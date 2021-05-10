@@ -48,6 +48,10 @@
                               <td><%= @truckload.dt_number %></td>
                             </tr>
                             <tr>
+                              <th><%= t('.value_driver') %></th>
+                              <td><%= number_to_currency(@truckload.value_driver) %></td>
+                            </tr>
+                            <tr>
                               <th><%= t('.is_agent') %>?</th>
                               <td><%= translate_boolean(@truckload.is_agent) %></td>
                             </tr>

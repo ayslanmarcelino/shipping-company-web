@@ -3,7 +3,7 @@ pt-BR:
     application:
       dashboard: Resumo
       clients: Clientes
-      truckloads: Cargas
+      truckload: Cargas
       cte: CT-e
       admins: Admin
       users: Usuários

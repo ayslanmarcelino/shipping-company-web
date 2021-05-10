@@ -16,3 +16,9 @@
   border-top: 1px solid #e3e3e3;
   border-bottom: 1px solid #f7f7f7;
 }
+
+.input--money {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30"><text x="5" y="19" style="font: 14px Arial;">R$</text></svg>') no-repeat;
+  height: 30px !important;
+  padding-left: 32px !important;
+}

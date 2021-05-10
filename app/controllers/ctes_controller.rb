@@ -14,9 +14,6 @@ class CtesController < UsersController
   end
 
   def create
-    
-    binding.pry
-    
     @cte = Cte.new(params_cte)
 
     @cte.save ? (redirect_to ctes_path, notice: 'CT-e cadastrado com sucesso') : (render :new)
