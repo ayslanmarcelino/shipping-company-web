@@ -51,6 +51,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :address
 
   has_many :truckload
+  has_many :cte
 
   def status_users
     return t('application.disabled') unless is_active

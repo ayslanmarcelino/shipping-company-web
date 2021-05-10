@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_181602) do
+ActiveRecord::Schema.define(version: 2021_05_10_185004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,20 @@ ActiveRecord::Schema.define(version: 2021_05_10_181602) do
     t.index ["address_id"], name: "index_clients_on_address_id"
     t.index ["document_number"], name: "index_clients_on_document_number", unique: true
     t.index ["enterprise_id"], name: "index_clients_on_enterprise_id"
+  end
+
+  create_table "ctes", force: :cascade do |t|
+    t.integer "cte_number", null: false
+    t.float "value", null: false
+    t.bigint "enterprise_id"
+    t.bigint "truckload_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cte_number"], name: "index_ctes_on_cte_number", unique: true
+    t.index ["enterprise_id"], name: "index_ctes_on_enterprise_id"
+    t.index ["truckload_id"], name: "index_ctes_on_truckload_id"
+    t.index ["user_id"], name: "index_ctes_on_user_id"
   end
 
   create_table "enterprises", force: :cascade do |t|
@@ -128,6 +142,9 @@ ActiveRecord::Schema.define(version: 2021_05_10_181602) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "enterprises"
+  add_foreign_key "ctes", "enterprises"
+  add_foreign_key "ctes", "truckloads"
+  add_foreign_key "ctes", "users"
   add_foreign_key "truckloads", "clients"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"

@@ -21,8 +21,10 @@ Rails.application.routes.draw do
 
   get 'dashboard/index'
   get 'truckloads/index'
+  get 'ctes/index'
 
   devise_for :users
   resources :truckloads
+  resources :ctes
   root to: 'dashboard#index'
 end

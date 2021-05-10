@@ -63,6 +63,7 @@ class Admins::ClientsController < AdminsController
   end
 
   def invalid_foreign_key
-    redirect_to admins_clients_index_path, notice: 'Não é possível excluir, pois a empresa possui carga(s) e/ou CT-e(s) vinculado.'
+    redirect_to admins_clients_index_path
+    flash[:danger] = 'Não é possível excluir, pois o cliente possui carga(s) e/ou CT-e(s) vinculado.'
   end
 end

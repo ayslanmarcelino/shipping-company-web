@@ -29,11 +29,11 @@ class Truckload < ApplicationRecord
   belongs_to :enterprise
   belongs_to :client
   belongs_to :user
-  # has_many :cte
+  has_many :cte
   validates_uniqueness_of :dt_number
 
   def truckload_value
-    # cte.sum(&:value)
+    cte.sum(&:value)
   end
 
   def ctes_numbers

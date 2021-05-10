@@ -32,14 +32,16 @@ class TruckloadsController < UsersController
   private
 
   def invalid_foreign_key
-    redirect_to truckloads_path, notice: 'Carga com CT-e vinculado não pode ser excluída'
+    redirect_to truckloads_path
+    flash[:danger] = 'Carga com CT-e vinculado não pode ser excluída.'
   end
 
   def set_truckload
     if current_user.truckload_ids.include?(Truckload.find(params[:id]).id)
       @truckload = Truckload.find(params[:id])
     else
-      redirect_to root_path, notice: 'Você não tem permissão para manipular esta carga.'
+      redirect_to root_path
+      flash[:danger] = 'Você não tem permissão para manipular esta carga.'
     end
   end
 

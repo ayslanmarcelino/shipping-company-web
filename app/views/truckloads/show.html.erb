@@ -52,7 +52,17 @@
                               <td><%= translate_boolean(@truckload.is_agent) %></td>
                             </tr>
                             <tr>
-
+                              <% if @truckload.ctes_numbers.count > 1 %>
+                                <th><%= t('.cte_number.other') %></th>
+                              <% else %>
+                                <th><%= t('.cte_number.one') %></th>
+                              <% end %>
+                              <td>
+                              <% @truckload.cte.each do |cte| %>
+                                <%= link_to cte_path(cte.id) do %>
+                                  <li><%= cte.cte_number %> - <%= number_to_currency(cte.value) %></li>
+                                <% end %>
+                              <% end %>
                             </tr>
                             <tr>
                               <th><%= t('.created_at') %></th>
