@@ -1,0 +1,7 @@
+pt-BR:
+  product_categories:
+    index:
+      registered_providers: Categorias cadastradas
+      description: Descrição
+      created_at: Criado em
+      delete_confirm: Você tem certeza que deseja excluir a categoria

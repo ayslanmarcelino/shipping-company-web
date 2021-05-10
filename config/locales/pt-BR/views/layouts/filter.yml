@@ -1,0 +1,6 @@
+pt-BR:
+  layouts:
+    filter:
+      filter: Filtrar
+      clear: Limpar
+      search: Pesquisar

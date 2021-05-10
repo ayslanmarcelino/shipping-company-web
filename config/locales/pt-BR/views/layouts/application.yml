@@ -1,0 +1,12 @@
+pt-BR:
+  layouts:
+    application:
+      dashboard: Resumo
+      clients: Clientes
+      admins: Admin
+      users: Usuários
+      super_admins: Super Admin
+      company: Empresas
+      my_enterprise: Minha empresa
+      my_profile: Meu perfil
+      exit: Sair

@@ -1,0 +1,6 @@
+pt-BR:
+  providers:
+    edit:
+      editing: Você está editando o fornecedor
+      cancel: Cancelar
+      edit: Editar fornecedor

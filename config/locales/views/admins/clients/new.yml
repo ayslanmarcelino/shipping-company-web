@@ -1,0 +1,7 @@
+pt-BR:
+  admins:
+    clients:
+      new:
+        new: Novo cliente
+        cancel: Cancelar
+        create_new: Criar novo cliente

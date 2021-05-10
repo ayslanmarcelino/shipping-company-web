@@ -1,0 +1,7 @@
+pt-BR:
+  admins:
+    clients:
+      components:
+        form:
+          general: Dados gerais
+          address: Endereço

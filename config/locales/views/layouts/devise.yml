@@ -1,0 +1,4 @@
+pt-BR:
+  layouts:
+    devise:
+      enterprise: Nome da empresa aqui

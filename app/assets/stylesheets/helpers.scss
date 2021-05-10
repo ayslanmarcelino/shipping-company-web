@@ -1,0 +1,18 @@
+.text-divider{
+  margin: 2em 0;
+  line-height: 0;
+  text-align: center;
+}
+
+.text-divider span{
+  background-color: #f5f5f5;
+  padding: 0.4em 1.75rem;
+  border-radius: 4px;
+}
+
+.text-divider:before{
+  content: " ";
+  display: block;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #f7f7f7;
+}
