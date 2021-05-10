@@ -4,7 +4,7 @@ pt-BR:
       list: Lista de cargas contradas por
       dt_number: Número DT
       client: Cliente
-      value: Valor
+      value: Valor da carga
       is_agent: Contratado por agenciador
       cte: CT-e(s) vinculado
       qtd_cte: Qtd. CT-e(s)

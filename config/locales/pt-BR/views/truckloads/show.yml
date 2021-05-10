@@ -8,6 +8,7 @@ pt-BR:
       general: Informações gerais
       client: Cliente
       dt_number: Número da DT
+      value_driver: Valor pago ao motorista
       is_agent: Contratado por agenciador
       cte_number:
         one: Número do CT-e
