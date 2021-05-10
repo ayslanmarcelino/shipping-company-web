@@ -45,3 +45,8 @@
         zip_code: CEP
         country: País
         complement: Complemento
+      truckload:
+        dt_number: Número da DT
+        value_driver: Valor pago ao motorista
+        client_id: Cliente
+        is_agent: Contratado por agenciador

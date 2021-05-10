@@ -1,0 +1,26 @@
+pt-BR:
+  truckloads:
+    show:
+      back: Voltar
+      edit: Editar
+      delete: Excluir
+      view: Visualizando a carga
+      general: Informações gerais
+      client: Cliente
+      dt_number: Número da DT
+      is_agent: Contratado por agenciador
+      cte_number:
+        one: Número do CT-e
+        other: Números dos CT-es
+      created_at: Criado em
+      updated_at: Atualizado em
+      document_number: CPF/CNPJ
+      address_zip_code: CEP
+      address_street: Logradouro
+      address_number: Número
+      address_complement: Complemento
+      address_neighborhood: Bairro
+      address_city: Cidade
+      address_state: Estado
+      address_country: País
+      delete_confirm: Você deseja excluir a carga

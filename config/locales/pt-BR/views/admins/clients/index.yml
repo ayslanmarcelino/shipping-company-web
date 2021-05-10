@@ -3,7 +3,8 @@ pt-BR:
     clients:
       index:
         list: Lista de clientes cadastrados
-        client: Cliente
+        company_name: Razão social
+        fantasy_name: Nome fantasia
         address_city: Cidade
         address_state: Estado
         document_number: CPF/CNPJ

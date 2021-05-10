@@ -3,6 +3,7 @@ pt-BR:
     application:
       dashboard: Resumo
       clients: Clientes
+      truckloads: Cargas
       admins: Admin
       users: Usuários
       super_admins: Super Admin

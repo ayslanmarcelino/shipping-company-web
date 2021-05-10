@@ -20,11 +20,9 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard/index'
-  get 'providers/index'
-  get 'product_categories/index'
+  get 'truckloads/index'
 
   devise_for :users
-  resources :providers
-  resources :product_categories
+  resources :truckloads
   root to: 'dashboard#index'
 end
