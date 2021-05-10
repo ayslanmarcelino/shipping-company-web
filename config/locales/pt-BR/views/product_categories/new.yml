@@ -1,0 +1,6 @@
+pt-BR:
+  product_categories:
+    new:
+      new_product_category: Nova categoria
+      cancel: Cancelar
+      create_new: Criar nova categoria

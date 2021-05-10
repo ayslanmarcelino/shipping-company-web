@@ -1,0 +1,7 @@
+pt-BR:
+  admins:
+    users:
+      new:
+        new_user: Novo usuário
+        cancel: Cancelar
+        create_new: Criar novo usuário

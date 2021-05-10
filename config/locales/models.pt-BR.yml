@@ -1,0 +1,41 @@
+'pt-BR':
+  activerecord:
+    models:
+      user:
+        one: Usuário
+    attributes:
+      user:
+        first_name: Primeiro nome
+        last_name: Último nome
+        nickname: Apelido
+        email: E-mail
+        document_number: CPF/CNPJ
+        is_active: Está ativo
+        is_employee: Funcionário
+        is_admin: Admin
+        is_super_admin: Super admin
+        enterprise: Empresa
+        enterprise_id: Empresa
+      enterprise:
+        company_name: Razão social
+        fantasy_name: Nome fantasia
+        document_number: CPF/CNPJ
+        email: E-mail
+        opening_date: Data de abertura da empresa
+        primary_color: Cor primária
+        secondary_color: Cor secundária
+        logo: Logomarca
+        is_active: Ativado
+      provider:
+        company_name: Razão social
+        fantasy_name: Nome fantasia
+        document_number: CPF/CNPJ
+        responsible: Responsável
+        email: E-mail
+        phone_number: Telefone fixo
+        telephone_number: Celular
+        observation: Observações
+        enterprise: Empresa
+        delete_confirm: Você tem certeza que deseja excluir o fornecedor
+      product_category:
+        description: Descrição

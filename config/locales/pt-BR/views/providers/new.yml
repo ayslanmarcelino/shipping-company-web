@@ -1,0 +1,6 @@
+pt-BR:
+  providers:
+    new:
+      new_provider: Novo fornecedor
+      cancel: Cancelar
+      create_new: Criar novo fornecedor

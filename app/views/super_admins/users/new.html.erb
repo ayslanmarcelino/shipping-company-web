@@ -1,0 +1,24 @@
+<div class="text-center">
+  <h4><%= t('.new_user') %></h4>
+</div>
+<div class="container h-100">
+  <%= render partial: 'super_admins/users/components/errors.html.erb' %>
+  <div class="d-flex justify-content-center h-100">
+    <div class="user-card-form">
+      <%= form_with(model: [:super_admins, @user], local: true) do |form| %>
+        <%= render partial: 'super_admins/users/components/form.html.erb',
+                   locals: { form: form } %>
+        <div class="row btn-actions">
+          <div class="col-lg-6 mt-3">
+            <%= link_to t('.cancel'), super_admins_users_path, class: 'btn btn-danger btn-user btn-block' %>
+          </div>
+          <div class="col-lg-6 mt-3">
+            <button class="btn btn-primary btn-user btn-block">
+              <%= t('.create_new') %>
+            </button>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

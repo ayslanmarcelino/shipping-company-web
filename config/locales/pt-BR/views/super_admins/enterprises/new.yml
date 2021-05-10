@@ -1,0 +1,7 @@
+pt-BR:
+  super_admins:
+    enterprises:
+      new:
+        new_enterprise: Nova empresa
+        cancel: Cancelar
+        create_new: Criar nova empresa

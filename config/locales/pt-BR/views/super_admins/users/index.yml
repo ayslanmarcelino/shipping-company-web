@@ -1,0 +1,12 @@
+pt-BR:
+  super_admins:
+    users:
+      index:
+        registered_users: Usuários cadastrados
+        name: Nome completo
+        nickname: Apelido
+        document_number: CPF/CNPJ
+        email: E-mail
+        function: Função
+        enterprise: Empresa
+        delete_confirm: Você tem certeza que deseja excluir o usuário

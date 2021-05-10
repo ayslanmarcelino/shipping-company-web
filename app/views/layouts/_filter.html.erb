@@ -1,0 +1,60 @@
+<p>
+  <a class="btn"
+     style="background-color: <%= current_user.enterprise.primary_color %>;
+            color: <%= current_user.enterprise.secondary_color %>"
+            data-toggle="collapse"
+            href="#collapseExample"
+            role="button"
+            aria-expanded="false"
+            aria-controls="collapseExample">
+    <i class="fas fa-filter"></i>
+    <%= t('layouts.filter.filter') %>
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <%= search_form_for @q, url: url do |f| %>
+      <% if current_user.is_super_admin %>
+        <%= f.select :enterprise_id_eq, enterprises_collection, { include_blank: 'Selecione a empresa' }, class: 'form-control col-md-12 mb-1' %>
+      <% end %>
+      <% @users.pluck(:is_active).each do |is_active| %>
+        <% if !is_active %>
+          <%= check_box_tag('q[is_active_in][]', is_active) %>
+          <%= f.label('Apenas desativados') %><br>
+        <% end %>
+      <% end %>
+      <% @users.pluck(:is_active).each do |is_active| %>
+        <% if is_active %>
+          <%= check_box_tag('q[is_active_in][]', is_active) %>
+          <%= f.label('Apenas ativos') %><br>
+        <% end %>
+      <% end %>
+      <% @users.pluck(:is_admin).each do |is_admin| %>
+        <% if is_admin %>
+          <%= check_box_tag('q[is_admin_in][]', is_admin) %>
+          <%= f.label('Apenas admins') %><br>
+        <% else %>
+          <%= check_box_tag('q[is_admin_in][]', is_admin) %>
+          <%= f.label('Apenas funcionários') %><br>
+        <% end %>
+      <% end %>
+      <% @users.pluck(:is_super_admin).each do |is_super_admin| %>
+        <% if current_user.is_super_admin && is_super_admin %>
+          <%= check_box_tag('q[is_super_admin_in][]', is_super_admin) %>
+          <%= f.label('Apenas super admins') %><br>
+        <% end %>
+      <% end %>
+      <hr>
+      <div>
+        <%= link_to url_for, class: 'btn btn-secondary' do %>
+          <i class="fas fa-broom"></i>
+          <%= t('layouts.filter.clear') %>
+        <% end %>
+        <%= button_tag(class: 'btn', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color};") do %>
+          <i class="fas fa-search"></i>
+          <%= t('layouts.filter.search') %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

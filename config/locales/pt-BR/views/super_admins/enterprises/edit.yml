@@ -1,0 +1,7 @@
+pt-BR:
+  super_admins:
+    enterprises:
+      edit:
+        editing: Você está editando a empresa
+        cancel: Cancelar
+        edit: Editar empresa

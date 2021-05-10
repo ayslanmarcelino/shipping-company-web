@@ -1,0 +1,5 @@
+.user-card-form {
+  @extend .user-card !optional;
+  width: 50%;
+  height: 50%
+}

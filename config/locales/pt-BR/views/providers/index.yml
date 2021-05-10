@@ -1,0 +1,10 @@
+pt-BR:
+  providers:
+    index:
+      registered_providers: Fornecedores cadastrados
+      company_name: Razão social
+      document_number: CPF/CNPJ
+      email: E-mail
+      phone_number: Telefone fixo
+      telephone_number: Celular
+      delete_confirm: Você tem certeza que deseja excluir o fornecedor
