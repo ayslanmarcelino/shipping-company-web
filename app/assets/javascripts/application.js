@@ -1,0 +1,2 @@
+//= require masks
+//= require datatable

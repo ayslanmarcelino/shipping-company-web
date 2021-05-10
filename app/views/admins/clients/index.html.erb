@@ -14,13 +14,13 @@
                 <th><%= t('.address_state') %></th>
                 <th><%= t('.address_city') %></th>
                 <th><%= t('.document_number') %></th>
-                <th class="no-sort table-buttons" style="width: 15%;">
+                <th class="no-sort table-buttons">
                   <%= link_to new_admins_client_path(@client), class: 'btn btn-success btn-circle' do %>
                     <i class="fas fa-plus"></i>
                   <% end %>
                 </th>
-            </thead>
-            <tbody>
+              </thead>
+              <tbody>
               <% @clients.each do |client| %>
                 <tr>
                   <td><%= client.company_name %></td>
@@ -51,16 +51,3 @@
     </div>
   </div>
 </div>
-<script>
-  $(document).ready(function(){
-    $('#table').DataTable({
-      "columnDefs": [{
-        "targets": 'no-sort',
-        "orderable": false,
-      }],
-      "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.22/i18n/Portuguese-Brasil.json"
-      }
-    });
-  });
-</script>

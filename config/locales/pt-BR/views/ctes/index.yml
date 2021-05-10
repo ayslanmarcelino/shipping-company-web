@@ -1,0 +1,11 @@
+pt-BR:
+  ctes:
+    index:
+      list: Lista de CT-e cadastrado por
+      cte_number: Número do CT-e
+      value: Valor
+      client: Cliente
+      created_at: Criado em
+      linked_truckload: Carga vinculada
+      delete_confirm: Você deseja excluir o CT-e
+      no_data: Não há cargas cadastradas

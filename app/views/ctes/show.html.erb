@@ -1,0 +1,112 @@
+<div class="col-xs-12 text-center">
+  <h4><%= t('.view') %>: <%= @cte.cte_number %></h4>
+</div>
+<div class="col-xs-12 mb-2">
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-user' do %>
+    <i class="fas fa-arrow-left"></i>
+    <%= t('.back') %>
+  <% end %>
+  <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info' do %>
+    <i class="fas fa-edit"></i>
+    <%= t('.edit') %>
+  <% end %>
+  <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
+    <i class="fas fa-trash"></i>
+    <%= t('.delete') %>
+  <% end %>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="overview-pill-vertical" href="#overviewPillVertical" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+              <%= t('.general') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+              <%= t('.client') %>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content" id="cardPillContentVertical">
+          <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
+            <table class="table">
+              <tr>
+                <th><%= t('.cte_number') %></th>
+                <td><%= @cte.cte_number %></td>
+              </tr>
+              <tr>
+                <th><%= t('.value') %></th>
+                <td><%= number_to_currency(@cte.value) %></td>
+              </tr>
+              <tr>
+                <th><%= t('.dt_number') %></th>
+                <td>
+                <%= link_to truckload_path(@cte.truckload.id) do %>
+                  <%= @cte.truckload.dt_number %></td>
+                <% end %>
+              </tr>
+              <tr>
+                <th><%= t('.created_at') %></th>
+                <td><%= l(@cte.created_at, format: '%d/%m/%Y às %H:%M') %></td>
+              </tr>
+              <tr>
+                <th><%= t('.updated_at') %></th>
+                <td><%= l(@cte.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
+            <table class="table">
+              <tr>
+                <th><%= t('.client') %></th>
+                <td><%= @cte.truckload.client.company_name %></td>
+              </tr>
+              <tr>
+                <th><%= t('.document_number') %></th>
+                <td><%= @cte.truckload.client.document_number.to_br_cnpj %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_zip_code') %></th>
+                <td><%= @cte.truckload.client.address.zip_code %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_street') %></th>
+                <td><%= @cte.truckload.client.address.street %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_number') %></th>
+                <td><%= @cte.truckload.client.address.number %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_complement') %></th>
+                <td><%= @cte.truckload.client.address.complement %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_neighborhood') %></th>
+                <td><%= @cte.truckload.client.address.neighborhood %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_city') %></th>
+                <td><%= @cte.truckload.client.address.city %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_state') %></th>
+                <td><%= @cte.truckload.client.address.state %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_country') %></th>
+                <td><%= @cte.truckload.client.address.country %></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

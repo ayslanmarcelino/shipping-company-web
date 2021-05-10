@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_02_024704) do
+ActiveRecord::Schema.define(version: 2021_05_10_185004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,20 @@ ActiveRecord::Schema.define(version: 2021_02_02_024704) do
     t.index ["enterprise_id"], name: "index_clients_on_enterprise_id"
   end
 
+  create_table "ctes", force: :cascade do |t|
+    t.integer "cte_number", null: false
+    t.float "value", null: false
+    t.bigint "enterprise_id"
+    t.bigint "truckload_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["cte_number"], name: "index_ctes_on_cte_number", unique: true
+    t.index ["enterprise_id"], name: "index_ctes_on_enterprise_id"
+    t.index ["truckload_id"], name: "index_ctes_on_truckload_id"
+    t.index ["user_id"], name: "index_ctes_on_user_id"
+  end
+
   create_table "enterprises", force: :cascade do |t|
     t.string "primary_color", null: false
     t.string "secondary_color", null: false
@@ -80,6 +94,21 @@ ActiveRecord::Schema.define(version: 2021_02_02_024704) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["document_number"], name: "index_enterprises_on_document_number", unique: true
+  end
+
+  create_table "truckloads", force: :cascade do |t|
+    t.integer "dt_number", null: false
+    t.boolean "is_agent"
+    t.bigint "enterprise_id"
+    t.bigint "client_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "value_driver", default: 0.0, null: false
+    t.index ["client_id"], name: "index_truckloads_on_client_id"
+    t.index ["dt_number"], name: "index_truckloads_on_dt_number", unique: true
+    t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"
+    t.index ["user_id"], name: "index_truckloads_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -113,6 +142,12 @@ ActiveRecord::Schema.define(version: 2021_02_02_024704) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "enterprises"
+  add_foreign_key "ctes", "enterprises"
+  add_foreign_key "ctes", "truckloads"
+  add_foreign_key "ctes", "users"
+  add_foreign_key "truckloads", "clients"
+  add_foreign_key "truckloads", "enterprises"
+  add_foreign_key "truckloads", "users"
   add_foreign_key "users", "addresses"
   add_foreign_key "users", "enterprises"
 end

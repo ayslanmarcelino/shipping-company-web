@@ -50,6 +50,9 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :address
 
+  has_many :truckload
+  has_many :cte
+
   def status_users
     return t('application.disabled') unless is_active
     return t('application.super_admin') if is_active && is_super_admin

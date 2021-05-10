@@ -1,0 +1,24 @@
+pt-BR:
+  ctes:
+    show:
+      back: Voltar
+      edit: Editar
+      delete: Excluir
+      general: Informações gerais
+      client: Cliente
+      view: Visualizando o CT-e
+      cte_number: Número do CT-e
+      value: Valor
+      dt_number: Número da DT
+      created_at: Criado em
+      updated_at: Atualizado em
+      document_number: CPF/CNPJ
+      address_zip_code: CEP
+      address_street: Logradouro
+      address_number: Número
+      address_complement: Complemento
+      address_neighborhood: Bairro
+      address_city: Cidade
+      address_state: Estado
+      address_country: País
+      delete_confirm: Você deseja excluir o CT-e
