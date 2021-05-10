@@ -2,8 +2,7 @@ pt-BR:
   layouts:
     application:
       dashboard: Resumo
-      providers: Fornecedores
-      product_categories: Categorias
+      clients: Clientes
       admins: Admin
       users: Usuários
       super_admins: Super Admin

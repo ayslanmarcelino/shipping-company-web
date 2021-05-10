@@ -5,7 +5,7 @@ class Admins::ClientsController < AdminsController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @clients = Client.includes(:address).order(:company_name)
+    @clients = Client.where(enterprise_id: current_user.enterprise_id).order(:company_name)
   end
 
   def new
@@ -25,6 +25,9 @@ class Admins::ClientsController < AdminsController
   def edit; end
 
   def update
+    
+    binding.pry
+    
     @client.address.validate_address = true
     @client.update(params_client) ? (redirect_to admins_clients_path, notice: 'Cliente atualizado com sucesso') : (render :edit)
   end
@@ -36,7 +39,12 @@ class Admins::ClientsController < AdminsController
   private
 
   def set_client
-    @client = Client.find(params[:id])
+    if Enterprise.find(current_user.enterprise_id).client_ids.include?(Client.find(params[:id]).id)
+      @client = Client.find(params[:id])
+    else
+      redirect_to root_path
+      flash[:danger] = 'Você não tem permissão para editar este cliente.' 
+    end
   end
 
   def params_client

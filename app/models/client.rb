@@ -30,10 +30,10 @@
 #
 class Client < ApplicationRecord
   belongs_to :address, optional: true
-
+  
   accepts_nested_attributes_for :address
 
   def formatted_name
-    "#{name} - #{address.state} | #{document_number.to_br_cnpj}"
+    "#{company_name} - #{address.state} | #{document_number.to_br_cnpj}"
   end
 end
