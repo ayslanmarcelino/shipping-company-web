@@ -1,0 +1,7 @@
+pt-BR:
+  admins:
+    clients:
+      edit:
+        editing: Você está editando o cliente
+        cancel: Cancelar
+        edit: Editar cliente

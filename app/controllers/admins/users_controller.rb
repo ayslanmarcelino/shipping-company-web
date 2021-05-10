@@ -31,9 +31,6 @@ module Admins
     def edit; end
 
     def update
-      
-      binding.pry
-      
       if @user.update(params_user)
         redirect_to admins_users_path
         flash[:success] = 'Usuário atualizado com sucesso.'

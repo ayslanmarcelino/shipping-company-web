@@ -26,16 +26,22 @@
         secondary_color: Cor secundária
         logo: Logomarca
         is_active: Ativado
-      provider:
+      client:
         company_name: Razão social
-        fantasy_name: Nome fantasia
         document_number: CPF/CNPJ
-        responsible: Responsável
         email: E-mail
-        phone_number: Telefone fixo
-        telephone_number: Celular
-        observation: Observações
-        enterprise: Empresa
-        delete_confirm: Você tem certeza que deseja excluir o fornecedor
-      product_category:
-        description: Descrição
+        fantasy_name: Nome fantasia
+        is_active: Está ativa
+        observation: Observação
+        phone_number: Celular
+        responsible: Responsável
+        telephone_number: Telefone
+      address:
+        street: Logradouro
+        number: Número
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        zip_code: CEP
+        country: País
+        complement: Complemento

@@ -43,8 +43,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   belongs_to :enterprise
+  belongs_to :address, optional: true
+
   validates :document_number, uniqueness: { scope: :enterprise_id }
   validates_presence_of %i[first_name last_name email document_number enterprise_id]
+
+  accepts_nested_attributes_for :address
 
   def status_users
     return t('application.disabled') unless is_active

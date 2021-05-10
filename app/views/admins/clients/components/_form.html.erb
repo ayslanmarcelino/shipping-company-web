@@ -1,0 +1,79 @@
+<h5 class="text-divider">
+  <span><%= t('.general') %></span>
+</h5>
+<div class="col-lg-12">
+  <%= form.label(:company_name) %>
+  <%= form.text_field(:company_name, class: 'form-control form-control-user', required: true) %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:fantasy_name) %>
+  <%= form.text_field(:fantasy_name, class: 'form-control form-control-user', required: true) %>
+</div>
+<div class="col-lg-12" style="text-transform: uppercase">
+  <%= form.label(:document_number) %>
+  <%= form.text_field(:document_number, class: 'form-control form-control-user document_number', required: true) %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:email) %>
+  <%= form.text_field(:email, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:telephone_number) %>
+  <%= form.number_field(:telephone_number, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:phone_number) %>
+  <%= form.number_field(:phone_number, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:responsible) %>
+  <%= form.text_field(:responsible, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:observation) %>
+  <%= form.text_field(:observation, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12 custom-control custom-switch">
+  <%= form.label(:is_active) %>?
+  <%= form.check_box(:is_active, class: "custom-control-input", id: "is_active_switch") %></br>
+  <label style="font-size: 13px">Não</label>
+  <label class="custom-control-label switch-user" for="is_active_switch"></label>
+  <label style="font-size: 13px">Sim</label>
+</div>
+<h5 class="text-divider">
+  <span><%= t('.address') %></span>
+</h5>
+<%= form.fields_for :address do |address| %>
+  <div class="col-lg-12">
+    <%= address.label(:zip_code) %>
+    <%= address.text_field(:zip_code, class: 'form-control form-control-user input--zip-code') %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:street) %>
+    <%= address.text_field(:street, class: 'form-control form-control-user') %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:number) %>
+    <%= address.number_field(:number, class: 'form-control form-control-user') %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:complement) %>
+    <%= address.text_field(:complement, class: 'form-control form-control-user') %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:neighborhood) %>
+    <%= address.text_field(:neighborhood, class: 'form-control form-control-user') %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:city) %>
+    <%= address.text_field(:city, class: 'form-control form-control-user') %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:state) %>
+    <%= address.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control' }) %>
+  </div>
+  <div class="col-lg-12">
+    <%= address.label(:country) %>
+    <%= address.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control' }) %>
+  </div>
+<% end %>

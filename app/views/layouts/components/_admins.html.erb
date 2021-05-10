@@ -2,8 +2,14 @@
   <%= t('layouts.application.admins') %>
 </div>
 <%= link_to admins_users_index_path, class: 'list-group-item list-group-item-action',
-                                      style: "color: #{current_user.enterprise.secondary_color};
-                                              background-color: #{current_user.enterprise.primary_color} !important" do %>
+                                     style: "color: #{current_user.enterprise.secondary_color};
+                                            background-color: #{current_user.enterprise.primary_color} !important" do %>
   <i class="fas fa-users"></i>
   <span><%= t('layouts.application.users') %></span>
+<% end %>
+<%= link_to admins_clients_index_path, class: 'list-group-item list-group-item-action',
+                                       style: "color: #{current_user.enterprise.secondary_color};
+                                              background-color: #{current_user.enterprise.primary_color} !important" do %>
+  <i class="far fa-building"></i>
+  <span><%= t('layouts.application.clients') %></span>
 <% end %>
