@@ -25,12 +25,15 @@ end
 group :development do
   gem 'annotate'
   gem 'cpf_faker'
+  gem 'factory_bot_rails'
   gem 'faker'
-  gem 'web-console', '>= 3.3.0'
+  gem 'ffaker'
   gem 'listen', '~> 3.2'
   gem 'pry'
+  gem 'rspec-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console', '>= 3.3.0'
 end
 
 group :test do
