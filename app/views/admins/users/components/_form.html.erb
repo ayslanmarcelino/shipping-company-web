@@ -23,10 +23,9 @@
   <%= form.check_box(:is_active, class: "custom-control-input", id: "is_active_switch") %>
   <label class="custom-control-label switch-user" for="is_active_switch"></label>
 </div>
-<div class="col-lg-12 custom-switch mt-2">
-  <%= form.label(:is_admin) %>?
-  <%= form.check_box(:is_admin, class: "custom-control-input", id: "is_admin_switch") %>
-  <label class="custom-control-label switch-user" for="is_admin_switch"></label>
+<div class="col-lg-12">
+  <%= form.label(:enterprise) %></br>
+  <%= form.collection_select(:enterprise_id, @enterprise, :id, :company_name, {}, { class: 'select2_single form-control', required: true }) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:password) %>

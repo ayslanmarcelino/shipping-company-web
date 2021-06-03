@@ -5,7 +5,7 @@
 #  id            :bigint           not null, primary key
 #  dt_number     :integer          not null
 #  is_agent      :boolean
-#  value_driver  :float            default(0.0), not null
+#  value_driver  :float            not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  client_id     :bigint

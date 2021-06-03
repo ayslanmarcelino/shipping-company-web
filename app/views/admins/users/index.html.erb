@@ -15,6 +15,7 @@
                 <th><%= t('.document_number')%></th>
                 <th><%= t('.email')%></th>
                 <th><%= t('.function')%></th>
+                <th><%= t('.enterprise')%></th>
                 <th class="no-sort table-buttons">
                   <%= link_to new_admins_user_path(@user), class: 'btn btn-success btn-circle' do %>
                     <i class="fas fa-plus"></i>
@@ -34,15 +35,20 @@
                       <%= function_translate(user.is_active) %>
                     </span>
                   </td>
+                  <td><%= user.enterprise.company_name %></td>
                   <td class="table-buttons">
-                    <%= link_to edit_admins_user_path(user), class: 'btn btn-info btn-circle' do %>
-                      <i class="fas fa-edit"></i>
+                    <% if can?(:update, User) %>
+                      <%= link_to edit_admins_user_path(user), class: 'btn btn-info btn-circle' do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
                     <% end %>
-                    <%= link_to admins_user_path(user),
-                                method: :delete,
-                                class: 'btn btn-danger btn-circle',
-                                data: { confirm: "#{t('.delete_confirm')}: #{user.first_name} #{user.last_name}?" } do %>
-                      <i class="fas fa-trash"></i>
+                    <% if can?(:destroy, User) %>
+                      <%= link_to admins_user_path(user),
+                          method: :delete,
+                          class: 'btn btn-danger btn-circle',
+                          data: { confirm: "#{t('.delete_confirm')}: #{user.first_name} #{user.last_name}?" } do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %>
                     <% end %>
                   </td>
                 </tr>

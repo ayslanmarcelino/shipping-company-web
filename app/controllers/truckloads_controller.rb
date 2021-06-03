@@ -4,7 +4,6 @@ class TruckloadsController < UsersController
   before_action :set_truckload, only: %w[edit update destroy show]
   before_action :set_client, only: %w[new create edit]
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
-  load_and_authorize_resource
 
   def index
     @truckloads = Truckload.accessible_by(current_ability).order(updated_at: :desc)

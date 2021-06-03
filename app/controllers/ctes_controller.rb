@@ -4,7 +4,6 @@ class CtesController < UsersController
   before_action :set_cte, only: %w[edit update destroy show]
   before_action :set_user, only: %w[new create edit]
   before_action :set_truckload, only: %w[new create edit]
-  load_and_authorize_resource
 
   def index
     @ctes = Cte.accessible_by(current_ability).order(created_at: :desc)

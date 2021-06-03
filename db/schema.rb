@@ -98,13 +98,13 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
 
   create_table "truckloads", force: :cascade do |t|
     t.integer "dt_number", null: false
+    t.float "value_driver", null: false
     t.boolean "is_agent"
     t.bigint "enterprise_id"
     t.bigint "client_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.float "value_driver", default: 0.0, null: false
     t.index ["client_id"], name: "index_truckloads_on_client_id"
     t.index ["dt_number"], name: "index_truckloads_on_dt_number", unique: true
     t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"

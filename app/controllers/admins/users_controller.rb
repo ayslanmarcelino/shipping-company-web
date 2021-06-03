@@ -4,10 +4,10 @@ module Admins
   class UsersController < AdminsController
     before_action :verify_password, only: %w[update]
     before_action :set_user, only: %w[edit update destroy]
+    before_action :set_enterprise, only: %w[create new edit update destroy]
 
-    def index   
-      @q = User.where(enterprise_id: current_user.enterprise_id)
-               .ransack(params[:q])
+    def index
+      @q = User.accessible_by(current_ability).ransack(params[:q])
       @users = @q.result(distinct: true)
     end
 
@@ -20,7 +20,7 @@ module Admins
     def create
       @user = User.new(params_user)
 
-      if @user.save
+      if @user.save!
         redirect_to admins_users_path
         flash[:success] = 'Usuário cadastrado com sucesso.'
       else
@@ -51,15 +51,21 @@ module Admins
     private
 
     def set_user
-      if current_user.enterprise_id == User.find(params[:id]).enterprise_id
-        @user = User.find(params[:id])
+      @user = User.find(params[:id])
+    end
+
+    def set_enterprise
+      if current_user.roles.kind_masters.present?
+        @enterprise = Enterprise.all
       else
-        redirect_to root_path
-        flash[:danger] = 'Você não tem permissão para editar este usuário.' 
+        @enterprise = Enterprise.where(id: current_user.enterprise_id)
       end
     end
 
     def params_user
+      
+      binding.pry
+      
       params.require(:user)
             .permit(:document_number,
                     :email,
@@ -67,9 +73,9 @@ module Admins
                     :is_active,
                     :last_name,
                     :nickname,
+                    :enterprise_id,
                     :password,
                     :password_confirmation)
-            .with_defaults(enterprise_id: current_user.enterprise_id)
     end
 
     def verify_password
