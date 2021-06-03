@@ -1,11 +1,15 @@
 pt-BR:
   ctes:
     index:
-      list: Lista de CT-e cadastrado por
+      list_enterprise: Lista de CT-e da empresa
+      list_user: Lista de CT-e contradas por
+      list: Lista de CT-e
       cte_number: Número do CT-e
       value: Valor
       client: Cliente
       created_at: Criado em
+      created_by: Criado por
+      enterprise: Empresa
       linked_truckload: Carga vinculada
       delete_confirm: Você deseja excluir o CT-e
       no_data: Não há cargas cadastradas

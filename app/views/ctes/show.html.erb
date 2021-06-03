@@ -6,13 +6,17 @@
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
-  <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info' do %>
-    <i class="fas fa-edit"></i>
-    <%= t('.edit') %>
+  <% if can?(:update, Cte) %>
+    <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info' do %>
+      <i class="fas fa-edit"></i>
+      <%= t('.edit') %>
+    <% end %>
   <% end %>
-  <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
-    <i class="fas fa-trash"></i>
-    <%= t('.delete') %>
+  <% if can?(:destroy, Cte) %>
+    <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
+      <i class="fas fa-trash"></i>
+      <%= t('.delete') %>
+    <% end %>
   <% end %>
 </div>
 <div class="card">
@@ -59,6 +63,14 @@
                 <th><%= t('.updated_at') %></th>
                 <td><%= l(@cte.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
               </tr>
+              <% if user_owner?(current_user) || user_master?(current_user) %>
+                <th><%= t('.created_by') %></th>
+                <td><%= @cte.user.first_name %> <%= @cte.user.last_name %></td>
+              <% end %>
+              <% if user_master?(current_user) %>
+                <th><%= t('.enterprise') %></th>
+                <td><%= @cte.user.enterprise.company_name %></td>
+              <% end %>
             </table>
           </div>
           <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
