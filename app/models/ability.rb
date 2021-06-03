@@ -28,8 +28,6 @@ class Ability
         owner_abilities
       when :employee
         employee_abilities
-      # when :financial
-      #   can(:read, :all)
       end
     end
 
@@ -48,13 +46,11 @@ class Ability
       can(:manage, Cte, enterprise: @enterprise)
       can(:manage, Client, enterprise: @enterprise)
       can(:manage, User, enterprise: @enterprise)
-      # can(:manage, Role, enterprise_id: @enterprise.id)
+      cannot(:update, Truckload)
+      cannot(:update, Cte)
     end
 
     def employee_abilities
-      
-      # binding.pry
-      
       can(:manage, Truckload, user: @user)
       can(:manage, Cte, user: @user)
     end
