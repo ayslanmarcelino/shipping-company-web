@@ -10,19 +10,19 @@ Rails.application.routes.draw do
   namespace :admins do
     get 'users/index'
     get 'enterprises/index'
-    get 'clients/index'
     
     resources :users
     resources :enterprises
-    resources :clients
   end
   
   get 'dashboard/index'
   get 'truckloads/index'
   get 'ctes/index'
+  get 'clients/index'
   
   devise_for :users
   resources :truckloads
   resources :ctes
+  resources :clients
   root to: 'dashboard#index'
 end

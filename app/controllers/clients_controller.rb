@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-class Admins::ClientsController < AdminsController
+class ClientsController < UsersController
   before_action :set_client, only: %w[edit update destroy show]
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @clients = Client.where(enterprise_id: current_user.enterprise_id).order(:company_name)
+    @clients = Client.accessible_by(current_ability).order(:company_name)
   end
 
   def new
@@ -63,7 +63,7 @@ class Admins::ClientsController < AdminsController
   end
 
   def invalid_foreign_key
-    redirect_to admins_clients_index_path
+    redirect_to clients_index_path
     flash[:danger] = 'Não é possível excluir, pois o cliente possui carga(s) e/ou CT-e(s) vinculado.'
   end
 end

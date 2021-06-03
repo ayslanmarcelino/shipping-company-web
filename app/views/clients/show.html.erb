@@ -6,11 +6,11 @@
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
-  <%= link_to edit_admins_client_path(@client), class: 'col-xs-3 btn btn-info' do %>
+  <%= link_to edit_client_path(@client), class: 'col-xs-3 btn btn-info' do %>
     <i class="fas fa-edit"></i>
     <%= t('.edit') %>
   <% end %>
-  <%= link_to admins_client_path(@client), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@client.company_name}?" } do %>
+  <%= link_to client_path(@client), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@client.company_name}?" } do %>
     <i class="fas fa-trash"></i>
     <%= t('.delete') %>
   <% end %>
