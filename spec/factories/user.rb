@@ -7,8 +7,6 @@ FactoryBot.define do
     document_number       { FFaker::IdentificationBR.cpf }
     password              { '12345678' }
     password_confirmation { '12345678' }
-    is_super_admin        { true }
-    is_admin              { true }
     is_active             { true }
     address               { create(:address) }
     enterprise            { create(:enterprise) }

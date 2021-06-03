@@ -61,8 +61,14 @@ module Admins
 
     def params_user
       params.require(:user)
-            .permit(:document_number, :email, :first_name, :is_active, :is_admin, :last_name, :nickname,
-                    :password, :password_confirmation)
+            .permit(:document_number,
+                    :email,
+                    :first_name,
+                    :is_active,
+                    :last_name,
+                    :nickname,
+                    :password,
+                    :password_confirmation)
             .with_defaults(enterprise_id: current_user.enterprise_id)
     end
 

@@ -1,4 +1,4 @@
-<% if current_user.is_admin %>
+<% if user_owner?(current_user) || user_master?(current_user) %>
   <%= link_to edit_admins_enterprise_path(current_user.enterprise), class: 'dropdown-item' do %>
     <i class="fas fa-building fa-sm fa-fw mr-2 text-gray-400"></i>
     <%= t('layouts.application.my_enterprise') %>

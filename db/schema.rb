@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_10_185004) do
+ActiveRecord::Schema.define(version: 2021_06_03_105222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,16 @@ ActiveRecord::Schema.define(version: 2021_05_10_185004) do
     t.index ["user_id"], name: "index_truckloads_on_user_id"
   end
 
+  create_table "user_roles", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "enterprise_id"
+    t.string "kind_cd"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enterprise_id"], name: "index_user_roles_on_enterprise_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -128,8 +138,6 @@ ActiveRecord::Schema.define(version: 2021_05_10_185004) do
     t.string "last_name", null: false
     t.string "nickname"
     t.string "document_number", null: false
-    t.boolean "is_admin", default: false
-    t.boolean "is_super_admin", default: false
     t.boolean "is_active", default: false
     t.bigint "address_id"
     t.bigint "enterprise_id"
@@ -148,6 +156,8 @@ ActiveRecord::Schema.define(version: 2021_05_10_185004) do
   add_foreign_key "truckloads", "clients"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"
+  add_foreign_key "user_roles", "enterprises"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "addresses"
   add_foreign_key "users", "enterprises"
 end

@@ -10,8 +10,6 @@
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string           not null
 #  is_active              :boolean          default(FALSE)
-#  is_admin               :boolean          default(FALSE)
-#  is_super_admin         :boolean          default(FALSE)
 #  last_name              :string           not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
@@ -52,6 +50,7 @@ class User < ApplicationRecord
 
   has_many :truckload
   has_many :cte
+  has_many :roles, dependent: :destroy
 
   def status_users
     return t('application.disabled') unless is_active

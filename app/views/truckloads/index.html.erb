@@ -1,5 +1,13 @@
 <div class="text-center">
-  <h4><%= t('.list') %>: <%= current_user.first_name %></h4>
+  <h4>
+    <% if user_owner?(current_user) %>
+      <%= t('.list_enterprise') %>: <%= current_user.enterprise.company_name %>
+    <% elsif user_master?(current_user) %>
+      <%= t('.list') %>
+    <% else %>
+      <%= t('.list_user') %>: <%= current_user.first_name %>
+    <% end %>
+  </h4>
 </div>
 <div class="card shadow mb-4">
   <div class="card-body">
@@ -16,6 +24,12 @@
                 <th><%= t('.created_at') %></th>
                 <th><%= t('.cte') %></th>
                 <th><%= t('.qtd_cte') %></th>
+                <% if user_owner?(current_user) || user_master?(current_user) %>
+                  <th><%= t('.created_by') %></th>
+                <% end %>
+                <% if user_master?(current_user) %>
+                  <th><%= t('.enterprise') %></th>
+                <% end %>
                 <th class="no-sort table-buttons">
                   <%= link_to new_truckload_path(@truckload), class: 'btn btn-success btn-circle' do %>
                     <i class="fas fa-plus"></i>
@@ -60,6 +74,12 @@
                     <td><%= t('.no_cte') %></td>
                   <% end %>
                   <td><%= truckload.ctes_numbers.count %></td>
+                  <% if user_owner?(current_user) || user_master?(current_user) %>
+                    <td><%= truckload.user.first_name %> <%= truckload.user.last_name %></td>
+                  <% end %>
+                  <% if user_master?(current_user) %>
+                    <td><%= truckload.user.enterprise.company_name %></td>
+                  <% end %>
                   <td>
                     <%= link_to truckload_path(truckload), class: 'btn btn-dark' do %>
                       <i class="fas fa-eye"></i>
@@ -79,7 +99,4 @@
       </div>
     </div>
   </div>
-  <% if @truckloads.empty? %>
-    <tr><%= t('.no_data') %></tr>
-  <% end %>
 </div>

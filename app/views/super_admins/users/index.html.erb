@@ -31,8 +31,8 @@
                   <td><%= format_document_number(user.document_number) %></td>
                   <td><%= user.email %></td>
                   <td class="text-center">
-                    <span class="badge badge-<%= function_color(user.is_active, user.is_admin, user.is_super_admin) %>" style="width: 100%">
-                      <%= function_translate(user.is_active, user.is_admin, user.is_super_admin) %>
+                    <span class="badge badge-<%= function_color(user.is_active) %>" style="width: 100%">
+                      <%= function_translate(user.is_active) %>
                     </span>
                   </td>
                   <td><%= user.enterprise.company_name %></td>

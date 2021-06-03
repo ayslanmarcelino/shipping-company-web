@@ -15,7 +15,7 @@
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
     <%= search_form_for @q, url: url do |f| %>
-      <% if current_user.is_super_admin %>
+      <% if user_master?(current_user) %>
         <%= f.select :enterprise_id_eq, enterprises_collection, { include_blank: 'Selecione a empresa' }, class: 'form-control col-md-12 mb-1' %>
       <% end %>
       <% @users.pluck(:is_active).each do |is_active| %>
@@ -28,21 +28,6 @@
         <% if is_active %>
           <%= check_box_tag('q[is_active_in][]', is_active) %>
           <%= f.label('Apenas ativos') %><br>
-        <% end %>
-      <% end %>
-      <% @users.pluck(:is_admin).each do |is_admin| %>
-        <% if is_admin %>
-          <%= check_box_tag('q[is_admin_in][]', is_admin) %>
-          <%= f.label('Apenas admins') %><br>
-        <% else %>
-          <%= check_box_tag('q[is_admin_in][]', is_admin) %>
-          <%= f.label('Apenas funcionários') %><br>
-        <% end %>
-      <% end %>
-      <% @users.pluck(:is_super_admin).each do |is_super_admin| %>
-        <% if current_user.is_super_admin && is_super_admin %>
-          <%= check_box_tag('q[is_super_admin_in][]', is_super_admin) %>
-          <%= f.label('Apenas super admins') %><br>
         <% end %>
       <% end %>
       <hr>
