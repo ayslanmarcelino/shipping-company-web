@@ -25,9 +25,6 @@ class ClientsController < UsersController
   def edit; end
 
   def update
-    
-    binding.pry
-    
     @client.address.validate_address = true
     @client.update(params_client) ? (redirect_to admins_clients_path, notice: 'Cliente atualizado com sucesso') : (render :edit)
   end

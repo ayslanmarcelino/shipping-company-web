@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class User::Role < ApplicationRecord
-  KINDS = [:master, :owner, :employee].freeze
+  KINDS = [:master, :owner, :operational].freeze
 
   belongs_to :user
   belongs_to :enterprise

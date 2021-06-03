@@ -26,8 +26,8 @@ class Ability
         can(:manage, :all)
       when :owner
         owner_abilities
-      when :employee
-        employee_abilities
+      when :operational
+        operational_abilities
       end
     end
 
@@ -50,7 +50,7 @@ class Ability
       cannot(:update, Cte)
     end
 
-    def employee_abilities
+    def operational_abilities
       can(:manage, Truckload, user: @user)
       can(:manage, Cte, user: @user)
     end
