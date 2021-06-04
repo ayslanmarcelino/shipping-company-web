@@ -40,9 +40,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
   belongs_to :enterprise
   belongs_to :address, optional: true
 
+  validates :email, uniqueness: true
   validates :document_number, uniqueness: { scope: :enterprise_id }
   validates_presence_of %i[first_name last_name email document_number enterprise_id]
 

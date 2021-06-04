@@ -37,7 +37,12 @@ class TruckloadsController < UsersController
   end
 
   def set_truckload
-    @truckload = Truckload.find(params[:id])
+    if current_user.truckload_ids.include?(Truckload.find(params[:id]).id) || current_user.roles.kind_masters.present?
+      @truckload = Truckload.find(params[:id])
+    else
+      redirect_to root_path
+      flash[:danger] = 'Você não tem permissão para manipular esta carga.'
+    end
   end
 
   def set_client

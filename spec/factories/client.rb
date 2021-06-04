@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :client do
     company_name      { Faker::Company.industry }
     fantasy_name      { Faker::Company.name }
-    document_number   { FFaker::IdentificationBR.cnpj }
+    document_number   { FFaker::IdentificationBR.pretty_cnpj }
     email             { Faker::Internet.email }
     observation       { 'Observação qualquer' }
     responsible       { FFaker::NameBR.name }

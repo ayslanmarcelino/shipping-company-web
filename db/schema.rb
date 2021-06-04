@@ -64,7 +64,6 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "index_clients_on_address_id"
-    t.index ["document_number"], name: "index_clients_on_document_number", unique: true
     t.index ["enterprise_id"], name: "index_clients_on_enterprise_id"
   end
 
@@ -76,7 +75,6 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["cte_number"], name: "index_ctes_on_cte_number", unique: true
     t.index ["enterprise_id"], name: "index_ctes_on_enterprise_id"
     t.index ["truckload_id"], name: "index_ctes_on_truckload_id"
     t.index ["user_id"], name: "index_ctes_on_user_id"
@@ -106,7 +104,6 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_truckloads_on_client_id"
-    t.index ["dt_number"], name: "index_truckloads_on_dt_number", unique: true
     t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"
     t.index ["user_id"], name: "index_truckloads_on_user_id"
   end

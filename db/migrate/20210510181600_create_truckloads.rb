@@ -10,6 +10,5 @@ class CreateTruckloads < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :truckloads, :dt_number, unique: true
   end
 end

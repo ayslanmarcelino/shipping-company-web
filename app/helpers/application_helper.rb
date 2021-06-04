@@ -1,6 +1,6 @@
 module ApplicationHelper
   def format_document_number(document_number)
-    document_number.length == 11 ? document_number.to_br_cpf : document_number.to_br_cnpj
+    document_number.length == 14 ? document_number.to_br_cpf : document_number.to_br_cnpj
   end
 
   def translate_boolean(boolean)

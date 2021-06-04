@@ -10,6 +10,7 @@
           <table id="table" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th><%= t('.id')%></th>
                 <th><%= t('.name')%></th>
                 <th><%= t('.nickname')%></th>
                 <th><%= t('.document_number')%></th>
@@ -30,6 +31,7 @@
             <tbody>
               <% @users.each do |user| %>
                 <tr>
+                  <td><%= user.id %></td>
                   <td><%= user.first_name %> <%= user.last_name %></td>
                   <td><%= user.nickname %></td>
                   <td><%= format_document_number(user.document_number) %></td>
