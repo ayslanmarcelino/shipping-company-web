@@ -2,12 +2,12 @@ pt-BR:
   layouts:
     application:
       dashboard: Resumo
+      operational: Operacional
+      register: Cadastro
       clients: Clientes
       truckload: Cargas
       cte: CT-e
-      admins: Admin
       users: Usuários
-      super_admins: Super Admin
       company: Empresas
       my_enterprise: Minha empresa
       my_profile: Meu perfil

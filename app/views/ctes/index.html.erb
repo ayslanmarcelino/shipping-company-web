@@ -29,8 +29,10 @@
                   <th><%= t('.enterprise') %></th>
                 <% end %>
                 <th class="no-sort table-buttons">
-                  <%= link_to new_cte_path(@cte), class: 'btn btn-success btn-circle' do %>
-                    <i class="fas fa-plus"></i>
+                  <% if can?(:create, Cte) %>
+                    <%= link_to new_cte_path(@cte), class: 'btn btn-success btn-circle' do %>
+                      <i class="fas fa-plus"></i>
+                    <% end %>
                   <% end %>
                 </th>
               </tr>

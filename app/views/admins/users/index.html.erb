@@ -17,8 +17,10 @@
                 <th><%= t('.function')%></th>
                 <th><%= t('.enterprise')%></th>
                 <th class="no-sort table-buttons">
-                  <%= link_to new_admins_user_path(@user), class: 'btn btn-success btn-circle' do %>
-                    <i class="fas fa-plus"></i>
+                  <% if can?(:create, User) %>
+                    <%= link_to new_admins_user_path(@user), class: 'btn btn-success btn-circle' do %>
+                      <i class="fas fa-plus"></i>
+                    <% end %>
                   <% end %>
                 </th>
               </tr>

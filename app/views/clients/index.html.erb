@@ -15,8 +15,10 @@
                 <th><%= t('.address_city') %></th>
                 <th><%= t('.document_number') %></th>
                 <th class="no-sort table-buttons">
-                  <%= link_to new_client_path(@client), class: 'btn btn-success btn-circle' do %>
-                    <i class="fas fa-plus"></i>
+                  <% if can?(:create, Client) %>
+                    <%= link_to new_client_path(@client), class: 'btn btn-success btn-circle' do %>
+                      <i class="fas fa-plus"></i>
+                    <% end %>
                   <% end %>
                 </th>
               </thead>

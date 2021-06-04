@@ -12,25 +12,25 @@ class ClientsController < UsersController
     @client = Client.new
     @client.build_address
   end
-  
+
   def show; end
-  
+
   def create
     @client = Client.new(params_client)
     @client.address.validate_address = true
 
-    @client.save ? (redirect_to admins_clients_path, notice: 'Cliente cadastrado com sucesso') : (render :new)
+    @client.save ? (redirect_to clients_path, notice: 'Cliente cadastrado com sucesso') : (render :new)
   end
 
   def edit; end
 
   def update
     @client.address.validate_address = true
-    @client.update(params_client) ? (redirect_to admins_clients_path, notice: 'Cliente atualizado com sucesso') : (render :edit)
+    @client.update(params_client) ? (redirect_to clients_path, notice: 'Cliente atualizado com sucesso') : (render :edit)
   end
 
   def destroy
-    @client.destroy ? (redirect_to admins_clients_path, notice: 'Cliente excluído com sucesso') : (render :index)
+    @client.destroy ? (redirect_to clients_path, notice: 'Cliente excluído com sucesso') : (render :index)
   end
 
   private

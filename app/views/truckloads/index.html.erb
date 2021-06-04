@@ -31,8 +31,10 @@
                   <th><%= t('.enterprise') %></th>
                 <% end %>
                 <th class="no-sort table-buttons">
-                  <%= link_to new_truckload_path(@truckload), class: 'btn btn-success btn-circle' do %>
-                    <i class="fas fa-plus"></i>
+                  <% if can?(:create, Truckload) %>
+                    <%= link_to new_truckload_path(@truckload), class: 'btn btn-success btn-circle' do %>
+                      <i class="fas fa-plus"></i>
+                    <% end %>
                   <% end %>
                 </th>
             </thead>

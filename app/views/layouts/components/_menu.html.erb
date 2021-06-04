@@ -4,7 +4,10 @@
   <i class="fas fa-chart-bar"></i>
   <span><%= t('layouts.application.dashboard') %></span>
 <% end %>
-<% if can?(:manage, Truckload) %>
+<div class="text-center">
+  <%= t('layouts.application.operational') %>
+</div>
+<% if can?(:read, Truckload) %>
   <%= link_to truckloads_index_path, class: 'list-group-item list-group-item-action',
                                      style: "color: #{current_user.enterprise.secondary_color};
                                              background-color: #{current_user.enterprise.primary_color} !important" do %>
@@ -12,7 +15,7 @@
     <span><%= t('layouts.application.truckload') %></span>
   <% end %>
 <% end %>
-<% if can?(:manage, Cte) %>
+<% if can?(:read, Cte) %>
   <%= link_to ctes_index_path, class: 'list-group-item list-group-item-action',
                                style: "color: #{current_user.enterprise.secondary_color};
                                        background-color: #{current_user.enterprise.primary_color} !important" do %>
@@ -20,7 +23,10 @@
     <span><%= t('layouts.application.cte') %></span>
   <% end %>
 <% end %>
-<% if can?(:manage, User) %>
+<div class="text-center">
+  <%= t('layouts.application.register') %>
+</div>
+<% if can?(:read, User) %>
   <%= link_to admins_users_index_path, class: 'list-group-item list-group-item-action',
                                        style: "color: #{current_user.enterprise.secondary_color};
                                                background-color: #{current_user.enterprise.primary_color} !important" do %>
@@ -28,7 +34,7 @@
     <span><%= t('layouts.application.users') %></span>
   <% end %>
 <% end %>
-<% if can?(:manage, Client) %>
+<% if can?(:read, Client) %>
   <%= link_to clients_index_path, class: 'list-group-item list-group-item-action',
                                          style: "color: #{current_user.enterprise.secondary_color};
                                                  background-color: #{current_user.enterprise.primary_color} !important" do %>
@@ -36,7 +42,7 @@
     <span><%= t('layouts.application.clients') %></span>
   <% end %>
 <% end %>
-<% if can?(:manage, Enterprise) %>
+<% if can?(:read, Enterprise) %>
   <%= link_to super_admins_enterprises_index_path, class: 'list-group-item list-group-item-action',
                                                    style: "color: #{current_user.enterprise.secondary_color};
                                                            background-color: #{current_user.enterprise.primary_color} !important" do %>
