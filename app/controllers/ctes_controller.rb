@@ -6,7 +6,7 @@ class CtesController < UsersController
   before_action :set_truckload, only: %w[new create edit]
 
   def index
-    @ctes = Cte.where(user: current_user).order(created_at: :desc)
+    @ctes = Cte.accessible_by(current_ability).order(created_at: :desc)
   end
 
   def new
@@ -32,12 +32,7 @@ class CtesController < UsersController
   private
 
   def set_cte
-    if current_user.cte_ids.include?(Cte.find(params[:id]).id)
-      @cte = Cte.find(params[:id])
-    else
-      redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular este CT-e.'
-    end
+    @cte = Cte.find(params[:id])
   end
 
   def set_user

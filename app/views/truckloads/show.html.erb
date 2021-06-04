@@ -6,13 +6,17 @@
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
-  <%= link_to edit_truckload_path(@truckload), class: 'col-xs-3 btn btn-info' do %>
-    <i class="fas fa-edit"></i>
-    <%= t('.edit') %>
+  <% if can?(:update, Truckload) %>
+    <%= link_to edit_truckload_path(@truckload), class: 'col-xs-3 btn btn-info' do %>
+      <i class="fas fa-edit"></i>
+      <%= t('.edit') %>
+    <% end %>
   <% end %>
-  <%= link_to truckload_path(@truckload), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@truckload.dt_number}?" } do %>
-    <i class="fas fa-trash"></i>
-    <%= t('.delete') %>
+  <% if can?(:destroy, Truckload) %>
+    <%= link_to truckload_path(@truckload), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@truckload.dt_number}?" } do %>
+      <i class="fas fa-trash"></i>
+      <%= t('.delete') %>
+    <% end %>
   <% end %>
 </div>
 <div class="card shadow mb-4">
@@ -76,6 +80,18 @@
                               <th><%= t('.updated_at') %></th>
                               <td><%= l(@truckload.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
                             </tr>
+                            <% if user_owner?(current_user) || user_master?(current_user) %>
+                              <tr>
+                                <th><%= t('.created_by') %></th>
+                                <td><%= @truckload.user.first_name %> <%= @truckload.user.last_name %></td>
+                              </tr>
+                            <% end %>
+                            <% if user_master?(current_user) %>
+                              <tr>
+                                <th><%= t('.enterprise') %></th>
+                                <td><%= @truckload.user.enterprise.company_name %></td>
+                              </tr>
+                            <% end %>
                           </table>
                         </div>
                         <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">

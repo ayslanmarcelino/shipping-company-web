@@ -6,7 +6,7 @@ class TruckloadsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @truckloads = Truckload.where(user: current_user).order(updated_at: :desc)
+    @truckloads = Truckload.accessible_by(current_ability).order(updated_at: :desc)
   end
 
   def new
@@ -37,12 +37,7 @@ class TruckloadsController < UsersController
   end
 
   def set_truckload
-    if current_user.truckload_ids.include?(Truckload.find(params[:id]).id)
-      @truckload = Truckload.find(params[:id])
-    else
-      redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular esta carga.'
-    end
+    @truckload = Truckload.find(params[:id])
   end
 
   def set_client

@@ -12,6 +12,8 @@ pt-BR:
       dt_number: Número da DT
       created_at: Criado em
       updated_at: Atualizado em
+      created_by: Criado por
+      enterprise: Empresa
       document_number: CPF/CNPJ
       address_zip_code: CEP
       address_street: Logradouro

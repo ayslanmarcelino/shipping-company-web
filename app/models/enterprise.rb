@@ -21,6 +21,7 @@
 class Enterprise < ApplicationRecord
   has_many :users
   has_many :clients
+  has_many :user_roles, class_name: 'User::Role', dependent: :restrict_with_exception, inverse_of: :enterprise  
   has_one_attached :logo
   validates_uniqueness_of :document_number
   validates_presence_of %i[company_name fantasy_name document_number email opening_date primary_color secondary_color]

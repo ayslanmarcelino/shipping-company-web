@@ -1,7 +1,9 @@
 pt-BR:
   truckloads:
     index:
-      list: Lista de cargas contradas por
+      list_enterprise: Lista de cargas da empresa
+      list_user: Lista de cargas contradas por
+      list: Lista de cargas
       dt_number: Número DT
       client: Cliente
       value: Valor da carga
@@ -10,6 +12,8 @@ pt-BR:
       qtd_cte: Qtd. CT-e(s)
       created_at: Criado em
       updated_at: Atualizado em
+      created_by: Criado por
+      enterprise: Empresa
       view_cte: Visualizar CT-e(s)
       linked_cte: CT-e(s) vinculados a carga
       delete_confirm: Você deseja excluir a carga
