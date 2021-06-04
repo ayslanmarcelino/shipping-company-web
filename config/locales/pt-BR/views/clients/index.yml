@@ -1,11 +1,12 @@
 pt-BR:
   clients:
     index:
-      list: Lista de clientes cadastrados
+      list: Clientes cadastrados
       company_name: Razão social
       fantasy_name: Nome fantasia
       address_city: Cidade
       address_state: Estado
       document_number: CPF/CNPJ
+      enterprise: Empresa
       no_data: Não há clientes cadastrados
       delete_confirm: Você deseja excluir o cliente

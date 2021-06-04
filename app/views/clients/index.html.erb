@@ -14,6 +14,9 @@
                 <th><%= t('.address_state') %></th>
                 <th><%= t('.address_city') %></th>
                 <th><%= t('.document_number') %></th>
+                <% if user_master?(current_user) %>
+                  <th><%= t('.enterprise') %></th>
+                <% end %>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, Client) %>
                     <%= link_to new_client_path(@client), class: 'btn btn-success btn-circle' do %>
@@ -30,6 +33,9 @@
                   <td><%= client.address.state %></td>
                   <td><%= client.address.city %></td>
                   <td><%= client.document_number.to_br_cnpj %></td>
+                  <% if user_master?(current_user) %>
+                    <td><%= client.enterprise.company_name %></td>
+                  <% end %>
                   <td class="table-buttons">
                     <% if can?(:read, Client) %>
                       <%= link_to client_path(client), class: 'btn btn-dark' do %>

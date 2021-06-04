@@ -14,8 +14,10 @@
                 <th><%= t('.nickname')%></th>
                 <th><%= t('.document_number')%></th>
                 <th><%= t('.email')%></th>
-                <th><%= t('.function')%></th>
-                <th><%= t('.enterprise')%></th>
+                <th><%= t('.roles')%></th>
+                <% if user_master?(current_user) %>
+                  <th><%= t('.enterprise')%></th>
+                <% end %>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, User) %>
                     <%= link_to new_admins_user_path(@user), class: 'btn btn-success btn-circle' do %>
@@ -32,12 +34,10 @@
                   <td><%= user.nickname %></td>
                   <td><%= format_document_number(user.document_number) %></td>
                   <td><%= user.email %></td>
-                  <td class="text-center">
-                    <span class="badge badge-<%= function_color(user.is_active) %>" style="width: 100%">
-                      <%= function_translate(user.is_active) %>
-                    </span>
-                  </td>
-                  <td><%= user.enterprise.company_name %></td>
+                  <td><%= user.all_roles %></td>
+                  <% if user_master?(current_user) %>
+                    <td><%= user.enterprise.company_name %></td>
+                  <% end %>
                   <td class="table-buttons">
                     <% if can?(:update, User) %>
                       <%= link_to edit_admins_user_path(user), class: 'btn btn-info btn-circle' do %>

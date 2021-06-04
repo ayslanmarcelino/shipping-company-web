@@ -7,5 +7,6 @@ pt-BR:
         nickname: Apelido
         document_number: CPF/CNPJ
         email: E-mail
-        function: Função
+        roles: Regra(s) de usuário
+        enterprise: Empresa
         delete_confirm: Você tem certeza que deseja excluir o usuário

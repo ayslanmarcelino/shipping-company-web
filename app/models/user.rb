@@ -52,6 +52,10 @@ class User < ApplicationRecord
   has_many :cte
   has_many :roles, dependent: :destroy
 
+  def all_roles
+    roles.map(&:kind_cd).join(', ')
+  end
+
   def status_users
     return t('application.disabled') unless is_active
     return t('application.super_admin') if is_active && is_super_admin
