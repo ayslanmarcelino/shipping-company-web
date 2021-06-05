@@ -2,6 +2,7 @@ pt-BR:
   clients:
     index:
       list: Clientes cadastrados
+      id: Código
       company_name: Razão social
       fantasy_name: Nome fantasia
       address_city: Cidade

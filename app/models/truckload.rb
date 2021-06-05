@@ -15,7 +15,6 @@
 # Indexes
 #
 #  index_truckloads_on_client_id      (client_id)
-#  index_truckloads_on_dt_number      (dt_number) UNIQUE
 #  index_truckloads_on_enterprise_id  (enterprise_id)
 #  index_truckloads_on_user_id        (user_id)
 #
@@ -30,7 +29,7 @@ class Truckload < ApplicationRecord
   belongs_to :client
   belongs_to :user
   has_many :cte
-  validates_uniqueness_of :dt_number
+  validates :dt_number, uniqueness: { scope: :enterprise_id }
 
   def truckload_value
     cte.sum(&:value)

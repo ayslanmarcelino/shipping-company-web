@@ -4,7 +4,7 @@ FactoryBot.define do
     first_name            { FFaker::Name.first_name }
     last_name             { FFaker::Name.last_name }
     nickname              { FFaker::Name.name }
-    document_number       { FFaker::IdentificationBR.cpf }
+    document_number       { FFaker::IdentificationBR.pretty_cpf }
     password              { '12345678' }
     password_confirmation { '12345678' }
     is_active             { true }

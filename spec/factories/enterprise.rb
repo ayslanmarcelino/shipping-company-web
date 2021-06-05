@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :enterprise do
     primary_color     { Faker::Color.hex_color }
     secondary_color   { Faker::Color.hex_color }
-    document_number   { FFaker::IdentificationBR.cnpj }
+    document_number   { FFaker::IdentificationBR.pretty_cnpj }
     email             { Faker::Internet.email }
     company_name      { FFaker::NameBR.name }
     fantasy_name      { FFaker::NameBR.name }

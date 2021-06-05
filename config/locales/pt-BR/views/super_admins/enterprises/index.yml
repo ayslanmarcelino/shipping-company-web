@@ -3,6 +3,7 @@ pt-BR:
     enterprises:
       index:
         registered_enterprises: Empresas cadastradas
+        id: Código
         company_name: Razão social
         fantasy_name: Nome fantasia
         document_number: CPF/CNPJ

@@ -20,7 +20,7 @@ module Admins
     def create
       @user = User.new(params_user)
 
-      if @user.save!
+      if @user.save
         redirect_to admins_users_path
         flash[:success] = 'Usuário cadastrado com sucesso.'
       else
@@ -51,7 +51,12 @@ module Admins
     private
 
     def set_user
-      @user = User.find(params[:id])
+      if current_user.enterprise_id == User.find(params[:id]).enterprise_id || current_user.roles.kind_masters.present?
+        @user = User.find(params[:id])
+      else
+        redirect_to root_path
+        flash[:danger] = 'Você não tem permissão para editar este usuário.'
+      end
     end
 
     def set_enterprise
@@ -63,9 +68,6 @@ module Admins
     end
 
     def params_user
-      
-      binding.pry
-      
       params.require(:user)
             .permit(:document_number,
                     :email,

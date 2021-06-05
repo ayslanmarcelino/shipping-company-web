@@ -36,11 +36,11 @@ class ClientsController < UsersController
   private
 
   def set_client
-    if Enterprise.find(current_user.enterprise_id).client_ids.include?(Client.find(params[:id]).id)
+    if Enterprise.find(current_user.enterprise_id).client_ids.include?(Client.find(params[:id]).id) || current_user.roles.kind_masters.present?
       @client = Client.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para editar este cliente.' 
+      flash[:danger] = 'Você não tem permissão para editar este cliente.'
     end
   end
 

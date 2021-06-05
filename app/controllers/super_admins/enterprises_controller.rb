@@ -17,7 +17,7 @@ module SuperAdmins
       @enterprise = Enterprise.new(params_enterprise)
 
       if @enterprise.save
-        redirect_to admins_enterprises_path 
+        redirect_to super_admins_enterprises_path 
         flash[:success] = 'Empresa cadastrada com sucesso.'
       else
         render :new
@@ -28,7 +28,7 @@ module SuperAdmins
 
     def update
       if @enterprise.update(params_enterprise)
-        redirect_to admins_enterprises_path
+        redirect_to super_admins_enterprises_path
         flash[:success] = 'Empresa atualizada com sucesso.'
       else
         render :edit
@@ -37,7 +37,7 @@ module SuperAdmins
 
     def destroy
       if @enterprise.destroy
-        redirect_to admins_enterprises_path
+        redirect_to super_admins_enterprises_path
         flash[:success] = 'Empresa excluída com sucesso.'
       else
         render :index

@@ -32,7 +32,12 @@ class CtesController < UsersController
   private
 
   def set_cte
-    @cte = Cte.find(params[:id])
+    if current_user.cte_ids.include?(Cte.find(params[:id]).id) || current_user.roles.kind_masters.present?
+      @cte = Cte.find(params[:id])
+    else
+      redirect_to root_path
+      flash[:danger] = 'Você não tem permissão para manipular este CT-e.'
+    end
   end
 
   def set_user

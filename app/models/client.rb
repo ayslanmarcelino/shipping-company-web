@@ -19,9 +19,8 @@
 #
 # Indexes
 #
-#  index_clients_on_address_id       (address_id)
-#  index_clients_on_document_number  (document_number) UNIQUE
-#  index_clients_on_enterprise_id    (enterprise_id)
+#  index_clients_on_address_id     (address_id)
+#  index_clients_on_enterprise_id  (enterprise_id)
 #
 # Foreign Keys
 #
@@ -30,10 +29,11 @@
 #
 class Client < ApplicationRecord
   belongs_to :address, optional: true
+  belongs_to :enterprise
   
   accepts_nested_attributes_for :address
 
-  belongs_to :enterprise
+  validates :document_number, uniqueness: { scope: :enterprise_id }
 
   def formatted_name
     "#{company_name} - #{address.state} | #{document_number.to_br_cnpj}"

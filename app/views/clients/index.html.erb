@@ -9,6 +9,7 @@
           <table id="table" class="table table-striped table-bordered">
             <thead>
               <tr>
+                <th><%= t('.id') %></th>
                 <th><%= t('.company_name') %></th>
                 <th><%= t('.fantasy_name') %></th>
                 <th><%= t('.address_state') %></th>
@@ -28,6 +29,7 @@
               <tbody>
               <% @clients.each do |client| %>
                 <tr>
+                  <td><%= client.id %></td>
                   <td><%= client.company_name %></td>
                   <td><%= client.fantasy_name %></td>
                   <td><%= client.address.state %></td>
@@ -57,9 +59,6 @@
               <% end %>
             </tbody>
           </table>
-          <% if @clients.empty? %>
-            <tr><%= t('.no_data') %></tr>
-          <% end %>
         </div>
       </div>
     </div>

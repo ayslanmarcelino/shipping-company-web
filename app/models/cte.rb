@@ -13,7 +13,6 @@
 #
 # Indexes
 #
-#  index_ctes_on_cte_number     (cte_number) UNIQUE
 #  index_ctes_on_enterprise_id  (enterprise_id)
 #  index_ctes_on_truckload_id   (truckload_id)
 #  index_ctes_on_user_id        (user_id)
@@ -28,7 +27,7 @@ class Cte < ApplicationRecord
   belongs_to :enterprise
   belongs_to :truckload
   belongs_to :user
-  validates_uniqueness_of :cte_number
+  validates :cte_number, uniqueness: { scope: :enterprise_id }
 
   def truckload_client
     "#{truckload.client.company_name} - #{truckload.client.address.state} | #{truckload.client.document_number.to_br_cnpj}"
