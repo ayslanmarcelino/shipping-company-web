@@ -7,6 +7,7 @@ role_owner = FactoryBot.create(:user_role, kind: :owner, user: user_owner, enter
 user_operational = FactoryBot.create(:user, email: 'operational@gmail.com', enterprise: enterprise_01)
 role_operational = FactoryBot.create(:user_role, kind: :operational, user: user_operational, enterprise: enterprise_01)
 disabled_user = FactoryBot.create(:user, is_active: false, enterprise: enterprise_01)
+role_disabled_user = FactoryBot.create(:user_role, user: disabled_user, enterprise: enterprise_01)
 client = FactoryBot.create(:client, enterprise: enterprise_01)
 truckload = FactoryBot.create(:truckload, user: user_operational, enterprise: enterprise_01, client: client)
 cte = FactoryBot.create(:cte, truckload: truckload, user: user_operational, enterprise: enterprise_01)
