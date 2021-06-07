@@ -2,11 +2,11 @@
   <%= form.label(:kind_cd) %>
   <% if user_master?(current_user) %>
     <%= form.select(:kind_cd,
-                    User::Role::KINDS.map { |kind| I18n.t(kind, scope: 'activerecord.attributes.user/role.kinds')},
+                    User::Role::KINDS,
                     { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control' }) %>
   <% else %>
     <%= form.select(:kind_cd,
-                    User::Role::KINDS_CLIENT.map { |kind| I18n.t(kind, scope: 'activerecord.attributes.user/role.kinds')},
+                    User::Role::KINDS_CLIENT,
                     { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control' }) %>
   <% end %>
 </div>
