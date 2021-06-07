@@ -25,7 +25,7 @@
     <span><%= t('layouts.application.cte') %></span>
   <% end %>
 <% end %>
-<% if can?(:read, User) || can?(:read, Client) || can?(:read, Enterprise) %>
+<% if can?(:read, User) || can?(:read, Client) || can?(:read, Enterprise) || can?(:read, User::Role) %>
   <div class="text-center">
     <%= t('layouts.application.register') %>
   </div>
@@ -36,6 +36,14 @@
                                                background-color: #{current_user.enterprise.primary_color} !important" do %>
     <i class="fas fa-users"></i>
     <span><%= t('layouts.application.users') %></span>
+  <% end %>
+<% end %>
+<% if can?(:read, User::Role) %>
+  <%= link_to user_roles_index_path, class: 'list-group-item list-group-item-action',
+                                      style: "color: #{current_user.enterprise.secondary_color};
+                                              background-color: #{current_user.enterprise.primary_color} !important" do %>
+    <i class="fas fa-users-cog"></i>
+    <span><%= t('layouts.application.user_roles') %></span>
   <% end %>
 <% end %>
 <% if can?(:read, Client) %>

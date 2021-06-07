@@ -58,6 +58,14 @@ class User < ApplicationRecord
     roles.map(&:kind_cd).join(', ')
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def full_information
+    "#{first_name} #{last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
+  end
+
   def status_users
     return t('application.disabled') unless is_active
     return t('application.super_admin') if is_active && is_super_admin
