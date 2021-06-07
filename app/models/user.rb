@@ -55,7 +55,7 @@ class User < ApplicationRecord
   has_many :roles, dependent: :destroy
 
   def all_roles
-    roles.map(&:kind_cd).join(', ')
+    roles.map(&:kind_cd).sort
   end
 
   def full_name

@@ -31,4 +31,8 @@ class User::Role < ApplicationRecord
   as_enum :kind, KINDS, prefix: true, map: :string
 
   validates :kind_cd, uniqueness: { scope: :user_id }
+
+  def translated_kinds
+    I18n.t(:kind_cd, scope: 'activerecord.attributes.user/role.kinds')
+  end
 end
