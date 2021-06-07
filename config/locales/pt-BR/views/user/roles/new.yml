@@ -1,0 +1,7 @@
+pt-BR:
+  user:
+    roles:
+      new:
+        new: Nova regra de usuário
+        cancel: Cancelar
+        create: Criar nova regra de usuário

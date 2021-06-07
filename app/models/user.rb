@@ -55,7 +55,15 @@ class User < ApplicationRecord
   has_many :roles, dependent: :destroy
 
   def all_roles
-    roles.map(&:kind_cd).join(', ')
+    roles.map(&:kind_cd).sort
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def full_information
+    "#{first_name} #{last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
   end
 
   def status_users

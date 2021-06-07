@@ -36,7 +36,7 @@
                   <td><%= user.nickname %></td>
                   <td><%= format_document_number(user.document_number) %></td>
                   <td><%= user.email %></td>
-                  <td><%= user.all_roles %></td>
+                  <td><%= I18n.t(user.all_roles, scope: 'activerecord.attributes.user/role.kinds').join(', ') %></td>
                   <% if user_master?(current_user) %>
                     <td><%= user.enterprise.company_name %></td>
                   <% end %>

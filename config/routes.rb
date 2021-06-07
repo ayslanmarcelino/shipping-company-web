@@ -15,6 +15,12 @@ Rails.application.routes.draw do
     resources :enterprises
   end
 
+  namespace :user do
+    get 'roles/index'
+
+    resources :roles
+  end
+
   get 'dashboard/index'
   get 'truckloads/index'
   get 'ctes/index'

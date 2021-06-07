@@ -20,10 +20,19 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class User::Role < ApplicationRecord
-  KINDS = [:master, :owner, :operational].freeze
+  KINDS_MASTER = [:master].freeze
+  KINDS_CLIENT = [:owner, :operational].freeze
+
+  KINDS = KINDS_MASTER + KINDS_CLIENT
 
   belongs_to :user
   belongs_to :enterprise
 
   as_enum :kind, KINDS, prefix: true, map: :string
+
+  validates :kind_cd, uniqueness: { scope: :user_id }
+
+  def translated_kinds
+    I18n.t(:kind_cd, scope: 'activerecord.attributes.user/role.kinds')
+  end
 end

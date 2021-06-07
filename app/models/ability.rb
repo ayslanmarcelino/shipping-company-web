@@ -46,6 +46,7 @@ class Ability
       can(:manage, Cte, enterprise: @enterprise)
       can(:manage, Client, enterprise: @enterprise)
       can(:manage, User, enterprise: @enterprise)
+      can(:manage, User::Role, enterprise: @enterprise)
       cannot(:update, Truckload)
       cannot(:update, Cte)
     end
@@ -53,6 +54,7 @@ class Ability
     def operational_abilities
       can(:manage, Truckload, user: @user)
       can(:manage, Cte, user: @user)
+      can(:manage, Client, enterprise: @enterprise)
     end
   end
 end
