@@ -7,7 +7,7 @@ module Admins
     before_action :set_enterprise, only: %w[create new edit update destroy]
 
     def index
-      @q = User.accessible_by(current_ability).ransack(params[:q])
+      @q = User.includes(:enterprise).includes(:roles).accessible_by(current_ability).ransack(params[:q])
       @users = @q.result(distinct: true)
     end
 

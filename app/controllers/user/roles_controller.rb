@@ -6,7 +6,7 @@ class User::RolesController < AdminsController
   before_action :set_enterprise, only: %w[new create edit]
 
   def index
-    @user_roles = User::Role.accessible_by(current_ability)
+    @user_roles = User::Role.includes(:user).includes(:enterprise).accessible_by(current_ability)
   end
 
   def new
