@@ -51,6 +51,9 @@
         client_id: Cliente
         is_agent: Contratado por agenciador
       user/role:
+        kind_cd: Regra
+        enterprise_id: Empresa
+        user_id: Usuário
         kinds:
           master: Master
           operational: Operacional
