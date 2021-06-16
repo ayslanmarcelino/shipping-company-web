@@ -2,8 +2,5 @@ pt-BR:
   application:
     disabled: Desativado
     actived: Ativado
-    super_admin: Super Admin
-    admin: Admin
-    employee: Funcionário
     positive: Sim
     negative: Não

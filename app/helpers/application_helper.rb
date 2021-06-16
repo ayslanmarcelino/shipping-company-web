@@ -7,20 +7,8 @@ module ApplicationHelper
     boolean ? t('application.positive') : t('application.negative')
   end
 
-  def function_color(active)
-    return 'danger' if !active
-  end
-
-  def function_translate(active)
-    return t('application.disabled') unless active
-  end
-
-  def enterprise_color(is_active)
-    is_active ? 'success' : 'danger'
-  end
-
-  def enterprise_status(is_active)
-    is_active ? t('application.actived') : t('application.disabled')
+  def boolean_color(boolean)
+    boolean ? 'success' : 'danger'
   end
 
   def user_master?(current_user)
@@ -29,5 +17,16 @@ module ApplicationHelper
   
   def user_owner?(current_user)
     current_user.roles.kind_owners.present?
+  end
+
+  def role_master_select
+    [['Master', 'master'],
+     ['Proprietário', 'owner'],
+     ['Operacional', 'operational']]
+  end
+
+  def role_select
+    [['Proprietário', 'owner'],
+     ['Operacional', 'operational']]
   end
 end

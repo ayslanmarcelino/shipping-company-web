@@ -17,7 +17,7 @@
                 <th><%= t('.primary_color')%></th>
                 <th><%= t('.secondary_color')%></th>
                 <th><%= t('.users_count')%></th>
-                <th><%= t('.status')%></th>
+                <th><%= t('.actived')%></th>
                 <th class="no-sort table-buttons">
                   <%= link_to new_super_admins_enterprise_path(@enterprise), class: 'btn btn-success btn-circle' do %>
                     <i class="fas fa-plus"></i>
@@ -45,8 +45,8 @@
                   </td>
                   <td><%= enterprise.users.count %></td>
                   <td class="text-center">
-                    <span class="badge badge-<%= enterprise_color(enterprise.is_active) %>">
-                      <%= enterprise_status(enterprise.is_active) %>
+                    <span class="badge badge-<%= boolean_color(enterprise.is_active) %>">
+                      <%= translate_boolean(enterprise.is_active) %>
                     </span>
                   </td>
                   <td class="table-buttons">

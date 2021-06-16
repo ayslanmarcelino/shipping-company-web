@@ -10,4 +10,5 @@ pt-BR:
         email: E-mail
         roles: Regra(s) de usuário
         enterprise: Empresa
+        actived: Ativo
         delete_confirm: Você tem certeza que deseja excluir o usuário
