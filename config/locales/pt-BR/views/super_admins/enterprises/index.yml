@@ -11,5 +11,5 @@ pt-BR:
         primary_color: Cor primária
         secondary_color: Cor secundária
         users_count: Qtd. de usuários
-        status: Status
+        actived: Ativo
         delete_confirm: Você tem certeza que deseja excluir a empresa

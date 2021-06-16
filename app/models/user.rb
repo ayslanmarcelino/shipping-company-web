@@ -65,11 +65,4 @@ class User < ApplicationRecord
   def full_information
     "#{first_name} #{last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
   end
-
-  def status_users
-    return t('application.disabled') unless is_active
-    return t('application.super_admin') if is_active && is_super_admin
-    return t('application.admin') if is_active && is_admin
-    return t('application.employee') if is_active && !is_admin && !is_super_admin
-  end
 end

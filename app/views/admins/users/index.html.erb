@@ -19,6 +19,7 @@
                 <% if user_master?(current_user) %>
                   <th><%= t('.enterprise')%></th>
                 <% end %>
+                <th><%= t('.actived')%></th>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, User) %>
                     <%= link_to new_admins_user_path(@user), class: 'btn btn-success btn-circle' do %>
@@ -40,6 +41,11 @@
                   <% if user_master?(current_user) %>
                     <td><%= user.enterprise.company_name %></td>
                   <% end %>
+                  <td class="text-center">
+                    <span class="badge badge-<%= boolean_color(user.is_active) %>">
+                      <%= translate_boolean(user.is_active) %>
+                    </span>
+                  </td>
                   <td class="table-buttons">
                     <% if can?(:update, User) %>
                       <%= link_to edit_admins_user_path(user), class: 'btn btn-info btn-circle' do %>
