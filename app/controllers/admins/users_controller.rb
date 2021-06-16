@@ -13,6 +13,7 @@ module Admins
 
     def new
       @user = User.new
+      # @user.build_person
     end
 
     def show; end
@@ -31,6 +32,8 @@ module Admins
     def edit; end
 
     def update
+      # @user.person.validate_person = true
+
       if @user.update(params_user)
         redirect_to admins_users_path
         flash[:success] = 'Usuário atualizado com sucesso.'
