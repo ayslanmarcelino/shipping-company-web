@@ -55,6 +55,7 @@ class Ability
       can(:manage, Truckload, user: @user)
       can(:manage, Cte, user: @user)
       can(:manage, Client, enterprise: @enterprise)
+      can(:update, User, user: @user)
     end
   end
 end

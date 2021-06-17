@@ -8,8 +8,13 @@
         first_name: Primeiro nome
         last_name: Último nome
         nickname: Apelido
+        birth_date: Data de nascimento
+        phone_number: Telefone
+        telephone_number: Celular
         email: E-mail
         document_number: CPF/CNPJ
+        rg: RG
+        rg_issuing_body: Órgão expedidor
         is_active: Está ativo
         is_employee: Funcionário
         is_admin: Admin
