@@ -46,6 +46,8 @@ class User < ApplicationRecord
   has_many :cte
   has_many :roles, dependent: :destroy
 
+  accepts_nested_attributes_for :person
+
   def all_roles
     roles.map(&:kind_cd).sort
   end

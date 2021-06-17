@@ -33,9 +33,9 @@
         fantasy_name: Nome fantasia
         is_active: Está ativa
         observation: Observação
-        phone_number: Celular
+        phone_number: Telefone
         responsible: Responsável
-        telephone_number: Telefone
+        telephone_number: Celular
       address:
         street: Logradouro
         number: Número

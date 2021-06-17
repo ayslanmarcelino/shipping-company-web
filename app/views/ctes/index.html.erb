@@ -50,7 +50,7 @@
                     <% end %>
                   </td>
                   <% if user_owner?(current_user) || user_master?(current_user) %>
-                    <td><%= cte.user.first_name %> <%= cte.user.last_name %></td>
+                    <td><%= cte.user.person.first_name %> <%= cte.user.person.last_name %></td>
                   <% end %>
                   <% if user_master?(current_user) %>
                     <td><%= cte.user.enterprise.company_name %></td>

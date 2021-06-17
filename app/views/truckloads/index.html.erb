@@ -77,7 +77,7 @@
                   <% end %>
                   <td><%= truckload.ctes_numbers.count %></td>
                   <% if user_owner?(current_user) || user_master?(current_user) %>
-                    <td><%= truckload.user.first_name %> <%= truckload.user.last_name %></td>
+                    <td><%= truckload.user.person.first_name %> <%= truckload.user.person.last_name %></td>
                   <% end %>
                   <% if user_master?(current_user) %>
                     <td><%= truckload.user.enterprise.company_name %></td>

@@ -29,9 +29,22 @@ class User::Person < ApplicationRecord
 
   belongs_to :address, optional: true
 
-  validates :document_number, uniqueness: true, on: :create
+  validates :document_number, uniqueness: true, on: :create, if: -> { document_number.present? }
 
   accepts_nested_attributes_for :address
+
+  def self.permitted_attributes
+    [:id,
+     :birth_date,
+     :document_number,
+     :first_name,
+     :last_name,
+     :nickname,
+     :phone_number,
+     :rg,
+     :rg_issuing_body,
+     :telephone_number]
+  end
 
   def full_name
     "#{first_name} #{last_name}"

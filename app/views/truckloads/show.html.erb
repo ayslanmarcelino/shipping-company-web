@@ -76,7 +76,7 @@
               <% if user_owner?(current_user) || user_master?(current_user) %>
                 <tr>
                   <th><%= t('.created_by') %></th>
-                  <td><%= @truckload.user.first_name %> <%= @truckload.user.last_name %></td>
+                  <td><%= @truckload.user.person.first_name %> <%= @truckload.user.person.last_name %></td>
                 </tr>
               <% end %>
               <% if user_master?(current_user) %>

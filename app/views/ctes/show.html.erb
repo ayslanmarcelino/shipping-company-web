@@ -66,7 +66,7 @@
               <% if user_owner?(current_user) || user_master?(current_user) %>
                 <tr>
                   <th><%= t('.created_by') %></th>
-                  <td><%= @cte.user.first_name %> <%= @cte.user.last_name %></td>
+                  <td><%= @cte.user.person.first_name %> <%= @cte.user.person.last_name %></td>
                 </tr>
               <% end %>
               <% if user_master?(current_user) %>

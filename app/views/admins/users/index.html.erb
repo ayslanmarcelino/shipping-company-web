@@ -33,9 +33,9 @@
               <% @users.each do |user| %>
                 <tr>
                   <td><%= user.id %></td>
-                  <td><%= user.first_name %> <%= user.last_name %></td>
-                  <td><%= user.nickname %></td>
-                  <td><%= format_document_number(user.document_number) %></td>
+                  <td><%= user.person.first_name %> <%= user.person.last_name %></td>
+                  <td><%= user.person.nickname %></td>
+                  <td><%= format_document_number(user.person.document_number) %></td>
                   <td><%= user.email %></td>
                   <td><%= I18n.t(user.all_roles, scope: 'activerecord.attributes.user/role.kinds').join(', ') %></td>
                   <% if user_master?(current_user) %>
@@ -56,7 +56,7 @@
                       <%= link_to admins_user_path(user),
                           method: :delete,
                           class: 'btn btn-danger btn-circle',
-                          data: { confirm: "#{t('.delete_confirm')}: #{user.first_name} #{user.last_name}?" } do %>
+                          data: { confirm: "#{t('.delete_confirm')}: #{user.person.first_name} #{user.person.last_name}?" } do %>
                         <i class="fas fa-trash"></i>
                       <% end %>
                     <% end %>

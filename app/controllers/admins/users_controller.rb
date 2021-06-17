@@ -7,13 +7,18 @@ module Admins
     before_action :set_enterprise, only: %w[create new edit update destroy]
 
     def index
-      @q = User.includes(:enterprise).includes(:roles).accessible_by(current_ability).ransack(params[:q])
+      @q = User.includes(:enterprise)
+               .includes(:roles)
+               .includes(:person)
+               .accessible_by(current_ability)
+               .ransack(params[:q])
       @users = @q.result(distinct: true)
     end
 
     def new
       @user = User.new
-      # @user.build_person
+      @user.build_person
+      @user.person.build_address
     end
 
     def show; end
@@ -32,8 +37,6 @@ module Admins
     def edit; end
 
     def update
-      # @user.person.validate_person = true
-
       if @user.update(params_user)
         redirect_to admins_users_path
         flash[:success] = 'Usuário atualizado com sucesso.'
@@ -72,15 +75,13 @@ module Admins
 
     def params_user
       params.require(:user)
-            .permit(:document_number,
-                    :email,
-                    :first_name,
+            .permit(:email,
                     :is_active,
-                    :last_name,
-                    :nickname,
                     :enterprise_id,
                     :password,
-                    :password_confirmation)
+                    :password_confirmation,
+                    person_attributes: [User::Person.permitted_attributes,
+                                        address_attributes: Address.permitted_attributes])
     end
 
     def verify_password
