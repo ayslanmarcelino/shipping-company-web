@@ -33,7 +33,7 @@ class TruckloadsController < UsersController
 
   def invalid_foreign_key
     redirect_to truckloads_path
-    flash[:danger] = 'Carga com CT-e vinculado não pode ser excluída.'
+    flash[:danger] = 'Carga com dados vinculados não pode ser excluída.'
   end
 
   def set_truckload

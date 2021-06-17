@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :verify_password, only: %w[update]
   before_action :set_user, only: %w[edit update destroy]
   before_action :set_enterprise, only: %w[create new edit update destroy]
+  rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
     @q = User.includes(:enterprise)
@@ -54,6 +55,11 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def invalid_foreign_key
+    redirect_to users_path
+    flash[:danger] = 'Usuário com dados vinculados não pode ser excluído.'
+  end
 
   def set_user
     can_view_user = true if current_user.roles.kind_masters.present? ||
