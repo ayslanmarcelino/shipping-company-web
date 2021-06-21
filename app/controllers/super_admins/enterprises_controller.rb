@@ -57,7 +57,7 @@ module SuperAdmins
 
     def invalid_foreign_key
       redirect_to super_admins_enterprises_path
-      flash[:danger] = 'Não é possível excluir, pois há dados vinculados.'
+      flash[:danger] = 'Empresa com dados vinculados não pode ser excluída.'
     end
   end
 end

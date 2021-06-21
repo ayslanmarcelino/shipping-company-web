@@ -2,18 +2,18 @@
   <h4><%= t('.view') %>: <%= @cte.cte_number %></h4>
 </div>
 <div class="col-xs-12 mb-2">
-  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-user' do %>
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm  btn-user' do %>
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
   <% if can?(:update, Cte) %>
-    <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info' do %>
+    <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
   <% end %>
   <% if can?(:destroy, Cte) %>
-    <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
+    <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -66,7 +66,7 @@
               <% if user_owner?(current_user) || user_master?(current_user) %>
                 <tr>
                   <th><%= t('.created_by') %></th>
-                  <td><%= @cte.user.first_name %> <%= @cte.user.last_name %></td>
+                  <td><%= @cte.user.person.first_name %> <%= @cte.user.person.last_name %></td>
                 </tr>
               <% end %>
               <% if user_master?(current_user) %>

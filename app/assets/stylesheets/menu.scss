@@ -17,7 +17,7 @@
 }
 
 #sidebar-wrapper .list-group {
-  width: 15rem;
+  width: 14rem;
 }
 
 #page-content-wrapper {
@@ -26,6 +26,10 @@
 
 #wrapper.toggled #sidebar-wrapper {
   margin-left: 0;
+}
+
+.list-item-menu {
+  padding: 0.75rem 1.25rem;
 }
 
 @media (min-width: 768px) {

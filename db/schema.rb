@@ -108,6 +108,22 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.index ["user_id"], name: "index_truckloads_on_user_id"
   end
 
+  create_table "user_people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "nickname"
+    t.string "document_number"
+    t.string "phone_number"
+    t.string "telephone_number"
+    t.string "rg"
+    t.string "rg_issuing_body"
+    t.datetime "birth_date"
+    t.bigint "address_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_id"], name: "index_user_people_on_address_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "enterprise_id"
@@ -131,16 +147,12 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "nickname"
-    t.string "document_number", null: false
     t.boolean "is_active", default: false
-    t.bigint "address_id"
     t.bigint "enterprise_id"
-    t.index ["address_id"], name: "index_users_on_address_id"
+    t.bigint "person_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["enterprise_id"], name: "index_users_on_enterprise_id"
+    t.index ["person_id"], name: "index_users_on_person_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -153,8 +165,9 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
   add_foreign_key "truckloads", "clients"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"
+  add_foreign_key "user_people", "addresses"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
-  add_foreign_key "users", "addresses"
   add_foreign_key "users", "enterprises"
+  add_foreign_key "users", "user_people", column: "person_id"
 end

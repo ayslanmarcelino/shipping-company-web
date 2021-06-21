@@ -1,0 +1,103 @@
+<h5 class="text-divider">
+  <span><%= t('.access') %></span>
+</h5>
+<div class="col-lg-12">
+  <%= form.label(:enterprise) %></br>
+  <%= form.collection_select(:enterprise_id, @enterprise, :id, :company_name, {}, { class: 'select2_single form-control', required: true }) %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:email) %>
+  <%= form.email_field(:email, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:password) %>
+  <%= form.password_field(:password, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:password_confirmation) %>
+  <%= form.password_field(:password_confirmation, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12 custom-control custom-switch">
+  <%= form.label(:is_active) %>?
+  <%= form.check_box(:is_active, class: "custom-control-input", id: "is_active_switch") %></br>
+  <label style="font-size: 13px">Não</label>
+  <label class="custom-control-label switch-user" for="is_active_switch"></label>
+  <label style="font-size: 13px">Sim</label>
+</div>
+<h5 class="text-divider">
+  <span><%= t('.personal') %></span>
+</h5>
+<div class="col-lg-12">
+  <%= form.label(:first_name) %>
+  <%= person_form.text_field(:first_name, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:last_name) %>
+  <%= person_form.text_field(:last_name, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:nickname) %>
+  <%= person_form.text_field(:nickname, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:birth_date) %>
+  <%= person_form.date_field(:birth_date, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:phone_number) %>
+  <%= person_form.text_field(:phone_number, class: 'form-control form-control-user input--phone-number') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:telephone_number) %>
+  <%= person_form.text_field(:telephone_number, class: 'form-control form-control-user input--telephone-number') %>
+</div>
+<h5 class="text-divider">
+  <span><%= t('.documents') %></span>
+</h5>
+<div class="col-lg-12">
+  <%= form.label(:document_number) %>
+  <%= person_form.text_field(:document_number, class: 'form-control form-control-user document_number') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:rg) %>
+  <%= person_form.number_field(:rg, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:rg_issuing_body) %>
+  <%= person_form.text_field(:rg_issuing_body, class: 'form-control form-control-user') %>
+</div>
+<h5 class="text-divider">
+  <span><%= t('.address') %></span>
+</h5>
+<div class="col-lg-12">
+  <%= address_form.label(:zip_code) %>
+  <%= address_form.text_field(:zip_code, class: 'form-control form-control-user input--zip-code') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:street) %>
+  <%= address_form.text_field(:street, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:number) %>
+  <%= address_form.number_field(:number, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:complement) %>
+  <%= address_form.text_field(:complement, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:neighborhood) %>
+  <%= address_form.text_field(:neighborhood, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:city) %>
+  <%= address_form.text_field(:city, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:state) %>
+  <%= address_form.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control' }) %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:country) %>
+  <%= address_form.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control' }) %>
+</div>

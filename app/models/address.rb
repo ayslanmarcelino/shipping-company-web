@@ -30,7 +30,7 @@ class Address < ApplicationRecord
   end
 
   as_enum :state, STATES, map: :string, source: :state
-  has_many :user
+  has_many :user_person
 
   private
 

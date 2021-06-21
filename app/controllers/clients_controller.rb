@@ -61,6 +61,6 @@ class ClientsController < UsersController
 
   def invalid_foreign_key
     redirect_to clients_index_path
-    flash[:danger] = 'Não é possível excluir, pois o cliente possui carga(s) e/ou CT-e(s) vinculado.'
+    flash[:danger] = 'Cliente com dados vinculados não pode ser excluído.'
   end
 end

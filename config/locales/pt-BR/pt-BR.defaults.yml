@@ -2,3 +2,4 @@ pt-BR:
   time:
     formats:
       with_full_hour: ! '%d/%m/%Y às %H:%M:%S'
+      date: ! '%d/%m/%Y'

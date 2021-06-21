@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h4><%= t('.editing') %>: <%= I18n.t(@user_role.kind_cd, scope: 'activerecord.attributes.user/role.kinds') %> do(a) <%= @user_role.user.full_name %></h4>
+  <h4><%= t('.editing') %>: <%= I18n.t(@user_role.kind_cd, scope: 'activerecord.attributes.user/role.kinds') %> do(a) <%= @user_role.user.person.full_name %></h4>
 </div>
 <div class="container h-100">
   <%= render partial: 'user/roles/components/errors' %>
@@ -10,7 +10,7 @@
                    locals: { form: form } %>
         <div class="row btn-actions">
           <div class="col-lg-6 mt-3">
-            <%= link_to t('.cancel'), user_roles_path, class: 'btn btn-danger btn-user btn-block' %>
+            <%= link_to t('.cancel'), user_roles_path, class: 'btn btn-sm btn-danger btn-user btn-block' %>
           </div>
           <div class="col-lg-6 mt-3">
             <button class="btn btn-primary btn-user btn-block">

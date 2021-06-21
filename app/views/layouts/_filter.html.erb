@@ -1,5 +1,5 @@
 <p>
-  <a class="btn"
+  <a class="btn btn-sm"
      style="background-color: <%= current_user.enterprise.primary_color %>;
             color: <%= current_user.enterprise.secondary_color %>;
             border-color: <%= current_user.enterprise.secondary_color %>"
@@ -32,11 +32,11 @@
       <% end %>
       <hr>
       <div>
-        <%= link_to url_for, class: 'btn btn-secondary' do %>
+        <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
           <i class="fas fa-broom"></i>
           <%= t('layouts.filter.clear') %>
         <% end %>
-        <%= button_tag(class: 'btn', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
           <i class="fas fa-search"></i>
           <%= t('layouts.filter.search') %>
         <% end %>
