@@ -2,7 +2,7 @@ pt-BR:
   truckloads:
     index:
       list_enterprise: Lista de cargas da empresa
-      list_user: Lista de cargas contradas por
+      list_user: Lista de cargas contratadas por
       list: Lista de cargas
       dt_number: Número DT
       client: Cliente

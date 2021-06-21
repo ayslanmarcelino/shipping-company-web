@@ -1,7 +1,7 @@
 <div class="text-center">
   <h4><%= t('.registered_users') %></h4>
 </div>
-<%= render partial: 'layouts/filter', locals: { url: users_path } %>
+<%= render partial: 'layouts/filter', locals: { url: admins_users_path } %>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">
@@ -22,7 +22,7 @@
                 <th><%= t('.actived')%></th>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, User) %>
-                    <%= link_to new_user_path(@user), class: 'btn btn-sm btn-success btn-circle' do %>
+                    <%= link_to new_admins_user_path(@user), class: 'btn btn-sm btn-success btn-circle' do %>
                       <i class="fas fa-plus"></i>
                     <% end %>
                   <% end %>
@@ -48,17 +48,17 @@
                   </td>
                   <td class="table-buttons">
                     <% if can?(:read, User) %>
-                      <%= link_to user_path(user), class: 'btn btn-sm btn-dark' do %>
+                      <%= link_to admins_user_path(user), class: 'btn btn-sm btn-dark' do %>
                         <i class="fas fa-eye"></i>
                       <% end %>
                     <% end %>
                     <% if can?(:update, User) %>
-                      <%= link_to edit_user_path(user), class: 'btn btn-sm btn-info btn-circle' do %>
+                      <%= link_to edit_admins_user_path(user), class: 'btn btn-sm btn-info btn-circle' do %>
                         <i class="fas fa-edit"></i>
                       <% end %>
                     <% end %>
                     <% if can?(:destroy, User) %>
-                      <%= link_to user_path(user),
+                      <%= link_to admins_user_path(user),
                           method: :delete,
                           class: 'btn btn-sm btn-danger btn-circle',
                           data: { confirm: "#{t('.delete_confirm')}: #{user.person.first_name} #{user.person.last_name}?" } do %>
