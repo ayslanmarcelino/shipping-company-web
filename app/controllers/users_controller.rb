@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :verify_password, only: %w[update]
-  before_action :set_user, only: %w[edit update destroy]
+  before_action :set_user, only: %w[show edit update destroy]
   before_action :set_enterprise, only: %w[create new edit update destroy]
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
