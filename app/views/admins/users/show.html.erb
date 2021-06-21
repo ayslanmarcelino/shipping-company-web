@@ -59,7 +59,7 @@
               </tr>
               <tr>
                 <th><%= t('.birth_date') %></th>
-                <td><%= l(@user.person.birth_date, format: :date) %></td>
+                <td><%= l(@user.person&.birth_date, format: :date) %></td>
               </tr>
               <tr>
                 <th><%= t('.phone_number') %></th>
