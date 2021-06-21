@@ -1,4 +1,4 @@
-<%= link_to dashboard_index_path, class: "#{'active' if request.path.include?(dashboard_index_path)} list-item-menu list-group-item-action",
+<%= link_to dashboard_index_path, class: "#{'active-menu' if request.path.include?(dashboard_index_path)} list-item-menu list-group-item-action",
                                   style: "color: #{current_user.enterprise.secondary_color};
                                           background-color: #{current_user.enterprise.primary_color}" do %>
   <div style="display: inline-flex">
@@ -14,7 +14,7 @@
   </div>
 <% end %>
 <% if can?(:read, Truckload) %>
-  <%= link_to truckloads_index_path, class: "#{'active' if request.path.include?(truckloads_path)} list-item-menu list-group-item-action",
+  <%= link_to truckloads_index_path, class: "#{'active-menu' if request.path.include?(truckloads_path)} list-item-menu list-group-item-action",
                                      style: "color: #{current_user.enterprise.secondary_color};
                                              background-color: #{current_user.enterprise.primary_color}" do %>
     <div style="display: inline-flex">
@@ -26,7 +26,7 @@
   <% end %>
 <% end %>
 <% if can?(:read, Cte) %>
-  <%= link_to ctes_index_path, class: "#{'active' if request.path.include?(ctes_path)} list-item-menu list-group-item-action",
+  <%= link_to ctes_index_path, class: "#{'active-menu' if request.path.include?(ctes_path)} list-item-menu list-group-item-action",
                                style: "color: #{current_user.enterprise.secondary_color};
                                        background-color: #{current_user.enterprise.primary_color}" do %>
     <div style="display: inline-flex">
@@ -43,7 +43,7 @@
   </div>
 <% end %>
 <% if can?(:read, User) %>
-  <%= link_to users_index_path, class: "#{'active' if request.path.include?(users_path)} list-item-menu list-group-item-action",
+  <%= link_to admins_users_index_path, class: "#{'active-menu' if request.path.include?(admins_users_path)} list-item-menu list-group-item-action",
                                        style: "color: #{current_user.enterprise.secondary_color};
                                                background-color: #{current_user.enterprise.primary_color}" do %>
     <div style="display: inline-flex">
@@ -55,7 +55,7 @@
   <% end %>
 <% end %>
 <% if can?(:read, User::Role) %>
-  <%= link_to user_roles_index_path, class: "#{'active' if request.path.include?(user_roles_path)} list-item-menu list-group-item-action",
+  <%= link_to user_roles_index_path, class: "#{'active-menu' if request.path.include?(user_roles_path)} list-item-menu list-group-item-action",
                                       style: "color: #{current_user.enterprise.secondary_color};
                                               background-color: #{current_user.enterprise.primary_color}" do %>
     <div style="display: inline-flex">
@@ -67,7 +67,7 @@
   <% end %>
 <% end %>
 <% if can?(:read, Client) %>
-  <%= link_to clients_index_path, class: "#{'active' if request.path.include?(clients_path)} list-item-menu list-group-item-action",
+  <%= link_to clients_index_path, class: "#{'active-menu' if request.path.include?(clients_path)} list-item-menu list-group-item-action",
                                          style: "color: #{current_user.enterprise.secondary_color};
                                                  background-color: #{current_user.enterprise.primary_color}" do %>
     <div style="display: inline-flex">
@@ -79,7 +79,7 @@
   <% end %>
 <% end %>
 <% if can?(:read, Enterprise) %>
-  <%= link_to super_admins_enterprises_index_path, class: "#{'active' if request.path.include?(super_admins_enterprises_path)} list-item-menu list-group-item-action",
+  <%= link_to super_admins_enterprises_index_path, class: "#{'active-menu' if request.path.include?(super_admins_enterprises_path)} list-item-menu list-group-item-action",
                                                    style: "color: #{current_user.enterprise.secondary_color};
                                                            background-color: #{current_user.enterprise.primary_color}" do %>
     <div style="display: inline-flex">
@@ -92,7 +92,7 @@
 <% end %>
 
 <style>
-  .active {
+  .active-menu {
     background-color: <%= current_user.enterprise.secondary_color %> !important;
     color: <%= current_user.enterprise.primary_color %> !important;
   }
@@ -100,5 +100,15 @@
   a.list-item-menu:hover {
     font-size: 1rem;
     font-weight: bold;
+  }
+
+  .nav-link.active {
+    background-color: <%= current_user.enterprise.primary_color %> !important;
+    color: <%= current_user.enterprise.secondary_color %> !important;
+    border: 1px solid <%= current_user.enterprise.secondary_color %> !important;
+  }
+
+  .nav-link {
+    color: <%= current_user.enterprise.secondary_color %> !important;
   }
 </style>

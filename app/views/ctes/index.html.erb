@@ -5,7 +5,7 @@
     <% elsif user_master?(current_user) %>
       <%= t('.list') %>
     <% else %>
-      <%= t('.list_user') %>: <%= current_user.first_name %>
+      <%= t('.list_user') %>: <%= current_user.person.first_name %>
     <% end %>
   </h4>
 </div>

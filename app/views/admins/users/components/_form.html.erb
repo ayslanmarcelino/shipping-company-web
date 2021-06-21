@@ -17,13 +17,15 @@
   <%= form.label(:password_confirmation) %>
   <%= form.password_field(:password_confirmation, class: 'form-control form-control-user') %>
 </div>
-<div class="col-lg-12 custom-control custom-switch">
-  <%= form.label(:is_active) %>?
-  <%= form.check_box(:is_active, class: "custom-control-input", id: "is_active_switch") %></br>
-  <label style="font-size: 13px">Não</label>
-  <label class="custom-control-label switch-user" for="is_active_switch"></label>
-  <label style="font-size: 13px">Sim</label>
-</div>
+<% if user_master?(current_user) || user_owner?(current_user) %>
+  <div class="col-lg-12 custom-control custom-switch">
+    <%= form.label(:is_active) %>?
+    <%= form.check_box(:is_active, class: "custom-control-input", id: "is_active_switch") %></br>
+    <label style="font-size: 13px">Não</label>
+    <label class="custom-control-label switch-user" for="is_active_switch"></label>
+    <label style="font-size: 13px">Sim</label>
+  </div>
+<% end %>
 <h5 class="text-divider">
   <span><%= t('.personal') %></span>
 </h5>

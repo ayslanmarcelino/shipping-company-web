@@ -1,8 +1,0 @@
-pt-BR:
-  users:
-    components:
-      form:
-        access: Dados de acesso
-        personal: Dados pessoais
-        documents: Documentos
-        address: Endereço
