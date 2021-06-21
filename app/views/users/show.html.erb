@@ -2,18 +2,18 @@
   <h4><%= t('.view') %>: <%= @user.person.full_name %></h4>
 </div>
 <div class="col-xs-12 mb-2">
-  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-user' do %>
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm  btn-user' do %>
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
   <% if can?(:update, User) %>
-    <%= link_to edit_user_path(@user), class: 'col-xs-3 btn btn-info' do %>
+    <%= link_to edit_user_path(@user), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
   <% end %>
   <% if can?(:destroy, User) %>
-    <%= link_to user_path(@user), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@user.person.first_name} #{@user.person.last_name}?" } do %>
+    <%= link_to user_path(@user), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@user.person.first_name} #{@user.person.last_name}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>

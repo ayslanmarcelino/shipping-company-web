@@ -3,7 +3,7 @@
 module Admins
   class EnterprisesController < AdminsController
     before_action :set_enterprise, only: %w[edit update]
-    
+
     def edit; end
 
     def update

@@ -1,9 +1,9 @@
 <div class="d-flex" id="wrapper">
-  <div class="border-right" id="sidebar-wrapper" style="background-color: <%= current_user.enterprise.primary_color %>">
+  <div class="border-right" id="sidebar-wrapper" style="background-color: <%= current_user.enterprise.primary_color %>; width: 14.6rem;">
     <div class="sidebar-heading text-center">
       <%= image_tag(current_user.enterprise.logo, style: 'height: 70px; max-width: 200px;') if current_user.enterprise.logo.attached? %>
     </div>
-    <div class="list-group list-group-flush" style="color: <%= current_user.enterprise.secondary_color %>">
+    <div class="list-group list-group-flush" style="color: <%= current_user.enterprise.secondary_color %>; font-size: 14px;">
       <%= render partial: 'layouts/components/menu' %>
     </div>
   </div>
@@ -21,7 +21,7 @@
             <i class="fas fa-user"></i>
             <%= current_user.email %>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" style="font-size: 13px;">
             <%= render partial: 'layouts/components/dropdown_options' %>
           </div>
         </li>

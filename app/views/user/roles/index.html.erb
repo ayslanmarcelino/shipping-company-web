@@ -18,7 +18,7 @@
                 <th><%= t('.created_at') %></th>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, User::Role) %>
-                    <%= link_to new_user_role_path(@user_role), class: 'btn btn-success btn-circle' do %>
+                    <%= link_to new_user_role_path(@user_role), class: 'btn btn-sm btn-success btn-circle' do %>
                       <i class="fas fa-plus"></i>
                     <% end %>
                   <% end %>
@@ -35,14 +35,14 @@
                   <td><%= l(role.created_at, format: :with_full_hour) %></td>
                   <td>
                     <% if can?(:update, User::Role) %>
-                      <%= link_to edit_user_role_path(role), class: 'btn btn-info btn-circle' do %>
+                      <%= link_to edit_user_role_path(role), class: 'btn btn-sm btn-info btn-circle' do %>
                         <i class="fas fa-edit"></i>
                       <% end %>
                     <% end %>
                     <% if can?(:destroy, User::Role) %>
                       <%= link_to user_role_path(role),
                                   method: :delete,
-                                  class: 'btn btn-danger btn-circle',
+                                  class: 'btn btn-sm btn-danger btn-circle',
                                   data: { confirm: "#{t('.delete_confirm')}: #{role.id} associado ao usuário #{role.user.person.full_name}?" } do %>
                         <i class="fas fa-trash"></i>
                       <% end %>

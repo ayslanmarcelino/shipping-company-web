@@ -51,4 +51,8 @@ class User < ApplicationRecord
   def all_roles
     roles.map(&:kind_cd).sort
   end
+
+  def full_information
+    "#{person.first_name} #{person.last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
+  end
 end

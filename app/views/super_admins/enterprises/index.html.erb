@@ -19,7 +19,7 @@
                 <th><%= t('.users_count')%></th>
                 <th><%= t('.actived')%></th>
                 <th class="no-sort table-buttons">
-                  <%= link_to new_super_admins_enterprise_path(@enterprise), class: 'btn btn-success btn-circle' do %>
+                  <%= link_to new_super_admins_enterprise_path(@enterprise), class: 'btn btn-sm btn-success btn-circle' do %>
                     <i class="fas fa-plus"></i>
                   <% end %>
                 </th>
@@ -51,14 +51,14 @@
                   </td>
                   <td class="table-buttons">
                     <% if can?(:update, Enterprise) %>
-                      <%= link_to edit_super_admins_enterprise_path(enterprise), class: 'btn btn-info btn-circle' do %>
+                      <%= link_to edit_super_admins_enterprise_path(enterprise), class: 'btn btn-sm btn-info btn-circle' do %>
                         <i class="fas fa-edit"></i>
                       <% end %>
                     <% end %>
                     <% if can?(:destroy, Enterprise) %>
                       <%= link_to super_admins_enterprise_path(enterprise),
                                   method: :delete,
-                                  class: 'btn btn-danger btn-circle',
+                                  class: 'btn btn-sm btn-danger btn-circle',
                                   data: { confirm: "#{t('.delete_confirm')}: #{enterprise.company_name}?" } do %>
                         <i class="fas fa-trash"></i>
                       <% end %>

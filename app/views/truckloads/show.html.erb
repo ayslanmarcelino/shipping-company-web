@@ -2,18 +2,18 @@
   <h4><%= t('.view') %>: <%= @truckload.dt_number %></h4>
 </div>
 <div class="col-xs-12 mb-2">
-  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-user' do %>
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm  btn-user' do %>
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
   <% if can?(:update, Truckload) %>
-    <%= link_to edit_truckload_path(@truckload), class: 'col-xs-3 btn btn-info' do %>
+    <%= link_to edit_truckload_path(@truckload), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
   <% end %>
   <% if can?(:destroy, Truckload) %>
-    <%= link_to truckload_path(@truckload), method: :delete, class: 'btn btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@truckload.dt_number}?" } do %>
+    <%= link_to truckload_path(@truckload), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@truckload.dt_number}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>

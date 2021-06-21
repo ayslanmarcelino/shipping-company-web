@@ -49,8 +49,4 @@ class User::Person < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
-
-  def full_information
-    "#{first_name} #{last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
-  end
 end
