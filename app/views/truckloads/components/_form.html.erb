@@ -6,13 +6,31 @@
   <%= form.label(:value_driver) %>
   <%= form.text_field(:value_driver, id: 'money', class: 'form-control form-control-user input--money', required: true) %>
 </div>
-<div class="col-lg-12">
-  <%= form.label(:client_id) %></br>
-  <%= form.collection_select(:client_id, @clients, :id, :formatted_name, { include_blank: 'Selecione um cliente' }, { class: 'select2_single form-control', required: true} ) %>
+<div class="col-lg-12 d-flex">
+  <div class="col-lg-10">
+    <%= form.label(:client_id) %></br>
+    <%= form.collection_select(:client_id, @clients, :id, :formatted_name, { include_blank: 'Selecione um cliente' }, { class: 'select2_single form-control', required: true} ) %>
+  </div>
+  <div class="col-lg-2 m-t-5">
+    <% if can?(:create, Client) %>
+      <%= link_to new_client_path(@client), class: 'btn btn-sm btn-success btn-circle' do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    <% end %>
+  </div>
 </div>
-<div class="col-lg-12">
-  <%= form.label(:driver_id) %></br>
-  <%= form.collection_select(:driver_id, @drivers, :id, :formatted_name, { include_blank: 'Selecione um motorista' }, { class: 'select2_single form-control', required: true} ) %>
+<div class="col-lg-12 d-flex">
+  <div class="col-lg-10">
+    <%= form.label(:driver_id) %></br>
+    <%= form.collection_select(:driver_id, @drivers, :id, :formatted_name, { include_blank: 'Selecione um motorista' }, { class: 'select2_single form-control', required: true} ) %>
+  </div>
+  <div class="col-lg-2 m-t-5">
+    <% if can?(:create, Driver) %>
+      <%= link_to new_driver_path(@driver), class: 'btn btn-sm btn-success btn-circle' do %>
+        <i class="fas fa-plus"></i>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 <div class="col-lg-12 custom-control custom-switch">
   <%= form.label(:is_agent) %>?
