@@ -30,7 +30,7 @@
 class Client < ApplicationRecord
   belongs_to :address, optional: true
   belongs_to :enterprise
-  
+
   accepts_nested_attributes_for :address
 
   validates :document_number, uniqueness: { scope: :enterprise_id }

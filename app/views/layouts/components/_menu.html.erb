@@ -37,7 +37,7 @@
     </div>
   <% end %>
 <% end %>
-<% if can?(:read, User) || can?(:read, Client) || can?(:read, Enterprise) || can?(:read, User::Role) %>
+<% if can?(:read, User) || can?(:read, Client) || can?(:read, Enterprise) || can?(:read, User::Role) || can?(:read, Driver) %>
   <div class="text-center">
     <%= t('layouts.application.register') %>
   </div>
@@ -63,6 +63,18 @@
         <i class="fas fa-users-cog"></i>
       </div>
       <span><%= t('layouts.application.user_roles') %></span>
+    </div>
+  <% end %>
+<% end %>
+<% if can?(:read, Driver) %>
+  <%= link_to drivers_index_path, class: "#{'active-menu' if request.path.include?(drivers_path)} list-item-menu list-group-item-action",
+                                  style: "color: #{current_user.enterprise.secondary_color};
+                                          background-color: #{current_user.enterprise.primary_color}" do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-user"></i>
+      </div>
+      <span><%= t('layouts.application.drivers') %></span>
     </div>
   <% end %>
 <% end %>

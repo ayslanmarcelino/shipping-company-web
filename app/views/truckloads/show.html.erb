@@ -34,6 +34,11 @@
               <%= t('.client') %>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="example-pill-vertical" href="#driver" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+              <%= t('.driver') %>
+            </a>
+          </li>
         </ul>
       </div>
       <div class="col-md-9">
@@ -128,6 +133,113 @@
               <tr>
                 <th><%= t('.address_country') %></th>
                 <td><%= @truckload.client.address.country %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="driver" role="tabpanel" aria-labelledby="example-pill-vertical">
+            <h5 class="text-divider">
+              <span><%= t('drivers.show.personal') %></span>
+            </h5>
+            <table class="table">
+              <tr>
+                <th><%= t('drivers.show.full_name') %></th>
+                <td><%= @truckload.driver.person.full_name %></td>
+              </tr>
+              <% if @truckload.driver.person.birth_date.present? %>
+                <tr>
+                  <th><%= t('drivers.show.birth_date') %></th>
+                  <td><%= l(@truckload.driver.person.birth_date, format: :date) %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th><%= t('drivers.show.phone_number') %></th>
+                <td><%= @truckload.driver.person.phone_number %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.telephone_number') %></th>
+                <td><%= @truckload.driver.person.telephone_number %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.is_employee') %>?</th>
+                <td><%= translate_boolean(@truckload.driver.is_employee) %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.is_blocked') %>?</th>
+                <td><%= translate_boolean(@truckload.driver.is_blocked) %></td>
+              </tr>
+            </table>
+            <h5 class="text-divider">
+              <span><%= t('drivers.show.document') %></span>
+            </h5>
+            <table class="table">
+              <tr>
+                <th><%= t('drivers.show.cnh_record') %></th>
+                <td><%= @truckload.driver.cnh_record %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.cnh_number') %></th>
+                <td><%= @truckload.driver.cnh_number %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.cnh_type') %></th>
+                <td><%= @truckload.driver.cnh_type %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.cnh_issuing_body') %></th>
+                <td><%= @truckload.driver.cnh_issuing_body %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.cnh_expires_at') %></th>
+                <td><%= l(@truckload.driver.cnh_expires_at.to_datetime, format: :date) %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.document_number') %></th>
+                <td><%= @truckload.driver.person.document_number %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.rg') %></th>
+                <td><%= @truckload.driver.person.rg %></td>
+              </tr>
+              <tr>
+                <th><%= t('drivers.show.rg_issuing_body') %></th>
+                <td><%= @truckload.driver.person.rg_issuing_body %></td>
+              </tr>
+            </table>
+            <h5 class="text-divider">
+              <span><%= t('drivers.show.address') %></span>
+            </h5>
+            <table class="table">
+              <tr>
+                <th><%= t('.address_zip_code') %></th>
+                <td><%= @truckload.driver.person.address.zip_code %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_street') %></th>
+                <td><%= @truckload.driver.person.address.street %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_number') %></th>
+                <td><%= @truckload.driver.person.address.number %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_complement') %></th>
+                <td><%= @truckload.driver.person.address.complement %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_neighborhood') %></th>
+                <td><%= @truckload.driver.person.address.neighborhood %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_city') %></th>
+                <td><%= @truckload.driver.person.address.city %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_state') %></th>
+                <td><%= @truckload.driver.person.address.state %></td>
+              </tr>
+              <tr>
+                <th><%= t('.address_country') %></th>
+                <td><%= @truckload.driver.person.address.country %></td>
               </tr>
             </table>
           </div>

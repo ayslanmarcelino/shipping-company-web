@@ -7,6 +7,7 @@ class CreateTruckloads < ActiveRecord::Migration[6.0]
       t.references :enterprise, foreign_key: true
       t.references :client, foreign_key: true
       t.references :user, foreign_key: true
+      t.references :driver, foreign_key: true
 
       t.timestamps
     end

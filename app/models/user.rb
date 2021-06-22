@@ -55,4 +55,8 @@ class User < ApplicationRecord
   def full_information
     "#{person.first_name} #{person.last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
   end
+
+  def full_name
+    "#{person.first_name} #{person.last_name}"
+  end
 end

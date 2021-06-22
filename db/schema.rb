@@ -80,6 +80,22 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.index ["user_id"], name: "index_ctes_on_user_id"
   end
 
+  create_table "drivers", force: :cascade do |t|
+    t.string "cnh_issuing_body"
+    t.string "cnh_number"
+    t.string "cnh_record"
+    t.string "cnh_type"
+    t.date "cnh_expires_at"
+    t.boolean "is_employee", default: false
+    t.boolean "is_blocked", default: false
+    t.bigint "enterprise_id"
+    t.bigint "person_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enterprise_id"], name: "index_drivers_on_enterprise_id"
+    t.index ["person_id"], name: "index_drivers_on_person_id"
+  end
+
   create_table "enterprises", force: :cascade do |t|
     t.string "primary_color", null: false
     t.string "secondary_color", null: false
@@ -101,9 +117,11 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.bigint "enterprise_id"
     t.bigint "client_id"
     t.bigint "user_id"
+    t.bigint "driver_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_truckloads_on_client_id"
+    t.index ["driver_id"], name: "index_truckloads_on_driver_id"
     t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"
     t.index ["user_id"], name: "index_truckloads_on_user_id"
   end
@@ -162,7 +180,10 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
   add_foreign_key "ctes", "enterprises"
   add_foreign_key "ctes", "truckloads"
   add_foreign_key "ctes", "users"
+  add_foreign_key "drivers", "enterprises"
+  add_foreign_key "drivers", "user_people", column: "person_id"
   add_foreign_key "truckloads", "clients"
+  add_foreign_key "truckloads", "drivers"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"
   add_foreign_key "user_people", "addresses"

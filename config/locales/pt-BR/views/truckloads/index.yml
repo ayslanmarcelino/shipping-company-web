@@ -10,6 +10,7 @@ pt-BR:
       is_agent: Contratado por agenciador
       cte: CT-e(s) vinculado
       qtd_cte: Qtd. CT-e(s)
+      driver: Motorista
       created_at: Criado em
       updated_at: Atualizado em
       created_by: Criado por

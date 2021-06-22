@@ -6,7 +6,9 @@ class User::RolesController < AdminsController
   before_action :set_enterprise, only: %w[new create edit]
 
   def index
-    @user_roles = User::Role.includes(:user).includes(:enterprise).accessible_by(current_ability)
+    @user_roles = User::Role.includes(:user)
+                            .includes(:enterprise)
+                            .accessible_by(current_ability)
   end
 
   def new
@@ -56,19 +58,19 @@ class User::RolesController < AdminsController
   end
 
   def set_user
-    if current_user.roles.kind_masters.present?
-      @users = User.all
-    else
-      @users = User.where(enterprise_id: current_user.enterprise_id)
-    end
+    @users = if current_user.roles.kind_masters.present?
+               User.where(is_active: true)
+             else
+               @users = User.where(enterprise_id: current_user.enterprise_id, is_active: true)
+             end
   end
 
   def set_enterprise
     @enterprises = if current_user.roles.kind_masters.present?
-                      Enterprise.all
-                    else
-                      Enterprise.where(id: current_user.enterprise_id)
-                    end
+                     Enterprise.where(is_active: true)
+                   else
+                     Enterprise.where(id: current_user.enterprise_id, is_active: true)
+                   end
   end
 
   def params_user_role
