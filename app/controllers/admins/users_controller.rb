@@ -46,7 +46,7 @@ class Admins::UsersController < ApplicationController
   end
 
   def destroy
-    if @user.destroy
+    if @user.destroy && @user.person.destroy
       redirect_to admins_users_path
       flash[:success] = 'Usuário excluído com sucesso.'
     else

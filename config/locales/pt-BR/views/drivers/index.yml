@@ -1,0 +1,14 @@
+pt-BR:
+  drivers:
+    index:
+      registered_drivers: Motoristas cadastrados
+      id: Código
+      full_name: Nome completo
+      nickname: Apelido
+      document_number: CPF/CNPJ
+      cnh_expires_at: Data de vencimento
+      cnh_record: Registro CNH
+      cnh_number: Número CNH
+      enterprise: Empresa
+      actived: Ativo
+      delete_confirm: Você tem certeza que deseja excluir o(a) motorista

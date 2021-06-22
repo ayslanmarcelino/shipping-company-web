@@ -1,0 +1,6 @@
+pt-BR:
+  drivers:
+    new:
+      new_driver: Novo motorista
+      cancel: Cancelar
+      create_new: Criar novo motorista

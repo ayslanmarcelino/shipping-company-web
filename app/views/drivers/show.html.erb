@@ -68,8 +68,12 @@
                 <td><%= @driver.person.telephone_number %></td>
               </tr>
               <tr>
-                <th><%= t('.is_employee') %></th>
+                <th><%= t('.is_employee') %>?</th>
                 <td><%= translate_boolean(@driver.is_employee) %></td>
+              </tr>
+              <tr>
+                <th><%= t('.is_blocked') %>?</th>
+                <td><%= translate_boolean(@driver.is_blocked) %></td>
               </tr>
             </table>
           </div>

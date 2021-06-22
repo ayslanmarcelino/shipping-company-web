@@ -9,7 +9,7 @@
 <% if current_page?(new_user_role_path) || request.method == 'POST' || user_master?(current_user) %>
   <div class="col-lg-12">
     <%= form.label(:enterprise_id) %>
-    <%= form.collection_select(:enterprise_id, @enterprises, :id, :formatted_enterprises, {}, { class: 'select2_single form-control', required: true }) %>
+    <%= form.collection_select(:enterprise_id, @enterprises, :id, :formatted_enterprises, { include_blank: 'Selecione uma empresa' }, { class: 'select2_single form-control', required: true }) %>
   </div>
   <div class="col-lg-12">
     <%= form.label(:user_id) %>

@@ -8,6 +8,7 @@
 #  cnh_number       :string
 #  cnh_record       :string
 #  cnh_type         :string
+#  is_blocked       :boolean          default(FALSE)
 #  is_employee      :boolean          default(FALSE)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -31,4 +32,6 @@ class Driver < ApplicationRecord
   belongs_to :person, class_name: 'User::Person'
 
   accepts_nested_attributes_for :person
+
+  validates :cnh_record, :cnh_number, uniqueness: { scope: :enterprise_id }
 end

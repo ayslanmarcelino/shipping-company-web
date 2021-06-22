@@ -11,7 +11,8 @@
               <tr>
                 <th><%= t('.id')%></th>
                 <th><%= t('.full_name')%></th>
-                <th><%= t('.cnh_expires_at')%></th>
+                <th><%= t('.nickname')%></th>
+                <th><%= t('.document_number')%></th>
                 <th><%= t('.cnh_record')%></th>
                 <th><%= t('.cnh_number')%></th>
                 <% if user_master?(current_user) %>
@@ -31,7 +32,8 @@
                 <tr>
                   <td><%= driver.id %></td>
                   <td><%= driver.person.full_name %></td>
-                  <td><%= l(driver.cnh_expires_at.to_datetime, format: :date) %></td>
+                  <td><%= driver.person.nickname %></td>
+                  <td><%= driver.person.document_number %></td>
                   <td><%= driver.cnh_record %></td>
                   <td><%= driver.cnh_number %></td>
                   <% if user_master?(current_user) %>

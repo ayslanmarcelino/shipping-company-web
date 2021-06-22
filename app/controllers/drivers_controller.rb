@@ -42,7 +42,7 @@ class DriversController < UsersController
   end
 
   def destroy
-    if @driver.destroy
+    if @driver.destroy && @driver.person.destroy
       redirect_to drivers_path
       flash[:success] = 'Motorista excluído com sucesso.'
     else
@@ -59,9 +59,8 @@ class DriversController < UsersController
 
   def set_driver
     can_view_driver = true if current_user.roles.kind_masters.present? ||
-                              current_user.id == User.find(params[:id]).id ||
                               (current_user.roles.kind_owners.present? &&
-                                current_user.enterprise_id == User.find(params[:id]).enterprise_id)
+                                current_user.enterprise_id == Driver.find(params[:id]).enterprise_id)
     if can_view_driver
       @driver = Driver.find(params[:id])
     else
@@ -80,11 +79,14 @@ class DriversController < UsersController
 
   def params_driver
     params.require(:driver)
-          .permit(:email,
-                  :is_active,
-                  :enterprise_id,
-                  :password,
-                  :password_confirmation,
+          .permit(:enterprise_id,
+                  :cnh_expires_at,
+                  :cnh_issuing_body,
+                  :cnh_number,
+                  :cnh_record,
+                  :cnh_type,
+                  :is_employee,
+                  :is_blocked,
                   person_attributes: [User::Person.permitted_attributes,
                                       address_attributes: Address.permitted_attributes])
   end

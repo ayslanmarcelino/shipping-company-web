@@ -7,6 +7,7 @@ class CreateDrivers < ActiveRecord::Migration[6.0]
       t.string :cnh_type
       t.date :cnh_expires_at
       t.boolean :is_employee, default: false
+      t.boolean :is_blocked, default: false
       t.references :enterprise, foreign_key: true
       t.references :person, foreign_key: { to_table: :user_people }
 

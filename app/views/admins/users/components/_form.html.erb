@@ -3,7 +3,7 @@
 </h5>
 <div class="col-lg-12">
   <%= form.label(:enterprise) %></br>
-  <%= form.collection_select(:enterprise_id, @enterprise, :id, :formatted_enterprises, {}, { class: 'select2_single form-control', required: true }) %>
+  <%= form.collection_select(:enterprise_id, @enterprise, :id, :formatted_enterprises, { include_blank: 'Selecione uma empresa' }, { class: 'select2_single form-control', required: true }) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:email) %>

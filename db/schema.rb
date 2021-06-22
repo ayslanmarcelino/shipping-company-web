@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_224801) do
     t.string "cnh_type"
     t.date "cnh_expires_at"
     t.boolean "is_employee", default: false
+    t.boolean "is_blocked", default: false
     t.bigint "enterprise_id"
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
