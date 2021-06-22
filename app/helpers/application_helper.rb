@@ -14,7 +14,7 @@ module ApplicationHelper
   def user_master?(current_user)
     current_user.roles.kind_masters.present?
   end
-  
+
   def user_owner?(current_user)
     current_user.roles.kind_owners.present?
   end

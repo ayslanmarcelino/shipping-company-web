@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_105222) do
+ActiveRecord::Schema.define(version: 2021_06_21_224801) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,21 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
     t.index ["enterprise_id"], name: "index_ctes_on_enterprise_id"
     t.index ["truckload_id"], name: "index_ctes_on_truckload_id"
     t.index ["user_id"], name: "index_ctes_on_user_id"
+  end
+
+  create_table "drivers", force: :cascade do |t|
+    t.string "cnh_issuing_body"
+    t.string "cnh_number"
+    t.string "cnh_record"
+    t.string "cnh_type"
+    t.date "cnh_expires_at"
+    t.boolean "is_employee", default: false
+    t.bigint "enterprise_id"
+    t.bigint "person_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enterprise_id"], name: "index_drivers_on_enterprise_id"
+    t.index ["person_id"], name: "index_drivers_on_person_id"
   end
 
   create_table "enterprises", force: :cascade do |t|
@@ -162,6 +177,8 @@ ActiveRecord::Schema.define(version: 2021_06_03_105222) do
   add_foreign_key "ctes", "enterprises"
   add_foreign_key "ctes", "truckloads"
   add_foreign_key "ctes", "users"
+  add_foreign_key "drivers", "enterprises"
+  add_foreign_key "drivers", "user_people", column: "person_id"
   add_foreign_key "truckloads", "clients"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"

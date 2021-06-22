@@ -6,6 +6,7 @@ pt-BR:
       register: Cadastro
       clients: Clientes
       truckload: Cargas
+      drivers: Motoristas
       cte: CT-e
       users: Usuários
       user_roles: Regras de usuário

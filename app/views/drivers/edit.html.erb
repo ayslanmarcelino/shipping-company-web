@@ -1,22 +1,22 @@
 <div class="text-center">
-  <h4><%= t('.new_user') %></h4>
+  <h4><%= t('.editing') %>: <%= @driver.person.first_name %> <%= @driver.person.last_name %></h4>
 </div>
 <div class="container h-100">
-  <%= render partial: 'admins/users/components/errors' %>
+  <%= render partial: 'drivers/components/errors' %>
   <div class="d-flex justify-content-center h-100">
     <div class="user-card-form">
-      <%= form_with(model: [:admins, @user], local: true) do |form| %>
+      <%= form_with(model: [@driver], local: true) do |form| %>
         <%= form.fields_for :person do |person_form| %>
           <%= person_form.fields_for :address do |address_form| %>
-            <%= render partial: 'admins/users/components/form',
+            <%= render partial: 'drivers/components/form',
                        locals: { form: form, person_form: person_form, address_form: address_form } %>
             <div class="row btn-actions">
               <div class="col-lg-6 mt-3">
-                <%= link_to t('.cancel'), admins_users_path, class: 'btn btn-sm btn-danger btn-user btn-block' %>
+                <%= link_to t('.cancel'), drivers_path, class: 'btn btn-sm btn-danger btn-user btn-block' %>
               </div>
               <div class="col-lg-6 mt-3">
                 <button class="btn btn-primary btn-user btn-block">
-                  <%= t('.create_new') %>
+                  <%= t('.edit') %>
                 </button>
               </div>
             </div>
