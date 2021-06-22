@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_21_224801) do
+ActiveRecord::Schema.define(version: 2021_06_03_105222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,9 +117,11 @@ ActiveRecord::Schema.define(version: 2021_06_21_224801) do
     t.bigint "enterprise_id"
     t.bigint "client_id"
     t.bigint "user_id"
+    t.bigint "driver_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["client_id"], name: "index_truckloads_on_client_id"
+    t.index ["driver_id"], name: "index_truckloads_on_driver_id"
     t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"
     t.index ["user_id"], name: "index_truckloads_on_user_id"
   end
@@ -181,6 +183,7 @@ ActiveRecord::Schema.define(version: 2021_06_21_224801) do
   add_foreign_key "drivers", "enterprises"
   add_foreign_key "drivers", "user_people", column: "person_id"
   add_foreign_key "truckloads", "clients"
+  add_foreign_key "truckloads", "drivers"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"
   add_foreign_key "user_people", "addresses"

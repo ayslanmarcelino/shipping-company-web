@@ -6,7 +6,7 @@
     <%= form.select(:kind_cd, role_select, { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control' }) %>
   <% end %>
 </div>
-<% if current_page?(new_user_role_path) || request.method == 'POST' || user_master?(current_user) %>
+<% if current_page?(new_user_role_path) || (request.method == 'POST' || 'GET') || user_master?(current_user) %>
   <div class="col-lg-12">
     <%= form.label(:enterprise_id) %>
     <%= form.collection_select(:enterprise_id, @enterprises, :id, :formatted_enterprises, { include_blank: 'Selecione uma empresa' }, { class: 'select2_single form-control', required: true }) %>

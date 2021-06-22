@@ -30,8 +30,13 @@ class Driver < ApplicationRecord
 
   belongs_to :enterprise
   belongs_to :person, class_name: 'User::Person'
+  has_many :truckloads
 
   accepts_nested_attributes_for :person
 
   validates :cnh_record, :cnh_number, uniqueness: { scope: :enterprise_id }
+
+  def formatted_name
+    "#{person.full_name} | #{person.document_number}"
+  end
 end

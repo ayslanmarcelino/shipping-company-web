@@ -6,5 +6,6 @@ FactoryBot.define do
     client        { create(:client) }
     user          { create(:user) }
     enterprise    { create(:enterprise) }
+    driver        { create(:driver) }
   end
 end

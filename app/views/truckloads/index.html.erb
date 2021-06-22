@@ -24,6 +24,7 @@
                 <th><%= t('.created_at') %></th>
                 <th><%= t('.cte') %></th>
                 <th><%= t('.qtd_cte') %></th>
+                <th><%= t('.driver') %></th>
                 <% if user_owner?(current_user) || user_master?(current_user) %>
                   <th><%= t('.created_by') %></th>
                 <% end %>
@@ -76,6 +77,7 @@
                     <td><%= t('.no_cte') %></td>
                   <% end %>
                   <td><%= truckload.ctes_numbers.count %></td>
+                  <td><%= truckload.driver.person.full_name %></td>
                   <% if user_owner?(current_user) || user_master?(current_user) %>
                     <td><%= truckload.user.person.first_name %> <%= truckload.user.person.last_name %></td>
                   <% end %>

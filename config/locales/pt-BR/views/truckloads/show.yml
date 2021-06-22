@@ -7,6 +7,7 @@ pt-BR:
       view: Visualizando a carga
       general: Informações gerais
       client: Cliente
+      driver: Motorista
       dt_number: Número da DT
       value_driver: Valor pago ao motorista
       is_agent: Contratado por agenciador

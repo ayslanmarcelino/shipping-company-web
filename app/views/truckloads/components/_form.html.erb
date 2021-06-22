@@ -8,7 +8,11 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:client_id) %></br>
-  <%= form.collection_select(:client_id, @clients, :id, :formatted_name, { include_blank: true }, { class: 'select2_single form-control'} ) %>
+  <%= form.collection_select(:client_id, @clients, :id, :formatted_name, { include_blank: 'Selecione um cliente' }, { class: 'select2_single form-control', required: true} ) %>
+</div>
+<div class="col-lg-12">
+  <%= form.label(:driver_id) %></br>
+  <%= form.collection_select(:driver_id, @drivers, :id, :formatted_name, { include_blank: 'Selecione um motorista' }, { class: 'select2_single form-control', required: true} ) %>
 </div>
 <div class="col-lg-12 custom-control custom-switch">
   <%= form.label(:is_agent) %>?
