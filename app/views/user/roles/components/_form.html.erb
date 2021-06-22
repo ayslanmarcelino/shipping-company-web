@@ -14,9 +14,9 @@
   <div class="col-lg-12">
     <%= form.label(:user_id) %>
     <% if user_master?(current_user) %>
-      <%= form.collection_select(:user_id, @users, :id, :full_information, {}, { class: 'select2_single form-control', required: true }) %>
+      <%= form.collection_select(:user_id, @users, :id, :full_information, { include_blank: 'Selecione um usuário' }, { class: 'select2_single form-control', required: true }) %>
     <% else %>
-      <%= form.collection_select(:user_id, @users, :id, :full_name, {}, { class: 'select2_single form-control', required: true }) %>
+      <%= form.collection_select(:user_id, @users, :id, :full_name, { include_blank: 'Selecione um usuário' }, { class: 'select2_single form-control', required: true }) %>
     <% end %>
   </div>
 <% end %>

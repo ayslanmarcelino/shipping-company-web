@@ -11,4 +11,5 @@ pt-BR:
       cnh_number: Número CNH
       enterprise: Empresa
       actived: Ativo
+      is_blocked: Bloqueado
       delete_confirm: Você tem certeza que deseja excluir o(a) motorista

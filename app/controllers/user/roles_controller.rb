@@ -57,9 +57,9 @@ class User::RolesController < AdminsController
 
   def set_user
     if current_user.roles.kind_masters.present?
-      @users = User.all
+      @users = User.where(is_active: true)
     else
-      @users = User.where(enterprise_id: current_user.enterprise_id)
+      @users = User.where(enterprise_id: current_user.enterprise_id, is_active: true)
     end
   end
 

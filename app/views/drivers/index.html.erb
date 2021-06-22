@@ -15,6 +15,7 @@
                 <th><%= t('.document_number')%></th>
                 <th><%= t('.cnh_record')%></th>
                 <th><%= t('.cnh_number')%></th>
+                <th><%= t('.is_blocked')%>?</th>
                 <% if user_master?(current_user) %>
                   <th><%= t('.enterprise')%></th>
                 <% end %>
@@ -36,6 +37,11 @@
                   <td><%= driver.person.document_number %></td>
                   <td><%= driver.cnh_record %></td>
                   <td><%= driver.cnh_number %></td>
+                  <td class="text-center">
+                    <span class="badge badge-<%= boolean_color(!driver.is_blocked) %>">
+                      <%= translate_boolean(driver.is_blocked) %>
+                    </span>
+                  </td>
                   <% if user_master?(current_user) %>
                     <td><%= driver.enterprise.company_name %></td>
                   <% end %>
