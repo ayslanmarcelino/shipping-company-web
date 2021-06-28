@@ -42,7 +42,10 @@ class TruckloadsController < UsersController
   end
 
   def set_truckload
-    if current_user.truckload_ids.include?(Truckload.find(params[:id]).id) || current_user.roles.kind_masters.present?
+    if current_user.truckload_ids.include?(Truckload.find(params[:id]).id) ||
+       current_user.roles.kind_masters.present? ||
+       (current_user.roles.kind_owners.present? &&
+        current_user.enterprise_id == Truckload.find(params[:id]).enterprise_id)
       @truckload = Truckload.find(params[:id])
     else
       redirect_to root_path
