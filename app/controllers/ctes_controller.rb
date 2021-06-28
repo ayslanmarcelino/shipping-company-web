@@ -32,7 +32,10 @@ class CtesController < UsersController
   private
 
   def set_cte
-    if current_user.cte_ids.include?(Cte.find(params[:id]).id) || current_user.roles.kind_masters.present?
+    if current_user.cte_ids.include?(Cte.find(params[:id]).id) ||
+       current_user.roles.kind_masters.present? ||
+       (current_user.roles.kind_owners.present? &&
+        current_user.enterprise_id == Cte.find(params[:id]).enterprise_id)
       @cte = Cte.find(params[:id])
     else
       redirect_to root_path
