@@ -25,6 +25,7 @@ class Admins::UsersController < ApplicationController
 
   def create
     @user = User.new(params_user)
+    @user.person.validate_access_data = true
 
     if @user.save
       redirect_to admins_users_path
@@ -37,6 +38,10 @@ class Admins::UsersController < ApplicationController
   def edit; end
 
   def update
+    @user.validate_all = true
+    @user.person.validate_all = true
+    @user.person.address.validate_address = true
+
     if @user.update(params_user)
       redirect_to admins_users_path
       flash[:success] = 'Usuário atualizado com sucesso.'

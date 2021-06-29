@@ -24,10 +24,19 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Cte < ApplicationRecord
+  attr_accessor :validate_all
+
   belongs_to :enterprise
   belongs_to :truckload
   belongs_to :user
   validates :cte_number, uniqueness: { scope: :enterprise_id }
+  validates :cte_number,
+            :value,
+            :enterprise_id,
+            :truckload_id,
+            :user_id,
+            presence: true,
+            if: -> { validate_all }
 
   def truckload_client
     "#{truckload.client.company_name} - #{truckload.client.address.state} | #{truckload.client.document_number.to_br_cnpj}"

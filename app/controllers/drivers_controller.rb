@@ -21,6 +21,9 @@ class DriversController < UsersController
 
   def create
     @driver = Driver.new(params_driver)
+    @driver.validate_all = true
+    @driver.person.validate_all = true
+    @driver.person.address.validate_address = true
 
     if @driver.save
       redirect_to drivers_path
@@ -33,6 +36,10 @@ class DriversController < UsersController
   def edit; end
 
   def update
+    @driver.validate_all = true
+    @driver.person.validate_all = true
+    @driver.person.address.validate_address = true
+
     if @driver.update(params_driver)
       redirect_to drivers_path
       flash[:success] = 'Motorista atualizado com sucesso.'

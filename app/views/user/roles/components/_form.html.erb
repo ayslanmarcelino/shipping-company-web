@@ -1,9 +1,9 @@
 <div class="col-lg-12">
   <%= form.label(:kind_cd) %>
   <% if user_master?(current_user) %>
-    <%= form.select(:kind_cd, role_master_select, { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control' }) %>
+    <%= form.select(:kind_cd, role_master_select, { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control', required: true }) %>
   <% else %>
-    <%= form.select(:kind_cd, role_select, { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control' }) %>
+    <%= form.select(:kind_cd, role_select, { include_blank: 'Selecione uma regra de usuário' }, { class: 'select2_single form-control', required: true }) %>
   <% end %>
 </div>
 <% if current_page?(new_user_role_path) || (request.method == 'POST' || 'GET') || user_master?(current_user) %>

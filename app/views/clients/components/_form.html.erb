@@ -15,11 +15,11 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:email) %>
-  <%= form.text_field(:email, class: 'form-control form-control-user') %>
+  <%= form.text_field(:email, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:phone_number) %>
-  <%= form.text_field(:phone_number, class: 'form-control form-control-user input--phone-number') %>
+  <%= form.text_field(:phone_number, class: 'form-control form-control-user input--phone-number', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:telephone_number) %>
@@ -27,7 +27,7 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:responsible) %>
-  <%= form.text_field(:responsible, class: 'form-control form-control-user') %>
+  <%= form.text_field(:responsible, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:observation) %>
@@ -46,15 +46,15 @@
 <%= form.fields_for :address do |address| %>
   <div class="col-lg-12">
     <%= address.label(:zip_code) %>
-    <%= address.text_field(:zip_code, class: 'form-control form-control-user input--zip-code') %>
+    <%= address.text_field(:zip_code, class: 'form-control form-control-user input--zip-code', required: true) %>
   </div>
   <div class="col-lg-12">
     <%= address.label(:street) %>
-    <%= address.text_field(:street, class: 'form-control form-control-user') %>
+    <%= address.text_field(:street, class: 'form-control form-control-user, required: true', required: true) %>
   </div>
   <div class="col-lg-12">
     <%= address.label(:number) %>
-    <%= address.number_field(:number, class: 'form-control form-control-user') %>
+    <%= address.number_field(:number, class: 'form-control form-control-user', required: true) %>
   </div>
   <div class="col-lg-12">
     <%= address.label(:complement) %>
@@ -62,18 +62,18 @@
   </div>
   <div class="col-lg-12">
     <%= address.label(:neighborhood) %>
-    <%= address.text_field(:neighborhood, class: 'form-control form-control-user') %>
+    <%= address.text_field(:neighborhood, class: 'form-control form-control-user', required: true) %>
   </div>
   <div class="col-lg-12">
     <%= address.label(:city) %>
-    <%= address.text_field(:city, class: 'form-control form-control-user') %>
+    <%= address.text_field(:city, class: 'form-control form-control-user', required: true) %>
   </div>
   <div class="col-lg-12">
     <%= address.label(:state) %>
-    <%= address.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control' }) %>
+    <%= address.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control', required: true }) %>
   </div>
   <div class="col-lg-12">
     <%= address.label(:country) %>
-    <%= address.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control' }) %>
+    <%= address.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control', required: true }) %>
   </div>
 <% end %>

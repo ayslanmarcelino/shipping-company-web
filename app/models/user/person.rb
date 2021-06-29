@@ -25,11 +25,28 @@
 #  fk_rails_...  (address_id => addresses.id)
 #
 class User::Person < ApplicationRecord
+  attr_accessor :validate_access_data, :validate_all
+
   has_one :user
 
   belongs_to :address, optional: true
 
   validates :document_number, uniqueness: true, on: :create, if: -> { document_number.present? }
+  validates :first_name,
+            :last_name,
+            presence: true,
+            if: -> { validate_access_data }
+  validates :first_name,
+            :last_name,
+            :birth_date,
+            :document_number,
+            :phone_number,
+            :phone_number,
+            :rg,
+            :rg_issuing_body,
+            :address_id,
+            presence: true,
+            if: -> { validate_all }
 
   accepts_nested_attributes_for :address
 

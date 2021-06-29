@@ -37,10 +37,27 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  attr_accessor :validate_access_data, :validate_all
+
   belongs_to :enterprise
   belongs_to :person
 
   validates :email, uniqueness: true
+  validates :enterprise_id,
+            :email,
+            :password,
+            :password_confirmation,
+            presence: true,
+            if: -> { validate_access_data }
+
+  validates :enterprise_id,
+            :email,
+            :password,
+            :password_confirmation,
+            :person_id,
+            :enterprise_id,
+            presence: true,
+            if: -> { validate_all }
 
   has_many :truckload
   has_many :cte

@@ -15,6 +15,7 @@ class CtesController < UsersController
 
   def create
     @cte = Cte.new(params_cte)
+    @cte.validate_all = true
 
     @cte.save ? (redirect_to ctes_path, notice: 'CT-e cadastrado com sucesso') : (render :new)
   end
@@ -22,6 +23,7 @@ class CtesController < UsersController
   def edit; end
 
   def update
+    @cte.validate_all = true
     @cte.update(params_cte) ? (redirect_to ctes_path, notice: 'CT-e atualizado com sucesso') : (render :edit)
   end
 
