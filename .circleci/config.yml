@@ -8,7 +8,11 @@ commands:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
             - rails-demo-bundle-v2-
-      
+
+      - run:
+          name: Build assets
+          command: bundle exec rails assets:precompile
+
       - run:
           name: Force Bundler Version
           command: |
@@ -48,7 +52,7 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DB: livelo_automation
           POSTGRES_PASSWORD: ""
-      
+
     steps:
       - run:
           name: Update binaries
