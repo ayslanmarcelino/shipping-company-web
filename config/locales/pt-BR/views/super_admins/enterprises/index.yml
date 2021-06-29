@@ -1,0 +1,15 @@
+pt-BR:
+  super_admins:
+    enterprises:
+      index:
+        registered_enterprises: Empresas cadastradas
+        id: Código
+        company_name: Razão social
+        fantasy_name: Nome fantasia
+        document_number: CPF/CNPJ
+        email: E-mail
+        primary_color: Cor primária
+        secondary_color: Cor secundária
+        users_count: Qtd. de usuários
+        actived: Ativo
+        delete_confirm: Você tem certeza que deseja excluir a empresa

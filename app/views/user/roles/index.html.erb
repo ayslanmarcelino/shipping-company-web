@@ -1,0 +1,59 @@
+<div class="text-center">
+  <h4>
+    <%= t('.list') %>
+  </h4>
+</div>
+<div class="card shadow mb-4">
+  <div class="card-body">
+    <div class="table-responsive">
+      <div class="row">
+        <div class="col-sm-12">
+          <table id="table" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th><%= t('.id') %></th>
+                <th><%= t('.kind') %></th>
+                <th><%= t('.user') %></th>
+                <th><%= t('.enterprise') %></th>
+                <th><%= t('.created_at') %></th>
+                <th class="no-sort table-buttons">
+                  <% if can?(:create, User::Role) %>
+                    <%= link_to new_user_role_path(@user_role), class: 'btn btn-sm btn-success btn-circle' do %>
+                      <i class="fas fa-plus"></i>
+                    <% end %>
+                  <% end %>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @user_roles.each do |role| %>
+                <tr role="row" class="odd">
+                  <td><%= role.id %></td>
+                  <td><%= I18n.t(role.kind_cd, scope: 'activerecord.attributes.user/role.kinds') %></td>
+                  <td><%= role.user.person.full_name %></td>
+                  <td><%= role.enterprise.company_name %></td>
+                  <td><%= l(role.created_at, format: :with_full_hour) %></td>
+                  <td>
+                    <% if can?(:update, User::Role) %>
+                      <%= link_to edit_user_role_path(role), class: 'btn btn-sm btn-info btn-circle' do %>
+                        <i class="fas fa-edit"></i>
+                      <% end %>
+                    <% end %>
+                    <% if can?(:destroy, User::Role) %>
+                      <%= link_to user_role_path(role),
+                                  method: :delete,
+                                  class: 'btn btn-sm btn-danger btn-circle',
+                                  data: { confirm: "#{t('.delete_confirm')}: #{role.id} associado ao usuário #{role.user.person.full_name}?" } do %>
+                        <i class="fas fa-trash"></i>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

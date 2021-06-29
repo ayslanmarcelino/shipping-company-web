@@ -1,0 +1,7 @@
+pt-BR:
+  user:
+    roles:
+      edit:
+        editing: Você está editando a regra de usuário
+        cancel: Cancelar
+        edit: Editar regra de usuário

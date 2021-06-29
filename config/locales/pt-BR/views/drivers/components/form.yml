@@ -1,0 +1,7 @@
+pt-BR:
+  drivers:
+    components:
+      form:
+        personal: Dados pessoais
+        documents: Documentos
+        address: Endereço

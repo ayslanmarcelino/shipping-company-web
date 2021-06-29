@@ -1,0 +1,16 @@
+pt-BR:
+  layouts:
+    application:
+      dashboard: Resumo
+      operational: Operacional
+      register: Cadastro
+      clients: Clientes
+      truckload: Cargas
+      drivers: Motoristas
+      cte: CT-e
+      users: Usuários
+      user_roles: Regras de usuário
+      company: Empresas
+      my_enterprise: Minha empresa
+      my_profile: Meu perfil
+      exit: Sair

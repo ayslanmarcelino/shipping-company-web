@@ -1,0 +1,6 @@
+pt-BR:
+  application:
+    disabled: Desativado
+    actived: Ativado
+    positive: Sim
+    negative: Não

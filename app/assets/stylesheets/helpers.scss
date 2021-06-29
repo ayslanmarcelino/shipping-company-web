@@ -1,0 +1,36 @@
+.text-divider{
+  margin: 2em 0;
+  line-height: 0;
+  text-align: center;
+}
+
+.text-divider span{
+  background-color: #f5f5f5;
+  padding: 0.4em 1.75rem;
+  border-radius: 4px;
+}
+
+.text-divider:before{
+  content: " ";
+  display: block;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #f7f7f7;
+}
+
+.input--money {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="30"><text x="5" y="19" style="font: 14px Arial;">R$</text></svg>') no-repeat;
+  height: 30px !important;
+  padding-left: 32px !important;
+}
+
+.form-control {
+  font-size: 14px !important;
+}
+
+.btn {
+  font-size: 14px !important;
+}
+
+.m-t-5 {
+  margin-top: 1.8rem !important;
+}

@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: pontual_web_development
+
+test:
+  <<: *default
+  database: pontual_web_test
+
+production:
+  <<: *default
+  database: pontual_web_production
+  username: pontual_web
+  password: <%= ENV['PONTUAL_WEB_DATABASE_PASSWORD'] %>

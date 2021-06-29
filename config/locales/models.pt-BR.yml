@@ -1,0 +1,104 @@
+'pt-BR':
+  activerecord:
+    models:
+      user:
+        one: Usuário
+    attributes:
+      user:
+        first_name: Primeiro nome
+        last_name: Último nome
+        nickname: Apelido
+        birth_date: Data de nascimento
+        phone_number: Telefone
+        telephone_number: Celular
+        email: E-mail
+        document_number: CPF/CNPJ
+        rg: RG
+        rg_issuing_body: Órgão expedidor
+        is_active: Está ativo
+        is_employee: Funcionário
+        is_admin: Admin
+        is_super_admin: Super admin
+        enterprise: Empresa
+        enterprise_id: Empresa
+      person:
+        first_name: Primeiro nome
+        last_name: Último nome
+        nickname: Apelido
+        birth_date: Data de nascimento
+        phone_number: Telefone
+        telephone_number: Celular
+        document_number: CPF/CNPJ
+        rg: RG
+        rg_issuing_body: Órgão expedidor
+      person/address:
+        street: Logradouro
+        number: Número
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        zip_code: CEP
+        country: País
+        complement: Complemento
+      enterprise:
+        company_name: Razão social
+        fantasy_name: Nome fantasia
+        document_number: CPF/CNPJ
+        email: E-mail
+        opening_date: Data de abertura da empresa
+        primary_color: Cor primária
+        secondary_color: Cor secundária
+        logo: Logomarca
+        is_active: Ativado
+      client:
+        company_name: Razão social
+        document_number: CPF/CNPJ
+        email: E-mail
+        fantasy_name: Nome fantasia
+        is_active: Está ativa
+        observation: Observação
+        phone_number: Telefone
+        responsible: Responsável
+        telephone_number: Celular
+      address:
+        street: Logradouro
+        number: Número
+        neighborhood: Bairro
+        city: Cidade
+        state: Estado
+        zip_code: CEP
+        country: País
+        complement: Complemento
+      truckload:
+        client: Cliente
+        driver_id: Motorista
+        dt_number: Número da DT
+        value_driver: Valor pago ao motorista
+        client_id: Cliente
+        is_agent: Contratado por agenciador
+      user/role:
+        kind_cd: Regra
+        enterprise_id: Empresa
+        user_id: Usuário
+        kinds:
+          master: Master
+          operational: Operacional
+          owner: Proprietário
+      driver:
+        enterprise: Empresa
+        cnh_expires_at: Data de vencimento
+        cnh_record: Registro CNH
+        cnh_number: Número CNH
+        cnh_type: Categoria CNH
+        cnh_issuing_body: Estado expedidor CNH
+        is_employee: É empregado
+        is_blocked: Está bloqueado
+        first_name: Primeiro nome
+        last_name: Último nome
+        nickname: Apelido
+        birth_date: Data de nascimento
+        phone_number: Telefone
+        telephone_number: Celular
+        document_number: CPF/CNPJ
+        rg: RG
+        rg_issuing_body: Órgão expedidor
