@@ -7,11 +7,11 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:first_name) %>
-  <%= person_form.text_field(:first_name, class: 'form-control form-control-user') %>
+  <%= person_form.text_field(:first_name, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:last_name) %>
-  <%= person_form.text_field(:last_name, class: 'form-control form-control-user') %>
+  <%= person_form.text_field(:last_name, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:nickname) %>
@@ -19,7 +19,7 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:birth_date) %>
-  <%= person_form.date_field(:birth_date, class: 'form-control form-control-user') %>
+  <%= person_form.date_field(:birth_date, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:phone_number) %>
@@ -27,7 +27,7 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:telephone_number) %>
-  <%= person_form.text_field(:telephone_number, class: 'form-control form-control-user input--telephone-number') %>
+  <%= person_form.text_field(:telephone_number, class: 'form-control form-control-user input--telephone-number', required: true) %>
 </div>
 <div class="col-lg-12 custom-control custom-switch">
   <%= form.label(:is_employee) %>?
@@ -48,50 +48,50 @@
 </h5>
 <div class="col-lg-12">
   <%= form.label(:cnh_number) %>
-  <%= form.number_field(:cnh_number, class: 'form-control form-control-user') %>
+  <%= form.number_field(:cnh_number, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:cnh_record) %>
-  <%= form.number_field(:cnh_record, class: 'form-control form-control-user') %>
+  <%= form.number_field(:cnh_record, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:cnh_type) %>
-  <%= form.select(:cnh_type, Driver::CNH_TYPES, { include_blank: 'Selecione a categoria' }, { class: 'select2_single form-control' }) %>
+  <%= form.select(:cnh_type, Driver::CNH_TYPES, { include_blank: 'Selecione a categoria' }, { class: 'select2_single form-control', required: true }) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:cnh_issuing_body) %>
-  <%= form.select(:cnh_issuing_body, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control' }) %>
+  <%= form.select(:cnh_issuing_body, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control', required: true }) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:cnh_expires_at) %>
-  <%= form.date_field(:cnh_expires_at, class: 'form-control form-control-user') %>
+  <%= form.date_field(:cnh_expires_at, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:document_number) %>
-  <%= person_form.text_field(:document_number, class: 'form-control form-control-user document_number') %>
+  <%= person_form.text_field(:document_number, class: 'form-control form-control-user document_number', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:rg) %>
-  <%= person_form.number_field(:rg, class: 'form-control form-control-user') %>
+  <%= person_form.number_field(:rg, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:rg_issuing_body) %>
-  <%= person_form.text_field(:rg_issuing_body, class: 'form-control form-control-user') %>
+  <%= person_form.text_field(:rg_issuing_body, class: 'form-control form-control-user', required: true) %>
 </div>
 <h5 class="text-divider">
   <span><%= t('.address') %></span>
 </h5>
 <div class="col-lg-12">
   <%= address_form.label(:zip_code) %>
-  <%= address_form.text_field(:zip_code, class: 'form-control form-control-user input--zip-code') %>
+  <%= address_form.text_field(:zip_code, class: 'form-control form-control-user input--zip-code', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:street) %>
-  <%= address_form.text_field(:street, class: 'form-control form-control-user') %>
+  <%= address_form.text_field(:street, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:number) %>
-  <%= address_form.number_field(:number, class: 'form-control form-control-user') %>
+  <%= address_form.number_field(:number, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:complement) %>
@@ -99,17 +99,17 @@
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:neighborhood) %>
-  <%= address_form.text_field(:neighborhood, class: 'form-control form-control-user') %>
+  <%= address_form.text_field(:neighborhood, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:city) %>
-  <%= address_form.text_field(:city, class: 'form-control form-control-user') %>
+  <%= address_form.text_field(:city, class: 'form-control form-control-user', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:state) %>
-  <%= address_form.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control' }) %>
+  <%= address_form.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control', required: true }) %>
 </div>
 <div class="col-lg-12">
   <%= address_form.label(:country) %>
-  <%= address_form.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control' }) %>
+  <%= address_form.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control', required: true }) %>
 </div>

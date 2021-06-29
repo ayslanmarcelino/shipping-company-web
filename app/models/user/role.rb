@@ -25,6 +25,14 @@ class User::Role < ApplicationRecord
 
   KINDS = KINDS_MASTER + KINDS_CLIENT
 
+  attr_accessor :validate_all
+
+  validates :kind_cd,
+            :enterprise_id,
+            :user_id,
+            presence: true,
+            if: -> { validate_all }
+
   belongs_to :user
   belongs_to :enterprise
 

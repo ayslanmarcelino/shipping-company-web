@@ -20,6 +20,7 @@ class TruckloadsController < UsersController
 
   def create
     @truckload = Truckload.new(params_truckload)
+    @truckload.validate_all = true
 
     @truckload.save ? (redirect_to truckloads_path, notice: 'Carga cadastrada com sucesso') : (render :new)
   end
@@ -27,6 +28,7 @@ class TruckloadsController < UsersController
   def edit; end
 
   def update
+    @truckload.validate_all = true
     @truckload.update(params_truckload) ? (redirect_to truckloads_path, notice: 'Carga atualizada com sucesso') : (render :edit)
   end
 

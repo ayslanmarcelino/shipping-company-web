@@ -28,6 +28,8 @@
 class Driver < ApplicationRecord
   CNH_TYPES = %i[A B C D E].freeze
 
+  attr_accessor :validate_all
+
   belongs_to :enterprise
   belongs_to :person, class_name: 'User::Person'
   has_many :truckloads
@@ -35,6 +37,15 @@ class Driver < ApplicationRecord
   accepts_nested_attributes_for :person
 
   validates :cnh_record, :cnh_number, uniqueness: { scope: :enterprise_id }
+  validates :cnh_expires_at,
+            :cnh_issuing_body,
+            :cnh_number,
+            :cnh_record,
+            :cnh_type,
+            :enterprise_id,
+            :person_id,
+            presence: true,
+            if: -> { validate_all }
 
   def formatted_name
     "#{person.full_name} | #{person.document_number}"

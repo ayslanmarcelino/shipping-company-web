@@ -5,7 +5,7 @@ class ClientsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @clients = Client.accessible_by(current_ability).order(:company_name)
+    @clients = Client.includes(:address).includes(:enterprise).accessible_by(current_ability).order(:company_name)
   end
 
   def new
@@ -17,6 +17,7 @@ class ClientsController < UsersController
 
   def create
     @client = Client.new(params_client)
+    @client.validate_all = true
     @client.address.validate_address = true
 
     @client.save ? (redirect_to clients_path, notice: 'Cliente cadastrado com sucesso') : (render :new)
@@ -25,6 +26,7 @@ class ClientsController < UsersController
   def edit; end
 
   def update
+    @client.validate_all = true
     @client.address.validate_address = true
     @client.update(params_client) ? (redirect_to clients_path, notice: 'Cliente atualizado com sucesso') : (render :edit)
   end

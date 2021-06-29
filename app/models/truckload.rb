@@ -28,12 +28,22 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Truckload < ApplicationRecord
+  attr_accessor :validate_all
+
   belongs_to :enterprise
   belongs_to :client
   belongs_to :user
   belongs_to :driver
   has_many :cte
   validates :dt_number, uniqueness: { scope: :enterprise_id }
+  validates :dt_number,
+            :value_driver,
+            :client_id,
+            :driver_id,
+            :enterprise_id,
+            :user_id,
+            presence: true,
+            if: -> { validate_all }
 
   def truckload_value
     cte.sum(&:value)
