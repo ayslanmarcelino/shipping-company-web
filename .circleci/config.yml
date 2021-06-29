@@ -34,7 +34,7 @@ workflows:
 jobs:
   cucumber:
     docker:
-      - image: circleci/ruby:2.6.5-node-browsers
+      - image: circleci/ruby:2.7.3-node-browsers
         environment:
           ALLOW_DB_SEEDS: true
           BUNDLE_JOBS: 2
