@@ -40,4 +40,9 @@ class UsersPage < SitePrism::Page
     button_filter.present?
     owner_table?
   end
+
+  def master_users_page?
+    master_table?
+    owner_users_page?
+  end
 end

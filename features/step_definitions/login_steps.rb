@@ -8,9 +8,7 @@ Dado('que acesso a página de login da aplicação') do
 end
 
 Dado('tenha um usuário operacional') do
-  @enterprise = FactoryBot.create(:enterprise)
-  @user = FactoryBot.create(:user, enterprise: @enterprise)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :operational, user: @user, enterprise: @enterprise)
+  create_user(:operational)
 end
 
 Quando('preencher os dados corretamente para logar') do
@@ -55,15 +53,11 @@ Então('quero visualizar o menu disponível para o usuário master') do
 end
 
 Dado('tenha um usuário proprietário') do
-  @enterprise = FactoryBot.create(:enterprise)
-  @user = FactoryBot.create(:user, enterprise: @enterprise)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :owner, user: @user, enterprise: @enterprise)
+  create_user(:owner)
 end
 
 Dado('tenha um usuário master') do
-  @enterprise = FactoryBot.create(:enterprise)
-  @user = FactoryBot.create(:user, enterprise: @enterprise)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :master, user: @user, enterprise: @enterprise)
+  create_user(:master)
 end
 
 Quando('preencher os dados incorretamente para logar') do
@@ -77,9 +71,23 @@ Então('quero visualizar a mensagem de que o login falhou') do
 end
 
 Dado('que realizo login na aplicação como usuário proprietário') do
+  create_user_and_login(:owner)
+end
+
+Dado('que realizo login na aplicação como usuário master') do
+  create_user_and_login(:master)
+end
+
+private
+
+def create_user(kind_cd)
   @enterprise = FactoryBot.create(:enterprise)
   @user = FactoryBot.create(:user, enterprise: @enterprise)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :owner, user: @user, enterprise: @enterprise)
+  @user_role = FactoryBot.create(:user_role, kind_cd: kind_cd, user: @user, enterprise: @enterprise)
+end
+
+def create_user_and_login(kind_cd)
+  create_user(kind_cd)
   @login_page = LoginPage.new
   @menu_page = MenuPage.new
 

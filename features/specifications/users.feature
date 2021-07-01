@@ -16,4 +16,12 @@ Funcionalidade: Manipular usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário proprietário
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
-    Então quero visualizar a página de usuários
+    Então quero visualizar a página de usuários como usuário proprietário
+
+  @visualizar_usuarios_como_master
+
+  Cenário: Visualizar usuários cadastrados
+    Dado que realizo login na aplicação como usuário master
+    E tiver "3" usuários cadastrados
+    Quando clicar no menu Usuários
+    Então quero visualizar a página de usuários como usuário master
