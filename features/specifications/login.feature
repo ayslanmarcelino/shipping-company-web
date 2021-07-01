@@ -10,7 +10,7 @@ Funcionalidade: Realizar Login
   EU QUERO realizar login na aplicação
   PARA acessar as funcionalidades disponíveis
 
-  @login_com_sucesso_com_usuario_operacional
+  @login_com_sucesso_como_usuario_operacional
 
   Cenário: Realizar login com sucesso com usuário operacional
     Dado que acesso a página de login da aplicação
@@ -18,9 +18,10 @@ Funcionalidade: Realizar Login
     Quando preencher os dados corretamente para logar
     E clicar no botão de login
     E for redirecionado para a página inicial da aplicação
+    E visualizar a mensagem de logado com sucesso
     Então quero visualizar o menu disponível para o usuário operacional
 
-  @login_com_sucesso_com_usuario_proprietario
+  @login_com_sucesso_como_usuario_proprietario
 
   Cenário: Realizar login com sucesso com usuário proprietário
     Dado que acesso a página de login da aplicação
@@ -28,9 +29,10 @@ Funcionalidade: Realizar Login
     Quando preencher os dados corretamente para logar
     E clicar no botão de login
     E for redirecionado para a página inicial da aplicação
+    E visualizar a mensagem de logado com sucesso
     Então quero visualizar o menu disponível para o usuário proprietário
 
-  @login_com_sucesso_com_usuario_master
+  @login_com_sucesso_como_usuario_master
 
   Cenário: Realizar login com sucesso com usuário master
     Dado que acesso a página de login da aplicação
@@ -38,6 +40,7 @@ Funcionalidade: Realizar Login
     Quando preencher os dados corretamente para logar
     E clicar no botão de login
     E for redirecionado para a página inicial da aplicação
+    E visualizar a mensagem de logado com sucesso
     Então quero visualizar o menu disponível para o usuário master
   
   @login_com_usuario_e_senha_incorretos

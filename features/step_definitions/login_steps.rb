@@ -8,8 +8,9 @@ Dado('que acesso a página de login da aplicação') do
 end
 
 Dado('tenha um usuário operacional') do
-  @user = FactoryBot.create(:user)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :operational, user: @user)
+  @enterprise = FactoryBot.create(:enterprise)
+  @user = FactoryBot.create(:user, enterprise: @enterprise)
+  @user_role = FactoryBot.create(:user_role, kind_cd: :operational, user: @user, enterprise: @enterprise)
 end
 
 Quando('preencher os dados corretamente para logar') do
@@ -23,6 +24,12 @@ end
 Quando('for redirecionado para a página inicial da aplicação') do
   page.has_title?(@user.enterprise.fantasy_name)
   expect(page).to have_current_path('/')
+end
+
+Quando('visualizar a mensagem de logado com sucesso') do
+  successfully_login_message = 'Login efetuado com sucesso.'
+
+  expect(page).to have_content(successfully_login_message)
 end
 
 Então('quero visualizar o menu disponível para o usuário operacional') do
@@ -48,13 +55,15 @@ Então('quero visualizar o menu disponível para o usuário master') do
 end
 
 Dado('tenha um usuário proprietário') do
-  @user = FactoryBot.create(:user)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :owner, user: @user)
+  @enterprise = FactoryBot.create(:enterprise)
+  @user = FactoryBot.create(:user, enterprise: @enterprise)
+  @user_role = FactoryBot.create(:user_role, kind_cd: :owner, user: @user, enterprise: @enterprise)
 end
 
 Dado('tenha um usuário master') do
-  @user = FactoryBot.create(:user)
-  @user_role = FactoryBot.create(:user_role, kind_cd: :master, user: @user)
+  @enterprise = FactoryBot.create(:enterprise)
+  @user = FactoryBot.create(:user, enterprise: @enterprise)
+  @user_role = FactoryBot.create(:user_role, kind_cd: :master, user: @user, enterprise: @enterprise)
 end
 
 Quando('preencher os dados incorretamente para logar') do
@@ -65,4 +74,16 @@ Então('quero visualizar a mensagem de que o login falhou') do
   failed_login_message = 'E-mail e/ou senha inválido(s)'
 
   expect(page).to have_content(failed_login_message)
+end
+
+Dado('que realizo login na aplicação como usuário proprietário') do
+  @enterprise = FactoryBot.create(:enterprise)
+  @user = FactoryBot.create(:user, enterprise: @enterprise)
+  @user_role = FactoryBot.create(:user_role, kind_cd: :owner, user: @user, enterprise: @enterprise)
+  @login_page = LoginPage.new
+  @menu_page = MenuPage.new
+
+  @login_page.load
+  @login_page.fill_correct_user(@user)
+  @login_page.click_enter_login
 end

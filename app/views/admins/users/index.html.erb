@@ -19,7 +19,7 @@
                 <% if user_master?(current_user) %>
                   <th><%= t('.enterprise')%></th>
                 <% end %>
-                <th><%= t('.actived')%></th>
+                <th><%= t('.actived')%>?</th>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, User) %>
                     <%= link_to new_admins_user_path(@user), class: 'btn btn-sm btn-success btn-circle' do %>
@@ -48,17 +48,18 @@
                   </td>
                   <td class="table-buttons">
                     <% if can?(:read, User) %>
-                      <%= link_to admins_user_path(user), class: 'btn btn-sm btn-dark' do %>
+                      <%= link_to admins_user_path(user), id: "show-user-#{user.id}", class: 'btn btn-sm btn-dark' do %>
                         <i class="fas fa-eye"></i>
                       <% end %>
                     <% end %>
                     <% if can?(:update, User) %>
-                      <%= link_to edit_admins_user_path(user), class: 'btn btn-sm btn-info btn-circle' do %>
+                      <%= link_to edit_admins_user_path(user), id: "edit-user-#{user.id}", class: 'btn btn-sm btn-info btn-circle' do %>
                         <i class="fas fa-edit"></i>
                       <% end %>
                     <% end %>
                     <% if can?(:destroy, User) %>
                       <%= link_to admins_user_path(user),
+                          id: "delete-user-#{user.id}",
                           method: :delete,
                           class: 'btn btn-sm btn-danger btn-circle',
                           data: { confirm: "#{t('.delete_confirm')}: #{user.person.first_name} #{user.person.last_name}?" } do %>
