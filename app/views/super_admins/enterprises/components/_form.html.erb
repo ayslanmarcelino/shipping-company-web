@@ -35,5 +35,5 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:logo) %>
-  <%= form.file_field(:logo, accept: 'image/png, image/jpeg, image/jpg') %>
+  <%= form.file_field(:logo, key: :file, col: 'md-3', input_opts: { as: :select2 }) %>
 </div>

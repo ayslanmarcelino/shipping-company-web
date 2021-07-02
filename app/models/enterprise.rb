@@ -8,6 +8,7 @@
 #  email           :string           not null
 #  fantasy_name    :string           not null
 #  is_active       :boolean          default(TRUE), not null
+#  logo            :string
 #  opening_date    :date             not null
 #  primary_color   :string           not null
 #  secondary_color :string           not null
@@ -23,7 +24,7 @@ class Enterprise < ApplicationRecord
   has_many :clients
   has_many :drivers
   has_many :user_roles, class_name: 'User::Role', dependent: :restrict_with_exception, inverse_of: :enterprise
-  has_one_attached :logo
+  mount_uploader :logo, ImageUploader
   validates_uniqueness_of :document_number
   validates_presence_of %i[company_name fantasy_name document_number email opening_date primary_color secondary_color]
 
