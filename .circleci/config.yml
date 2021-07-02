@@ -10,6 +10,10 @@ commands:
             - rails-demo-bundle-v2-
 
       - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      - run:
           name: Build assets
           command: bundle exec rails assets:precompile
 
@@ -18,10 +22,6 @@ commands:
           command: |
             sudo gem update --system
             gem install bundler
-
-      - run:
-          name: Bundle Install
-          command: bundle check || bundle install
 
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
