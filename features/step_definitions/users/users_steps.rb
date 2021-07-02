@@ -19,6 +19,22 @@ Então('quero visualizar a página de usuários como usuário master') do
   expect(page).to have_content("#{User.all.count} registros")
 end
 
+Quando('clicar no botão de novo usuário') do
+  @users_page.click_new_user
+  @new_user_page = NewUserPage.new
+  @last_user_before_create = User.last
+end
+
+Então('quero visualizar o usuário criado como proprietário') do
+  view_created_user
+  users_expect_content_owner(@users)
+end
+
+Então('quero visualizar o usuário criado como master') do
+  view_created_user
+  users_expect_content_master(@users)
+end
+
 private
 
 def users_expect_content_owner(users)
@@ -53,4 +69,14 @@ def users_expect_content_master(users)
 
     expect(page).to have_content(enterprise)
   end
+end
+
+def view_created_user
+  last_user_after_create = User.last
+
+  expect(@last_user_before_create).not_to eql(last_user_after_create)
+
+  @users = []
+  @users << @last_user_before_create
+  @users << last_user_after_create
 end

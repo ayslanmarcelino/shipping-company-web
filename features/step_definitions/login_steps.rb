@@ -64,12 +64,6 @@ Quando('preencher os dados incorretamente para logar') do
   @login_page.fill_incorrect_user
 end
 
-Então('quero visualizar a mensagem de que o login falhou') do
-  failed_login_message = 'E-mail e/ou senha inválido(s)'
-
-  expect(page).to have_content(failed_login_message)
-end
-
 Dado('que realizo login na aplicação como usuário proprietário') do
   create_user_and_login(:owner)
 end

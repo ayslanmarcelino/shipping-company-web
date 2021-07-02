@@ -45,4 +45,8 @@ class UsersPage < SitePrism::Page
     master_table?
     owner_users_page?
   end
+
+  def click_new_user
+    button_new_user.click
+  end
 end

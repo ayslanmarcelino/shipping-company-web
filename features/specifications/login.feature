@@ -18,7 +18,7 @@ Funcionalidade: Realizar Login
     Quando preencher os dados corretamente para logar
     E clicar no botão de login
     E for redirecionado para a página inicial da aplicação
-    E visualizar a mensagem de logado com sucesso
+    E o sistema retornar a seguinte mensagem "Login efetuado com sucesso."
     Então quero visualizar o menu disponível para o usuário operacional
 
   @login_com_sucesso_como_usuario_proprietario
@@ -29,7 +29,7 @@ Funcionalidade: Realizar Login
     Quando preencher os dados corretamente para logar
     E clicar no botão de login
     E for redirecionado para a página inicial da aplicação
-    E visualizar a mensagem de logado com sucesso
+    E o sistema retornar a seguinte mensagem "Login efetuado com sucesso."
     Então quero visualizar o menu disponível para o usuário proprietário
 
   @login_com_sucesso_como_usuario_master
@@ -40,7 +40,7 @@ Funcionalidade: Realizar Login
     Quando preencher os dados corretamente para logar
     E clicar no botão de login
     E for redirecionado para a página inicial da aplicação
-    E visualizar a mensagem de logado com sucesso
+    E o sistema retornar a seguinte mensagem "Login efetuado com sucesso."
     Então quero visualizar o menu disponível para o usuário master
   
   @login_com_usuario_e_senha_incorretos
@@ -49,4 +49,4 @@ Funcionalidade: Realizar Login
     Dado que acesso a página de login da aplicação
     Quando preencher os dados incorretamente para logar
     E clicar no botão de login
-    Então quero visualizar a mensagem de que o login falhou
+    Então o sistema deve retornar a seguinte mensagem "E-mail e/ou senha inválido(s)"
