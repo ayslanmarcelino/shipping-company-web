@@ -95,6 +95,11 @@ GEM
     capybara-webkit (1.15.1)
       capybara (>= 2.3, < 4.0)
       json
+    carrierwave (1.3.2)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
+      ssrf_filter (~> 1.0)
     childprocess (3.0.0)
     chronic (0.10.2)
     clipboard (1.3.5)
@@ -296,6 +301,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    ssrf_filter (1.0.7)
     thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -347,6 +353,7 @@ DEPENDENCIES
   capybara-screenshot
   capybara-select-2
   capybara-webkit
+  carrierwave (~> 1.3.2)
   chronic
   cpf_cnpj
   cpf_faker

@@ -6,6 +6,7 @@ ruby '2.7.3'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'brcobranca'
 gem 'cancancan'
+gem 'carrierwave', '~> 1.3.2'
 gem 'cpf_cnpj'
 gem 'devise'
 gem 'jbuilder', '~> 2.7'
