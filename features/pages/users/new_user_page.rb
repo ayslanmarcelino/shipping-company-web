@@ -26,20 +26,15 @@ class NewUserPage < SitePrism::Page
   element :button_new_user, '#new_user'
 
   def fill_all_fields(user)
-    select_enterprise.select(user.enterprise.company_name)
-    input_first_name.set(Faker::Name.first_name)
-    input_last_name.set(Faker::Name.last_name)
+    fill_required_fields(user)
     input_nickname.set(Faker::Name.name)
-    input_email.set(Faker::Internet.email)
-    input_password.set('12345678')
-    input_password_confirmation.set('12345678')
     input_birth_date.set((Date.today - 18.years).strftime('%d/%m/%Y'))
     input_telephone.set(Faker::Number.number(digits: 10))
     input_phone.set(Faker::Number.number(digits: 11))
     input_document_number.set(FFaker::IdentificationBR.pretty_cpf)
     input_rg.set(Faker::Number.number(digits: 8))
     input_rg_issuing_body.set('SSP AL')
-    input_zip_code.set(FFaker::AddressBR.zip_code)
+    fill_address_zip_code
     input_street.set(Faker::Address.street_name)
     input_number.set(Faker::Address.building_number)
     input_complement.set(Faker::Address.street_address)
@@ -51,5 +46,22 @@ class NewUserPage < SitePrism::Page
 
   def click_new_user
     button_new_user.click
+  end
+
+  def options_in_select
+    select_enterprise.all('option').count
+  end
+
+  def fill_required_fields(user)
+    select_enterprise.select(user.enterprise.company_name)
+    input_first_name.set(Faker::Name.first_name)
+    input_last_name.set(Faker::Name.last_name)
+    input_email.set(Faker::Internet.email)
+    input_password.set('12345678')
+    input_password_confirmation.set('12345678')
+  end
+
+  def fill_address_zip_code
+    input_zip_code.set(FFaker::AddressBR.zip_code)
   end
 end
