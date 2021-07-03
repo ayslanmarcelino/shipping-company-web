@@ -64,4 +64,12 @@ class NewUserPage < SitePrism::Page
   def fill_address_zip_code
     input_zip_code.set(FFaker::AddressBR.zip_code)
   end
+
+  def fill_existing_document_number(user)
+    input_document_number.set(user.person.document_number)
+  end
+
+  def fill_existing_email(user)
+    input_email.set(user.email)
+  end
 end
