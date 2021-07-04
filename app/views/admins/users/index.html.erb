@@ -61,7 +61,7 @@
                       <%= link_to admins_user_path(user),
                           id: "delete-user-#{user.id}",
                           method: :delete,
-                          class: 'btn btn-sm btn-danger btn-circle',
+                          class: 'btn btn-sm btn-danger btn-circle swal_alert',
                           data: { confirm: "#{t('.delete_confirm')}: #{user.person.first_name} #{user.person.last_name}?" } do %>
                         <i class="fas fa-trash"></i>
                       <% end %>

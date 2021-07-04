@@ -33,32 +33,16 @@
   </div>
 </div>
 <script>
+  <%= render partial: 'notification', formats: [:js],
+             locals: {
+               title: @notify_title,
+               confirm_button_text: @notify_confirm_button_text,
+               show_cancel_button: @show_cancel_button,
+               cancel_button_text: @notify_cancel_button_text,
+               confirm_path_ajax: @confirm_path_ajax
+             } %>
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });
 </script>
-<% flash.each do |key, value| %>
-  <% next if key == 'alert' %>
-  <% if key == 'notice' %>
-    <div class="text-center alert alert-success">
-      <script>
-        $.bootstrapGrowl('<%= value %>', {
-          type: 'success',
-          stackup_spacing: 10,
-          width: '100%'
-        });
-      </script>
-    </div>
-  <% else %>
-    <div class="text-center alert alert-<%= key %>">
-      <script>
-        $.bootstrapGrowl('<%= value %>', {
-          type: '<%= key %>',
-          stackup_spacing: 10,
-          width: '100%'
-        });
-      </script>
-    </div>
-  <% end %>
-<% end %>

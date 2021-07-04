@@ -1,0 +1,59 @@
+function loadNotification() {
+  <% if flash.count > 0 %>
+    <% flashIcon = flash.first[0] %>
+    let html = '';
+    let confirmButtonText = '<%= local_assigns[:confirm_button_text].presence || 'OK' %>';
+    let cancelButtonText = '<%= local_assigns[:cancel_button_text].presence   || 'Cancelar' %>';
+    let showCancelButton = '<%= local_assigns[:show_cancel_button] %>';
+    let confirmPathAjax = '<%= local_assigns[:confirm_path_ajax] %>';
+    let flashIcon, title;
+
+    showCancelButton  = showCancelButton  === '' || showCancelButton === 'false' ? false : cancelButtonText
+
+    flashIcon = '<%= swal_type_from_notification_type(flashIcon) %>';
+    title = flashIcon === 'warning' ? 'Atenção!' : '<%= local_assigns[:title] %>';
+    html += '<%= flash.first[1] %>';
+
+    let defaultOptions = {
+      title: title,
+      icon: flashIcon,
+      confirmButtonText: confirmButtonText,
+      confirmButtonColor: "#24a0ed",
+	    onOpen: function() {
+		    $('.swal2-modal').find('.swal2-confirm').focus();
+      }
+    };
+
+    let toastOptions = {
+      toast: true,
+      position: 'top-end',
+      timer: 10000
+    };
+
+    switch ('<%= flashIcon %>') {
+      case 'notice':
+        defaultOptions.icon = 'info';
+        defaultOptions.title = html;
+        $.extend(defaultOptions, toastOptions)
+
+        break;
+      case 'success':
+        defaultOptions.title = html;
+
+        $.extend(defaultOptions, toastOptions)
+        break;
+      default:
+        defaultOptions.html = html;
+        defaultOptions.cancelButtonText = cancelButtonText;
+        defaultOptions.showCancelButton = showCancelButton;
+    }
+
+    Swal.fire(defaultOptions).then(function(result){
+      if (result.value && confirmPathAjax !== '') {
+        $.get(confirmPathAjax)
+      }
+    })
+  <% end %>
+}
+
+loadNotification();
