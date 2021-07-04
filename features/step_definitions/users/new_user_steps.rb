@@ -1,4 +1,5 @@
 Quando('preencher todos os dados solicitados para novo usuário') do
+  @registered_users_count = User.count
   @new_user_page.fill_all_fields(@user)
 
   enterprise_options_count
@@ -9,6 +10,7 @@ Quando('clicar em Criar novo usuário') do
 end
 
 Quando('preencher apenas dados obrigatórios para novo usuário') do
+  @registered_users_count = User.count
   @new_user_page.fill_required_fields(@user)
 end
 

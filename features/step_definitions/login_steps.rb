@@ -60,6 +60,16 @@ Dado('tenha um usuário master') do
   create_user(:master)
 end
 
+Dado('tenha um usuário desativado') do
+  create_user(:master)
+  @user.update(is_active: false)
+end
+
+Dado('tenha um usuário com empresa desativada') do
+  create_user(:master)
+  @enterprise.update(is_active: false)
+end
+
 Quando('preencher os dados incorretamente para logar') do
   @login_page.fill_incorrect_user
 end

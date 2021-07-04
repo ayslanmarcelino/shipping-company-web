@@ -34,7 +34,7 @@ module ApplicationHelper
     case type
     when 'success', 'notice' then 'success'
     when 'alert' then 'warning'
-    when 'error', 'denied' then 'error'
+    when 'danger', 'error', 'denied' then 'error'
     when 'question' then 'question'
     else 'info'
     end

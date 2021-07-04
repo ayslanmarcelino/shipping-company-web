@@ -42,6 +42,22 @@ Funcionalidade: Realizar Login
     E for redirecionado para a página inicial da aplicação
     E o sistema retornar a seguinte mensagem "Login efetuado com sucesso."
     Então quero visualizar o menu disponível para o usuário master
+
+  @login_com_sucesso_com_usuario_desativado
+
+  Cenário: Realizar login com usuário desativado
+    E tenha um usuário desativado
+    Quando preencher os dados corretamente para logar
+    E clicar no botão de login
+    Então o sistema deve retornar a seguinte mensagem "Sua conta está inativa. Para mais informações, entre em contato com o administrador da empresa."
+
+  @login_com_sucesso_com_empresa_desativada
+
+  Cenário: Realizar login com sucesso com empresa desativada
+    E tenha um usuário com empresa desativada
+    Quando preencher os dados corretamente para logar
+    E clicar no botão de login
+    Então o sistema deve retornar a seguinte mensagem "Sua empresa está inativa. Para mais informações, entre em contato com o suporte."
   
   @login_com_usuario_e_senha_incorretos
 

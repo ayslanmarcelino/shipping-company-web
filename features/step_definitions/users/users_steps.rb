@@ -1,8 +1,13 @@
 Dado('tiver {string} usuários cadastrados') do |times|
+  registered_users_count = User.count
   @users = []
 
   @users << @user
   @users += FactoryBot.create_list(:user, times.to_i, enterprise: @enterprise)
+
+  registered_users_count_after_create = User.count
+
+  expect(registered_users_count_after_create).to eql(registered_users_count + times.to_i)
 end
 
 Então('quero visualizar a página de usuários como usuário proprietário') do
@@ -36,11 +41,17 @@ end
 Então('quero visualizar o usuário criado como proprietário') do
   view_created_user
   users_expect_content_owner(@users)
+
+  registered_users_count_after_create = User.count
+  expect(registered_users_count_after_create).to eql(@registered_users_count + 1)
 end
 
 Então('quero visualizar o usuário criado como master') do
   view_created_user
   users_expect_content_master(@users)
+
+  registered_users_count_after_create = User.count
+  expect(registered_users_count_after_create).to eql(@registered_users_count + 1)
 end
 
 Quando('clicar no botão de deletar usuário') do
@@ -58,8 +69,10 @@ end
 
 Então('o usuário deve ser excluído') do
   subtraction_excluded_user = @users_count - 1
+  has_excluded_user_on_db = User.where(id: @users.last.id).present?
 
   expect(page).to have_content("#{subtraction_excluded_user} registros")
+  expect(has_excluded_user_on_db).to eql(false)
 end
 
 private
