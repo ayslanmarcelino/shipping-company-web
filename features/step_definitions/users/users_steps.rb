@@ -57,9 +57,9 @@ Quando('retornar o modal com a seguinte mensagem {string}') do |message|
 end
 
 Então('o usuário deve ser excluído') do
-  users_not_expect_content(@users.last)
+  subtraction_excluded_user = @users_count - 1
 
-  expect(page).to have_content("#{@users_count - 1} registros")
+  expect(page).to have_content("#{subtraction_excluded_user} registros")
 end
 
 private
@@ -107,20 +107,4 @@ def view_created_user
   @users = []
   @users << @last_user_before_create
   @users << last_user_after_create
-end
-
-def users_not_expect_content(user)
-  id = user.id
-  full_name = user.person.full_name
-  nickname = user.person.nickname
-  document_number = user.person.document_number
-  email = user.email
-  roles = I18n.t(user.all_roles, scope: 'activerecord.attributes.user/role.kinds').join(', ')
-
-  expect(page).to have_no_content(id)
-  expect(page).to have_no_content(full_name)
-  expect(page).to have_no_content(nickname)
-  expect(page).to have_no_content(document_number)
-  expect(page).to have_no_content(email)
-  expect(page).to have_no_content(roles) if roles.present?
 end
