@@ -13,3 +13,7 @@ Então('o sistema deve retornar os seguintes valores da tabela') do |table|
     expect(page).to have_content(value.first)
   end
 end
+
+Quando('clicar em OK') do
+  @general_page.click_yes
+end
