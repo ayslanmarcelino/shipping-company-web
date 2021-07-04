@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Admins::UsersController < ApplicationController
+class Admins::UsersController < AdminsController
   before_action :verify_password, only: %w[update]
   before_action :set_user, only: %w[show edit update destroy]
   before_action :set_enterprise, only: %w[create new edit update destroy]
@@ -43,7 +43,7 @@ class Admins::UsersController < ApplicationController
     @user.person.address.validate_address = true
 
     if @user.update(params_user)
-      redirect_to admins_users_path
+      redirect_to(admins_users_path)
       flash[:success] = 'Usuário atualizado com sucesso.'
     else
       render :edit

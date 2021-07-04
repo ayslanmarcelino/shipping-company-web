@@ -20,7 +20,12 @@ class User::RolesController < AdminsController
     @user_role.validate_all = true
 
     if can?(:create, User::Role)
-      @user_role.save ? (redirect_to user_roles_path, notice: 'Regra de usuário cadastrada com sucesso.') : (render :new)
+      if @user_role.save
+        redirect_to(user_roles_path)
+        flash[:success] = 'Regra de usuário cadastrada com sucesso.'
+      else
+        render :new
+      end
     else
       redirect_to(user_roles_path)
       flash[:danger] = 'Você não tem permissão para realizar esta ação.'
@@ -34,9 +39,10 @@ class User::RolesController < AdminsController
 
     if can?(:update, User::Role)
       if @user_role.update(params_user_role)
-        redirect_to(user_roles_path, notice: 'Regra de usuário atualizada com sucesso.')
+        redirect_to(user_roles_path)
+        flash[:sucess] = 'Regra de usuário atualizada com sucesso.'
       else
-        (render :edit)
+        render :edit
       end
     else
       redirect_to(user_roles_path)
@@ -46,7 +52,12 @@ class User::RolesController < AdminsController
 
   def destroy
     if can?(:delete, User::Role)
-      @user_role.destroy ? (redirect_to user_roles_path, notice: 'Regra de usuário excluída com sucesso') : (render :index)
+      if @user_role.destroy
+        redirect_to user_roles_path
+        flash[:success] = 'Regra de usuário excluída com sucesso'
+      else
+        render :index
+      end
     else
       redirect_to(user_roles_path)
       flash[:danger] = 'Você não tem permissão para realizar esta ação.'

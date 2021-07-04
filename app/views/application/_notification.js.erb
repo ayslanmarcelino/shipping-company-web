@@ -42,6 +42,12 @@ function loadNotification() {
 
         $.extend(defaultOptions, toastOptions)
         break;
+      case 'danger':
+        defaultOptions.icon = 'error';
+        defaultOptions.title = html;
+
+        $.extend(defaultOptions, toastOptions)
+        break;
       default:
         defaultOptions.html = html;
         defaultOptions.cancelButtonText = cancelButtonText;

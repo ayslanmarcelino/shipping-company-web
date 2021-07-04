@@ -6,7 +6,9 @@ class AdminsController < ApplicationController
   private
 
   def admin?
-    if current_user.roles.kind_owners.empty? && current_user.roles.kind_masters.empty?
+    if current_user.roles.kind_owners.empty? &&
+       current_user.roles.kind_masters.empty? &&
+       request.path.exclude?("users/#{current_user.id}/edit")
       redirect_to root_path
       flash[:danger] = 'Você não tem permissão para acessar esta página'
     end
