@@ -1,24 +1,15 @@
-# README
+# SISTEMA PARA TRANSPORTADORAS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Sistema criado com foco em estudos.
 
-Things you may want to cover:
+Algumas tecnologias/funcionalidades trabalhadas aqui:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby;
+* Rails;
+* BDD;
+* Cucumber / Capybara;
+* Whitelabel;
+* AWS s3;
+* Sidekiq (em breve);
+* Rollbar (em breve);
+* Consumo de API para emissão de CT-e e MDF-e (em breve).
