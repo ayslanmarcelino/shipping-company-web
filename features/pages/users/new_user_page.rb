@@ -19,7 +19,7 @@ class NewUserPage < SitePrism::Page
   element :input_street, '#user_person_attributes_address_attributes_street'
   element :input_number, '#user_person_attributes_address_attributes_number'
   element :input_complement, '#user_person_attributes_address_attributes_complement'
-  element :input_neighboorhood, '#user_person_attributes_address_attributes_neighborhood'
+  element :input_neighborhood, '#user_person_attributes_address_attributes_neighborhood'
   element :input_city, '#user_person_attributes_address_attributes_city'
   element :select_state, '#user_person_attributes_address_attributes_state'
   element :select_country, '#user_person_attributes_address_attributes_country'
@@ -38,7 +38,7 @@ class NewUserPage < SitePrism::Page
     input_street.set(Faker::Address.street_name)
     input_number.set(Faker::Address.building_number)
     input_complement.set(Faker::Address.street_address)
-    input_neighboorhood.set(Faker::Address.community)
+    input_neighborhood.set(Faker::Address.community)
     input_city.set(FFaker::AddressBR.city)
     select_state.select('AL')
     select_country.select('Brasil')

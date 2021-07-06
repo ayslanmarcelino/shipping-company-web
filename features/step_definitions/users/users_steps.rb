@@ -55,9 +55,9 @@ Então('quero visualizar o usuário criado como master') do
 end
 
 Quando('clicar no botão de deletar usuário') do
-  delete_button = find_by_id("delete-user-#{@users.last.id}")
+  button_delete = find_by_id("delete-user-#{@users.last.id}")
 
-  delete_button.click
+  button_delete.click
 end
 
 Quando('retornar o modal com a seguinte mensagem {string}') do |message|
@@ -73,6 +73,12 @@ Então('o usuário deve ser excluído') do
 
   expect(page).to have_content("#{subtraction_excluded_user} registros")
   expect(has_excluded_user_on_db).to eql(false)
+end
+
+Quando('clicar no botão de visualizar detalhes do usuário') do
+  button_show = find_by_id("show-user-#{@users.last.id}")
+
+  button_show.click
 end
 
 private

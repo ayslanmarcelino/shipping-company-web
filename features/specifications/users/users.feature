@@ -51,3 +51,13 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
     E clicar em OK
     E o sistema retornar a seguinte mensagem "Usuário excluído com sucesso."
     Então o usuário deve ser excluído
+
+  @visualizar_detalhes_usuario_como_proprietario
+
+  Cenário: Visualizar detalhes do usuário cadastrado
+    Dado que realizo login na aplicação como usuário proprietário
+    E tiver "3" usuários cadastrados
+    Quando clicar no menu Usuários
+    E clicar no botão de visualizar detalhes do usuário
+    E for redirecionado para a tela de detalhes do usuário
+    Então o sistema deve retornar todos os dados do usuário

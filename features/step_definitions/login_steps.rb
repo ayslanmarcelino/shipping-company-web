@@ -22,6 +22,7 @@ end
 Quando('for redirecionado para a página inicial da aplicação') do
   page.has_title?(@user.enterprise.fantasy_name)
   expect(page).to have_current_path('/')
+  expect(root_path).to eql('/')
 end
 
 Quando('visualizar a mensagem de logado com sucesso') do
