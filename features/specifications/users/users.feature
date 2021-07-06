@@ -61,3 +61,43 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
     E clicar no botão de visualizar detalhes do usuário
     E for redirecionado para a tela de detalhes do usuário
     Então o sistema deve retornar todos os dados do usuário
+
+  @visualizar_detalhes_usuario_como_master
+
+  Cenário: Visualizar detalhes do usuário cadastrado
+    Dado que realizo login na aplicação como usuário "master"
+    E tiver "3" usuários cadastrados
+    Quando clicar no menu Usuários
+    E clicar no botão de visualizar detalhes do usuário
+    E for redirecionado para a tela de detalhes do usuário
+    Então o sistema deve retornar todos os dados do usuário
+
+  @deletar_usuario_dentro_de_detalhes_como_proprietario
+
+  Cenário: Visualizar detalhes do usuário cadastrado
+    Dado que realizo login na aplicação como usuário "owner"
+    E tiver "3" usuários cadastrados
+    Quando clicar no menu Usuários
+    E verificar a quantidade de usuários cadastrados como proprietário
+    E clicar no botão de visualizar detalhes do usuário
+    E for redirecionado para a tela de detalhes do usuário
+    E clicar no botão de deletar usuário
+    E retornar o modal com a seguinte mensagem "Você tem certeza que deseja excluir o usuário"
+    E clicar em OK
+    E o sistema retornar a seguinte mensagem "Usuário excluído com sucesso."
+    Então o usuário deve ser excluído
+
+  @deletar_usuario_dentro_de_detalhes_como_master
+
+  Cenário: Visualizar detalhes do usuário cadastrado
+    Dado que realizo login na aplicação como usuário "master"
+    E tiver "3" usuários cadastrados
+    Quando clicar no menu Usuários
+    E verificar a quantidade de usuários cadastrados como master
+    E clicar no botão de visualizar detalhes do usuário
+    E for redirecionado para a tela de detalhes do usuário
+    E clicar no botão de deletar usuário
+    E retornar o modal com a seguinte mensagem "Você tem certeza que deseja excluir o usuário"
+    E clicar em OK
+    E o sistema retornar a seguinte mensagem "Usuário excluído com sucesso."
+    Então o usuário deve ser excluído

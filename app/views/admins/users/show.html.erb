@@ -7,13 +7,13 @@
     <%= t('.back') %>
   <% end %>
   <% if can?(:update, User) %>
-    <%= link_to edit_admins_user_path(@user), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
+    <%= link_to edit_admins_user_path(@user), id: "edit-user-#{@user.id}", class: 'col-xs-3 btn btn-info btn-sm  ' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
   <% end %>
   <% if can?(:destroy, User) %>
-    <%= link_to admins_user_path(@user), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@user.person.first_name} #{@user.person.last_name}?" } do %>
+    <%= link_to admins_user_path(@user), id: "delete-user-#{@user.id}", method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@user.person.first_name} #{@user.person.last_name}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
