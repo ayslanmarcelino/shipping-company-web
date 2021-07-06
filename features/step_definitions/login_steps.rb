@@ -75,12 +75,10 @@ Quando('preencher os dados incorretamente para logar') do
   @login_page.fill_incorrect_user
 end
 
-Dado('que realizo login na aplicação como usuário proprietário') do
-  create_user_and_login(:owner)
-end
+Dado('que realizo login na aplicação como usuário {string}') do |kind|
+  formatted_kind = kind.to_sym
 
-Dado('que realizo login na aplicação como usuário master') do
-  create_user_and_login(:master)
+  create_user_and_login(formatted_kind)
 end
 
 private

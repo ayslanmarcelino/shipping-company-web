@@ -13,7 +13,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
   @visualizar_usuarios_como_proprietario
 
   Cenário: Visualizar usuários cadastrados
-    Dado que realizo login na aplicação como usuário proprietário
+    Dado que realizo login na aplicação como usuário "owner"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
     Então quero visualizar a página de usuários como usuário proprietário
@@ -21,7 +21,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
   @visualizar_usuarios_como_master
 
   Cenário: Visualizar usuários cadastrados
-    Dado que realizo login na aplicação como usuário master
+    Dado que realizo login na aplicação como usuário "master"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
     Então quero visualizar a página de usuários como usuário master
@@ -29,7 +29,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
   @apagar_usuarios_como_proprietario
 
   Cenário: Visualizar usuários cadastrados
-    Dado que realizo login na aplicação como usuário proprietário
+    Dado que realizo login na aplicação como usuário "owner"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
     E verificar a quantidade de usuários cadastrados como proprietário
@@ -42,7 +42,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
   @apagar_usuarios_como_master
 
   Cenário: Visualizar usuários cadastrados
-    Dado que realizo login na aplicação como usuário master
+    Dado que realizo login na aplicação como usuário "master"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
     E verificar a quantidade de usuários cadastrados como master
@@ -55,7 +55,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
   @visualizar_detalhes_usuario_como_proprietario
 
   Cenário: Visualizar detalhes do usuário cadastrado
-    Dado que realizo login na aplicação como usuário proprietário
+    Dado que realizo login na aplicação como usuário "owner"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
     E clicar no botão de visualizar detalhes do usuário
