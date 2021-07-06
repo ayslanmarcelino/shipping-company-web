@@ -2,12 +2,13 @@
 
 Sistema criado com foco em estudos.
 
-Algumas tecnologias/funcionalidades trabalhadas aqui:
+Algumas funcionalidades/tecnologias/metódos trabalhados no projeto:
 
 * Ruby;
 * Rails;
 * BDD;
 * Cucumber / Capybara;
+* Rspec;
 * Whitelabel;
 * AWS s3;
 * Sidekiq (em breve);
