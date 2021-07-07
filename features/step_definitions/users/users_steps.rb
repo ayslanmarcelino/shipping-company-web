@@ -34,7 +34,7 @@ end
 
 Quando('clicar no botão de novo usuário') do
   @users_page.click_new_user
-  @new_user_page = NewUserPage.new
+  @form_user_page = FormUserPage.new
   @last_user_before_create = User.last
 end
 
@@ -54,10 +54,10 @@ Então('quero visualizar o usuário criado como master') do
   expect(registered_users_count_after_create).to eql(@registered_users_count + 1)
 end
 
-Quando('clicar no botão de deletar usuário') do
-  button_delete = find_by_id("delete-user-#{@users.last.id}")
+Quando('clicar no botão de {string} usuário') do |action|
+  button = find_by_id("#{action}-user-#{@users.last.id}")
 
-  button_delete.click
+  button.click
 end
 
 Quando('retornar o modal com a seguinte mensagem {string}') do |message|
@@ -73,12 +73,6 @@ Então('o usuário deve ser excluído') do
 
   expect(page).to have_content("#{subtraction_excluded_user} registros")
   expect(has_excluded_user_on_db).to eql(false)
-end
-
-Quando('clicar no botão de visualizar detalhes do usuário') do
-  button_show = find_by_id("show-user-#{@users.last.id}")
-
-  button_show.click
 end
 
 private

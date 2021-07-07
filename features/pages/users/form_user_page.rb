@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class NewUserPage < SitePrism::Page
+class FormUserPage < SitePrism::Page
   element :select_enterprise, '#user_enterprise_id'
   element :input_first_name, '#user_person_attributes_first_name'
   element :input_last_name, '#user_person_attributes_last_name'
@@ -24,6 +24,42 @@ class NewUserPage < SitePrism::Page
   element :select_state, '#user_person_attributes_address_attributes_state'
   element :select_country, '#user_person_attributes_address_attributes_country'
   element :button_new_user, '#new_user'
+  element :button_update_user, '#update_user'
+
+  def form_user_page?
+    select_enterprise.present?
+    input_first_name.present?
+    input_last_name.present?
+    input_nickname.present?
+    input_email.present?
+    input_password.present?
+    input_password_confirmation.present?
+    # checkbox_is_active.present?
+    input_birth_date.present?
+    input_telephone.present?
+    input_phone.present?
+    input_document_number.present?
+    input_rg.present?
+    input_rg_issuing_body.present?
+    input_zip_code.present?
+    input_street.present?
+    input_number.present?
+    input_complement.present?
+    input_neighborhood.present?
+    input_city.present?
+    select_state.present?
+    select_country.present?
+  end
+
+  def new_user_page?
+    form_user_page?
+    button_new_user.present?
+  end
+
+  def update_user_page?
+    form_user_page?
+    button_update_user.present?
+  end
 
   def fill_all_fields(user)
     fill_required_fields(user)

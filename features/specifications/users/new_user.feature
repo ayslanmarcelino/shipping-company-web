@@ -16,6 +16,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "owner"
     Quando clicar no menu Usuários
     E clicar no botão de novo usuário
+    E for redirecionado para a tela de novo usuário
     E preencher todos os dados solicitados para novo usuário
     E clicar em Criar novo usuário
     E o sistema retornar a seguinte mensagem "Usuário cadastrado com sucesso."
@@ -27,6 +28,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "master"
     Quando clicar no menu Usuários
     E clicar no botão de novo usuário
+    E for redirecionado para a tela de novo usuário
     E preencher todos os dados solicitados para novo usuário
     E clicar em Criar novo usuário
     E o sistema retornar a seguinte mensagem "Usuário cadastrado com sucesso."
@@ -38,6 +40,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "owner"
     Quando clicar no menu Usuários
     E clicar no botão de novo usuário
+    E for redirecionado para a tela de novo usuário
     E preencher apenas dados obrigatórios para novo usuário
     E clicar em Criar novo usuário
     E o sistema retornar a seguinte mensagem "Usuário cadastrado com sucesso."
@@ -49,6 +52,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "master"
     Quando clicar no menu Usuários
     E clicar no botão de novo usuário
+    E for redirecionado para a tela de novo usuário
     E preencher apenas dados obrigatórios para novo usuário
     E clicar em Criar novo usuário
     E o sistema retornar a seguinte mensagem "Usuário cadastrado com sucesso."
@@ -59,6 +63,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "owner"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
         | E-mail não pode ficar em branco        |
@@ -72,6 +77,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "master"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
         | E-mail não pode ficar em branco        |
@@ -85,6 +91,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "owner"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E preencher apenas dados obrigatórios para novo usuário e apenas CEP
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
@@ -99,6 +106,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "master"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E preencher apenas dados obrigatórios para novo usuário e apenas CEP
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
@@ -113,6 +121,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "owner"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E preencher todos os dados solicitados para novo usuário com CPF já cadastrado
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
@@ -123,6 +132,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "master"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E preencher todos os dados solicitados para novo usuário com CPF já cadastrado
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
@@ -133,6 +143,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "owner"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E preencher todos os dados solicitados para novo usuário com e-mail já cadastrado
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
@@ -143,6 +154,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       Dado que realizo login na aplicação como usuário "master"
       Quando clicar no menu Usuários
       E clicar no botão de novo usuário
+      E for redirecionado para a tela de novo usuário
       E preencher todos os dados solicitados para novo usuário com e-mail já cadastrado
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
