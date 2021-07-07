@@ -4,3 +4,5 @@ pt-BR:
     actived: Ativado
     positive: Sim
     negative: Não
+    false: Não
+    true: Sim

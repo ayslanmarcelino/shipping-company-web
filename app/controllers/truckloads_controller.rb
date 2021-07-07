@@ -22,18 +22,33 @@ class TruckloadsController < UsersController
     @truckload = Truckload.new(params_truckload)
     @truckload.validate_all = true
 
-    @truckload.save ? (redirect_to truckloads_path, notice: 'Carga cadastrada com sucesso') : (render :new)
+    if @truckload.save
+      redirect_to(truckloads_path)
+      flash[:success] = 'Carga cadastrada com sucesso'
+    else
+      render :new
+    end
   end
 
   def edit; end
 
   def update
     @truckload.validate_all = true
-    @truckload.update(params_truckload) ? (redirect_to truckloads_path, notice: 'Carga atualizada com sucesso') : (render :edit)
+    if @truckload.update(params_truckload)
+      redirect_to(truckloads_path)
+      flash[:success] = 'Carga atualizada com sucesso'
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @truckload.destroy ? (redirect_to truckloads_path, notice: 'Carga excluída com sucesso') : (render :index)
+    if @truckload.destroy
+      redirect_to(truckloads_path)
+      flash[:success] = 'Carga excluída com sucesso'
+    else
+      render :index
+    end
   end
 
   private

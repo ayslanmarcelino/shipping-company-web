@@ -28,4 +28,8 @@ class MenuPage < SitePrism::Page
     operational_menu?
     owner_menu?
   end
+
+  def click_users
+    menu_users.click
+  end
 end
