@@ -29,4 +29,14 @@ module ApplicationHelper
     [['Proprietário', 'owner'],
      ['Operacional', 'operational']]
   end
+
+  def swal_type_from_notification_type(type)
+    case type
+    when 'success', 'notice' then 'success'
+    when 'alert' then 'warning'
+    when 'danger', 'error', 'denied' then 'error'
+    when 'question' then 'question'
+    else 'info'
+    end
+  end
 end

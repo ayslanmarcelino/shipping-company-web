@@ -31,7 +31,7 @@ class User::Person < ApplicationRecord
 
   belongs_to :address, optional: true
 
-  validates :document_number, uniqueness: true, on: :create, if: -> { document_number.present? }
+  validates :document_number, uniqueness: true, if: -> { document_number.present? }
   validates :first_name,
             :last_name,
             presence: true,
