@@ -20,7 +20,12 @@ class ClientsController < UsersController
     @client.validate_all = true
     @client.address.validate_address = true
 
-    @client.save ? (redirect_to clients_path, notice: 'Cliente cadastrado com sucesso') : (render :new)
+    if @client.save
+      redirect_to(clients_path)
+      flash[:success] = 'Cliente cadastrado com sucesso'
+    else
+      render :new
+    end
   end
 
   def edit; end
@@ -28,11 +33,21 @@ class ClientsController < UsersController
   def update
     @client.validate_all = true
     @client.address.validate_address = true
-    @client.update(params_client) ? (redirect_to clients_path, notice: 'Cliente atualizado com sucesso') : (render :edit)
+    if @client.update(params_client)
+      redirect_to(clients_path)
+      flash[:success] = 'Cliente atualizado com sucesso'
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @client.destroy ? (redirect_to clients_path, notice: 'Cliente excluído com sucesso') : (render :index)
+    if @client.destroy
+      redirect_to(clients_path)
+      flash[:success] = 'Cliente excluído com sucesso'
+    else
+      render :index
+    end
   end
 
   private

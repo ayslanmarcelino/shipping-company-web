@@ -17,18 +17,33 @@ class CtesController < UsersController
     @cte = Cte.new(params_cte)
     @cte.validate_all = true
 
-    @cte.save ? (redirect_to ctes_path, notice: 'CT-e cadastrado com sucesso') : (render :new)
+    if @cte.save
+      redirect_to(ctes_path)
+      flash[:success] = 'CT-e cadastrado com sucesso'
+    else
+      render :new
+    end
   end
 
   def edit; end
 
   def update
     @cte.validate_all = true
-    @cte.update(params_cte) ? (redirect_to ctes_path, notice: 'CT-e atualizado com sucesso') : (render :edit)
+    if @cte.update(params_cte)
+      redirect_to ctes_path
+      flash[:success] = 'CT-e atualizado com sucesso'
+    else
+      render :edit
+    end
   end
 
   def destroy
-    @cte.destroy ? (redirect_to ctes_path, notice: 'CT-e excluído com sucesso') : (render :index)
+    if @cte.destroy
+      redirect_to ctes_path
+      flash[:success] = 'CT-e excluído com sucesso'
+    else
+      render :index
+    end
   end
 
   private
