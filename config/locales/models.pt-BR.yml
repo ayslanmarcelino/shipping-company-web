@@ -28,7 +28,7 @@
         birth_date: Data de nascimento
         phone_number: Telefone
         telephone_number: Celular
-        document_number: CPF/CNPJ
+        document_number: CPF
         rg: RG
         rg_issuing_body: Órgão expedidor
       person/address:
@@ -99,6 +99,6 @@
         birth_date: Data de nascimento
         phone_number: Telefone
         telephone_number: Celular
-        document_number: CPF/CNPJ
+        document_number: CPF
         rg: RG
         rg_issuing_body: Órgão expedidor

@@ -125,7 +125,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       E preencher todos os dados solicitados para novo usuário com CPF já cadastrado
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
-        | CPF/CNPJ já está em uso |
+        | CPF já está em uso |
 
   @criar_usuario_como_master_com_cpf_ja_existente
     Cenário: Criar usuário como master com dados obrigatórios e CPF já existente
@@ -136,7 +136,7 @@ Funcionalidade: Criar usuários cadastrados na plataforma
       E preencher todos os dados solicitados para novo usuário com CPF já cadastrado
       E clicar em Criar novo usuário
       Então o sistema deve retornar os seguintes valores da tabela
-        | CPF/CNPJ já está em uso |
+        | CPF já está em uso |
 
   @criar_usuario_como_proprietario_com_email_ja_existente
     Cenário: Criar usuário como proprietário com dados obrigatórios e e-mail já existente
