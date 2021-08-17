@@ -45,15 +45,11 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :enterprise_id,
             :email,
-            :password,
-            :password_confirmation,
             presence: true,
             if: -> { validate_access_data }
 
   validates :enterprise_id,
             :email,
-            :password,
-            :password_confirmation,
             :person_id,
             :enterprise_id,
             presence: true,

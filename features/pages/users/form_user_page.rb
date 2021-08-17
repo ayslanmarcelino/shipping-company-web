@@ -24,7 +24,7 @@ class FormUserPage < SitePrism::Page
   element :select_state, '#user_person_attributes_address_attributes_state'
   element :select_country, '#user_person_attributes_address_attributes_country'
   element :button_new_user, '#new_user'
-  element :button_update_user, '#update_user'
+  element :button_edit_user, '#update_user'
 
   def form_user_page?
     select_enterprise.present?
@@ -56,9 +56,9 @@ class FormUserPage < SitePrism::Page
     button_new_user.present?
   end
 
-  def update_user_page?
+  def edit_user_page?
     form_user_page?
-    button_update_user.present?
+    button_edit_user.present?
   end
 
   def fill_all_fields(user)
@@ -67,6 +67,7 @@ class FormUserPage < SitePrism::Page
     input_birth_date.set((Date.today - 18.years).strftime('%d/%m/%Y'))
     input_telephone.set(Faker::Number.number(digits: 10))
     input_phone.set(Faker::Number.number(digits: 11))
+    input_document_number.native.clear
     input_document_number.set(FFaker::IdentificationBR.pretty_cpf)
     input_rg.set(Faker::Number.number(digits: 8))
     input_rg_issuing_body.set('SSP AL')
@@ -102,7 +103,8 @@ class FormUserPage < SitePrism::Page
   end
 
   def fill_existing_document_number(user)
-    input_document_number.set(user.person.document_number)
+    input_document_number.native.clear
+    input_document_number.set(user.person.document_number.to_br_cpf)
   end
 
   def fill_existing_email(user)

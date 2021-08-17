@@ -22,7 +22,7 @@
                 <th><%= t('.actived')%>?</th>
                 <th class="no-sort table-buttons">
                   <% if can?(:create, User) %>
-                    <%= link_to new_admins_user_path(@user), class: 'btn btn-sm btn-success btn-circle' do %>
+                    <%= link_to new_admins_user_path(@user), class: 'btn btn-sm btn-success btn-circle', id: 'create-new-user' do %>
                       <i class="fas fa-plus"></i>
                     <% end %>
                   <% end %>

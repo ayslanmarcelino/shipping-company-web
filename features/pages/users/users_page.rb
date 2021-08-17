@@ -14,7 +14,7 @@ class UsersPage < SitePrism::Page
   element :th_roles, 'th', text: 'Regra(s) de usuário'
   element :th_is_active, 'th', text: 'Ativo?'
   element :th_enterprise, 'th', text: 'Empresa'
-  element :button_new_user, 'a[href="/admins/users/new"]'
+  element :button_new_user, '#create-new-user'
 
   def owner_table?
     table_users.present?
