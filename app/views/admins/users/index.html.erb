@@ -1,7 +1,37 @@
 <div class="text-center">
   <h4><%= t('.registered_users') %></h4>
 </div>
-<%= render partial: 'layouts/filter', locals: { url: admins_users_path } %>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: admins_users_path do |f| %>
+    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
+      <%= f.text_field :person_first_name_cont, placeholder: 'Primeiro Nome', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.text_field :email_cont, placeholder: 'E-mail', class: 'form-control mb-2 col-md-4 mr-2' %>
+      <%= f.number_field :person_document_number_cont, placeholder: 'CPF/CNPJ', class: 'form-control mb-2 col-md-2 mr-2' %>
+    </div>
+    <% if can?(:manage, Enterprise) %>
+      <%= f.select :enterprise_id_eq, enterprises_collection, { include_blank: 'Selecione a empresa' }, class: 'form-control col-md-12 mb-1' %>
+    <% end %>
+    <% @users.pluck(:is_active).each do |is_active| %>
+      <% if is_active %>
+        <div>
+          <%= check_box_tag('q[is_active_in][]', is_active) %>
+          <%= f.label('Apenas ativos') %>
+        </div>
+      <% end %>
+    <% end %>
+    <hr>
+    <div>
+      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+        <i class="fas fa-broom"></i>
+        <%= t('layouts.filter.clear') %>
+      <% end %>
+      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <i class="fas fa-search"></i>
+        <%= t('layouts.filter.search') %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">

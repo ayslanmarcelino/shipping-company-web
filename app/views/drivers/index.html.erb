@@ -1,6 +1,34 @@
 <div class="text-center">
   <h4><%= t('.registered_drivers') %></h4>
 </div>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: drivers_path do |f| %>
+    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
+      <%= f.text_field :person_first_name_cont, placeholder: 'Primeiro Nome', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.number_field :person_document_number_cont, placeholder: 'CPF', class: 'form-control mb-2 col-md-3 mr-2' %>
+      <%= f.number_field :cnh_number_cont, placeholder: 'Número CNH', class: 'form-control mb-2 col-md-2 mr-2' %>
+    </div>
+    <% @drivers.pluck(:is_blocked).each do |is_blocked| %>
+      <% if is_blocked %>
+        <div>
+          <%= check_box_tag('q[is_blocked_in][]', !is_blocked) %>
+          <%= f.label('Apenas desbloqueados') %>
+        </div>
+      <% end %>
+    <% end %>
+    <hr>
+    <div>
+      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+        <i class="fas fa-broom"></i>
+        <%= t('layouts.filter.clear') %>
+      <% end %>
+      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <i class="fas fa-search"></i>
+        <%= t('layouts.filter.search') %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">

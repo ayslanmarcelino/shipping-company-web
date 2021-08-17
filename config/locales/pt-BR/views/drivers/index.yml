@@ -5,7 +5,7 @@ pt-BR:
       id: Código
       full_name: Nome completo
       nickname: Apelido
-      document_number: CPF/CNPJ
+      document_number: CPF
       cnh_expires_at: Data de vencimento
       cnh_record: Registro CNH
       cnh_number: Número CNH
