@@ -8,7 +8,7 @@ class DriversController < UsersController
                .includes(:person)
                .accessible_by(current_ability)
                .ransack(params[:q])
-    @drivers = @q.result(distinct: true)
+    @drivers = @q.result(distinct: false)
   end
 
   def new

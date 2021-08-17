@@ -4,4 +4,10 @@ module UsersHelper
               .compact
               .sort
   end
+
+  def users_collection
+    User.pluck(:email, :id)
+        .compact
+        .sort
+  end
 end
