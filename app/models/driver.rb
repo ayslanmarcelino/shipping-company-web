@@ -43,7 +43,6 @@ class Driver < ApplicationRecord
             :cnh_record,
             :cnh_type,
             :enterprise_id,
-            :person_id,
             presence: true,
             if: -> { validate_all }
 

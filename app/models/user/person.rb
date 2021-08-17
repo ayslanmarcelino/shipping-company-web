@@ -28,6 +28,7 @@ class User::Person < ApplicationRecord
   attr_accessor :validate_access_data, :validate_all
 
   has_one :user
+  has_many :bank_accounts
 
   belongs_to :address, optional: true
 
@@ -44,11 +45,11 @@ class User::Person < ApplicationRecord
             :phone_number,
             :rg,
             :rg_issuing_body,
-            :address_id,
             presence: true,
             if: -> { validate_all }
 
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :bank_accounts, reject_if: :all_blank, allow_destroy: true
   cpf_column :document_number, presence: false
 
   def self.permitted_attributes

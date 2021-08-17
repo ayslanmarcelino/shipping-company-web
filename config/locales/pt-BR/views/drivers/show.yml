@@ -33,3 +33,12 @@ pt-BR:
       address_city: Cidade
       address_state: Estado
       address_country: País
+      bank_accounts: Contas bancárias
+      bank_account_bank_code: Código do banco
+      bank_account_account_number: Número da conta (com dígito)
+      bank_account_account_type: Tipo da conta
+      bank_account_agency: Agência
+      bank_account_document_number: CPF/CNPJ
+      bank_account_pix_key_type: Tipo de chave Pix
+      bank_account_pix_key: Chave pix
+      bank_account_kinds:

@@ -83,6 +83,11 @@ def users_expect_content_owner(users)
     full_name = user.person.full_name
     nickname = user.person.nickname
     document_number = user.person.document_number
+    formatted_document_number = if document_number.length == 11
+                                  document_number.to_br_cpf
+                                else
+                                  document_number.to_br_cnpj
+                                end
     email = user.email
     roles = I18n.t(user.all_roles, scope: 'activerecord.attributes.user/role.kinds').join(', ')
     is_active = I18n.t(user.is_active, scope: 'application')
@@ -93,7 +98,7 @@ def users_expect_content_owner(users)
     expect(page).to have_content(id)
     expect(page).to have_content(full_name)
     expect(page).to have_content(nickname)
-    expect(page).to have_content(document_number)
+    expect(page).to have_content(formatted_document_number)
     expect(page).to have_content(email)
     expect(page).to have_content(roles) if roles.present?
     expect(page).to have_content(is_active)
