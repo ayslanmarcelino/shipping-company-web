@@ -1,6 +1,6 @@
 module ApplicationHelper
   def format_document_number(document_number)
-    document_number.length == 14 ? document_number.to_br_cpf : document_number.to_br_cnpj
+    document_number.length == 11 ? document_number.to_br_cpf : document_number.to_br_cnpj
   end
 
   def translate_boolean(boolean)
@@ -28,6 +28,24 @@ module ApplicationHelper
   def role_select
     [['Proprietário', 'owner'],
      ['Operacional', 'operational']]
+  end
+
+  def pix_key_types_select
+    [['CPF/CNPJ', 'document_number'],
+     ['Celular', 'phone_number'],
+     ['E-mail', 'email'],
+     ['Chave aleatória', 'random_key']]
+  end
+
+  def account_types_select
+    [
+      ['Conta Poupança', 'saving_account'],
+      ['Conta Corrente', 'current_account'],
+      ['Conta Salário', 'salary_account'],
+      ['Conta Investimento', 'investment_account'],
+      ['Conta Conjunta', 'joint_account'],
+      ['Conta Pagamento', 'payment_account'],
+    ]
   end
 
   def swal_type_from_notification_type(type)

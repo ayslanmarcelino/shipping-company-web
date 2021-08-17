@@ -113,3 +113,14 @@
   <%= address_form.label(:country) %>
   <%= address_form.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control', required: true }) %>
 </div>
+<h5 class="text-divider">
+  <span><%= t('.bank_accounts') %></span>
+</h5>
+<div class="col-lg-12">
+  <%= person_form.simple_fields_for(:bank_accounts) do |bank_account| %>
+    <%= render 'bank_account_fields', f: bank_account %>
+  <% end %>
+  <div class="mt-5 text-center">
+    <%= link_to_add_association 'Adicionar conta bancária', person_form, :bank_accounts, class: 'btn btn-success btn-cocoon-success' %>
+  </div>
+</div>
