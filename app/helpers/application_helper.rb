@@ -30,6 +30,13 @@ module ApplicationHelper
      ['Operacional', 'operational']]
   end
 
+  def pix_key_types_select
+    [['CPF/CNPJ', 'document_number'],
+     ['Celular', 'phone_number'],
+     ['E-mail', 'email'],
+     ['Chave aleatória', 'random_key']]
+  end
+
   def swal_type_from_notification_type(type)
     case type
     when 'success', 'notice' then 'success'

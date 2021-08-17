@@ -49,6 +49,7 @@ class User::Person < ApplicationRecord
             if: -> { validate_all }
 
   accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :bank_accounts, reject_if: :all_blank, allow_destroy: true
   cpf_column :document_number, presence: false
 
   def self.permitted_attributes

@@ -22,13 +22,13 @@
 #  fk_rails_...  (person_id => user_people.id)
 #
 class BankAccount < ApplicationRecord
-  KEY_TYPES = [:document_number, :phone_number, :random_key].freeze
+  KEY_TYPES = [:document_number, :email, :phone_number, :random_key].freeze
 
   belongs_to :person, class_name: 'User::Person'
 
   as_enum :pix_key_type, KEY_TYPES, map: :string, source: :pix_key_type
 
   def self.permitted_attributes
-    [:id, :account_number, :agency, :bank_code, :document_number, :pix_key, :pix_key_type_cd, :person_id]
+    [:id, :account_number, :agency, :bank_code, :document_number, :pix_key, :pix_key_type_cd, :person_id, :_destroy]
   end
 end

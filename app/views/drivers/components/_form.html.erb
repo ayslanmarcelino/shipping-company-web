@@ -68,7 +68,7 @@
 </div>
 <div class="col-lg-12">
   <%= form.label(:document_number) %>
-  <%= person_form.text_field(:document_number, class: 'form-control form-control-user input--cpf', required: true) %>
+  <%= person_form.text_field(:document_number, class: 'form-control form-control-user document_number', required: true) %>
 </div>
 <div class="col-lg-12">
   <%= form.label(:rg) %>
@@ -112,4 +112,12 @@
 <div class="col-lg-12">
   <%= address_form.label(:country) %>
   <%= address_form.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control', required: true }) %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.simple_fields_for(:bank_accounts) do |bank_account| %>
+    <%= render 'bank_account_fields', f: bank_account %>
+  <% end %>
+  <div class="links">
+    <%= link_to_add_association 'Novo contato', person_form, :bank_accounts, class: 'btn btn-success btn-cocoon-success' %>
+  </div>
 </div>
