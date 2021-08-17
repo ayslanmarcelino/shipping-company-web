@@ -6,7 +6,7 @@ module SuperAdmins
     rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
     def index
-      @enterprises = Enterprise.accessible_by(current_ability)
+      @enterprises = Enterprise.page(params[:page]).accessible_by(current_ability)
     end
 
     def new

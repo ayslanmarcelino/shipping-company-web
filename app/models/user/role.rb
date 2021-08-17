@@ -40,6 +40,8 @@ class User::Role < ApplicationRecord
 
   validates :kind_cd, uniqueness: { scope: :user_id }
 
+  paginates_per 25
+
   def translated_kinds
     I18n.t(:kind_cd, scope: 'activerecord.attributes.user/role.kinds')
   end

@@ -60,6 +60,7 @@ class User < ApplicationRecord
   has_many :roles, dependent: :destroy
 
   accepts_nested_attributes_for :person
+  paginates_per 25
 
   def all_roles
     roles.map(&:kind_cd).sort

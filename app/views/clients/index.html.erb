@@ -22,66 +22,63 @@
     </div>
   <% end %>
 <% end %>
-<div class="card shadow mb-4">
-  <div class="card-body">
-    <div class="table-responsive">
-      <div class="row">
-        <div class="col-sm-12">
-          <table id="table" class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th><%= t('.id') %></th>
-                <th><%= t('.company_name') %></th>
-                <th><%= t('.fantasy_name') %></th>
-                <th><%= t('.address_state') %></th>
-                <th><%= t('.address_city') %></th>
-                <th><%= t('.document_number') %></th>
-                <% if user_master?(current_user) %>
-                  <th><%= t('.enterprise') %></th>
+<div class="table-responsive">
+  <div class="row">
+    <div class="col-sm-12">
+      <table id="table" class="ui celled table">
+        <thead>
+          <tr>
+            <th><%= t('.id') %></th>
+            <th><%= t('.company_name') %></th>
+            <th><%= t('.fantasy_name') %></th>
+            <th><%= t('.address_state') %></th>
+            <th><%= t('.address_city') %></th>
+            <th><%= t('.document_number') %></th>
+            <% if user_master?(current_user) %>
+              <th><%= t('.enterprise') %></th>
+            <% end %>
+            <th class="no-sort table-buttons">
+              <% if can?(:create, Client) %>
+                <%= link_to new_client_path(@client), class: 'btn btn-sm btn-success btn-circle' do %>
+                  <i class="fas fa-plus"></i>
                 <% end %>
-                <th class="no-sort table-buttons">
-                  <% if can?(:create, Client) %>
-                    <%= link_to new_client_path(@client), class: 'btn btn-sm btn-success btn-circle' do %>
-                      <i class="fas fa-plus"></i>
-                    <% end %>
-                  <% end %>
-                </th>
-              </thead>
-              <tbody>
-              <% @clients.each do |client| %>
-                <tr>
-                  <td><%= client.id %></td>
-                  <td><%= client.company_name %></td>
-                  <td><%= client.fantasy_name %></td>
-                  <td><%= client.address.state %></td>
-                  <td><%= client.address.city %></td>
-                  <td><%= client.document_number.to_br_cnpj %></td>
-                  <% if user_master?(current_user) %>
-                    <td><%= client.enterprise.company_name %></td>
-                  <% end %>
-                  <td class="table-buttons">
-                    <% if can?(:read, Client) %>
-                      <%= link_to client_path(client), class: 'btn btn-sm btn-dark' do %>
-                        <i class="fas fa-eye"></i>
-                      <% end %>
-                    <% end %>
-                    <% if can?(:update, Client) %>
-                      <%= link_to edit_client_path(client), class: 'btn btn-sm btn-info btn-circle' do %>
-                        <i class="fas fa-edit"></i>
-                      <% end %>
-                    <% end %>
-                    <% if can?(:destroy, Client) %>
-                      <%= link_to client_path(client), method: :delete, class: 'btn btn-sm btn-danger btn-circle', data: { confirm: "#{t('.delete_confirm')}: #{client.company_name}?"} do %>
-                        <i class="fas fa-trash"></i>
-                      <% end %>
-                    <% end %>
-                  </td>
-                </tr>
               <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
+            </th>
+          </thead>
+          <tbody>
+          <% @clients.each do |client| %>
+            <tr>
+              <td><%= client.id %></td>
+              <td><%= client.company_name %></td>
+              <td><%= client.fantasy_name %></td>
+              <td><%= client.address.state %></td>
+              <td><%= client.address.city %></td>
+              <td><%= client.document_number.to_br_cnpj %></td>
+              <% if user_master?(current_user) %>
+                <td><%= client.enterprise.company_name %></td>
+              <% end %>
+              <td class="table-buttons">
+                <% if can?(:read, Client) %>
+                  <%= link_to client_path(client), class: 'btn btn-sm btn-dark' do %>
+                    <i class="fas fa-eye"></i>
+                  <% end %>
+                <% end %>
+                <% if can?(:update, Client) %>
+                  <%= link_to edit_client_path(client), class: 'btn btn-sm btn-info btn-circle' do %>
+                    <i class="fas fa-edit"></i>
+                  <% end %>
+                <% end %>
+                <% if can?(:destroy, Client) %>
+                  <%= link_to client_path(client), method: :delete, class: 'btn btn-sm btn-danger btn-circle', data: { confirm: "#{t('.delete_confirm')}: #{client.company_name}?"} do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @clients %>
     </div>
   </div>
 </div>

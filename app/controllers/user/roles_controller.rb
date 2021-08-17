@@ -10,6 +10,7 @@ class User::RolesController < AdminsController
                    .includes(:enterprise)
                    .includes(user: :person)
                    .accessible_by(current_ability)
+                   .page(params[:page])
                    .ransack(params[:q])
 
     @user_roles = @q.result(distinct: false)

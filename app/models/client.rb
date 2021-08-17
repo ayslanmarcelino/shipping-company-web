@@ -48,6 +48,7 @@ class Client < ApplicationRecord
             if: -> { validate_all }
 
   cnpj_column :document_number
+  paginates_per 25
 
   def formatted_name
     "#{company_name} - #{address.state} | #{document_number.to_br_cnpj}"
