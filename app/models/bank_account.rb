@@ -28,6 +28,8 @@ class BankAccount < ApplicationRecord
 
   as_enum :pix_key_type, KEY_TYPES, map: :string, source: :pix_key_type
 
+  cpf_column :document_number, presence: false
+
   def self.permitted_attributes
     [:id, :account_number, :agency, :bank_code, :document_number, :pix_key, :pix_key_type_cd, :person_id, :_destroy]
   end
