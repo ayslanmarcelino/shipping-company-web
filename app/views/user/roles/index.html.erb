@@ -3,6 +3,32 @@
     <%= t('.list') %>
   </h4>
 </div>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: user_roles_path do |f| %>
+    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
+      <% if can?(:manage, Enterprise) %>
+        <%= f.select :enterprise_id_eq, enterprises_collection, { include_blank: 'Selecione a empresa' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+      <% end %>
+      <%= f.select :user_id_eq, users_collection, { include_blank: 'Selecione o usuário' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+      <% if user_master?(current_user) %>
+        <%= f.select :kind_cd_eq, role_master_select, { include_blank: 'Selecione a regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+      <% else %>
+        <%= f.select :kind_cd_eq, role_select, { include_blank: 'Selecione a regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+      <% end %>
+    </div>
+    <hr>
+    <div>
+      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+        <i class="fas fa-broom"></i>
+        <%= t('layouts.filter.clear') %>
+      <% end %>
+      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <i class="fas fa-search"></i>
+        <%= t('layouts.filter.search') %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">

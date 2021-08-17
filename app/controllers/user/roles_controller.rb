@@ -6,10 +6,13 @@ class User::RolesController < AdminsController
   before_action :set_enterprise, only: %w[new create edit]
 
   def index
-    @user_roles = User::Role.includes(:user)
-                            .includes(:enterprise)
-                            .includes(user: :person)
-                            .accessible_by(current_ability)
+    @q = User::Role.includes(:user)
+                   .includes(:enterprise)
+                   .includes(user: :person)
+                   .accessible_by(current_ability)
+                   .ransack(params[:q])
+
+    @user_roles = @q.result(distinct: false)
   end
 
   def new

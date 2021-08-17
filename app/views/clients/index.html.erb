@@ -1,6 +1,27 @@
 <div class="text-center">
   <h4><%= t('.list') %></h4>
 </div>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: clients_path do |f| %>
+    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
+      <%= f.text_field :company_name_cont, placeholder: 'Razão social', class: 'form-control col-md-2 mb-2 mr-2' %>
+      <%= f.text_field :fantasy_name_cont, placeholder: 'Nome fantasia', class: 'form-control col-md-2 mb-2 mr-2' %>
+      <%= f.select(:address_state_eq, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control', required: true }) %>
+      <%= f.number_field :document_number_cont, placeholder: 'CPF/CNPJ', class: 'form-control mb-2 col-md-6 mr-2' %>
+    </div>
+    <hr>
+    <div>
+      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+        <i class="fas fa-broom"></i>
+        <%= t('layouts.filter.clear') %>
+      <% end %>
+      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <i class="fas fa-search"></i>
+        <%= t('layouts.filter.search') %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 <div class="card shadow mb-4">
   <div class="card-body">
     <div class="table-responsive">
