@@ -37,6 +37,17 @@ module ApplicationHelper
      ['Chave aleatória', 'random_key']]
   end
 
+  def account_types_select
+    [
+      ['Conta Poupança', 'saving_account'],
+      ['Conta Corrente', 'current_account'],
+      ['Conta Salário', 'salary_account'],
+      ['Conta Investimento', 'investment_account'],
+      ['Conta Conjunta', 'joint_account'],
+      ['Conta Pagamento', 'payment_account'],
+    ]
+  end
+
   def swal_type_from_notification_type(type)
     case type
     when 'success', 'notice' then 'success'

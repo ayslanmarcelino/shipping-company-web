@@ -113,11 +113,20 @@
         bank_code: Código do banco
         account_number: Número da conta (com dígito)
         agency: Agência
+        account_type: Tipo de conta
         document_number: CPF/CNPJ
         pix_key_type: Tipo de chave Pix
         pix_key: Chave pix
-        kinds:
+        pix_types:
           document_number: CPF/CNPJ
           phone_number: Celular
           email: E-mail
           random_key: Chave aleatória
+        account_types:
+          saving_account: Conta Poupança
+          current_account: Conta Corrente
+          salary_account: Conta Salário
+          investment_account: Conta Investimento
+          joint_account: Conta Conjunta
+          payment_account: Conta Pagamento
+        

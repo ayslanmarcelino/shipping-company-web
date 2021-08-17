@@ -155,34 +155,42 @@
             </table>
           </div>
           <div class="tab-pane fade" id="bank_accounts" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <% @driver.person.bank_accounts.each_with_index do |bank_account, index| %>
-              <h4>Conta bancária #<%= index + 1 %></h4>
-              <table class="table">
-                <tr>
-                  <th><%= t('.bank_account_bank_code') %></th>
-                  <td><%= bank_account.bank_code %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.bank_account_agency') %></th>
-                  <td><%= bank_account.agency %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.bank_account_account_number') %></th>
-                  <td><%= bank_account.account_number %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.bank_account_document_number') %></th>
-                  <td><%= format_document_number(bank_account.document_number) %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.bank_account_pix_key_type') %></th>
-                  <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.kinds') %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.bank_account_pix_key') %></th>
-                  <td><%= bank_account.pix_key %></td>
-                </tr>
-              </table>
+            <% if @driver.person.bank_accounts.present? %>
+              <% @driver.person.bank_accounts.each_with_index do |bank_account, index| %>
+                <h4>Conta bancária #<%= index + 1 %></h4>
+                <table class="table">
+                  <tr>
+                    <th><%= t('.bank_account_bank_code') %></th>
+                    <td><%= bank_account.bank_code %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_agency') %></th>
+                    <td><%= bank_account.agency %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_account_number') %></th>
+                    <td><%= bank_account.account_number %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_account_type') %></th>
+                    <td><%= I18n.t(bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_document_number') %></th>
+                    <td><%= format_document_number(bank_account.document_number) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_pix_key_type') %></th>
+                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_pix_key') %></th>
+                    <td><%= bank_account.pix_key %></td>
+                  </tr>
+                </table>
+              <% end %>
+            <% else %>
+              <h4>Motorista não tem contas bancárias cadastradas</h4>
             <% end %>
           </div>
         </div>

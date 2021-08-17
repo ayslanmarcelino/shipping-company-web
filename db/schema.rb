@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
 
   create_table "bank_accounts", force: :cascade do |t|
     t.string "account_number"
+    t.string "account_type_cd"
     t.string "agency"
     t.string "bank_code"
     t.string "document_number"
