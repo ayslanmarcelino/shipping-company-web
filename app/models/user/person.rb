@@ -28,6 +28,7 @@ class User::Person < ApplicationRecord
   attr_accessor :validate_access_data, :validate_all
 
   has_one :user
+  has_many :bank_accounts
 
   belongs_to :address, optional: true
 
@@ -44,7 +45,6 @@ class User::Person < ApplicationRecord
             :phone_number,
             :rg,
             :rg_issuing_body,
-            :address_id,
             presence: true,
             if: -> { validate_all }
 

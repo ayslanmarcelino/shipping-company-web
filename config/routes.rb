@@ -26,11 +26,13 @@ Rails.application.routes.draw do
   get 'ctes/index'
   get 'clients/index'
   get 'drivers/index'
+  get 'bank_accounts/index'
 
   devise_for :users
   resources :truckloads
   resources :ctes
   resources :clients
   resources :drivers
+  resources :bank_accounts
   root to: 'dashboard#index'
 end
