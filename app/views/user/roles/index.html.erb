@@ -54,7 +54,7 @@
             <tr class="text-center">
               <td><%= role.id %></td>
               <td><%= I18n.t(role.kind_cd, scope: 'activerecord.attributes.user/role.kinds') %></td>
-              <td><%= role.user.person.full_name %></td>
+              <td><%= link_to(role.user.person.full_name, admins_user_path(role.user)) %></td>
               <td><%= role.enterprise.company_name %></td>
               <td><%= l(role.created_at, format: :with_full_hour) %></td>
               <td>

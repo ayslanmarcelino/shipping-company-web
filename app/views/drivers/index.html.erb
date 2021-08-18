@@ -60,7 +60,7 @@
               <td><%= driver.id %></td>
               <td><%= driver.person.full_name %></td>
               <td><%= driver.person.nickname %></td>
-              <td><%= driver.person.document_number %></td>
+              <td><%= format_document_number(driver.person.document_number) %></td>
               <td><%= driver.cnh_record %></td>
               <td><%= driver.cnh_number %></td>
               <td class="text-center">
