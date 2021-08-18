@@ -131,4 +131,16 @@
   .nav-link {
     color: <%= current_user.enterprise.secondary_color %> !important;
   }
+
+  .page-link {
+    margin-top: 20px;
+    color: <%= current_user.enterprise.secondary_color %> !important;
+    background-color: <%= current_user.enterprise.primary_color %> !important;
+    border-color: <%= current_user.enterprise.secondary_color %> !important;
+  }
+
+  .page-item.active .page-link {
+    color: <%= current_user.enterprise.primary_color %> !important;
+    background-color: <%= current_user.enterprise.secondary_color %> !important;
+  }
 </style>

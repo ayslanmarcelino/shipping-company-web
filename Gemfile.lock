@@ -179,6 +179,18 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     json (2.3.0)
+    kaminari (1.2.1)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.1)
+      kaminari-activerecord (= 1.2.1)
+      kaminari-core (= 1.2.1)
+    kaminari-actionview (1.2.1)
+      actionview
+      kaminari-core (= 1.2.1)
+    kaminari-activerecord (1.2.1)
+      activerecord
+      kaminari-core (= 1.2.1)
+    kaminari-core (1.2.1)
     launchy (2.4.3)
       addressable (~> 2.3)
     listen (3.5.1)
@@ -390,6 +402,7 @@ DEPENDENCIES
   ffaker
   fog-aws (~> 3.3.0)
   jbuilder (~> 2.7)
+  kaminari
   listen (~> 3.2)
   mini_magick
   paper_trail
