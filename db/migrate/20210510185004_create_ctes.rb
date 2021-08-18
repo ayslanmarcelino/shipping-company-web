@@ -7,6 +7,7 @@ class CreateCtes < ActiveRecord::Migration[6.0]
       t.string :emitter
       t.string :observation
       t.datetime :emitted_at
+      t.references :client, foreign_key: true
       t.references :enterprise, foreign_key: true
       t.references :truckload, foreign_key: true
       t.references :user, foreign_key: true

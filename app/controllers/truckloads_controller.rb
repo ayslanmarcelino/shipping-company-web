@@ -7,11 +7,15 @@ class TruckloadsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @truckloads = Truckload.includes(:client)
-                           .includes(:cte)
-                           .includes(:driver)
-                           .includes(:user)
-                           .accessible_by(current_ability).order(updated_at: :desc)
+    @q = Truckload.includes(:cte)
+                  .includes(:driver)
+                  .includes([client: :address])
+                  .includes([user: :person])
+                  .accessible_by(current_ability)
+                  .page(params[:page])
+                  .ransack(params[:q])
+
+    @truckloads = @q.result(distinct: false)
   end
 
   def new
@@ -83,7 +87,7 @@ class TruckloadsController < UsersController
 
   def params_truckload
     params.require(:truckload)
-          .permit(:dt_number, :value_driver, :is_agent, :client_id, :user_id, :driver_id)
+          .permit(:dt_number, :value_driver, :is_agent, :user_id, :driver_id)
           .with_defaults(user: current_user, enterprise: current_user.enterprise)
   end
 
@@ -95,20 +99,48 @@ class TruckloadsController < UsersController
         xml = File.read(cte)
         data = Hash.from_xml(xml)
         cte_info = data['cteProc']['CTe']['infCte']
-
+        client_document_number = cte_info['rem']['CNPJ']
         @new_cte = Cte.new
+        client = Client.find_or_initialize_by(document_number: client_document_number)
+
+        if client.new_record?
+          address = client.build_address
+          client_address = cte_info['rem']['enderReme']
+
+          client.company_name = cte_info['rem']['xNome']
+          client.document_number = client_document_number
+          client.state_tax_number = cte_info['rem']['IE']
+          address.city = client_address['xMun']
+          address.city_code = client_address['cMun']
+          address.complement = client_address['xCpl']
+          address.country = client_address['xPais']
+          address.country_code = client_address['cPais']
+          address.neighborhood = client_address['xBairro']
+          address.number = client_address['nro']
+          address.state = client_address['UF']
+          address.street = client_address['xLgr']
+          address.zip_code = client_address['CEP']
+          address.save
+          client.address = address
+          client.enterprise = current_user.enterprise
+          client.save
+        end
+
+        @truckload.client = client
         @new_cte.cte_id = cte_info['Id'] if cte_info['Id'].present?
         @new_cte.emitted_at = cte_info['ide']['dhEmi'].to_datetime if cte_info['ide']['dhEmi'].present?
         @new_cte.cte_number = cte_info['ide']['nCT'] if cte_info['ide']['nCT'].present?
-        @new_cte.value = cte_info['vPrest']['Comp'].first['vComp'].to_f if cte_info['vPrest']['Comp'].first['vComp'].present?
+        @new_cte.value = cte_info['vPrest']['vTPrest'].to_f if cte_info['vPrest']['vTPrest'].present?
         if cte_info['compl'].present?
           @new_cte.emitter = cte_info['compl']['xEmi'] 
           @new_cte.observation = cte_info['compl']['xObs']
         end
+        @new_cte.client = client
         @new_cte.enterprise = current_user.enterprise
         @new_cte.user = current_user
         @new_cte.truckload = @truckload
         @new_cte.save
+        @truckload.save
 
         if @new_cte.errors.present?
           @new_cte.errors.full_messages.each do |message|

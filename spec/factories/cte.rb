@@ -6,6 +6,7 @@ FactoryBot.define do
     observation { 'Emitido por Ayslan, coletado ontem.' }
     cte_number  { Faker::Number.number(digits: 6) }
     value       { Faker::Number.number(digits: 5) }
+    client      { create(:client) }
     truckload   { create(:truckload) }
     user        { create(:user) }
     enterprise  { create(:enterprise) }

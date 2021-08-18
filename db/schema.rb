@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.string "state"
     t.string "street"
     t.string "zip_code"
+    t.string "country_code"
+    t.string "city_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,6 +54,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.string "responsible"
     t.string "telephone_number"
     t.string "observation"
+    t.string "state_tax_number"
     t.boolean "is_active", default: true
     t.bigint "address_id", null: false
     t.bigint "enterprise_id", null: false
@@ -68,11 +71,13 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.string "emitter"
     t.string "observation"
     t.datetime "emitted_at"
+    t.bigint "client_id"
     t.bigint "enterprise_id"
     t.bigint "truckload_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["client_id"], name: "index_ctes_on_client_id"
     t.index ["enterprise_id"], name: "index_ctes_on_enterprise_id"
     t.index ["truckload_id"], name: "index_ctes_on_truckload_id"
     t.index ["user_id"], name: "index_ctes_on_user_id"
@@ -110,8 +115,8 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   end
 
   create_table "truckloads", force: :cascade do |t|
-    t.integer "dt_number", null: false
-    t.float "value_driver", null: false
+    t.integer "dt_number"
+    t.float "value_driver"
     t.boolean "is_agent"
     t.bigint "enterprise_id"
     t.bigint "client_id"
@@ -176,6 +181,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   add_foreign_key "bank_accounts", "user_people", column: "person_id"
   add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "enterprises"
+  add_foreign_key "ctes", "clients"
   add_foreign_key "ctes", "enterprises"
   add_foreign_key "ctes", "truckloads"
   add_foreign_key "ctes", "users"

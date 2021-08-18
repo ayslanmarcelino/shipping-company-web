@@ -2,12 +2,14 @@ pt-BR:
   ctes:
     index:
       list_enterprise: Lista de CT-e da empresa
-      list_user: Lista de CT-e contratadas por
+      list_user: Lista de CT-e cadastrados por
       list: Lista de CT-e
       cte_number: Número do CT-e
       value: Valor
       client: Cliente
       created_at: Criado em
+      emitted_at: Emitido em
+      emitter: Emissor
       created_by: Criado por
       enterprise: Empresa
       linked_truckload: Carga vinculada

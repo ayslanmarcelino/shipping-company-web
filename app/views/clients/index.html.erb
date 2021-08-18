@@ -5,8 +5,7 @@
   <%= search_form_for @q, url: clients_path do |f| %>
     <div class="d-inline-flex col-md-12" style="padding-left: 0;">
       <%= f.text_field :company_name_cont, placeholder: 'Razão social', class: 'form-control col-md-2 mb-2 mr-2' %>
-      <%= f.text_field :fantasy_name_cont, placeholder: 'Nome fantasia', class: 'form-control col-md-2 mb-2 mr-2' %>
-      <%= f.select(:address_state_eq, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control', required: true }) %>
+      <%= f.select(:address_state_eq, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control' }) %>
       <%= f.number_field :document_number_cont, placeholder: 'CPF/CNPJ', class: 'form-control mb-2 col-md-6 mr-2' %>
     </div>
     <hr>
@@ -30,7 +29,6 @@
           <tr class="text-center">
             <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
             <th class="no-sort"><%= sort_link @q, :company_name, t('.company_name') %></th>
-            <th class="no-sort"><%= sort_link @q, :fantasy_name, t('.fantasy_name') %></th>
             <th class="no-sort"><%= sort_link @q, :address_state, t('.address_state') %></th>
             <th class="no-sort"><%= sort_link @q, :address_city, t('.address_city') %></th>
             <th class="no-sort"><%= t('.document_number') %></th>
@@ -50,7 +48,6 @@
             <tr class="text-center">
               <td><%= client.id %></td>
               <td><%= client.company_name %></td>
-              <td><%= client.fantasy_name %></td>
               <td><%= client.address.state %></td>
               <td><%= client.address.city %></td>
               <td><%= client.document_number.to_br_cnpj %></td>

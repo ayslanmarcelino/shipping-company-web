@@ -77,7 +77,7 @@
         country: País
         complement: Complemento
       truckload:
-        client: Cliente
+        client: CT-e
         driver_id: Motorista
         dt_number: Número da DT
         value_driver: Valor pago ao motorista

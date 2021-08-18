@@ -4,8 +4,10 @@
 #
 #  id           :bigint           not null, primary key
 #  city         :string
+#  city_code    :string
 #  complement   :string
 #  country      :string
+#  country_code :string
 #  neighborhood :string
 #  number       :integer
 #  state        :string
@@ -21,7 +23,7 @@ class Address < ApplicationRecord
 
   attr_accessor :validate_address
 
-  validates :zip_code, length: { is: 9 }, if: -> { zip_code.present? }
+  validates :zip_code, length: { is: 8 }, if: -> { zip_code.present? }
   validates :zip_code, :neighborhood, :street, :city, :state, :country, presence: true, if: -> { validate_address || zip_code.present? }
   validate :invalid_zip_code, if: -> { validate_address && errors[:zip_code].blank? }
 
