@@ -106,7 +106,7 @@
               </tr>
               <tr>
                 <th><%= t('.document_number') %></th>
-                <td><%= @driver.person.document_number %></td>
+                <td><%= format_document_number(@driver.person.document_number) %></td>
               </tr>
               <tr>
                 <th><%= t('.rg') %></th>
