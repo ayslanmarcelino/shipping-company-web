@@ -11,7 +11,9 @@ class Admins::UsersController < AdminsController
              .includes(:roles)
              .includes(:person)
              .accessible_by(current_ability)
+             .page(params[:page])
              .ransack(params[:q])
+
     @users = @q.result(distinct: true)
   end
 

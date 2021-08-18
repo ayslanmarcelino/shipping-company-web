@@ -78,3 +78,31 @@ body {
 .custom-switch {
   padding-left: 1rem !important;
 }
+
+.dataTables_wrapper {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid #dee2e6;
+}
+
+.table {
+  thead {
+    th {
+      border-top: none !important;
+    }
+  }
+}
+
+.dataTable {
+  th {
+    border-bottom: none !important;
+  }
+  
+  table.dataTable.no-footer {
+    border-bottom: none !important;
+  }
+}
+
+.sort_link {
+  color: #212529 !important;
+}

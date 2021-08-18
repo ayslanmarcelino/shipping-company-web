@@ -7,7 +7,9 @@ class DriversController < UsersController
     @q = Driver.includes(:enterprise)
                .includes(:person)
                .accessible_by(current_ability)
+               .page(params[:page])
                .ransack(params[:q])
+
     @drivers = @q.result(distinct: false)
   end
 
