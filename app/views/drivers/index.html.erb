@@ -34,16 +34,16 @@
     <div class="col-sm-12">
       <table id="table" class="ui celled table">
         <thead>
-          <tr>
-            <th><%= t('.id')%></th>
-            <th><%= t('.full_name')%></th>
-            <th><%= t('.nickname')%></th>
-            <th><%= t('.document_number')%></th>
-            <th><%= t('.cnh_record')%></th>
-            <th><%= t('.cnh_number')%></th>
-            <th><%= t('.is_blocked')%>?</th>
+          <tr class="text-center">
+            <th class="no-sort"><%= sort_link @q, :id, t('.id')%></th>
+            <th class="no-sort"><%= sort_link @q, :first_name, t('.full_name')%></th>
+            <th class="no-sort"><%= sort_link @q, :nickname, t('.nickname')%></th>
+            <th class="no-sort"><%= t('.document_number')%></th>
+            <th class="no-sort"><%= t('.cnh_record')%></th>
+            <th class="no-sort"><%= t('.cnh_number')%></th>
+            <th class="no-sort"><%= sort_link @q, :is_blocked, t('.is_blocked')%>?</th>
             <% if user_master?(current_user) %>
-              <th><%= t('.enterprise')%></th>
+              <th class="no-sort"><%= t('.enterprise')%></th>
             <% end %>
             <th class="no-sort table-buttons">
               <% if can?(:create, Driver) %>
@@ -55,8 +55,8 @@
           </tr>
         </thead>
         <tbody>
-          <% @drivers.each do |driver| %>
-            <tr>
+          <% @drivers.order(created_at: :desc).each do |driver| %>
+            <tr class="text-center">
               <td><%= driver.id %></td>
               <td><%= driver.person.full_name %></td>
               <td><%= driver.person.nickname %></td>

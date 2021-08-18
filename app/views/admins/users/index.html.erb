@@ -37,17 +37,17 @@
     <div class="col-sm-12">
       <table id="table" class="ui celled table">
         <thead>
-          <tr>
-            <th><%= t('.id')%></th>
-            <th><%= t('.name')%></th>
-            <th><%= t('.nickname')%></th>
-            <th><%= t('.document_number')%></th>
-            <th><%= t('.email')%></th>
-            <th><%= t('.roles')%></th>
+          <tr class="text-center">
+            <th class="no-sort"><%= sort_link @q, :id, t('.id'), default_order: :desc %></th>
+            <th class="no-sort"><%= sort_link @q, :first_name, t('.name') %></th>
+            <th class="no-sort"><%= sort_link @q, :nickname, t('.nickname') %></th>
+            <th class="no-sort"><%= t('.document_number') %></th>
+            <th class="no-sort"><%= t('.email') %></th>
+            <th class="no-sort"><%= t('.roles') %></th>
             <% if user_master?(current_user) %>
-              <th><%= t('.enterprise')%></th>
+              <th class="no-sort"><%= t('.enterprise')%></th>
             <% end %>
-            <th><%= t('.actived')%>?</th>
+            <th class="no-sort"><%= t('.actived')%>?</th>
             <th class="no-sort table-buttons">
               <% if can?(:create, User) %>
                 <%= link_to new_admins_user_path(@user), class: 'btn btn-sm btn-success btn-circle', id: 'create-new-user' do %>
@@ -58,8 +58,8 @@
           </tr>
         </thead>
         <tbody>
-          <% @users.each do |user| %>
-            <tr>
+          <% @users.order(created_at: :desc).each do |user| %>
+            <tr class="text-center">
               <td><%= user.id %></td>
               <td><%= user.person.first_name %> <%= user.person.last_name %></td>
               <td><%= user.person.nickname %></td>

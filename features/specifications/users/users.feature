@@ -32,7 +32,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "owner"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
-    E verificar a quantidade de usuários cadastrados como proprietário
+    E verificar a quantidade de usuários cadastrados no sistema
     E clicar no botão de "delete" usuário
     E retornar o modal com a seguinte mensagem "Você tem certeza que deseja excluir o usuário"
     E clicar em OK
@@ -45,7 +45,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "master"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
-    E verificar a quantidade de usuários cadastrados como master
+    E verificar a quantidade de usuários cadastrados no sistema
     E clicar no botão de "delete" usuário
     E retornar o modal com a seguinte mensagem "Você tem certeza que deseja excluir o usuário"
     E clicar em OK
@@ -78,7 +78,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "owner"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
-    E verificar a quantidade de usuários cadastrados como proprietário
+    E verificar a quantidade de usuários cadastrados no sistema
     E clicar no botão de "show" usuário
     E for redirecionado para a tela de detalhes do usuário
     E clicar no botão de "delete" usuário
@@ -93,7 +93,7 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma
     Dado que realizo login na aplicação como usuário "master"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários
-    E verificar a quantidade de usuários cadastrados como master
+    E verificar a quantidade de usuários cadastrados no sistema
     E clicar no botão de "show" usuário
     E for redirecionado para a tela de detalhes do usuário
     E clicar no botão de "delete" usuário

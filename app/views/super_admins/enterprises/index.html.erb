@@ -6,16 +6,16 @@
     <div class="col-sm-12">
       <table id="table" class="ui celled table">
         <thead>
-          <tr>
-            <th><%= t('.id')%></th>
-            <th><%= t('.company_name')%></th>
-            <th><%= t('.fantasy_name')%></th>
-            <th><%= t('.document_number')%></th>
-            <th><%= t('.email')%></th>
-            <th><%= t('.primary_color')%></th>
-            <th><%= t('.secondary_color')%></th>
-            <th><%= t('.users_count')%></th>
-            <th><%= t('.actived')%></th>
+          <tr class="text-center">
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
+            <th class="no-sort"><%= sort_link @q, :company_name, t('.company_name') %></th>
+            <th class="no-sort"><%= sort_link @q, :fantasy_name, t('.fantasy_name') %></th>
+            <th class="no-sort"><%= t('.document_number') %></th>
+            <th class="no-sort"><%= t('.email') %></th>
+            <th class="no-sort"><%= t('.primary_color') %></th>
+            <th class="no-sort"><%= t('.secondary_color') %></th>
+            <th class="no-sort"><%= t('.users_count') %></th>
+            <th class="no-sort"><%= sort_link @q, :is_active, t('.actived') %></th>
             <th class="no-sort table-buttons">
               <%= link_to new_super_admins_enterprise_path(@enterprise), class: 'btn btn-sm btn-success btn-circle' do %>
                 <i class="fas fa-plus"></i>
@@ -24,8 +24,8 @@
           </tr>
         </thead>
         <tbody>
-          <% @enterprises.each do |enterprise| %>
-            <tr>
+          <% @enterprises.order(created_at: :desc).each do |enterprise| %>
+            <tr class="text-center">
               <td><%= enterprise.id %></td>
               <td><%= enterprise.company_name %></td>
               <td><%= enterprise.fantasy_name %></td>

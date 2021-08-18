@@ -27,15 +27,15 @@
     <div class="col-sm-12">
       <table id="table" class="ui celled table">
         <thead>
-          <tr>
-            <th><%= t('.id') %></th>
-            <th><%= t('.company_name') %></th>
-            <th><%= t('.fantasy_name') %></th>
-            <th><%= t('.address_state') %></th>
-            <th><%= t('.address_city') %></th>
-            <th><%= t('.document_number') %></th>
+          <tr class="text-center">
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
+            <th class="no-sort"><%= sort_link @q, :company_name, t('.company_name') %></th>
+            <th class="no-sort"><%= sort_link @q, :fantasy_name, t('.fantasy_name') %></th>
+            <th class="no-sort"><%= sort_link @q, :address_state, t('.address_state') %></th>
+            <th class="no-sort"><%= sort_link @q, :address_city, t('.address_city') %></th>
+            <th class="no-sort"><%= t('.document_number') %></th>
             <% if user_master?(current_user) %>
-              <th><%= t('.enterprise') %></th>
+              <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
             <th class="no-sort table-buttons">
               <% if can?(:create, Client) %>
@@ -46,8 +46,8 @@
             </th>
           </thead>
           <tbody>
-          <% @clients.each do |client| %>
-            <tr>
+          <% @clients.order(created_at: :desc).each do |client| %>
+            <tr class="text-center">
               <td><%= client.id %></td>
               <td><%= client.company_name %></td>
               <td><%= client.fantasy_name %></td>

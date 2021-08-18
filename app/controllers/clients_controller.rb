@@ -6,8 +6,8 @@ class ClientsController < UsersController
 
   def index
     @q = Client.includes(:address)
+               .includes(:enterprise)
                .accessible_by(current_ability)
-               .order(:company_name)
                .page(params[:page])
                .ransack(params[:q])
 
