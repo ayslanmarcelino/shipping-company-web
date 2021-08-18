@@ -41,6 +41,18 @@
           <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
             <table class="table">
               <tr>
+                <th><%= t('.cte_id') %></th>
+                <td><%= @cte.cte_id %></td>
+              </tr>
+              <tr>
+                <th><%= t('.emitter') %></th>
+                <td><%= @cte.emitter %></td>
+              </tr>
+              <tr>
+                <th><%= t('.emitted_at') %></th>
+                <td><%= l(@cte.emitted_at, format: :with_full_hour)  %></td>
+              </tr>
+              <tr>
                 <th><%= t('.cte_number') %></th>
                 <td><%= @cte.cte_number %></td>
               </tr>
@@ -54,6 +66,10 @@
                 <%= link_to truckload_path(@cte.truckload.id) do %>
                   <%= @cte.truckload.dt_number %></td>
                 <% end %>
+              </tr>
+              <tr>
+                <th><%= t('.observation') %></th>
+                <td><%= @cte.observation %></td>
               </tr>
               <tr>
                 <th><%= t('.created_at') %></th>

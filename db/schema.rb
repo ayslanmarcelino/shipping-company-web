@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   end
 
   create_table "bank_accounts", force: :cascade do |t|
+    t.string "account_name"
     t.string "account_number"
     t.string "account_type_cd"
     t.string "agency"
@@ -63,6 +64,10 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   create_table "ctes", force: :cascade do |t|
     t.integer "cte_number", null: false
     t.float "value", null: false
+    t.string "cte_id"
+    t.string "emitter"
+    t.string "observation"
+    t.datetime "emitted_at"
     t.bigint "enterprise_id"
     t.bigint "truckload_id"
     t.bigint "user_id"

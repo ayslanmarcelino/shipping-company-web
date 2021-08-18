@@ -1,6 +1,7 @@
 class CreateBankAccounts < ActiveRecord::Migration[6.0]
   def change
     create_table :bank_accounts do |t|
+      t.string :account_name
       t.string :account_number
       t.string :account_type_cd
       t.string :agency

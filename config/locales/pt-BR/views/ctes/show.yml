@@ -6,6 +6,10 @@ pt-BR:
       delete: Excluir
       general: Informações gerais
       client: Cliente
+      cte_id: CT-e
+      emitter: Emissor
+      emitted_at: Emitido em
+      observation: Observação
       view: Visualizando o CT-e
       cte_number: Número do CT-e
       value: Valor

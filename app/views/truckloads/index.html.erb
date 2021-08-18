@@ -77,9 +77,13 @@
                     <td><%= t('.no_cte') %></td>
                   <% end %>
                   <td><%= truckload.ctes_numbers.count %></td>
-                  <td><%= truckload.driver.person.full_name %></td>
+                  <td><%= link_to(truckload.driver.person.full_name, driver_path(truckload.driver)) %></td>
                   <% if user_owner?(current_user) || user_master?(current_user) %>
-                    <td><%= truckload.user.person.first_name %> <%= truckload.user.person.last_name %></td>
+                    <td>
+                      <%= link_to(admins_user_path(truckload.user)) do %>
+                        <%= truckload.user.person.first_name %> <%= truckload.user.person.last_name %>
+                      <% end %>
+                    </td>
                   <% end %>
                   <% if user_master?(current_user) %>
                     <td><%= truckload.user.enterprise.company_name %></td>

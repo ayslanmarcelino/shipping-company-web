@@ -4,9 +4,13 @@
 #
 #  id            :bigint           not null, primary key
 #  cte_number    :integer          not null
+#  emitted_at    :datetime
+#  emitter       :string
+#  observation   :string
 #  value         :float            not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  cte_id        :string
 #  enterprise_id :bigint
 #  truckload_id  :bigint
 #  user_id       :bigint
@@ -29,6 +33,7 @@ class Cte < ApplicationRecord
   belongs_to :enterprise
   belongs_to :truckload
   belongs_to :user
+  validates :cte_id, uniqueness: true
   validates :cte_number, uniqueness: { scope: :enterprise_id }
   validates :cte_number,
             :value,

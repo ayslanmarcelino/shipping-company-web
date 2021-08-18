@@ -54,7 +54,7 @@ class Ability
 
     def operational_abilities
       can(:manage, Truckload, user: @user)
-      can(:manage, Cte, user: @user)
+      can([:read, :destroy], Cte, user: @user)
       can(:manage, Client, enterprise: @enterprise)
       can(:update, User, user: @user)
       can(:manage, Driver, enterprise: @enterprise)

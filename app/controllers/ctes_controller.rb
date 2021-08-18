@@ -2,27 +2,11 @@
 
 class CtesController < UsersController
   before_action :set_cte, only: %w[edit update destroy show]
-  before_action :set_user, only: %w[new create edit]
-  before_action :set_truckload, only: %w[new create edit]
+  before_action :set_user, only: %w[edit]
+  before_action :set_truckload, only: %w[edit]
 
   def index
     @ctes = Cte.accessible_by(current_ability).order(created_at: :desc)
-  end
-
-  def new
-    @cte = Cte.new
-  end
-
-  def create
-    @cte = Cte.new(params_cte)
-    @cte.validate_all = true
-
-    if @cte.save
-      redirect_to(ctes_path)
-      flash[:success] = 'CT-e cadastrado com sucesso'
-    else
-      render :new
-    end
   end
 
   def edit; end

@@ -28,13 +28,7 @@
                 <% if user_master?(current_user) %>
                   <th><%= t('.enterprise') %></th>
                 <% end %>
-                <th class="no-sort table-buttons">
-                  <% if can?(:create, Cte) %>
-                    <%= link_to new_cte_path(@cte), class: 'btn btn-sm btn-success btn-circle' do %>
-                      <i class="fas fa-plus"></i>
-                    <% end %>
-                  <% end %>
-                </th>
+                <th class="no-sort"></th>
               </tr>
             </thead>
             <tbody>
@@ -50,7 +44,10 @@
                     <% end %>
                   </td>
                   <% if user_owner?(current_user) || user_master?(current_user) %>
-                    <td><%= cte.user.person.first_name %> <%= cte.user.person.last_name %></td>
+                    <td>
+                      <%= link_to(admins_user_path(cte.user)) do %>
+                        <%= cte.user.person.first_name %> <%= cte.user.person.last_name %></td>
+                    <% end %>
                   <% end %>
                   <% if user_master?(current_user) %>
                     <td><%= cte.user.enterprise.company_name %></td>

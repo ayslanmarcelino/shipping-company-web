@@ -11,3 +11,4 @@ role_disabled_user = FactoryBot.create(:user_role, user: disabled_user, enterpri
 client = FactoryBot.create(:client, enterprise: enterprise_01)
 truckload = FactoryBot.create(:truckload, user: user_operational, enterprise: enterprise_01, client: client)
 cte = FactoryBot.create(:cte, truckload: truckload, user: user_operational, enterprise: enterprise_01)
+driver = FactoryBot.create(:driver, enterprise: enterprise_01)

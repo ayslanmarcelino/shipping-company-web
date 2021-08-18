@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :bank_account do
+    account_name    { 'Ayslan Marcelino'                  }
     account_number  { '2398-2'                            }
     account_type_cd { 'current_account'                   }
     agency          { '0001'                              }
