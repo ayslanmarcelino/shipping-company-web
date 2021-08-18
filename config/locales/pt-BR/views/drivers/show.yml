@@ -17,7 +17,7 @@ pt-BR:
       telephone_number: Celular
       is_employee: É empregado
       is_blocked: Está bloqueado
-      document_number: CPF/CNPJ
+      document_number: CPF
       cnh_expires_at: Data de vencimento
       cnh_record: Registro CNH
       cnh_number: Número CNH

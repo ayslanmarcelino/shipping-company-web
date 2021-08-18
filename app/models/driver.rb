@@ -47,6 +47,7 @@ class Driver < ApplicationRecord
             if: -> { validate_all }
 
   paginates_per 25
+  cpf_column :document_number
 
   def formatted_name
     "#{person.full_name} | #{person.document_number}"

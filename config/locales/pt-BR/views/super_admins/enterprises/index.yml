@@ -6,7 +6,7 @@ pt-BR:
         id: Código
         company_name: Razão social
         fantasy_name: Nome fantasia
-        document_number: CPF/CNPJ
+        document_number: CNPJ
         email: E-mail
         primary_color: Cor primária
         secondary_color: Cor secundária
