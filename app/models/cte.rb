@@ -2,19 +2,20 @@
 #
 # Table name: ctes
 #
-#  id            :bigint           not null, primary key
-#  cte_number    :integer          not null
-#  emitted_at    :datetime
-#  emitter       :string
-#  observation   :string
-#  value         :float            not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  client_id     :bigint
-#  cte_id        :string
-#  enterprise_id :bigint
-#  truckload_id  :bigint
-#  user_id       :bigint
+#  id                    :bigint           not null, primary key
+#  cte_number            :integer          not null
+#  emitted_at            :datetime
+#  emitted_by_enterprise :boolean          default(FALSE)
+#  emitter               :string
+#  observation           :string
+#  value                 :float            not null
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#  client_id             :bigint
+#  cte_id                :string
+#  enterprise_id         :bigint
+#  truckload_id          :bigint
+#  user_id               :bigint
 #
 # Indexes
 #

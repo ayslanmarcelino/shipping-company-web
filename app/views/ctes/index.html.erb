@@ -21,6 +21,14 @@
       <%= f.select(:client_id_eq, clients_collection, { include_blank: 'Selecione o cliente' }, { class: 'select2_single mb-2 col-md-4 mr-2 form-control' }) %>
       <%= f.select(:emitter_eq, emitter_collection, { include_blank: 'Selecione o emissor' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control' }) %>
     </div>
+    <% @ctes.pluck(:emitted_by_enterprise).uniq.each do |emitted_by_enterprise| %>
+      <% if emitted_by_enterprise %>
+        <div>
+          <%= check_box_tag('q[emitted_by_enterprise_in][]', emitted_by_enterprise) %>
+          <%= f.label("Apenas CT-e(s) emitidos pela #{current_user.enterprise.company_name}") %>
+        </div>
+      <% end %>
+    <% end %>
     <hr>
     <div>
       <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
@@ -46,6 +54,7 @@
             <th class="no-sort"><%= sort_link @q, :emitter, t('.emitter') %></th>
             <th class="no-sort"><%= sort_link @q, :created_at, t('.created_at') %></th>
             <th class="no-sort"><%= sort_link @q, :emitted_at, t('.emitted_at') %></th>
+            <th class="no-sort"><%= t('.emitted_by') %>: <%= current_user.enterprise.company_name %></th>
             <th class="no-sort"><%= t('.linked_truckload') %></th>
             <% if user_owner?(current_user) || user_master?(current_user) %>
               <th class="no-sort"><%= t('.created_by') %></th>
@@ -61,10 +70,20 @@
             <tr class="text-center">
               <td><%= cte.cte_number %></td>
               <td><%= number_to_currency(cte.value) %></td>
-              <td><%= cte.client.formatted_name %></td>
+              <td>
+                <%= link_to(client_path(cte.client)) do %> 
+                  <%= cte.client.formatted_name %>
+                <% end %>
+              </td>
               <td><%= cte.emitter %></td>
               <td><%= l(cte.created_at, format: '%d/%m/%Y às %H:%M') %></td>
               <td><%= l(cte.emitted_at, format: '%d/%m/%Y às %H:%M') %></td>
+              <td class="text-center">
+                <span class="badge badge-<%= boolean_color(cte.emitted_by_enterprise) %>">
+                  <%= translate_boolean(cte.emitted_by_enterprise) %>
+                </span>
+              </td>
+              </td>
               <td>
                 <%= link_to truckload_path(cte.truckload.id) do %>
                   <li><%= cte.truckload.dt_number %></li>
@@ -83,11 +102,6 @@
                 <% if can?(:read, Cte) %>
                   <%= link_to cte_path(cte), class: 'btn btn-sm btn-dark' do %>
                     <i class="fas fa-eye"></i>
-                  <% end %>
-                <% end %>
-                <% if can?(:update, Cte) %>
-                  <%= link_to edit_cte_path(cte), class: 'btn btn-sm btn-info btn-circle' do %>
-                    <i class="fas fa-edit"></i>
                   <% end %>
                 <% end %>
                 <% if can?(:destroy, Cte) %>

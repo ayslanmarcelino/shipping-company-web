@@ -101,15 +101,13 @@ class TruckloadsController < UsersController
         cte_info = data['cteProc']['CTe']['infCte']
         client_document_number = cte_info['rem']['CNPJ']
         @new_cte = Cte.new
-        client = Client.find_or_initialize_by(document_number: client_document_number)
+        client = Client.find_or_initialize_by(document_number: client_document_number, enterprise: current_user.enterprise)
+        emitted_enterprise = current_user.enterprise.document_number == cte_info['emit']['CNPJ']
 
         if client.new_record?
           address = client.build_address
           client_address = cte_info['rem']['enderReme']
 
-          client.company_name = cte_info['rem']['xNome']
-          client.document_number = client_document_number
-          client.state_tax_number = cte_info['rem']['IE']
           address.city = client_address['xMun']
           address.city_code = client_address['cMun']
           address.complement = client_address['xCpl']
@@ -123,9 +121,13 @@ class TruckloadsController < UsersController
           address.save
           client.address = address
           client.enterprise = current_user.enterprise
+          client.company_name = cte_info['rem']['xNome']
+          client.document_number = client_document_number
+          client.state_tax_number = cte_info['rem']['IE']
           client.save
         end
 
+        @new_cte.emitted_by_enterprise = emitted_enterprise
         @truckload.client = client
         @new_cte.cte_id = cte_info['Id'] if cte_info['Id'].present?
         @new_cte.emitted_at = cte_info['ide']['dhEmi'].to_datetime if cte_info['ide']['dhEmi'].present?

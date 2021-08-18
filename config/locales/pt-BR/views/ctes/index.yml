@@ -9,6 +9,7 @@ pt-BR:
       client: Cliente
       created_at: Criado em
       emitted_at: Emitido em
+      emitted_by: Emitido por
       emitter: Emissor
       created_by: Criado por
       enterprise: Empresa
