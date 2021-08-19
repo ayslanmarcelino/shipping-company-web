@@ -67,7 +67,7 @@ class User < ApplicationRecord
   end
 
   def full_information
-    "#{person.first_name} #{person.last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
+    "#{person.first_name} #{person.last_name} | #{enterprise.company_name} - #{enterprise.document_number.to_br_cnpj} "
   end
 
   def full_name

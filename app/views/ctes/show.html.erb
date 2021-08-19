@@ -25,12 +25,17 @@
       <div class="col-md-3">
         <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="overview-pill-vertical" href="#overviewPillVertical" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link active" id="general-info" href="#general" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
               <%= t('.general') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" id="emitter-info" href="#emitter" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+              <%= t('.emitter_info') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="client-info" href="#client" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
               <%= t('.client') %>
             </a>
           </li>
@@ -38,8 +43,12 @@
       </div>
       <div class="col-md-9">
         <div class="tab-content" id="cardPillContentVertical">
-          <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
+          <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-info">
             <table class="table">
+              <tr>
+                <th><%= t('.cte_id') %></th>
+                <td><%= @cte.cte_id %></td>
+              </tr>
               <tr>
                 <th><%= t('.cte_number') %></th>
                 <td><%= @cte.cte_number %></td>
@@ -54,6 +63,10 @@
                 <%= link_to truckload_path(@cte.truckload.id) do %>
                   <%= @cte.truckload.dt_number %></td>
                 <% end %>
+              </tr>
+              <tr>
+                <th><%= t('.observation') %></th>
+                <td><%= @cte.observation %></td>
               </tr>
               <tr>
                 <th><%= t('.created_at') %></th>
@@ -77,7 +90,37 @@
               <% end %>
             </table>
           </div>
-          <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
+          <div class="tab-pane fade" id="emitter" role="tabpanel" aria-labelledby="emitter-info">
+            <table class="table">
+              <% if @cte.emitted_by_enterprise %>
+                <tr>
+                  <th><%= t('.emitter') %></th>
+                  <td><%= @cte.emitter %></td>
+                </tr>
+              <% end %>
+              <tr>
+                <th><%= t('.emitted_at') %></th>
+                <td><%= l(@cte.emitted_at, format: :with_full_hour)  %></td>
+              </tr>
+              <tr>
+                <th><%= t('.company_name_emitter') %></th>
+                <td><%= @cte.company_name_emitter %></td>
+              </tr>
+              <tr>
+                <th><%= t('.fantasy_name_emitter') %></th>
+                <td><%= @cte.fantasy_name_emitter %></td>
+              </tr>
+              <tr>
+                <th><%= t('.document_number_emitter') %></th>
+                <td><%= @cte.document_number_emitter.to_br_cnpj %></td>
+              </tr>
+              <tr>
+                <th><%= t('.state_tax_number_emitter') %></th>
+                <td><%= @cte.state_tax_number_emitter %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="tab-pane fade" id="client" role="tabpanel" aria-labelledby="client-info">
             <table class="table">
               <tr>
                 <th><%= t('.client') %></th>

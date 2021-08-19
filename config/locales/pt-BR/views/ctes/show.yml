@@ -6,6 +6,16 @@ pt-BR:
       delete: Excluir
       general: Informações gerais
       client: Cliente
+      cte_id: CT-e
+      emitter_info: Informações de emissão
+      emitter: Emissor
+      emitted_by: Emitido por
+      emitted_at: Emitido em
+      company_name_emitter: Razão social do emissor
+      fantasy_name_emitter: Nome fantasia do emissor
+      document_number_emitter: CNPJ do emissor
+      state_tax_number_emitter: Inscrição estadual do emissor
+      observation: Observação
       view: Visualizando o CT-e
       cte_number: Número do CT-e
       value: Valor
@@ -14,7 +24,7 @@ pt-BR:
       updated_at: Atualizado em
       created_by: Criado por
       enterprise: Empresa
-      document_number: CPF/CNPJ
+      document_number: CNPJ
       address_zip_code: CEP
       address_street: Logradouro
       address_number: Número

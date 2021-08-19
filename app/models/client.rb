@@ -11,6 +11,7 @@
 #  observation      :string
 #  phone_number     :string
 #  responsible      :string
+#  state_tax_number :string
 #  telephone_number :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

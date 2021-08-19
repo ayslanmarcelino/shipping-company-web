@@ -1,6 +1,10 @@
 <div class="nested-fields">
   <div class="">
     <div>
+      <%= f.label(:account_name) %>
+      <%= f.text_field(:account_name, class: 'form-control form-control-user') %>
+    </div>
+    <div>
       <%= f.label(:bank_code) %>
       <%= f.text_field(:bank_code, class: 'form-control form-control-user') %>
     </div>

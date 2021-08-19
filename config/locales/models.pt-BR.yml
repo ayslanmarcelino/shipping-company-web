@@ -77,7 +77,7 @@
         country: País
         complement: Complemento
       truckload:
-        client: Cliente
+        client: CT-e
         driver_id: Motorista
         dt_number: Número da DT
         value_driver: Valor pago ao motorista
@@ -110,6 +110,7 @@
         rg: RG
         rg_issuing_body: Órgão expedidor
       bank_account:
+        account_name: Nome do favorecido
         bank_code: Código do banco
         account_number: Número da conta (com dígito)
         agency: Agência
@@ -129,4 +130,6 @@
           investment_account: Conta Investimento
           joint_account: Conta Conjunta
           payment_account: Conta Pagamento
-        
+      cte:
+        cte_id: CT-e
+        cte_number: Número do CT-e

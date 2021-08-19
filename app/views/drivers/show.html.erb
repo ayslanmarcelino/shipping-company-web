@@ -180,6 +180,10 @@
                     <td><%= format_document_number(bank_account.document_number) %></td>
                   </tr>
                   <tr>
+                    <th><%= t('.bank_account_account_name') %></th>
+                    <td><%= bank_account.account_name %></td>
+                  </tr>
+                  <tr>
                     <th><%= t('.bank_account_pix_key_type') %></th>
                     <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') %></td>
                   </tr>

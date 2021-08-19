@@ -5,7 +5,7 @@ FactoryBot.define do
     neighborhood { Faker::Address.community }
     state        { FFaker::AddressBR.state_abbr }
     city         { FFaker::AddressBR.city }
-    zip_code     { FFaker::AddressBR.zip_code }
+    zip_code     { '57000000' }
     country      { 'Brasil' }
     complement   { Faker::Address.street_address }
 

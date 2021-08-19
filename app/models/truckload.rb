@@ -3,9 +3,9 @@
 # Table name: truckloads
 #
 #  id            :bigint           not null, primary key
-#  dt_number     :integer          not null
+#  dt_number     :integer
 #  is_agent      :boolean
-#  value_driver  :float            not null
+#  value_driver  :float
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  client_id     :bigint
@@ -38,7 +38,6 @@ class Truckload < ApplicationRecord
   validates :dt_number, uniqueness: { scope: :enterprise_id }
   validates :dt_number,
             :value_driver,
-            :client_id,
             :driver_id,
             :enterprise_id,
             :user_id,

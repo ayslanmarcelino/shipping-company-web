@@ -31,6 +31,6 @@ class Enterprise < ApplicationRecord
   paginates_per 25
 
   def formatted_enterprises
-    "#{company_name} | #{document_number}"
+    "#{company_name} | #{document_number.to_br_cnpj}"
   end
 end

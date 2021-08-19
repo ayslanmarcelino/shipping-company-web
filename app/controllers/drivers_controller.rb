@@ -68,8 +68,7 @@ class DriversController < UsersController
 
   def set_driver
     can_view_driver = true if current_user.roles.kind_masters.present? ||
-                              (current_user.roles.kind_owners.present? &&
-                                current_user.enterprise_id == Driver.find(params[:id]).enterprise_id)
+                              current_user.enterprise_id == Driver.find(params[:id]).enterprise_id
     if can_view_driver
       @driver = Driver.find(params[:id])
     else
