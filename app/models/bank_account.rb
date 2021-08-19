@@ -3,6 +3,7 @@
 # Table name: bank_accounts
 #
 #  id              :bigint           not null, primary key
+#  account_name    :string
 #  account_number  :string
 #  account_type_cd :string
 #  agency          :string
@@ -31,9 +32,19 @@ class BankAccount < ApplicationRecord
   as_enum :pix_key_type, KEY_TYPES, map: :string, source: :pix_key_type
   as_enum :account_type, KEY_TYPES, map: :string, source: :account_type
 
-  cpf_column :document_number, presence: false
+  cpf_or_cnpj_column :document_number, presence: false
 
   def self.permitted_attributes
-    [:id, :account_number, :agency, :account_type_cd, :bank_code, :document_number, :pix_key, :pix_key_type_cd, :person_id, :_destroy]
+    [:id,
+     :account_name,
+     :account_number,
+     :agency,
+     :account_type_cd,
+     :bank_code,
+     :document_number,
+     :pix_key,
+     :pix_key_type_cd,
+     :person_id,
+     :_destroy]
   end
 end

@@ -10,6 +10,7 @@ pt-BR:
       delete_confirm: Você deseja excluir o cliente
       company_name: Razão social
       document_number: CPF/CNPJ
+      state_tax_number: Inscrição Estadual
       email: E-mail
       fantasy_name: Nome fantasia
       is_active: Está ativa

@@ -1,8 +1,8 @@
 class CreateTruckloads < ActiveRecord::Migration[6.0]
   def change
     create_table :truckloads do |t|
-      t.integer :dt_number, null: false
-      t.float :value_driver, null: false
+      t.integer :dt_number
+      t.float :value_driver
       t.boolean :is_agent
       t.references :enterprise, foreign_key: true
       t.references :client, foreign_key: true

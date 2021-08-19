@@ -9,6 +9,7 @@ class CreateClients < ActiveRecord::Migration[6.0]
       t.string :responsible
       t.string :telephone_number
       t.string :observation
+      t.string :state_tax_number
       t.boolean :is_active, default: true
       t.references :address, null: false, foreign_key: true
       t.references :enterprise, null: false, foreign_key: true

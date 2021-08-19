@@ -9,7 +9,7 @@ class Ability
     roles = @user.roles
 
     roles.includes(:enterprise).each do |role|
-      PerEnterpriseAbility.new(self, enterprise: role.enterprise, user: @user).compile(role.kind)
+      PerEnterpriseAbility.new(self, enterprise: @user.enterprise, user: @user).compile(role.kind)
     end
   end
 
@@ -54,7 +54,7 @@ class Ability
 
     def operational_abilities
       can(:manage, Truckload, user: @user)
-      can(:manage, Cte, user: @user)
+      can([:read, :destroy], Cte, user: @user)
       can(:manage, Client, enterprise: @enterprise)
       can(:update, User, user: @user)
       can(:manage, Driver, enterprise: @enterprise)
