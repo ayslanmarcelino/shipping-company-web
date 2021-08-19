@@ -1,28 +1,20 @@
 pt-BR:
-  drivers:
+  agents:
     show:
       back: Voltar
       edit: Editar
       delete: Deletar
-      delete_confirm: Você tem certeza que deseja excluir o(a) motorista
-      view: Você está vendo o(a) motorista
+      delete_confirm: Você tem certeza que deseja excluir o(a) agenciador(a)
+      view: Você está vendo o(a) agenciador(a)
       personal: Dados pessoais
       document: Documentos
       address: Endereço
       full_name: Nome completo
       nickname: Apelido
-      email: E-mail
       birth_date: Data de nascimento
       phone_number: Telefone
       telephone_number: Celular
-      is_employee: É empregado
-      is_blocked: Está bloqueado
       document_number: CPF
-      cnh_expires_at: Data de vencimento
-      cnh_record: Registro CNH
-      cnh_number: Número CNH
-      cnh_type: Categoria CNH
-      cnh_issuing_body: Estado expedidor CNH
       rg: RG
       rg_issuing_body: Orgão expedidor RG
       address_zip_code: CEP

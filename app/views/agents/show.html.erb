@@ -30,6 +30,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" id="document-menu" href="#document" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+              <%= t('.document') %>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" id="example-pill-vertical" href="#address" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
               <%= t('.address') %>
             </a>
@@ -66,6 +71,22 @@
               <tr>
                 <th><%= t('.telephone_number') %></th>
                 <td><%= @agent.person.telephone_number %></td>
+              </tr>
+            </table>
+          </div>
+          <div class="tab-pane fade show" id="document" role="tabpanel" aria-labelledby="document-menu">
+            <table class="table">
+              <tr>
+                <th><%= t('.document_number') %></th>
+                <td><%= @agent.person.document_number.to_br_cpf %></td>
+              </tr>
+              <tr>
+                <th><%= t('.rg') %></th>
+                <td><%= @agent.person.rg %></td>
+              </tr>
+              <tr>
+                <th><%= t('.rg_issuing_body') %></th>
+                <td><%= @agent.person.rg_issuing_body %></td>
               </tr>
             </table>
           </div>
@@ -123,20 +144,20 @@
                     <td><%= bank_account.account_number %></td>
                   </tr>
                   <tr>
-                    <th><%= t('.bank_account_account_type') %></th>
-                    <td><%= I18n.t(bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_document_number') %></th>
-                    <td><%= format_document_number(bank_account.document_number) %></td>
-                  </tr>
                   <tr>
                     <th><%= t('.bank_account_account_name') %></th>
                     <td><%= bank_account.account_name %></td>
                   </tr>
+                    <th><%= t('.bank_account_document_number') %></th>
+                    <td><%= format_document_number(bank_account.document_number) %></td>
+                  </tr>
+                  <tr>
+                    <th><%= t('.bank_account_account_type') %></th>
+                    <td><%= I18n.t(bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') if bank_account.account_type_cd.present? %></td>
+                  </tr>
                   <tr>
                     <th><%= t('.bank_account_pix_key_type') %></th>
-                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') %></td>
+                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') if bank_account.pix_key_type_cd.present? %> </td>
                   </tr>
                   <tr>
                     <th><%= t('.bank_account_pix_key') %></th>

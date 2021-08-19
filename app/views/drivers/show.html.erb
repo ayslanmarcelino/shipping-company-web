@@ -172,20 +172,20 @@
                     <td><%= bank_account.account_number %></td>
                   </tr>
                   <tr>
-                    <th><%= t('.bank_account_account_type') %></th>
-                    <td><%= I18n.t(bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') %></td>
+                    <th><%= t('.bank_account_account_name') %></th>
+                    <td><%= bank_account.account_name %></td>
                   </tr>
                   <tr>
                     <th><%= t('.bank_account_document_number') %></th>
                     <td><%= format_document_number(bank_account.document_number) %></td>
                   </tr>
                   <tr>
-                    <th><%= t('.bank_account_account_name') %></th>
-                    <td><%= bank_account.account_name %></td>
+                    <th><%= t('.bank_account_account_type') %></th>
+                    <td><%= I18n.t(bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') if bank_account.account_type_cd.present? %></td>
                   </tr>
                   <tr>
                     <th><%= t('.bank_account_pix_key_type') %></th>
-                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') %></td>
+                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') if bank_account.pix_key_type_cd.present? %></td>
                   </tr>
                   <tr>
                     <th><%= t('.bank_account_pix_key') %></th>

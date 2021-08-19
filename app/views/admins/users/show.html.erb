@@ -77,7 +77,7 @@
             <table class="table">
               <tr>
                 <th><%= t('.document_number') %></th>
-                <td><%= @user.person.document_number %></td>
+                <td><%= @user.person.document_number.to_br_cpf %></td>
               </tr>
               <tr>
                 <th><%= t('.rg') %></th>

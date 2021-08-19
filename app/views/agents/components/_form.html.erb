@@ -3,8 +3,6 @@
 </h5>
 <div class="col-lg-12">
   <%= form.label(:enterprise) %>
-</div>
-<div class="col-lg-12">
   <%= form.collection_select(:enterprise_id, @enterprise, :id, :formatted_enterprises, { include_blank: 'Selecione uma empresa' }, { class: 'select2_single form-control', required: true }) %>
 </div>
 <%= render 'layouts/forms/person_form', person_form: person_form %>

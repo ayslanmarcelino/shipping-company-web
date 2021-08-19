@@ -133,3 +133,5 @@
       cte:
         cte_id: CT-e
         cte_number: Número do CT-e
+      agent:
+        enterprise: Empresa
