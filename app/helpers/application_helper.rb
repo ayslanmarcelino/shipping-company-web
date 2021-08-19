@@ -11,6 +11,10 @@ module ApplicationHelper
     boolean ? 'success' : 'danger'
   end
 
+  def agent_color(boolean)
+    boolean ? 'secondary' : 'success'
+  end
+
   def user_master?(current_user)
     current_user.roles.kind_masters.present?
   end

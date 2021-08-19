@@ -96,52 +96,23 @@ class TruckloadsController < UsersController
 
     if ctes.present?
       params.require(:truckload)[:cte].each do |cte|
-        xml = File.read(cte)
-        data = Hash.from_xml(xml)
-        cte_info = data['cteProc']['CTe']['infCte']
-        client_document_number = cte_info['rem']['CNPJ']
-        @new_cte = Cte.new
-        client = Client.find_or_initialize_by(document_number: client_document_number, enterprise: current_user.enterprise)
-        emitted_enterprise = current_user.enterprise.document_number == cte_info['emit']['CNPJ']
+        xml_cte = File.read(cte)
+        data_xml = Hash.from_xml(xml_cte)
+        @cte_info = data_xml['cteProc']['CTe']['infCte']
+        client_document_number = @cte_info['rem']['CNPJ']
+        @client = Client.find_or_initialize_by(document_number: client_document_number, enterprise: current_user.enterprise)
+        @emitted_enterprise = current_user.enterprise.document_number == @cte_info['emit']['CNPJ']
 
-        if client.new_record?
-          address = client.build_address
-          client_address = cte_info['rem']['enderReme']
-
-          address.city = client_address['xMun']
-          address.city_code = client_address['cMun']
-          address.complement = client_address['xCpl']
-          address.country = client_address['xPais']
-          address.country_code = client_address['cPais']
-          address.neighborhood = client_address['xBairro']
-          address.number = client_address['nro']
-          address.state = client_address['UF']
-          address.street = client_address['xLgr']
-          address.zip_code = client_address['CEP']
-          address.save
-          client.address = address
-          client.enterprise = current_user.enterprise
-          client.company_name = cte_info['rem']['xNome']
-          client.document_number = client_document_number
-          client.state_tax_number = cte_info['rem']['IE']
-          client.save
+        if @client.new_record?
+          @address = @client.build_address
+          @client_address = @cte_info['rem']['enderReme']
+          create_address
+          create_client
         end
 
-        @new_cte.emitted_by_enterprise = emitted_enterprise
-        @truckload.client = client
-        @new_cte.cte_id = cte_info['Id'] if cte_info['Id'].present?
-        @new_cte.emitted_at = cte_info['ide']['dhEmi'].to_datetime if cte_info['ide']['dhEmi'].present?
-        @new_cte.cte_number = cte_info['ide']['nCT'] if cte_info['ide']['nCT'].present?
-        @new_cte.value = cte_info['vPrest']['vTPrest'].to_f if cte_info['vPrest']['vTPrest'].present?
-        if cte_info['compl'].present?
-          @new_cte.emitter = cte_info['compl']['xEmi'] 
-          @new_cte.observation = cte_info['compl']['xObs']
-        end
-        @new_cte.client = client
-        @new_cte.enterprise = current_user.enterprise
-        @new_cte.user = current_user
-        @new_cte.truckload = @truckload
-        @new_cte.save
+        create_new_cte
+
+        @truckload.client = @client
         @truckload.save
 
         if @new_cte.errors.present?
@@ -151,5 +122,50 @@ class TruckloadsController < UsersController
         end
       end
     end
+  end
+
+  def create_address
+    @address.city = @client_address['xMun']
+    @address.city_code = @client_address['cMun']
+    @address.complement = @client_address['xCpl']
+    @address.country = @client_address['xPais']
+    @address.country_code = @client_address['cPais']
+    @address.neighborhood = @client_address['xBairro']
+    @address.number = @client_address['nro']
+    @address.state = @client_address['UF']
+    @address.street = @client_address['xLgr']
+    @address.zip_code = @client_address['CEP']
+    @address.save
+  end
+
+  def create_client
+    @client.address = @address
+    @client.enterprise = current_user.enterprise
+    @client.company_name = @cte_info['rem']['xNome']
+    @client.document_number = client_document_number
+    @client.state_tax_number = @cte_info['rem']['IE']
+    @client.save
+  end
+
+  def create_new_cte
+    @new_cte = Cte.new
+    @new_cte.emitted_by_enterprise = @emitted_enterprise
+    @new_cte.cte_id = @cte_info['Id'] if @cte_info['Id'].present?
+    @new_cte.company_name_emitter = @cte_info['emit']['xNome']
+    @new_cte.fantasy_name_emitter = @cte_info['emit']['xFant']
+    @new_cte.document_number_emitter = @cte_info['emit']['CNPJ']
+    @new_cte.state_tax_number_emitter = @cte_info['emit']['IE']
+    @new_cte.emitted_at = @cte_info['ide']['dhEmi'].to_datetime if @cte_info['ide']['dhEmi'].present?
+    @new_cte.cte_number = @cte_info['ide']['nCT'] if @cte_info['ide']['nCT'].present?
+    @new_cte.value = @cte_info['vPrest']['vTPrest'].to_f if @cte_info['vPrest']['vTPrest'].present?
+    if @cte_info['compl'].present?
+      @new_cte.emitter = @cte_info['compl']['xEmi'] if @emitted_enterprise
+      @new_cte.observation = @cte_info['compl']['xObs']
+    end
+    @new_cte.client = @client
+    @new_cte.enterprise = current_user.enterprise
+    @new_cte.user = current_user
+    @new_cte.truckload = @truckload
+    @new_cte.save
   end
 end

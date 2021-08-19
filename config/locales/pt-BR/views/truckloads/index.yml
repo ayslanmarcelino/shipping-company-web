@@ -7,6 +7,7 @@ pt-BR:
       dt_number: Número DT
       client: Cliente
       value: Valor da carga
+      value_driver: Valor do motorista
       is_agent: Contratado por agenciador
       cte: CT-e(s) vinculado
       qtd_cte: Qtd. CT-e(s)

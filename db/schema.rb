@@ -71,6 +71,10 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.string "emitter"
     t.string "observation"
     t.boolean "emitted_by_enterprise", default: false
+    t.string "company_name_emitter"
+    t.string "fantasy_name_emitter"
+    t.string "document_number_emitter"
+    t.string "state_tax_number_emitter"
     t.datetime "emitted_at"
     t.bigint "client_id"
     t.bigint "enterprise_id"

@@ -38,7 +38,8 @@
           <tr class="text-center">
             <th class="no-sort"><%= sort_link @q, :dt_number, t('.dt_number') %></th>
             <th class="no-sort"><%= t('.client') %></th>
-            <th class="no-sort"><%= sort_link @q, :value, t('.value') %></th>
+            <th class="no-sort"><%= t('.value') %></th>
+            <th class="no-sort"><%= t('.value_driver') %></th>
             <th class="no-sort"><%= sort_link @q, :is_agent, t('.is_agent') %>?</th>
             <th class="no-sort"><%= sort_link @q, :created_at, t('.created_at') %></th>
             <th class="no-sort"><%= t('.cte') %></th>
@@ -59,7 +60,7 @@
             </th>
         </thead>
         <tbody>
-          <% @truckloads.each do |truckload| %>
+          <% @truckloads.order(created_at: :desc).each do |truckload| %>
             <tr class="text-center">
               <td><%= truckload.dt_number %></td>
               <td>
@@ -68,7 +69,12 @@
                 <% end %>
               </td>
               <td><%= number_to_currency(truckload.truckload_value) %></td>
-              <td><%= is_agent(truckload.is_agent) %></td>
+              <td><%= number_to_currency(truckload.value_driver) %></td>
+              <td class="text-center">
+                <span class="badge badge-<%= agent_color(truckload.is_agent) %>">
+                  <%= translate_boolean(truckload.is_agent) %>
+                </span>
+              </td>
               <td><%= l(truckload.created_at, format: '%d/%m/%Y às %H:%M') %></td>
               <% if truckload.cte.present? %>
                 <td>

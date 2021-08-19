@@ -7,6 +7,10 @@ class CreateCtes < ActiveRecord::Migration[6.0]
       t.string :emitter
       t.string :observation
       t.boolean :emitted_by_enterprise, default: false
+      t.string :company_name_emitter
+      t.string :fantasy_name_emitter
+      t.string :document_number_emitter
+      t.string :state_tax_number_emitter
       t.datetime :emitted_at
       t.references :client, foreign_key: true
       t.references :enterprise, foreign_key: true

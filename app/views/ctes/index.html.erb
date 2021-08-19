@@ -54,7 +54,7 @@
             <th class="no-sort"><%= sort_link @q, :emitter, t('.emitter') %></th>
             <th class="no-sort"><%= sort_link @q, :created_at, t('.created_at') %></th>
             <th class="no-sort"><%= sort_link @q, :emitted_at, t('.emitted_at') %></th>
-            <th class="no-sort"><%= t('.emitted_by') %>: <%= current_user.enterprise.company_name %></th>
+            <th class="no-sort"><%= t('.emitted_by') %>?</th>
             <th class="no-sort"><%= t('.linked_truckload') %></th>
             <% if user_owner?(current_user) || user_master?(current_user) %>
               <th class="no-sort"><%= t('.created_by') %></th>
