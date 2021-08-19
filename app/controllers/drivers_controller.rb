@@ -51,7 +51,9 @@ class DriversController < UsersController
   end
 
   def destroy
-    if @driver.destroy && @driver.person.destroy
+    bank_accounts = BankAccount.where(person: @driver.person)
+
+    if @driver.destroy && bank_accounts.destroy_all && @driver.person.destroy
       redirect_to drivers_path
       flash[:success] = 'Motorista excluído com sucesso.'
     else

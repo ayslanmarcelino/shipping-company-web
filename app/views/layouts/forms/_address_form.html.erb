@@ -1,0 +1,32 @@
+<div class="col-lg-12">
+  <%= address_form.label(:zip_code) %>
+  <%= address_form.text_field(:zip_code, class: 'form-control form-control-user input--zip-code') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:street) %>
+  <%= address_form.text_field(:street, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:number) %>
+  <%= address_form.number_field(:number, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:complement) %>
+  <%= address_form.text_field(:complement, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:neighborhood) %>
+  <%= address_form.text_field(:neighborhood, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:city) %>
+  <%= address_form.text_field(:city, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:state) %>
+  <%= address_form.select(:state, Address::STATES, { include_blank: 'Selecione um estado' }, { class: 'select2_single form-control' }) %>
+</div>
+<div class="col-lg-12">
+  <%= address_form.label(:country) %>
+  <%= address_form.select(:country, Address::COUNTRIES, { include_blank: 'Selecione um país' }, { class: 'select2_single form-control' }) %>
+</div>

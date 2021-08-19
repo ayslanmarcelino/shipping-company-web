@@ -6,12 +6,6 @@
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
-  <% if can?(:update, Cte) %>
-    <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
-      <i class="fas fa-edit"></i>
-      <%= t('.edit') %>
-    <% end %>
-  <% end %>
   <% if can?(:destroy, Cte) %>
     <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
       <i class="fas fa-trash"></i>
@@ -112,7 +106,7 @@
               </tr>
               <tr>
                 <th><%= t('.document_number_emitter') %></th>
-                <td><%= @cte.document_number_emitter.to_br_cnpj %></td>
+                <td><%= @cte.document_number_emitter&.to_br_cnpj %></td>
               </tr>
               <tr>
                 <th><%= t('.state_tax_number_emitter') %></th>

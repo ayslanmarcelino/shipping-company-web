@@ -1,0 +1,36 @@
+<div class="col-lg-12">
+  <%= person_form.label('Primeiro nome') %>
+  <%= person_form.text_field(:first_name, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.label('Último nome') %>
+  <%= person_form.text_field(:last_name, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.label('Apelido') %>
+  <%= person_form.text_field(:nickname, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.label('Data de nascimento') %>
+  <%= person_form.date_field(:birth_date, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.label('Telefone') %>
+  <%= person_form.text_field(:phone_number, class: 'form-control form-control-user input--phone-number') %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.label('Celular') %>
+  <%= person_form.text_field(:telephone_number, class: 'form-control form-control-user input--telephone-number') %>
+</div>
+<div class="col-lg-12 uppercase">
+  <%= person_form.label('CPF') %>
+  <%= person_form.text_field(:document_number, class: 'form-control form-control-user input--cpf') %>
+</div>
+<div class="col-lg-12 uppercase">
+  <%= person_form.label('RG') %>
+  <%= person_form.number_field(:rg, class: 'form-control form-control-user') %>
+</div>
+<div class="col-lg-12">
+  <%= person_form.label('Órgão expedidor') %>
+  <%= person_form.text_field(:rg_issuing_body, class: 'form-control form-control-user') %>
+</div>

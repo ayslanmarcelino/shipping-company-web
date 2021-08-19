@@ -1,0 +1,8 @@
+<div class="col-lg-12">
+  <%= person_form.simple_fields_for(:bank_accounts) do |bank_account| %>
+    <%= render 'bank_account_fields', f: bank_account %>
+  <% end %>
+  <div class="mt-5 text-center">
+    <%= link_to_add_association 'Adicionar conta bancária', person_form, :bank_accounts, class: 'btn btn-success btn-cocoon-success' %>
+  </div>
+</div>
