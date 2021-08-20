@@ -64,8 +64,10 @@
             <tr class="text-center">
               <td><%= truckload.dt_number %></td>
               <td>
-                <%= link_to(client_path(truckload.client)) do %>
-                  <%= truckload.client.company_name %> - <%= truckload.client.address.state %> | <%= truckload.client.document_number.to_br_cnpj %>
+                <% if truckload.client.present? %>
+                  <%= link_to(client_path(truckload.client)) do %>
+                    <%= truckload.client.company_name %> - <%= truckload.client.address.state %> | <%= truckload.client.document_number.to_br_cnpj %>
+                  <% end %>
                 <% end %>
               </td>
               <td><%= number_to_currency(truckload.truckload_value) %></td>
@@ -76,7 +78,7 @@
                 </span>
               </td>
               <td><%= l(truckload.created_at, format: '%d/%m/%Y às %H:%M') %></td>
-              <% if truckload.cte.present? %>
+              <% if truckload.ctes.present? %>
                 <td>
                   <a href="#" data-toggle="modal" data-target="#truckload-<%= truckload.id %>">
                     <%= t('.view_cte') %>
@@ -89,7 +91,7 @@
                           <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                        <% truckload.cte.each do |cte| %>
+                        <% truckload.ctes.each do |cte| %>
                           <%= link_to cte_path(cte.id) do %>
                             <li><%= cte.cte_number %> - <%= number_to_currency(cte.value) %></li>
                           <% end %>

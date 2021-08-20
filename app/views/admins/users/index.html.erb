@@ -5,6 +5,7 @@
   <%= search_form_for @q, url: admins_users_path do |f| %>
     <div class="d-inline-flex col-md-12" style="padding-left: 0;">
       <%= f.text_field :person_first_name_cont, placeholder: 'Primeiro Nome', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.text_field :person_nickname_cont, placeholder: 'Apelido', class: 'form-control mb-2 col-md-2 mr-2' %>
       <%= f.text_field :email_cont, placeholder: 'E-mail', class: 'form-control mb-2 col-md-4 mr-2' %>
       <%= f.number_field :person_document_number_cont, placeholder: 'CPF/CNPJ', class: 'form-control mb-2 col-md-2 mr-2' %>
     </div>

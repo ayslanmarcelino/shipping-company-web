@@ -6,8 +6,15 @@ module UsersHelper
   end
 
   def users_collection
-    User.pluck(:email, :id)
-        .compact
-        .sort
+    if current_user.roles.kind_masters.present?
+      User.pluck(:email, :id)
+          .compact
+          .sort
+    else
+      User.where(enterprise: current_user.enterprise)
+          .pluck(:email, :id)
+          .compact
+          .sort
+    end
   end
 end

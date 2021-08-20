@@ -97,6 +97,19 @@
     </div>
   <% end %>
 <% end %>
+<% if can?(:read, Agent) %>
+  <%= link_to agents_index_path, class: "#{'active-menu' if request.path.include?(agents_path)} list-item-menu list-group-item-action",
+                                  style: "color: #{current_user.enterprise.secondary_color};
+                                          background-color: #{current_user.enterprise.primary_color}",
+                                  id: 'agents' do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-user-secret"></i>
+      </div>
+      <span><%= t('layouts.application.agents') %></span>
+    </div>
+  <% end %>
+<% end %>
 <% if can?(:read, Enterprise) %>
   <%= link_to super_admins_enterprises_index_path, class: "#{'active-menu' if request.path.include?(super_admins_enterprises_path)} list-item-menu list-group-item-action",
                                                    style: "color: #{current_user.enterprise.secondary_color};

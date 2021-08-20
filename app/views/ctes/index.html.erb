@@ -66,7 +66,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @ctes.order(created_at: :asc).each do |cte| %>
+          <% @ctes.order(created_at: :desc).each do |cte| %>
             <tr class="text-center">
               <td><%= cte.cte_number %></td>
               <td><%= number_to_currency(cte.value) %></td>

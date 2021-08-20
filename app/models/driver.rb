@@ -49,6 +49,6 @@ class Driver < ApplicationRecord
   paginates_per 25
 
   def formatted_name
-    "#{person.full_name} | #{person.document_number}"
+    "#{person.full_name} | #{person.document_number.to_br_cpf}"
   end
 end

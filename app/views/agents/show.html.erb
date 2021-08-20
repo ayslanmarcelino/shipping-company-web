@@ -1,19 +1,19 @@
 <div class="col-xs-12 text-center">
-  <h4><%= t('.view') %>: <%= @driver.person.full_name %></h4>
+  <h4><%= t('.view') %>: <%= @agent.person.full_name %></h4>
 </div>
 <div class="col-xs-12 mb-2">
   <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm  btn-user' do %>
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
-  <% if can?(:update, Driver) %>
-    <%= link_to edit_driver_path(@driver), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
+  <% if can?(:update, Agent) %>
+    <%= link_to edit_agent_path(@agent), class: 'col-xs-3 btn btn-info btn-sm' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
   <% end %>
-  <% if can?(:destroy, Driver) %>
-    <%= link_to driver_path(@driver), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@driver.person.first_name} #{@driver.person.last_name}?" } do %>
+  <% if can?(:destroy, Agent) %>
+    <%= link_to agent_path(@agent), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@agent.person.first_name} #{@agent.person.last_name}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="overview-pill-vertical" href="#document" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link" id="document-menu" href="#document" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
               <%= t('.document') %>
             </a>
           </li>
@@ -52,69 +52,41 @@
             <table class="table">
               <tr>
                 <th><%= t('.full_name') %></th>
-                <td><%= @driver.person.full_name %></td>
+                <td><%= @agent.person.full_name %></td>
               </tr>
               <tr>
                 <th><%= t('.nickname') %></th>
-                <td><%= @driver.person.nickname %></td>
+                <td><%= @agent.person.nickname %></td>
               </tr>
-              <% if @driver.person.birth_date.present? %>
+              <% if @agent.person.birth_date.present? %>
                 <tr>
                   <th><%= t('.birth_date') %></th>
-                  <td><%= l(@driver.person.birth_date, format: :date) %></td>
+                  <td><%= l(@agent.person.birth_date, format: :date) %></td>
                 </tr>
               <% end %>
               <tr>
                 <th><%= t('.phone_number') %></th>
-                <td><%= @driver.person.phone_number %></td>
+                <td><%= @agent.person.phone_number %></td>
               </tr>
               <tr>
                 <th><%= t('.telephone_number') %></th>
-                <td><%= @driver.person.telephone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.is_employee') %>?</th>
-                <td><%= translate_boolean(@driver.is_employee) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.is_blocked') %>?</th>
-                <td><%= translate_boolean(@driver.is_blocked) %></td>
+                <td><%= @agent.person.telephone_number %></td>
               </tr>
             </table>
           </div>
-          <div class="tab-pane fade show" id="document" role="tabpanel" aria-labelledby="overview-pill-vertical">
+          <div class="tab-pane fade show" id="document" role="tabpanel" aria-labelledby="document-menu">
             <table class="table">
               <tr>
-                <th><%= t('.cnh_record') %></th>
-                <td><%= @driver.cnh_record %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_number') %></th>
-                <td><%= @driver.cnh_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_type') %></th>
-                <td><%= @driver.cnh_type %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_issuing_body') %></th>
-                <td><%= @driver.cnh_issuing_body %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_expires_at') %></th>
-                <td><%= l(@driver.cnh_expires_at.to_datetime, format: :date) %></td>
-              </tr>
-              <tr>
                 <th><%= t('.document_number') %></th>
-                <td><%= format_document_number(@driver.person.document_number) %></td>
+                <td><%= @agent.person.document_number.to_br_cpf %></td>
               </tr>
               <tr>
                 <th><%= t('.rg') %></th>
-                <td><%= @driver.person.rg %></td>
+                <td><%= @agent.person.rg %></td>
               </tr>
               <tr>
                 <th><%= t('.rg_issuing_body') %></th>
-                <td><%= @driver.person.rg_issuing_body %></td>
+                <td><%= @agent.person.rg_issuing_body %></td>
               </tr>
             </table>
           </div>
@@ -122,41 +94,41 @@
             <table class="table">
               <tr>
                 <th><%= t('.address_zip_code') %></th>
-                <td><%= @driver.person.address.zip_code %></td>
+                <td><%= @agent.person.address.zip_code %></td>
               </tr>
               <tr>
                 <th><%= t('.address_street') %></th>
-                <td><%= @driver.person.address.street %></td>
+                <td><%= @agent.person.address.street %></td>
               </tr>
               <tr>
                 <th><%= t('.address_number') %></th>
-                <td><%= @driver.person.address.number %></td>
+                <td><%= @agent.person.address.number %></td>
               </tr>
               <tr>
                 <th><%= t('.address_complement') %></th>
-                <td><%= @driver.person.address.complement %></td>
+                <td><%= @agent.person.address.complement %></td>
               </tr>
               <tr>
                 <th><%= t('.address_neighborhood') %></th>
-                <td><%= @driver.person.address.neighborhood %></td>
+                <td><%= @agent.person.address.neighborhood %></td>
               </tr>
               <tr>
                 <th><%= t('.address_city') %></th>
-                <td><%= @driver.person.address.city %></td>
+                <td><%= @agent.person.address.city %></td>
               </tr>
               <tr>
                 <th><%= t('.address_state') %></th>
-                <td><%= @driver.person.address.state %></td>
+                <td><%= @agent.person.address.state %></td>
               </tr>
               <tr>
                 <th><%= t('.address_country') %></th>
-                <td><%= @driver.person.address.country %></td>
+                <td><%= @agent.person.address.country %></td>
               </tr>
             </table>
           </div>
           <div class="tab-pane fade" id="bank_accounts" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <% if @driver.person.bank_accounts.present? %>
-              <% @driver.person.bank_accounts.each_with_index do |bank_account, index| %>
+            <% if @agent.person.bank_accounts.present? %>
+              <% @agent.person.bank_accounts.each_with_index do |bank_account, index| %>
                 <h4>Conta bancária #<%= index + 1 %></h4>
                 <table class="table">
                   <tr>
@@ -172,10 +144,10 @@
                     <td><%= bank_account.account_number %></td>
                   </tr>
                   <tr>
+                  <tr>
                     <th><%= t('.bank_account_account_name') %></th>
                     <td><%= bank_account.account_name %></td>
                   </tr>
-                  <tr>
                     <th><%= t('.bank_account_document_number') %></th>
                     <td><%= format_document_number(bank_account.document_number) %></td>
                   </tr>
@@ -185,7 +157,7 @@
                   </tr>
                   <tr>
                     <th><%= t('.bank_account_pix_key_type') %></th>
-                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') if bank_account.pix_key_type_cd.present? %></td>
+                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') if bank_account.pix_key_type_cd.present? %> </td>
                   </tr>
                   <tr>
                     <th><%= t('.bank_account_pix_key') %></th>
