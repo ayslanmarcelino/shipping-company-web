@@ -29,11 +29,13 @@
               <%= t('.general') %>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
-              <%= t('.client') %>
-            </a>
-          </li>
+          <% if @truckload.client.present? %>
+            <li class="nav-item">
+              <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+                <%= t('.client') %>
+              </a>
+            </li>
+          <% end %>
           <li class="nav-item">
             <a class="nav-link" id="example-pill-vertical" href="#driver" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
               <%= t('.driver') %>
@@ -57,6 +59,12 @@
                 <th><%= t('.is_agent') %>?</th>
                 <td><%= translate_boolean(@truckload.is_agent) %></td>
               </tr>
+              <% if @truckload.agent.present? %>
+                <tr>
+                  <th><%= t('.agent_name') %></th>
+                  <td><%= link_to(@truckload.agent.full_name, agent_path(@truckload.agent)) %></td>
+                </tr>
+              <% end %>
               <tr>
                 <% if @truckload.ctes_numbers.count > 1 %>
                   <th><%= t('.cte_number.other') %></th>
@@ -64,7 +72,7 @@
                   <th><%= t('.cte_number.one') %></th>
                 <% end %>
                 <td>
-                <% @truckload.cte.each do |cte| %>
+                <% @truckload.ctes.each do |cte| %>
                   <%= link_to cte_path(cte.id) do %>
                     <li><%= cte.cte_number %> - <%= number_to_currency(cte.value) %></li>
                   <% end %>
@@ -92,50 +100,52 @@
               <% end %>
             </table>
           </div>
-          <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.client') %></th>
-                <td><%= @truckload.client.company_name %></td>
-              </tr>
-              <tr>
-                <th><%= t('.document_number') %></th>
-                <td><%= @truckload.client.document_number.to_br_cnpj %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_zip_code') %></th>
-                <td><%= @truckload.client.address.zip_code %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_street') %></th>
-                <td><%= @truckload.client.address.street %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_number') %></th>
-                <td><%= @truckload.client.address.number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_complement') %></th>
-                <td><%= @truckload.client.address.complement %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_neighborhood') %></th>
-                <td><%= @truckload.client.address.neighborhood %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_city') %></th>
-                <td><%= @truckload.client.address.city %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_state') %></th>
-                <td><%= @truckload.client.address.state %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_country') %></th>
-                <td><%= @truckload.client.address.country %></td>
-              </tr>
-            </table>
-          </div>
+          <% if @truckload.client.present? %>
+            <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
+              <table class="table">
+                <tr>
+                  <th><%= t('.client') %></th>
+                  <td><%= @truckload.client.company_name %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.document_number') %></th>
+                  <td><%= @truckload.client.document_number.to_br_cnpj %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_zip_code') %></th>
+                  <td><%= @truckload.client.address.zip_code %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_street') %></th>
+                  <td><%= @truckload.client.address.street %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_number') %></th>
+                  <td><%= @truckload.client.address.number %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_complement') %></th>
+                  <td><%= @truckload.client.address.complement %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_neighborhood') %></th>
+                  <td><%= @truckload.client.address.neighborhood %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_city') %></th>
+                  <td><%= @truckload.client.address.city %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_state') %></th>
+                  <td><%= @truckload.client.address.state %></td>
+                </tr>
+                <tr>
+                  <th><%= t('.address_country') %></th>
+                  <td><%= @truckload.client.address.country %></td>
+                </tr>
+              </table>
+            </div>
+          <% end %>
           <div class="tab-pane fade" id="driver" role="tabpanel" aria-labelledby="example-pill-vertical">
             <h5 class="text-divider">
               <span><%= t('drivers.show.personal') %></span>
@@ -143,7 +153,7 @@
             <table class="table">
               <tr>
                 <th><%= t('drivers.show.full_name') %></th>
-                <td><%= @truckload.driver.person.full_name %></td>
+                <td><%= link_to(@truckload.driver.person.full_name, driver_path(@truckload.driver)) %></td>
               </tr>
               <% if @truckload.driver.person.birth_date.present? %>
                 <tr>

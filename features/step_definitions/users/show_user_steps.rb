@@ -18,7 +18,7 @@ Então('o sistema deve retornar todos os dados do usuário') do
 
   @show_user_page.click_nav_document
   @show_user_page.nav_document?
-  expect(page).to have_content(user.person.document_number)
+  expect(page).to have_content(user.person.document_number.to_br_cpf)
   expect(page).to have_content(user.person.rg)
   expect(page).to have_content(user.person.rg_issuing_body)
 

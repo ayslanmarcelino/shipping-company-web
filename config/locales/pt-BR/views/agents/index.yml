@@ -1,0 +1,9 @@
+pt-BR:
+  agents:
+    index:
+      registered: Agenciadores cadastrados
+      id: Código
+      full_name: Nome completo
+      nickname: Apelido
+      document_number: CPF
+      delete_confirm: Você tem certeza que deseja excluir o(a) agenciador

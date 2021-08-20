@@ -30,6 +30,15 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "agents", force: :cascade do |t|
+    t.bigint "enterprise_id"
+    t.bigint "person_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enterprise_id"], name: "index_agents_on_enterprise_id"
+    t.index ["person_id"], name: "index_agents_on_person_id"
+  end
+
   create_table "bank_accounts", force: :cascade do |t|
     t.string "account_name"
     t.string "account_number"
@@ -122,13 +131,15 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   create_table "truckloads", force: :cascade do |t|
     t.integer "dt_number"
     t.float "value_driver"
-    t.boolean "is_agent"
+    t.boolean "is_agent", default: false
     t.bigint "enterprise_id"
     t.bigint "client_id"
     t.bigint "user_id"
     t.bigint "driver_id"
+    t.bigint "agent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["agent_id"], name: "index_truckloads_on_agent_id"
     t.index ["client_id"], name: "index_truckloads_on_client_id"
     t.index ["driver_id"], name: "index_truckloads_on_driver_id"
     t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"
@@ -183,6 +194,8 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "agents", "enterprises"
+  add_foreign_key "agents", "user_people", column: "person_id"
   add_foreign_key "bank_accounts", "user_people", column: "person_id"
   add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "enterprises"
@@ -192,6 +205,7 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   add_foreign_key "ctes", "users"
   add_foreign_key "drivers", "enterprises"
   add_foreign_key "drivers", "user_people", column: "person_id"
+  add_foreign_key "truckloads", "agents"
   add_foreign_key "truckloads", "clients"
   add_foreign_key "truckloads", "drivers"
   add_foreign_key "truckloads", "enterprises"

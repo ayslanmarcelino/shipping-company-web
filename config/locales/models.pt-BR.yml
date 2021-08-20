@@ -77,12 +77,13 @@
         country: País
         complement: Complemento
       truckload:
-        client: CT-e
+        client: Cliente
         driver_id: Motorista
         dt_number: Número da DT
         value_driver: Valor pago ao motorista
         client_id: Cliente
         is_agent: Contratado por agenciador
+        agent_id: Agenciador
       user/role:
         kind_cd: Regra
         enterprise_id: Empresa
@@ -133,3 +134,5 @@
       cte:
         cte_id: CT-e
         cte_number: Número do CT-e
+      agent:
+        enterprise: Empresa

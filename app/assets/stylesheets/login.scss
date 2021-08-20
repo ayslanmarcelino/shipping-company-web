@@ -79,7 +79,7 @@ body {
   padding-left: 1rem !important;
 }
 
-.dataTables_wrapper {
+table {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: 1px solid #dee2e6;
@@ -105,4 +105,19 @@ body {
 
 .sort_link {
   color: #212529 !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.bank-account-fields {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  margin-bottom: 10px;
+}
+
+.dataTables_wrapper {
+  padding-right: 2px;
 }

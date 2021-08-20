@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :cte do
-    cte_id      { 'CTe27210409495109000111570010000163961734797101' }
+    cte_id      { "CTe#{Faker::Number.number(digits: 44)}" }
     emitter     { 'Ayslan' }
     emitted_at  { Time.zone.now }
     observation { 'Emitido por Ayslan, coletado ontem.' }

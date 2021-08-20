@@ -4,10 +4,11 @@ class TruckloadsController < UsersController
   before_action :set_truckload, only: %w[edit update destroy show]
   before_action :set_client, only: %w[new create edit update]
   before_action :set_driver, only: %w[new create edit update]
+  before_action :set_agent, only: %w[new create edit update]
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @q = Truckload.includes(:cte)
+    @q = Truckload.includes(:ctes)
                   .includes(:driver)
                   .includes([client: :address])
                   .includes([user: :person])
@@ -85,9 +86,13 @@ class TruckloadsController < UsersController
     @drivers = Driver.where(enterprise_id: current_user.enterprise.id, is_blocked: false)
   end
 
+  def set_agent
+    @agents = Agent.where(enterprise_id: current_user.enterprise.id)
+  end
+
   def params_truckload
     params.require(:truckload)
-          .permit(:dt_number, :value_driver, :is_agent, :user_id, :driver_id)
+          .permit(:dt_number, :value_driver, :is_agent, :user_id, :driver_id, :agent_id)
           .with_defaults(user: current_user, enterprise: current_user.enterprise)
   end
 
@@ -95,12 +100,12 @@ class TruckloadsController < UsersController
     ctes = params.require(:truckload)[:cte]
 
     if ctes.present?
-      params.require(:truckload)[:cte].each do |cte|
+      params.require(:truckload)[:cte].reverse.each do |cte|
         xml_cte = File.read(cte)
         data_xml = Hash.from_xml(xml_cte)
         @cte_info = data_xml['cteProc']['CTe']['infCte']
-        client_document_number = @cte_info['rem']['CNPJ']
-        @client = Client.find_or_initialize_by(document_number: client_document_number, enterprise: current_user.enterprise)
+        @client_document_number = @cte_info['rem']['CNPJ']
+        @client = Client.find_or_initialize_by(document_number: @client_document_number, enterprise: current_user.enterprise)
         @emitted_enterprise = current_user.enterprise.document_number == @cte_info['emit']['CNPJ']
 
         if @client.new_record?
@@ -110,10 +115,10 @@ class TruckloadsController < UsersController
           create_client
         end
 
-        create_new_cte
-
         @truckload.client = @client
         @truckload.save
+
+        create_new_cte
 
         if @new_cte.errors.present?
           @new_cte.errors.full_messages.each do |message|
@@ -142,7 +147,7 @@ class TruckloadsController < UsersController
     @client.address = @address
     @client.enterprise = current_user.enterprise
     @client.company_name = @cte_info['rem']['xNome']
-    @client.document_number = client_document_number
+    @client.document_number = @client_document_number
     @client.state_tax_number = @cte_info['rem']['IE']
     @client.save
   end

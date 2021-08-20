@@ -1,0 +1,6 @@
+pt-BR:
+  agents:
+    new:
+      new: Novo(a) agenciador(a)
+      cancel: Cancelar
+      create_new: Criar novo(a) agenciador(a)

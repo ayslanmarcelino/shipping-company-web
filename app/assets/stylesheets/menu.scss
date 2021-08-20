@@ -28,6 +28,10 @@
   margin-left: 0;
 }
 
+#wrapper.toggled .rounded-circle {
+  margin-left: 0 !important;
+}
+
 .list-item-menu {
   padding: 0.75rem 1.25rem;
 }
@@ -44,5 +48,9 @@
 
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -15rem;
+  }
+
+  .rounded-circle {
+    margin-left: -2.25rem !important;
   }
 }

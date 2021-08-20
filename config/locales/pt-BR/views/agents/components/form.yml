@@ -1,0 +1,9 @@
+pt-BR:
+  agents:
+    components:
+      form:
+        personal: Dados pessoais
+        documents: Documentos
+        address: Endereço
+        bank_accounts: Contas bancárias
+        enterprise: Empresa

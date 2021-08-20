@@ -5,8 +5,9 @@
   <%= search_form_for @q, url: drivers_path do |f| %>
     <div class="d-inline-flex col-md-12" style="padding-left: 0;">
       <%= f.text_field :person_first_name_cont, placeholder: 'Primeiro Nome', class: 'form-control mb-2 col-md-2 mr-2' %>
-      <%= f.number_field :person_document_number_cont, placeholder: 'CPF', class: 'form-control mb-2 col-md-3 mr-2' %>
-      <%= f.number_field :cnh_number_cont, placeholder: 'Número CNH', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.text_field :person_nickname_cont, placeholder: 'Apelido', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.number_field :person_document_number_cont, placeholder: 'CPF', class: 'form-control mb-2 col-md-4 mr-2' %>
+      <%= f.number_field :cnh_number_cont, placeholder: 'Número CNH', class: 'form-control mb-2 col-md-3 mr-2' %>
     </div>
     <% @drivers.pluck(:is_blocked).each do |is_blocked| %>
       <% if is_blocked %>
