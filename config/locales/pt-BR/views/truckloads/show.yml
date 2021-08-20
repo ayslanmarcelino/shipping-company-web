@@ -11,6 +11,7 @@ pt-BR:
       dt_number: Número da DT
       value_driver: Valor pago ao motorista
       is_agent: Contratado por agenciador
+      agent_name: Nome do agenciador
       cte_number:
         one: Número do CT-e
         other: Números dos CT-es

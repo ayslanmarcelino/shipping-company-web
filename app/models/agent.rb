@@ -23,4 +23,13 @@ class Agent < ApplicationRecord
   belongs_to :person, class_name: 'User::Person'
   accepts_nested_attributes_for :person
   paginates_per 25
+  has_many :truckloads
+
+  def formatted_name
+    "#{person.full_name} | #{person.document_number.to_br_cpf}"
+  end
+
+  def full_name
+    "#{person.first_name} #{person.last_name}"
+  end
 end

@@ -83,7 +83,6 @@ table {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   border: 1px solid #dee2e6;
-  max-width: 99.5%;
 }
 
 .table {
@@ -117,4 +116,8 @@ table {
   padding: 10px;
   border: 1px solid #dee2e6;
   margin-bottom: 10px;
+}
+
+.dataTables_wrapper {
+  padding-right: 2px;
 }

@@ -4,10 +4,11 @@ class TruckloadsController < UsersController
   before_action :set_truckload, only: %w[edit update destroy show]
   before_action :set_client, only: %w[new create edit update]
   before_action :set_driver, only: %w[new create edit update]
+  before_action :set_agent, only: %w[new create edit update]
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @q = Truckload.includes(:cte)
+    @q = Truckload.includes(:ctes)
                   .includes(:driver)
                   .includes([client: :address])
                   .includes([user: :person])
@@ -85,9 +86,13 @@ class TruckloadsController < UsersController
     @drivers = Driver.where(enterprise_id: current_user.enterprise.id, is_blocked: false)
   end
 
+  def set_agent
+    @agents = Agent.where(enterprise_id: current_user.enterprise.id)
+  end
+
   def params_truckload
     params.require(:truckload)
-          .permit(:dt_number, :value_driver, :is_agent, :user_id, :driver_id)
+          .permit(:dt_number, :value_driver, :is_agent, :user_id, :driver_id, :agent_id)
           .with_defaults(user: current_user, enterprise: current_user.enterprise)
   end
 
