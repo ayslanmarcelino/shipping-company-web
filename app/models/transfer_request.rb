@@ -35,7 +35,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class TransferRequest < ApplicationRecord
-  TYPES = [:advance, :discharge, :balance, :agency, :full, :other].freeze
+  TYPES = [:advance, :discharge, :balance, :agency, :full, :daily, :other].freeze
   METHODS = [:ted, :pix, :doc, :boleto, :tev, :other].freeze
   STATUS = [:rejected, :pending, :approved]
 

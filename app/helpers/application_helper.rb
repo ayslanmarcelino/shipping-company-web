@@ -65,6 +65,7 @@ module ApplicationHelper
       ['Saldo', 'balance'],
       ['Agenciamento', 'agency'],
       ['Frete todo', 'full'],
+      ['Diária', 'daily'],
       ['Outros', 'other']
     ]
   end
