@@ -1,0 +1,5 @@
+pt-BR:
+  transfer_requests:
+    components:
+      form:
+        transfer_to: Transferir para

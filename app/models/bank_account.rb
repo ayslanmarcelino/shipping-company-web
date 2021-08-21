@@ -47,4 +47,8 @@ class BankAccount < ApplicationRecord
      :person_id,
      :_destroy]
   end
+
+  def formatted_bank_account
+    "#{bank_code} - #{agency} | #{account_number} - #{person.full_name}"
+  end
 end

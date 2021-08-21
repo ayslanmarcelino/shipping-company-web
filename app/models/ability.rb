@@ -49,6 +49,7 @@ class Ability
       can(:manage, User::Role, enterprise: @enterprise)
       can(:manage, Driver, enterprise: @enterprise)
       can(:manage, Agent, enterprise: @enterprise)
+      can(:manage, TransferRequest, enterprise: @enterprise)
       cannot(:update, Truckload)
       cannot(:update, Cte)
     end
@@ -60,6 +61,7 @@ class Ability
       can(:update, User, user: @user)
       can(:manage, Driver, enterprise: @enterprise)
       can(:manage, Agent, enterprise: @enterprise)
+      can(:manage, TransferRequest, enterprise: @enterprise, user: @user)
     end
   end
 end

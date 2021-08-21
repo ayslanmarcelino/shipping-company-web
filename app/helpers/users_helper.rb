@@ -6,15 +6,18 @@ module UsersHelper
   end
 
   def users_collection
-    if current_user.roles.kind_masters.present?
-      User.pluck(:email, :id)
-          .compact
-          .sort
-    else
-      User.where(enterprise: current_user.enterprise)
-          .pluck(:email, :id)
-          .compact
-          .sort
+    @users = []
+
+    users = if user_master?(current_user)
+              User.all
+            else
+              User.where(enterprise: current_user.enterprise)
+            end
+
+    users.each do |user|
+      @users << ["#{user.person.first_name} #{user.person.last_name} | #{user.email}", user.id]
     end
+
+    @users.sort
   end
 end
