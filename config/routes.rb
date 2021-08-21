@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'clients/index'
   get 'drivers/index'
   get 'agents/index'
+  get 'transfer_requests/index'
 
   devise_for :users
   resources :truckloads
@@ -34,5 +35,10 @@ Rails.application.routes.draw do
   resources :clients
   resources :drivers
   resources :agents
+  resources :transfer_requests do
+    collection do
+      get 'truckload_information'
+    end
+  end
   root to: 'dashboard#index'
 end

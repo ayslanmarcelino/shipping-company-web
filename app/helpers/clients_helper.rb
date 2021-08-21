@@ -6,6 +6,6 @@ module ClientsHelper
       @clients << ["#{client.company_name} - #{client.address.state} | #{client.document_number.to_br_cnpj}", client.id]
     end
 
-    @clients
+    @clients.sort
   end
 end

@@ -58,6 +58,12 @@ class Truckload < ApplicationRecord
   end
 
   def formatted_truckload
-    "DT #{dt_number} | #{client.company_name} - #{client.address.state} | #{client.document_number.to_br_cnpj}"
+    client_info = if client.present?
+                    "#{client&.company_name} - #{client&.address&.state} | #{client&.document_number&.to_br_cnpj}"
+                  else
+                    'Não há cliente vinculado'
+                  end
+
+    "DT #{dt_number} | #{client_info}"
   end
 end

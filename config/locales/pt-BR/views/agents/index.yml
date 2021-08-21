@@ -6,4 +6,5 @@ pt-BR:
       full_name: Nome completo
       nickname: Apelido
       document_number: CPF
+      enterprise: Empresa
       delete_confirm: Você tem certeza que deseja excluir o(a) agenciador

@@ -136,3 +136,31 @@
         cte_number: Número do CT-e
       agent:
         enterprise: Empresa
+      transfer_request:
+        truckload_id: Carga (DT | Cliente - UF | CNPJ)
+        value: Valor
+        driver: Motorista
+        agent: Agenciador
+        type_cd: Tipo de solicitação
+        bank_account: Conta bancária (Cód. banco - Agência | Conta - Favorecido)
+        method_cd: Método de envio
+        status: Status
+        status:
+          rejected: Rejeitado
+          pending: Pendente
+          approved: Finalizado
+        methods:
+          ted: TED
+          pix: Pix
+          doc: DOC
+          boleto: Boleto
+          tev: TEV
+          other: Outros
+        types:
+          advance: Adiantamento
+          discharge: Descarga
+          balance: Saldo
+          agency: Agenciamento
+          full: Frete todo
+          daily: Diária
+          other: Outros
