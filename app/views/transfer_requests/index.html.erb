@@ -1,0 +1,80 @@
+<div class="text-center">
+  <h4><%= t('.registered') %></h4>
+</div>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: transfer_requests_path do |f| %>
+    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
+    </div>
+    <hr>
+    <div>
+      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+        <i class="fas fa-broom"></i>
+        <%= t('layouts.filter.clear') %>
+      <% end %>
+      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <i class="fas fa-search"></i>
+        <%= t('layouts.filter.search') %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+<div class="table-responsive">
+  <div class="row">
+    <div class="col-sm-12">
+      <table id="table" class="ui celled table">
+        <thead>
+          <tr class="text-center">
+            <th class="no-sort"><%= t('.id') %></th>
+            <th class="no-sort"><%= t('.value') %></th>
+            <th class="no-sort"><%= t('.type_cd') %></th>
+            <th class="no-sort"><%= t('.method_cd') %></th>
+            <th class="no-sort"><%= t('.truckload_number') %></th>
+            <th class="no-sort"><%= t('.bank_account') %></th>
+            <th class="no-sort"><%= t('.status') %></th>
+            <% if user_master?(current_user) %>
+              <th class="no-sort"><%= t('.enterprise') %></th>
+            <% end %>
+            <th class="no-sort table-buttons">
+              <% if can?(:create, TransferRequest) %>
+                <%= link_to new_transfer_request_path(@transfer_request), class: 'btn btn-sm btn-success btn-circle' do %>
+                  <i class="fas fa-plus"></i>
+                <% end %>
+              <% end %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transfer_requests.order(created_at: :desc).each do |transfer_request| %>
+            <tr class="text-center">
+              <td><%= transfer_request.id %></td>
+              <td><%= number_to_currency(transfer_request.value) %></td>
+              <td><%= I18n.t(transfer_request.type_cd, scope: 'activerecord.attributes.transfer_request.types') if transfer_request.type_cd.present? %></td>
+              <td><%= I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods') if transfer_request.method_cd.present? %></td>
+              <td><%= link_to(transfer_request.truckload.dt_number, truckload_path(transfer_request.truckload)) %></td>
+              <td><%= transfer_request.bank_account.formatted_bank_account %></td>
+              <td class="text-center">
+                <span class="badge badge-<%= status_color(transfer_request.status_cd) %>">
+                  <%= I18n.t(transfer_request.status_cd, scope: 'activerecord.attributes.transfer_request.status') if transfer_request.status_cd.present? %>
+                </span>
+              </td>
+              <% if user_master?(current_user) %>
+                <td><%= transfer_request.enterprise.company_name %></td>
+              <% end %>
+              <td>
+                <% if can?(:destroy, TransferRequest) %>
+                  <%= link_to transfer_request_path(transfer_request),
+                              method: :delete,
+                              class: 'btn btn-sm btn-danger btn-circle',
+                              data: { confirm: "#{t('.delete_confirm')}: #{transfer_request.id} - #{I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods')} - #{transfer_request.bank_account.formatted_bank_account}?" } do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @transfer_requests %>
+    </div>
+  </div>
+</div>

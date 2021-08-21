@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_17_122624) do
+ActiveRecord::Schema.define(version: 2021_08_20_145552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,6 +128,27 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
     t.index ["document_number"], name: "index_enterprises_on_document_number", unique: true
   end
 
+  create_table "transfer_requests", force: :cascade do |t|
+    t.float "value"
+    t.string "type_cd"
+    t.string "method_cd"
+    t.string "status_cd", default: "pending"
+    t.bigint "user_id"
+    t.bigint "truckload_id"
+    t.bigint "driver_id"
+    t.bigint "agent_id"
+    t.bigint "bank_account_id"
+    t.bigint "enterprise_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["agent_id"], name: "index_transfer_requests_on_agent_id"
+    t.index ["bank_account_id"], name: "index_transfer_requests_on_bank_account_id"
+    t.index ["driver_id"], name: "index_transfer_requests_on_driver_id"
+    t.index ["enterprise_id"], name: "index_transfer_requests_on_enterprise_id"
+    t.index ["truckload_id"], name: "index_transfer_requests_on_truckload_id"
+    t.index ["user_id"], name: "index_transfer_requests_on_user_id"
+  end
+
   create_table "truckloads", force: :cascade do |t|
     t.integer "dt_number"
     t.float "value_driver"
@@ -205,6 +226,12 @@ ActiveRecord::Schema.define(version: 2021_08_17_122624) do
   add_foreign_key "ctes", "users"
   add_foreign_key "drivers", "enterprises"
   add_foreign_key "drivers", "user_people", column: "person_id"
+  add_foreign_key "transfer_requests", "agents"
+  add_foreign_key "transfer_requests", "bank_accounts"
+  add_foreign_key "transfer_requests", "drivers"
+  add_foreign_key "transfer_requests", "enterprises"
+  add_foreign_key "transfer_requests", "truckloads"
+  add_foreign_key "transfer_requests", "users"
   add_foreign_key "truckloads", "agents"
   add_foreign_key "truckloads", "clients"
   add_foreign_key "truckloads", "drivers"

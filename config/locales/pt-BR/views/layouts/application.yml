@@ -4,6 +4,8 @@ pt-BR:
       dashboard: Resumo
       operational: Operacional
       register: Cadastro
+      financial: Financeiro
+      transfer_request: Transferências
       clients: Clientes
       truckload: Cargas
       drivers: Motoristas

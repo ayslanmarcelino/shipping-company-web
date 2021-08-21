@@ -13,7 +13,7 @@
               style="background-color: <%= current_user.enterprise.primary_color %>;
                      color: <%= current_user.enterprise.secondary_color %>;"
               id="menu-toggle">
-        <i id="ayslan" class="fas fa-chevron-left"></i>
+        <i id="icon-menu" class="fas fa-chevron-left"></i>
       </button>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item dropdown">
@@ -45,14 +45,14 @@
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 
-    let classes = document.getElementById('ayslan').classList
+    let classes = document.getElementById('icon-menu').classList
 
     if (classes.contains('fa-chevron-left')) {
-      classes.add("fa-chevron-right")
+      classes.add("fa-bars")
       classes.remove("fa-chevron-left")
     } else {
       classes.add("fa-chevron-left")
-      classes.remove("fa-chevron-right")
+      classes.remove("fa-bars")
     }
   });
 </script>

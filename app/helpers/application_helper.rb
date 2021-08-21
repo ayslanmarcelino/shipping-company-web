@@ -15,6 +15,12 @@ module ApplicationHelper
     boolean ? 'secondary' : 'success'
   end
 
+  def status_color(status)
+    return 'warning' if status == 'pending'
+    return 'danger' if status == 'rejected'
+    return 'success' if status == 'approved'
+  end
+
   def user_master?(current_user)
     current_user.roles.kind_masters.present?
   end
@@ -26,12 +32,12 @@ module ApplicationHelper
   def role_master_select
     [['Master', 'master'],
      ['Proprietário', 'owner'],
-     ['Operacional', 'operational']]
+     ['Operacional', 'operational']].sort
   end
 
   def role_select
     [['Proprietário', 'owner'],
-     ['Operacional', 'operational']]
+     ['Operacional', 'operational']].sort
   end
 
   def pix_key_types_select
@@ -49,6 +55,28 @@ module ApplicationHelper
       ['Conta Investimento', 'investment_account'],
       ['Conta Conjunta', 'joint_account'],
       ['Conta Pagamento', 'payment_account'],
+    ]
+  end
+
+  def transfer_types_select
+    [
+      ['Adiantamento', 'advance'],
+      ['Descarga', 'discharge'],
+      ['Saldo', 'balance'],
+      ['Agenciamento', 'agency'],
+      ['Frete todo', 'full'],
+      ['Outros', 'other']
+    ]
+  end
+
+  def method_types_select
+    [
+      ['Pix', 'pix'],
+      ['TED', 'ted'],
+      ['DOC', 'doc'],
+      ['TEV', 'tev'],
+      ['Boleto', 'boleto'],
+      ['Outros', 'other']
     ]
   end
 
