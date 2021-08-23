@@ -1,0 +1,29 @@
+pt-BR:
+  transfer_requests:
+    show:
+      back: Voltar
+      cancel: Cancelar
+      approve: Aprovar
+      download_document: Baixar comprovante
+      destiny: Destino
+      client: Cliente
+      driver: Motorista
+      requested_by: Solicitado por
+      value_driver: Valor do motorista
+      total_paid: Total pago até o momento
+      all_transfers: Todas as transferências desta carga
+      value_transfer_remaining: Saldo do motorista
+      value_transfer: Valor de transferência
+      balance: Saldo do motorista após esta transferência
+      observation: Observação
+      bank_account_info: Dados bancários
+      transfer_type: Tipo de transferência
+      pix_key_type: Tipo de chave Pix
+      pix_key: Chave pix
+      account_name: Nome do favorecido
+      document_number: CPF/CNPJ
+      bank_code: Código do banco
+      agency: Agência
+      account_number: Número da conta (com dígito)
+      type: Tipo da conta
+

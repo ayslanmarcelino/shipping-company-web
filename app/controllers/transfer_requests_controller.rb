@@ -32,8 +32,8 @@ class TransferRequestsController < UsersController
   end
 
   def update
-    params_update_transfer_request = case params.require(:solicitation_type)
-                                     when 'approve'
+    params_update_transfer_request = case params.require(:commit)
+                                     when 'Aprovar'
                                        params_approve_transfer_request
                                      when 'reject'
                                        params_reject_transfer_request

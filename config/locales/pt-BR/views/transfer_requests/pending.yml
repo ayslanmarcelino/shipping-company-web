@@ -1,0 +1,14 @@
+pt-BR:
+  transfer_requests:
+    pending:
+     registered: Transferências pendentes
+     id: Código
+     value: Valor
+     type_cd: Tipo de solicitação
+     method_cd: Forma de pagamento
+     bank_account: Conta bancária
+     truckload_number: Número DT
+     requested_at: Solicitado em
+     requested_by: Solicitado por
+     observation: Tem observação
+     enterprise: Empresa

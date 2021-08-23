@@ -145,6 +145,8 @@
         bank_account: Conta bancária (Cód. banco - Agência | Conta - Favorecido)
         method_cd: Método de envio
         status: Status
+        voucher: Comprovante de transferência
+        observation: Observação
         status:
           rejected: Rejeitado
           pending: Pendente

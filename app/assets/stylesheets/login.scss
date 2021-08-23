@@ -130,6 +130,7 @@ table {
 .td-value-transfer {
   font-weight: bold;
   color: #da9694;
+  font-size: 25px;
 }
 
 .td-balance {
@@ -146,4 +147,14 @@ table {
   color: red;
   font-weight: bold;
   font-size: 20px;
+}
+
+@media print {    
+  .no-print, .no-print * {
+    display: none !important;
+  }
+
+  .transfer-request {
+    -webkit-print-color-adjust: exact; 
+  }
 }
