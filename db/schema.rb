@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.integer "dt_number"
     t.float "value_driver"
     t.boolean "is_agent", default: false
+    t.float "balance_value_driver", default: 0.0
     t.bigint "enterprise_id"
     t.bigint "client_id"
     t.bigint "user_id"

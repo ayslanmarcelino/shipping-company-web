@@ -45,6 +45,7 @@ class TransferRequest < ApplicationRecord
   belongs_to :agent, optional: true
   belongs_to :driver, optional: true
   belongs_to :bank_account
+  paginates_per 15
 
   as_enum :type, TYPES, map: :string, source: :type
   as_enum :method, METHODS, map: :string, source: :method

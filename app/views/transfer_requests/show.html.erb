@@ -21,7 +21,7 @@
       </tr>
       <tr>
         <th><%= t('.client') %></th>
-        <td><%= @transfer_request.truckload.client.company_name %></td>
+        <td><%= @transfer_request.truckload.client&.company_name %></td>
       </tr>
       <tr>
         <th><%= t('.cte_number') %></th>
@@ -38,8 +38,12 @@
         <td><%= link_to(@transfer_request.truckload.driver.person.full_name, driver_path(@transfer_request.truckload.driver)) %></td>
       </tr>
       <tr>
+        <th><%= t('.request_by') %></th>
+        <td><%= link_to(@transfer_request.truckload.user.person.full_name, admins_user_path(@transfer_request.truckload.user)) %></td>
+      </tr>
+      <tr>
         <th><%= t('.truckload_value') %></th>
-        <td class="td-value-driver"><%= number_to_currency(@transfer_request.truckload.value_driver.to_currency) %></td>
+        <td class="td-value-driver"><%= number_to_currency(@transfer_request.truckload.value_driver) %></td>
       </tr>
       <tr>
         <th><%= t('.value_transfer') %></th>
@@ -47,7 +51,9 @@
       </tr>
       <tr>
         <th><%= t('.balance') %></th>
-        <td class="td-balance"><%= number_to_currency(@transfer_request.value) %></td>
+        <td style="background-color: <%= (@transfer_request.truckload.balance_value_driver - @transfer_request.value).positive? ? '#ffff00' : '#da9694' %>;">
+          <%= number_to_currency(@transfer_request.truckload.balance_value_driver - @transfer_request.value) %>
+        </td>
       </tr>
     </table>
     <table class="table table-bordered">

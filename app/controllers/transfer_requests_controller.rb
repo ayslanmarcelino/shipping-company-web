@@ -25,7 +25,7 @@ class TransferRequestsController < UsersController
     @transfer_request = TransferRequest.new(params_transfer_request)
 
     if @transfer_request.save
-      redirect_to transfer_requests_path
+      redirect_to(transfer_requests_path)
       flash[:success] = 'Solicitação de transferência cadastrada com sucesso.'
     else
       render :new
@@ -33,11 +33,18 @@ class TransferRequestsController < UsersController
   end
 
   def destroy
-    if @transfer_request.destroy
-      redirect_to transfer_requests_path
-      flash[:success] = 'Solicitação de transferência excluída com sucesso.'
+    can_destroy_transfer_request = true if current_user.roles.kind_masters.present? ||
+                                           TransferRequest.find(params[:id]).user == current_user
+    if can_destroy_transfer_request
+      if @transfer_request.destroy
+        redirect_to(transfer_requests_path)
+        flash[:success] = 'Solicitação de transferência excluída com sucesso.'
+      else
+        render :index
+      end
     else
-      render :index
+      redirect_to(transfer_requests_path)
+      flash[:danger] = 'Você não pode deletar a solicitação de transferência de terceiros.'
     end
   end
 
@@ -64,8 +71,12 @@ class TransferRequestsController < UsersController
 
   def pending
     @search_params = params[:q]
-    @q = TransferRequest.where(status_cd: :pending).ransack(@search_params)
-    @transfer_requests = @q.result.page(params[:page]).per(50)
+    @q = if current_user.roles.kind_masters.present?
+           TransferRequest.where(status_cd: :pending).ransack(@search_params)
+         else
+           TransferRequest.where(status_cd: :pending, enterprise: current_user.enterprise).ransack(@search_params)
+         end
+    @transfer_requests = @q.result.page(params[:page]).per(15)
   end
 
   def approve

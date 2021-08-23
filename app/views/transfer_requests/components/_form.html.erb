@@ -88,11 +88,19 @@
       });
       if (!$('#driver-bank-account').length){
         $.each(driver_bank_account, function(i, k){
-          $('#select-bank-accounts').append($('<option>', {
-            id: 'driver-bank-account',
-            value: k['id'],
-            text: `${k['bank_code']} - ${k['agency']} | ${k['account_number']} - ${k['account_name']}`
-          }))
+          if (k['pix_key_type_cd'].length > 0) {
+            $('#select-bank-accounts').append($('<option>', {
+              id: `driver-bank-account-${k['id']}`,
+              value: k['id'],
+              text: `${k['bank_code']} - ${k['agency']} | ${k['account_number']} - ${k['account_name']} | Pix: ${I18n.t(`activerecord.attributes.bank_account.pix_types.${k['pix_key_type_cd']}`, { locale: 'pt-BR' })} - ${k['pix_key']}`
+            }))
+          } else {
+            $('#select-bank-accounts').append($('<option>', {
+              id: `driver-bank-account-${k['id']}`,
+              value: k['id'],
+              text: `${k['bank_code']} - ${k['agency']} | ${k['account_number']} - ${k['account_name']}`
+            }))
+          }
         });
       }
     });
@@ -105,11 +113,19 @@
       });
       if (!$('#agent-bank-account').length){
         $.each(agent_bank_account, function(i, k){
-          $('#select-bank-accounts').append($('<option>', {
-            id: `agent-bank-account-${k['id']}`,
-            value: k['id'],
-            text: `${k['bank_code']} - ${k['agency']} | ${k['account_number']} - ${k['account_name']}`
-          }))
+          if (k['pix_key_type_cd'].length > 0) {
+            $('#select-bank-accounts').append($('<option>', {
+              id: `agent-bank-account-${k['id']}`,
+              value: k['id'],
+              text: `${k['bank_code']} - ${k['agency']} | ${k['account_number']} - ${k['account_name']} | Pix: ${I18n.t(`activerecord.attributes.bank_account.pix_types.${k['pix_key_type_cd']}`, { locale: 'pt-BR' })} - ${k['pix_key']}`
+            }))
+          } else {
+            $('#select-bank-accounts').append($('<option>', {
+              id: `agent-bank-account-${k['id']}`,
+              value: k['id'],
+              text: `${k['bank_code']} - ${k['agency']} | ${k['account_number']} - ${k['account_name']}`
+            }))
+          }
         });
       }
     });

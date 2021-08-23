@@ -31,6 +31,7 @@
             <th class="no-sort"><%= t('.bank_account') %></th>
             <th class="no-sort"><%= t('.truckload_number') %></th>
             <th class="no-sort"><%= t('.status') %></th>
+            <th class="no-sort"><%= t('.requested_by') %></th>
             <% if user_master?(current_user) %>
               <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
@@ -61,6 +62,7 @@
                   <%= I18n.t(transfer_request.status_cd, scope: 'activerecord.attributes.transfer_request.status') if transfer_request.status_cd.present? %>
                 </span>
               </td>
+              <td><%= link_to(transfer_request.user.person.full_name, admins_user_path(transfer_request.user)) %></td>
               <% if user_master?(current_user) %>
                 <td><%= transfer_request.enterprise.company_name %></td>
               <% end %>

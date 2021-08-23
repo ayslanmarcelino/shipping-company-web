@@ -23,9 +23,10 @@ class TruckloadsController < UsersController
     @truckload = Truckload.new
   end
 
-  def create    
+  def create
     @truckload = Truckload.new(params_truckload)
     @truckload.validate_all = true
+    @truckload.balance_value_driver = @truckload.value_driver
     create_ctes
 
     if @truckload.save && (@new_cte&.errors&.full_messages&.empty? || @new_cte&.errors&.full_messages.nil?)
