@@ -8,7 +8,8 @@ class TransferRequestsController < UsersController
   before_action :set_bank_account, only: %w[create new destroy]
 
   def index
-    @q = TransferRequest.accessible_by(current_ability)
+    @q = TransferRequest.includes([bank_account: :person], :truckload, :user, :enterprise)
+                        .accessible_by(current_ability)
                         .page(params[:page])
                         .ransack(params[:q])
 
@@ -71,12 +72,14 @@ class TransferRequestsController < UsersController
 
   def pending
     @search_params = params[:q]
+    transfer_request = TransferRequest.includes([bank_account: :person], :truckload, :user, :enterprise)
     @q = if current_user.roles.kind_masters.present?
-           TransferRequest.where(status_cd: :pending).ransack(@search_params)
+           transfer_request.where(status_cd: :pending).ransack(@search_params)
          else
-           TransferRequest.where(status_cd: :pending, enterprise: current_user.enterprise).ransack(@search_params)
+           transfer_request.where(status_cd: :pending, enterprise: current_user.enterprise).ransack(@search_params)
          end
     @transfer_requests = @q.result.page(params[:page]).per(15)
+    @pending_transfer_request_count = @q.result.count
   end
 
   def approve

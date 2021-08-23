@@ -3,7 +3,7 @@ class AgentsController < UsersController
   before_action :set_enterprise, only: %w[create new edit update destroy]
 
   def index
-    @q = Agent.accessible_by(current_ability)
+    @q = Agent.includes(:person, :enterprise).accessible_by(current_ability)
               .page(params[:page])
               .ransack(params[:q])
 

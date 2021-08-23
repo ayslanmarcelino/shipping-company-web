@@ -8,7 +8,7 @@ class Ability
     @user = user
     roles = @user.roles
 
-    roles.includes(:enterprise).each do |role|
+    roles.each do |role|
       PerEnterpriseAbility.new(self, enterprise: @user.enterprise, user: @user).compile(role.kind)
     end
   end

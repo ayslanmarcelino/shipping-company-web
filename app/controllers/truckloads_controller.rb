@@ -8,9 +8,7 @@ class TruckloadsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @q = Truckload.includes(:ctes)
-                  .includes(:driver)
-                  .includes([client: :address])
+    @q = Truckload.includes(:ctes, [driver: :person], [client: :address])
                   .includes([user: :person])
                   .accessible_by(current_ability)
                   .page(params[:page])

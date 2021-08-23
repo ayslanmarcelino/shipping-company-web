@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h4><%= t('.registered') %></h4>
+  <h4><%= t('.registered') %>: <%= @pending_transfer_request_count %> </h4>
 </div>
 <%= render layout: 'layouts/filter' do %>
   <%= search_form_for @q, url: transfer_requests_path do |f| %>
