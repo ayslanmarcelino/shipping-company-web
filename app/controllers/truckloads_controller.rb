@@ -154,12 +154,27 @@ class TruckloadsController < UsersController
 
   def create_new_cte
     @new_cte = Cte.new
+    destiny_address = @cte_info['dest']['enderDest']
+
     @new_cte.emitted_by_enterprise = @emitted_enterprise
     @new_cte.cte_id = @cte_info['Id'] if @cte_info['Id'].present?
     @new_cte.company_name_emitter = @cte_info['emit']['xNome']
     @new_cte.fantasy_name_emitter = @cte_info['emit']['xFant']
     @new_cte.document_number_emitter = @cte_info['emit']['CNPJ']
     @new_cte.state_tax_number_emitter = @cte_info['emit']['IE']
+
+    @new_cte.destiny = @cte_info['dest']['xNome']
+    @new_cte.destiny_city = destiny_address['xMun']
+    @new_cte.destiny_city_code = destiny_address['cMun']
+    @new_cte.destiny_complement = destiny_address['xCpl']
+    @new_cte.destiny_country = destiny_address['xPais']
+    @new_cte.destiny_country_code = destiny_address['cPais']
+    @new_cte.destiny_neighborhood = destiny_address['xBairro']
+    @new_cte.destiny_number = destiny_address['nro']
+    @new_cte.destiny_state = destiny_address['UF']
+    @new_cte.destiny_street = destiny_address['xLgr']
+    @new_cte.destiny_zip_code = destiny_address['CEP']
+
     @new_cte.emitted_at = @cte_info['ide']['dhEmi'].to_datetime if @cte_info['ide']['dhEmi'].present?
     @new_cte.cte_number = @cte_info['ide']['nCT'] if @cte_info['ide']['nCT'].present?
     @new_cte.value = @cte_info['vPrest']['vTPrest'].to_f if @cte_info['vPrest']['vTPrest'].present?

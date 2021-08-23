@@ -6,6 +6,7 @@ pt-BR:
       register: Cadastro
       financial: Financeiro
       transfer_request: Transferências
+      pending_transfer_request: Transferências pendentes
       clients: Clientes
       truckload: Cargas
       drivers: Motoristas

@@ -62,6 +62,18 @@ class TransferRequestsController < UsersController
     render json: information
   end
 
+  def pending
+    @search_params = params[:q]
+    @q = TransferRequest.where(status_cd: :pending).ransack(@search_params)
+    @transfer_requests = @q.result.page(params[:page]).per(50)
+  end
+
+  def approve
+  end
+
+  def reject
+  end
+
   private
 
   def set_transfer_request

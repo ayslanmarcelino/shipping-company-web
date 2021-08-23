@@ -30,21 +30,16 @@
             <th class="no-sort"><%= t('.method_cd') %></th>
             <th class="no-sort"><%= t('.bank_account') %></th>
             <th class="no-sort"><%= t('.truckload_number') %></th>
-            <th class="no-sort"><%= t('.status') %></th>
+            <th class="no-sort"><%= t('.requested_at') %></th>
+            <th class="no-sort"><%= t('.requested_by') %></th>
             <% if user_master?(current_user) %>
               <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
-            <th class="no-sort table-buttons">
-              <% if can?(:create, TransferRequest) %>
-                <%= link_to new_transfer_request_path(@transfer_request), class: 'btn btn-sm btn-success btn-circle' do %>
-                  <i class="fas fa-plus"></i>
-                <% end %>
-              <% end %>
-            </th>
+            <th class="no-sort"></th>
           </tr>
         </thead>
         <tbody>
-          <% @transfer_requests.order(created_at: :desc).each do |transfer_request| %>
+          <% @transfer_requests.each do |transfer_request| %>
             <tr class="text-center">
               <td><%= transfer_request.id %></td>
               <td><%= number_to_currency(transfer_request.value) %></td>
@@ -56,11 +51,8 @@
                 <td><%= transfer_request.bank_account.formatted_bank_account %></td>
               <% end %>
               <td><%= link_to(transfer_request.truckload.dt_number, truckload_path(transfer_request.truckload)) %></td>
-              <td class="text-center">
-                <span class="badge badge-<%= status_color(transfer_request.status_cd) %>">
-                  <%= I18n.t(transfer_request.status_cd, scope: 'activerecord.attributes.transfer_request.status') if transfer_request.status_cd.present? %>
-                </span>
-              </td>
+              <td><%= l(transfer_request.created_at, format: :with_full_hour) %></td>
+              <td><%= link_to(transfer_request.user.person.full_name, admins_user_path(transfer_request.user)) %></td>
               <% if user_master?(current_user) %>
                 <td><%= transfer_request.enterprise.company_name %></td>
               <% end %>
@@ -68,14 +60,6 @@
                 <% if can?(:read, TransferRequest) %>
                   <%= link_to transfer_request_path(transfer_request), id: "show-transfer-request-#{transfer_request.id}", class: 'btn btn-sm btn-dark' do %>
                     <i class="fas fa-eye"></i>
-                  <% end %>
-                <% end %>
-                <% if can?(:destroy, TransferRequest) && transfer_request.status_cd == 'pending' %>
-                  <%= link_to transfer_request_path(transfer_request),
-                              method: :delete,
-                              class: 'btn btn-sm btn-danger btn-circle',
-                              data: { confirm: "#{t('.delete_confirm')}: #{transfer_request.id} - #{I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods')} - #{transfer_request.bank_account.formatted_bank_account}?" } do %>
-                    <i class="fas fa-trash"></i>
                   <% end %>
                 <% end %>
               </td>

@@ -7,6 +7,6 @@ pt-BR:
       type_cd: Tipo de solicitação
       method_cd: Método de envio
       truckload_number: Número DT
-      bank_account: Conta bancária (Cód. banco - Agência | Conta - Favorecido)
+      bank_account: Conta bancária
       enterprise: Empresa
       delete_confirm: Você tem certeza que deseja excluir a solicitação de transferência
