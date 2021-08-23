@@ -32,6 +32,8 @@
             <th class="no-sort"><%= t('.truckload_number') %></th>
             <th class="no-sort"><%= t('.status') %></th>
             <th class="no-sort"><%= t('.requested_by') %></th>
+            <th class="no-sort"><%= t('.updated_by') %></th>
+            <th class="no-sort"><%= t('.download_document') %></th>
             <% if user_master?(current_user) %>
               <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
@@ -46,10 +48,11 @@
         </thead>
         <tbody>
           <% @transfer_requests.order(created_at: :desc).each do |transfer_request| %>
+            <% translated_type_cd = I18n.t(transfer_request.type_cd, scope: 'activerecord.attributes.transfer_request.types') %>
             <tr class="text-center">
               <td><%= transfer_request.id %></td>
               <td><%= number_to_currency(transfer_request.value) %></td>
-              <td><%= I18n.t(transfer_request.type_cd, scope: 'activerecord.attributes.transfer_request.types') if transfer_request.type_cd.present? %></td>
+              <td><%= translated_type_cd if transfer_request.type_cd.present? %></td>
               <td><%= I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods') if transfer_request.method_cd.present? %></td>
               <% if transfer_request.method_cd == 'pix' %>
                 <td><%= transfer_request.bank_account.formatted_pix %></td>
@@ -63,6 +66,18 @@
                 </span>
               </td>
               <td><%= link_to(transfer_request.user.person.full_name, admins_user_path(transfer_request.user)) %></td>
+              <td><%= link_to(User.find(transfer_request.updated_by_id.to_i).person.full_name, admins_user_path(User.find(transfer_request.updated_by_id.to_i))) if transfer_request.updated_by_id.present? %></td>
+              <td>
+                <% if transfer_request.status_cd == 'approved' %>
+                  <%= link_to(transfer_request.voucher.url,
+                              download: "Comprovante-#{translated_type_cd}-DT-#{transfer_request.truckload.dt_number}",
+                              target: '_blank',
+                              rel: 'noopener',
+                              class: 'btn') do %>
+                    <i class="fas fa-download"></i>
+                  <% end %>
+                <% end %>
+              </td>
               <% if user_master?(current_user) %>
                 <td><%= transfer_request.enterprise.company_name %></td>
               <% end %>

@@ -5,6 +5,11 @@ class CreateTransferRequests < ActiveRecord::Migration[6.0]
       t.string :type_cd
       t.string :method_cd
       t.string :status_cd, default: 'pending'
+      t.string :voucher
+      t.string :reject_reason
+      t.string :observation
+      t.string :updated_by_id
+      t.float :balance_value_truckload, default: 0.0
       t.references :user, foreign_key: true
       t.references :truckload, foreign_key: true
       t.references :driver, foreign_key: true

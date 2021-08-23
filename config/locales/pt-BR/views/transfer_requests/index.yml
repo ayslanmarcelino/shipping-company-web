@@ -9,4 +9,7 @@ pt-BR:
       truckload_number: Número DT
       bank_account: Conta bancária
       enterprise: Empresa
+      requested_by: Solicitado por
+      updated_by: Atualizado por
+      download_document: Download
       delete_confirm: Você tem certeza que deseja excluir a solicitação de transferência

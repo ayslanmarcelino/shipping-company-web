@@ -123,14 +123,27 @@ table {
 }
 
 .td-value-driver {
-  background-color: #91cf50;
+  font-weight: bold;
+  color: #91cf50;
 }
 
 .td-value-transfer {
-  background-color: #da9694;
+  font-weight: bold;
+  color: #da9694;
 }
 
 .td-balance {
-  background-color: #ffff00;
+  font-weight: bold;
+  color: #caca00;
 }
 
+.td-all-transfers {
+  font-weight: bold;
+  color: #3c91ff;
+}
+
+.td-observation {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}

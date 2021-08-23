@@ -39,8 +39,6 @@ Rails.application.routes.draw do
     collection do
       get :truckload_information
       get :pending
-      post :approve
-      post :reject
     end
   end
   root to: 'dashboard#index'

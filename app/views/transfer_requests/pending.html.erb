@@ -32,6 +32,7 @@
             <th class="no-sort"><%= t('.truckload_number') %></th>
             <th class="no-sort"><%= t('.requested_at') %></th>
             <th class="no-sort"><%= t('.requested_by') %></th>
+            <th class="no-sort"><%= t('.observation') %>?</th>
             <% if user_master?(current_user) %>
               <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
@@ -53,6 +54,11 @@
               <td><%= link_to(transfer_request.truckload.dt_number, truckload_path(transfer_request.truckload)) %></td>
               <td><%= l(transfer_request.created_at, format: :with_full_hour) %></td>
               <td><%= link_to(transfer_request.user.person.full_name, admins_user_path(transfer_request.user)) %></td>
+              <td class="text-center">
+                <span class="badge badge-<%= boolean_color(!transfer_request.observation.present?) %>">
+                  <%= translate_boolean(transfer_request.observation.present?) %>
+                </span>
+              </td>
               <% if user_master?(current_user) %>
                 <td><%= transfer_request.enterprise.company_name %></td>
               <% end %>

@@ -31,11 +31,16 @@
   <%= form.label(:type_cd) %>
   <%= form.select(:type_cd, transfer_types_select, { include_blank: 'Selecione o tipo de solicitação' }, { class: 'select2_single form-control', required: true} ) %>
 </div>
+<div class="col-lg-12">
+  <%= form.label(:observation) %>
+  <%= form.text_field(:observation, class: 'form-control form-control-user') %>
+</div>
 
 <script>
   $(document).ready(function(){
     let truckload
-    let truckload_value_driver
+    let balance_value_truckload
+    let formatted_balance_value
     let agent_bank_account
     let driver_bank_account
 
@@ -48,21 +53,22 @@
         data: { id: this.value }
       }).done(function(data){
         truckload = data['truckload']
-        truckload_value_driver = data['truckload_value_driver']
+        balance_value_truckload = data['balance_value_truckload']
+        formatted_balance_value = data['formatted_balance_value_truckload']
         agent_bank_account = data['agent_bank_account']
         driver_bank_account = data['driver_bank_account']
       })
 
       $('#use_available').change(function () {
         if (this.checked) {
-          $('#transfer_request_value').val(truckload['value_driver'])
+          $('#transfer_request_value').val(balance_value_truckload)
         } else {
           $('#transfer_request_value').val('');
         }
       });
 
       var balance = document.getElementById('balance-truckload');
-      balance.innerHTML = `Usar valor disponível: R$ ${truckload_value_driver}`
+      balance.innerHTML = `Usar valor disponível: R$ ${formatted_balance_value}`
 
       $('.value-transfer-request').removeClass('d-none');
       $('.label-transfer-checkboxes').removeClass('d-none');

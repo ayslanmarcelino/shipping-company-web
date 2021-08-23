@@ -39,6 +39,7 @@ class Truckload < ApplicationRecord
   belongs_to :user
   belongs_to :driver
   has_many :ctes
+  has_many :transfer_requests
   belongs_to :agent, optional: true
   validates :dt_number, uniqueness: { scope: :enterprise_id }
   validates :dt_number,

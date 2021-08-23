@@ -2,19 +2,24 @@
 #
 # Table name: transfer_requests
 #
-#  id              :bigint           not null, primary key
-#  method_cd       :string
-#  status_cd       :string           default("pending")
-#  type_cd         :string
-#  value           :float
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  agent_id        :bigint
-#  bank_account_id :bigint
-#  driver_id       :bigint
-#  enterprise_id   :bigint
-#  truckload_id    :bigint
-#  user_id         :bigint
+#  id                      :bigint           not null, primary key
+#  balance_value_truckload :float
+#  method_cd               :string
+#  observation             :string
+#  reject_reason           :string
+#  status_cd               :string           default("pending")
+#  type_cd                 :string
+#  value                   :float
+#  voucher                 :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  agent_id                :bigint
+#  bank_account_id         :bigint
+#  driver_id               :bigint
+#  enterprise_id           :bigint
+#  truckload_id            :bigint
+#  updated_by_id           :string
+#  user_id                 :bigint
 #
 # Indexes
 #
