@@ -35,17 +35,19 @@ class TransferRequestsController < UsersController
     params_update_transfer_request = case params.require(:commit)
                                      when 'Aprovar'
                                        params_approve_transfer_request
-                                     when 'reject'
+                                     when 'Rejeitar'
                                        params_reject_transfer_request
                                      end
 
     if params_update_transfer_request == params_approve_transfer_request
       notice = 'Solicitação de transferência aprovada com sucesso.'
       @transfer_request.status_cd = 'approved'
-      @transfer_request.balance_value_truckload -= @transfer_request.value
     elsif params_update_transfer_request == params_reject_transfer_request
       notice = 'Solicitação de transferência rejeitada com sucesso.'
+      @transfer_request.status_cd = 'rejected'
     end
+
+    @transfer_request.balance_value_truckload -= @transfer_request.value
 
     return unless @transfer_request.update(params_update_transfer_request)
 
@@ -65,6 +67,7 @@ class TransferRequestsController < UsersController
 
     if can_destroy_transfer_request
       if @transfer_request.destroy
+        @transfer_request.truckload.transfer_requests.last.balance_value_truckload += @transfer_request.value
         redirect_to(transfer_requests_path)
         flash[:success] = 'Solicitação de transferência excluída com sucesso.'
       else
@@ -78,11 +81,9 @@ class TransferRequestsController < UsersController
 
   def truckload_information
     @truckload = Truckload.find(params[:id])
-    @balance_value_truckload = @truckload.transfer_requests
-                                         .where(status_cd: 'approved')
-                                         .last
-                                         &.balance_value_truckload || @truckload.value_driver
-    @formatted_balance_value_truckload = @balance_value_truckload.to_currency
+    @balance_value_truckload = @truckload.value_driver
+    @balance_value = @balance_value_truckload - @truckload.transfer_requests.sum(&:value)
+    @formatted_balance_value_truckload = @balance_value.to_currency
     @agent = @truckload&.agent&.person || []
     @driver = @truckload.driver.person
     @driver_bank_account = @driver.bank_accounts
@@ -93,7 +94,7 @@ class TransferRequestsController < UsersController
                           end
     information = {
                     truckload: @truckload,
-                    balance_value_truckload: @balance_value_truckload,
+                    balance_value_truckload: @balance_value,
                     formatted_balance_value_truckload: @formatted_balance_value_truckload,
                     agent_bank_account: @agent_bank_account,
                     driver_bank_account: @driver_bank_account
@@ -166,15 +167,16 @@ class TransferRequestsController < UsersController
   end
 
   def params_reject_transfer_request
-    nil
+    params.require(:transfer_request)
+          .permit(:reject_reason)
+          .with_defaults(updated_by_id: current_user.id)
   end
 
   def params_transfer_request
     truckload = Truckload.find(params.require(:transfer_request)[:truckload_id])
     driver = Driver.find(truckload.driver_id) if params.require(:transfer_request)[:driver] == '1'
     agent = Agent.find(truckload.agent_id) if params.require(:transfer_request)[:agent] == '1'
-    balance_value_truckload = truckload.transfer_requests.where(status_cd: 'approved').last&.balance_value_truckload ||
-                              truckload.value_driver
+    balance_value_truckload = truckload.value_driver - truckload.transfer_requests.sum(&:value)
 
     params.require(:transfer_request)
           .permit(:value,

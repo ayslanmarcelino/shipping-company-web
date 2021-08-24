@@ -2,18 +2,17 @@
 #
 # Table name: truckloads
 #
-#  id                   :bigint           not null, primary key
-#  balance_value_driver :float            default(0.0)
-#  dt_number            :integer
-#  is_agent             :boolean          default(FALSE)
-#  value_driver         :float
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  agent_id             :bigint
-#  client_id            :bigint
-#  driver_id            :bigint
-#  enterprise_id        :bigint
-#  user_id              :bigint
+#  id            :bigint           not null, primary key
+#  dt_number     :integer
+#  is_agent      :boolean          default(FALSE)
+#  value_driver  :float
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  agent_id      :bigint
+#  client_id     :bigint
+#  driver_id     :bigint
+#  enterprise_id :bigint
+#  user_id       :bigint
 #
 # Indexes
 #

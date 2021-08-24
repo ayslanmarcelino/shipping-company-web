@@ -24,7 +24,6 @@ class TruckloadsController < UsersController
   def create
     @truckload = Truckload.new(params_truckload)
     @truckload.validate_all = true
-    @truckload.balance_value_driver = @truckload.value_driver
     create_ctes
 
     if @truckload.save && (@new_cte&.errors&.full_messages&.empty? || @new_cte&.errors&.full_messages.nil?)
@@ -42,7 +41,6 @@ class TruckloadsController < UsersController
     create_ctes
 
     if @truckload.update(params_truckload) && (@new_cte&.errors&.full_messages&.empty? || @new_cte&.errors&.full_messages.nil?)
-      @truckload.update(balance_value_driver: @truckload.value_driver)
       redirect_to(truckloads_path)
       flash[:success] = 'Carga atualizada com sucesso.'
     else

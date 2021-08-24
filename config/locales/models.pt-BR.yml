@@ -147,6 +147,7 @@
         status: Status
         voucher: Comprovante de transferência
         observation: Observação
+        reject_reason: Motivo de rejeição
         status:
           rejected: Rejeitado
           pending: Pendente

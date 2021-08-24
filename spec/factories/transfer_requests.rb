@@ -3,7 +3,7 @@
 # Table name: transfer_requests
 #
 #  id                      :bigint           not null, primary key
-#  balance_value_truckload :float
+#  balance_value_truckload :float            default(0.0)
 #  method_cd               :string
 #  observation             :string
 #  reject_reason           :string

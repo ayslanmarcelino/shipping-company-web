@@ -3,18 +3,21 @@ pt-BR:
     show:
       back: Voltar
       cancel: Cancelar
+      reject: Rejeitar
       approve: Aprovar
       download_document: Baixar comprovante
       destiny: Destino
       client: Cliente
+      cte_number: CT-e(s)
       driver: Motorista
       requested_by: Solicitado por
       value_driver: Valor do motorista
       total_paid: Total pago até o momento
+      total_pending: Total de transferências pendentes
       all_transfers: Todas as transferências desta carga
       value_transfer_remaining: Saldo do motorista
       value_transfer: Valor de transferência
-      balance: Saldo do motorista após esta transferência
+      balance: Saldo do motorista (após esta transferência)
       observation: Observação
       bank_account_info: Dados bancários
       transfer_type: Tipo de transferência

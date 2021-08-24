@@ -22,9 +22,9 @@ module ApplicationHelper
   end
 
   def money_color(value)
-    return '#91cf50' if value.zero?
-    return '#da9694' if value.negative?
-    return '#caca00' if value.positive?
+    return '#4f9800' if value.zero?
+    return '#c65a56' if value.negative?
+    return '#95951b' if value.positive?
   end
 
   def user_master?(current_user)

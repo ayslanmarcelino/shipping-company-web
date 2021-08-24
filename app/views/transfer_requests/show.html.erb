@@ -2,7 +2,7 @@
   <h4 class="uppercase"><%= @transfer_request.full_information %></h4>
 </div>
 <div class="col-xs-12 mb-2 d-flex mr-2 no-print">
-  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm btn-user' do %>
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm btn-user mr-2' do %>
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
@@ -17,12 +17,40 @@
       <%= t('.download_document') %>
     <% end %>
   <% end %>
+  <% if can?(:reject, TransferRequest) && @transfer_request.status_cd == 'pending' %>
+    <a class='col-xs-3 btn btn-danger btn-sm no-print mr-2' href="#" data-toggle="modal" data-target="#reject-transfer-request-<%= @transfer_request.id %>">
+      <i class="fas fa-times"></i>
+      <%= t('.reject') %>
+    </a>
+    <div id="reject-transfer-request-<%= @transfer_request.id %>" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><%= t('.reject') %></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <%= form_with(model: [@transfer_request], local: true) do |form| %>
+              <div class="col-lg-12 mb-2">
+                <%= form.label(:reject_reason) %>
+                <%= form.text_field(:reject_reason, class: 'form-control form-control-user', required: true) %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.cancel') %></button>
+                <%= form.submit(t('.reject'), class: 'btn btn-danger') %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <% if can?(:approve, TransferRequest) && @transfer_request.status_cd == 'pending' %>
-    <a class = 'col-xs-3 btn btn-success btn-sm no-print' href="#" data-toggle="modal" data-target="#transfer_request-<%= @transfer_request.id %>">
+    <a class='col-xs-3 btn btn-success btn-sm no-print mr-2' href="#" data-toggle="modal" data-target="#approve-transfer-request-<%= @transfer_request.id %>">
       <i class="fas fa-check"></i>
       <%= t('.approve') %>
     </a>
-    <div id="transfer_request-<%= @transfer_request.id %>" class="modal fade" role="dialog">
+    <div id="approve-transfer-request-<%= @transfer_request.id %>" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -31,15 +59,13 @@
           </div>
           <div class="modal-body">
             <%= form_with(model: [@transfer_request], local: true) do |form| %>
-              <div class="col-lg-12">
+              <div class="col-lg-12 mb-2">
                 <%= form.label(:voucher) %>
-                <%= form.file_field(:voucher, key: :file, input_opts: { as: :select2 }) %>
+                <%= form.file_field(:voucher, key: :file, input_opts: { as: :select2 }, required: true) %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.cancel') %></button>
-                <%= form.submit(t('.approve'),
-                                data: { confirm: 'Você tem certeza?' },
-                                class: 'btn btn-primary') %>
+                <%= form.submit(t('.approve'), class: 'btn btn-success') %>
               </div>
             <% end %>
           </div>
@@ -103,8 +129,15 @@
           </td>
         </tr>
       <% end %>
+      <% sum_pending_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'pending').sum(&:value) %>
+      <% sum_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved').sum(&:value) %>
       <tr>
-        <% sum_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved').sum(&:value) %>
+        <th><%= t('.total_pending') %></th>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_pending_transfer_requests) %>;">
+          <%= number_to_currency(sum_pending_transfer_requests) %>
+        </td>
+      </tr>
+      <tr>
         <th><%= t('.total_paid') %></th>
         <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests) %>;">
           <%= number_to_currency(sum_transfer_requests) %>

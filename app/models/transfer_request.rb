@@ -3,7 +3,7 @@
 # Table name: transfer_requests
 #
 #  id                      :bigint           not null, primary key
-#  balance_value_truckload :float
+#  balance_value_truckload :float            default(0.0)
 #  method_cd               :string
 #  observation             :string
 #  reject_reason           :string
@@ -63,9 +63,9 @@ class TransferRequest < ApplicationRecord
 
   def full_information
     info = if truckload.ctes.count > 1
-             "CT-es #{truckload.ctes_numbers.first} à #{truckload.ctes_numbers.last} - MOT. #{driver.person.full_name}"
+             "CT-es #{truckload.ctes_numbers.first} à #{truckload.ctes_numbers.last} - MOT. #{truckload.driver.person.full_name}"
            else
-             "CT-e #{truckload.ctes_numbers.first} - MOT. #{driver.person.full_name}"
+             "CT-e #{truckload.ctes_numbers.first} - MOT. #{truckload.driver.person.full_name}"
            end
 
     "#{I18n.t(type_cd, scope: 'activerecord.attributes.transfer_request.types')} - " \
