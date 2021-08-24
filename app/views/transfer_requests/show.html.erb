@@ -1,0 +1,228 @@
+<div class="col-xs-12 text-center">
+  <h4 class="uppercase"><%= @transfer_request.full_information %></h4>
+</div>
+<div class="col-xs-12 mb-2 d-flex mr-2 no-print">
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm btn-user mr-2' do %>
+    <i class="fas fa-arrow-left"></i>
+    <%= t('.back') %>
+  <% end %>
+  <% translated_type_cd = I18n.t(@transfer_request.type_cd, scope: 'activerecord.attributes.transfer_request.types') %>
+  <% if @transfer_request.status_cd == 'approved' %>
+    <%= link_to(@transfer_request.voucher.url,
+                download: "Comprovante-#{translated_type_cd}-DT-#{@transfer_request.truckload.dt_number}",
+                target: '_blank',
+                rel: 'noopener',
+                class: 'btn btn-primary') do %>
+      <i class="fas fa-download"></i>
+      <%= t('.download_document') %>
+    <% end %>
+  <% end %>
+  <% if can?(:reject, TransferRequest) && @transfer_request.status_cd == 'pending' %>
+    <a class='col-xs-3 btn btn-danger btn-sm no-print mr-2' href="#" data-toggle="modal" data-target="#reject-transfer-request-<%= @transfer_request.id %>">
+      <i class="fas fa-times"></i>
+      <%= t('.reject') %>
+    </a>
+    <div id="reject-transfer-request-<%= @transfer_request.id %>" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><%= t('.reject') %></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <%= form_with(model: [@transfer_request], local: true) do |form| %>
+              <div class="col-lg-12 mb-2">
+                <%= form.label(:reject_reason) %>
+                <%= form.text_field(:reject_reason, class: 'form-control form-control-user', required: true) %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.cancel') %></button>
+                <%= form.submit(t('.reject'), class: 'btn btn-danger') %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <% if can?(:approve, TransferRequest) && @transfer_request.status_cd == 'pending' %>
+    <a class='col-xs-3 btn btn-success btn-sm no-print mr-2' href="#" data-toggle="modal" data-target="#approve-transfer-request-<%= @transfer_request.id %>">
+      <i class="fas fa-check"></i>
+      <%= t('.approve') %>
+    </a>
+    <div id="approve-transfer-request-<%= @transfer_request.id %>" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><%= t('.approve') %></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <%= form_with(model: [@transfer_request], local: true) do |form| %>
+              <div class="col-lg-12 mb-2">
+                <%= form.label(:voucher) %>
+                <%= form.file_field(:voucher, key: :file, input_opts: { as: :select2 }, required: true) %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.cancel') %></button>
+                <%= form.submit(t('.approve'), class: 'btn btn-success') %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="p-3 transfer-request">
+  <div class="row">
+    <table class="table table-bordered">
+      <span class="text-center w-100" style="background: #1f497d; color: white; font-size: 20px; font-weight: bold;">
+        <%= translated_type_cd if @transfer_request.type_cd.present? %>
+      </span>
+      <tr>
+        <th><%= t('.destiny') %></th>
+        <td>
+          <%= @transfer_request.truckload.ctes.map { |k, _| "#{k.destiny_city} - #{k.destiny_state}"}.join(', ') %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= t('.client') %></th>
+        <td><%= @transfer_request.truckload.client&.company_name %></td>
+      </tr>
+      <tr>
+        <th><%= t('.cte_number') %></th>
+        <td>
+          <% @transfer_request.truckload.ctes.each do |cte| %>
+            <%= link_to cte_path(cte.id) do %>
+              <li><%= cte.cte_number %></li>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= t('.driver') %></th>
+        <td><%= link_to(@transfer_request.truckload.driver.person.full_name, driver_path(@transfer_request.truckload.driver)) %></td>
+      </tr>
+      <tr>
+        <th><%= t('.requested_by') %></th>
+        <td><%= link_to(@transfer_request.truckload.user.person.full_name, admins_user_path(@transfer_request.truckload.user)) %></td>
+      </tr>
+      <tr>
+        <th><%= t('.value_driver') %></th>
+        <td class="td-value-driver"><%= number_to_currency(@transfer_request.truckload.value_driver) %></td>
+      </tr>
+      <% transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved') %>
+      <% if transfer_requests.count.positive? %>
+        <tr>
+          <th><%= t('.all_transfers') %></th>
+          <td class="td-all-transfers">
+            <% transfer_requests.each do |other_transfer| %>
+              <%= link_to transfer_request_path(other_transfer.id) do %>
+                <% if other_transfer.id == @transfer_request.id %>
+                  <li><%= other_transfer.basic_information %> - Transferência atual</li>
+                <% else %>
+                  <li><%= other_transfer.basic_information %></li>
+                <% end %>
+              <% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      <% sum_pending_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'pending').sum(&:value) %>
+      <% sum_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved').sum(&:value) %>
+      <tr>
+        <th><%= t('.total_pending') %></th>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_pending_transfer_requests) %>;">
+          <%= number_to_currency(sum_pending_transfer_requests) %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= t('.total_paid') %></th>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests) %>;">
+          <%= number_to_currency(sum_transfer_requests) %>
+        </td>
+      </tr>
+      <tr>
+        <th><%= t('.value_transfer_remaining') %></th>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests) %>;">
+          <%= number_to_currency(@transfer_request.truckload.value_driver - sum_transfer_requests) %>
+        </td>
+      </tr>
+      <% if @transfer_request.status_cd == 'pending' %>
+        <tr>
+          <th><%= t('.balance') %></th>
+          <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests - @transfer_request.value) %>;">
+            <%= number_to_currency(@transfer_request.truckload.value_driver - sum_transfer_requests - @transfer_request.value) %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <th><%= t('.value_transfer') %></th>
+        <td class="td-value-transfer"><%= number_to_currency(@transfer_request.value) %></td>
+      </tr>
+      <% if @transfer_request.observation.present? %>
+        <tr>
+          <th><%= t('.observation') %></th>
+          <td class="td-observation">
+            <i class="fas fa-exclamation-triangle"></i>
+            <%= @transfer_request.observation %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+    <table class="table table-bordered">
+      <span class="text-center w-100" style="background: #1f497d; color: white; font-size: 20px; font-weight: bold;">
+        <%= t('.bank_account_info') %>
+      </span>
+      <tr>
+        <th><%= t('.transfer_type') %></th>
+        <td><%= I18n.t(@transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods') if @transfer_request.method_cd.present? %></td>
+      </tr>
+      <% if @transfer_request.method_cd == 'pix' %>
+        <tr>
+          <th><%= t('.pix_key_type') %></th>
+          <td><%= I18n.t(@transfer_request.bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') if @transfer_request.bank_account.pix_key_type_cd.present? %></td>
+        </tr>
+        <tr>
+          <th><%= t('.pix_key') %></th>
+          <td><%= @transfer_request.bank_account.pix_key %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <th><%= t('.account_name') %></th>
+        <td><%= @transfer_request.bank_account.account_name %></td>
+      </tr>
+      <tr>
+        <th><%= t('.document_number') %></th>
+        <td><%= format_document_number(@transfer_request.bank_account.document_number) %></td>
+      </tr>
+      <tr>
+        <th><%= t('.bank_code') %></th>
+        <td><%= @transfer_request.bank_account.bank_code %></td>
+      </tr>
+      <tr>
+        <th><%= t('.agency') %></th>
+        <td><%= @transfer_request.bank_account.agency %></td>
+      </tr>
+      <tr>
+        <th><%= t('.account_number') %></th>
+        <td><%= @transfer_request.bank_account.account_number %></td>
+      </tr>
+      <tr>
+        <th><%= t('.type') %></th>
+        <td><%= I18n.t(@transfer_request.bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') if @transfer_request.bank_account.account_type_cd.present? %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<style>
+  th {
+    width: 25% !important;
+  }
+
+  td {
+    width: 75% !important;
+  }
+</style>

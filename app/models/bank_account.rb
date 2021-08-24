@@ -51,4 +51,12 @@ class BankAccount < ApplicationRecord
   def formatted_bank_account
     "#{bank_code} - #{agency} | #{account_number} - #{person.full_name}"
   end
+
+  def formatted_pix
+    if pix_key_type_cd.present?
+      pix_key_type = I18n.t(pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types')
+    end
+
+    "#{pix_key_type} - #{pix_key} | #{person.full_name}"
+  end
 end

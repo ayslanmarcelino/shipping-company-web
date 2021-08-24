@@ -5,6 +5,17 @@
 #  id                       :bigint           not null, primary key
 #  company_name_emitter     :string
 #  cte_number               :integer          not null
+#  destiny                  :string
+#  destiny_city             :string
+#  destiny_city_code        :string
+#  destiny_complement       :string
+#  destiny_country          :string
+#  destiny_country_code     :string
+#  destiny_neighborhood     :string
+#  destiny_number           :string
+#  destiny_state            :string
+#  destiny_street           :string
+#  destiny_zip_code         :string
 #  document_number_emitter  :string
 #  emitted_at               :datetime
 #  emitted_by_enterprise    :boolean          default(FALSE)
@@ -54,5 +65,9 @@ class Cte < ApplicationRecord
 
   def truckload_client
     "#{truckload.client.company_name} - #{truckload.client.address.state} | #{truckload.client.document_number.to_br_cnpj}"
+  end
+
+  def full_destiny
+    "#{destiny_city} - #{destiny_state}"
   end
 end

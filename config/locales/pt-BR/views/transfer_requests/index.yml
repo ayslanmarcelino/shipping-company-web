@@ -7,6 +7,14 @@ pt-BR:
       type_cd: Tipo de solicitação
       method_cd: Método de envio
       truckload_number: Número DT
-      bank_account: Conta bancária (Cód. banco - Agência | Conta - Favorecido)
+      bank_account: Conta bancária
       enterprise: Empresa
+      requested_by: Solicitado por
+      updated_by: Atualizado por
+      view_details: Mais detalhes
+      destroy: Excluir
+      view: Visualizar
+      reject_reason: Motivo de rejeição
+      close: Fechar
+      download_document: Baixar comprovante
       delete_confirm: Você tem certeza que deseja excluir a solicitação de transferência

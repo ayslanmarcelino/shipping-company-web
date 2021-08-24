@@ -37,7 +37,8 @@ Rails.application.routes.draw do
   resources :agents
   resources :transfer_requests do
     collection do
-      get 'truckload_information'
+      get :truckload_information
+      get :pending
     end
   end
   root to: 'dashboard#index'

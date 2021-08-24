@@ -21,6 +21,12 @@ module ApplicationHelper
     return 'success' if status == 'approved'
   end
 
+  def money_color(value)
+    return '#4f9800' if value.zero?
+    return '#c65a56' if value.negative?
+    return '#95951b' if value.positive?
+  end
+
   def user_master?(current_user)
     current_user.roles.kind_masters.present?
   end

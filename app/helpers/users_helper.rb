@@ -14,7 +14,7 @@ module UsersHelper
               User.where(enterprise: current_user.enterprise)
             end
 
-    users.each do |user|
+    users.includes(:person).each do |user|
       @users << ["#{user.person.first_name} #{user.person.last_name} | #{user.email}", user.id]
     end
 

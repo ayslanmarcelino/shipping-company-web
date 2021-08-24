@@ -23,9 +23,12 @@ truckload = FactoryBot.create(:truckload,
                               driver: driver,
                               agent: agent)
 FactoryBot.create(:cte, truckload: truckload, user: user_operational, enterprise: enterprise1, client: client)
-FactoryBot.create(:transfer_request,
-                  truckload: truckload,
-                  driver: driver,
-                  bank_account: driver.person.bank_accounts.first,
-                  enterprise: enterprise1,
-                  user: user_operational)
+%i[pending approved rejected].each do |status|
+  FactoryBot.create(:transfer_request,
+                    truckload: truckload,
+                    driver: driver,
+                    bank_account: driver.person.bank_accounts.first,
+                    enterprise: enterprise1,
+                    user: user_operational,
+                    status_cd: status)
+end

@@ -15,7 +15,7 @@
   </div>
 <% end %>
 <% if can?(:read, TransferRequest) %>
-  <%= link_to transfer_requests_index_path, class: "#{'active-menu' if request.path.include?(transfer_requests_path)} list-item-menu list-group-item-action",
+  <%= link_to transfer_requests_index_path, class: "#{'active-menu' if request.path.include?(transfer_requests_path) && request.path.exclude?(pending_transfer_requests_path)} list-item-menu list-group-item-action",
                                             style: "color: #{current_user.enterprise.secondary_color};
                                                     background-color: #{current_user.enterprise.primary_color}",
                                             id: 'transfer_requests' do %>
@@ -24,6 +24,19 @@
         <i class="fas fa-exchange-alt"></i>
       </div>
       <span><%= t('layouts.application.transfer_request') %></span>
+    </div>
+  <% end %>
+<% end %>
+<% if can?(:read_pending, TransferRequest) %>
+  <%= link_to pending_transfer_requests_path, class: "#{'active-menu' if request.path.include?(pending_transfer_requests_path)} list-item-menu list-group-item-action",
+                                              style: "color: #{current_user.enterprise.secondary_color};
+                                                      background-color: #{current_user.enterprise.primary_color}",
+                                              id: 'pending_transfer_requests' do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-exchange-alt"></i>
+      </div>
+      <span><%= t('layouts.application.pending_transfer_request') %></span>
     </div>
   <% end %>
 <% end %>
