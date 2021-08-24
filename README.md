@@ -11,6 +11,7 @@ Algumas funcionalidades/tecnologias/metódos trabalhados no projeto:
 * Rspec;
 * Whitelabel;
 * AWS s3;
+* Leitura de XML;
 * Sidekiq (em breve);
 * Rollbar (em breve);
 * Consumo de API para emissão de CT-e e MDF-e (em breve).
