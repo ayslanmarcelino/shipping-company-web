@@ -5,7 +5,7 @@ class ClientsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @q = Client.includes(:address)
+    @q = Client.includes(:address, :enterprise)
                .accessible_by(current_ability)
                .page(params[:page])
                .ransack(params[:q])

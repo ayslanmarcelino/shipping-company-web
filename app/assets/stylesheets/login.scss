@@ -121,3 +121,40 @@ table {
 .dataTables_wrapper {
   padding-right: 2px;
 }
+
+.td-value-driver {
+  font-weight: bold;
+  color: #4f9800;
+}
+
+.td-value-transfer {
+  font-weight: bold;
+  color: #c65a56;
+  font-size: 25px;
+}
+
+.td-balance {
+  font-weight: bold;
+  color: #95951b;
+}
+
+.td-all-transfers {
+  font-weight: bold;
+  color: #3c91ff;
+}
+
+.td-observation {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@media print {    
+  .no-print, .no-print * {
+    display: none !important;
+  }
+
+  .transfer-request {
+    -webkit-print-color-adjust: exact; 
+  }
+}
