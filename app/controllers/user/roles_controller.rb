@@ -33,7 +33,7 @@ class User::RolesController < AdminsController
       end
     else
       redirect_to(user_roles_path)
-      flash[:danger] = 'Você não tem permissão para realizar esta ação.'
+      flash[:danger] = 'Você não possui permissão para realizar esta ação.'
     end
   end
 
@@ -51,7 +51,7 @@ class User::RolesController < AdminsController
       end
     else
       redirect_to(user_roles_path)
-      flash[:danger] = 'Você não tem permissão para realizar esta ação.'
+      flash[:danger] = 'Você não possui permissão para realizar esta ação.'
     end
   end
 
@@ -65,7 +65,7 @@ class User::RolesController < AdminsController
       end
     else
       redirect_to(user_roles_path)
-      flash[:danger] = 'Você não tem permissão para realizar esta ação.'
+      flash[:danger] = 'Você não possui permissão para realizar esta ação.'
     end
   end
 
@@ -76,7 +76,7 @@ class User::RolesController < AdminsController
       @user_role = User::Role.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular esta regra de usuário.'
+      flash[:danger] = 'Você não possui permissão para manipular esta regra de usuário.'
     end
   end
 

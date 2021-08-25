@@ -8,8 +8,7 @@ class TruckloadsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
-    @q = Truckload.includes(:ctes, [driver: :person], [client: :address])
-                  .includes([user: :person])
+    @q = Truckload.includes(:ctes, [driver: :person], [client: :address], [user: :person], [user: :enterprise])
                   .accessible_by(current_ability)
                   .page(params[:page])
                   .ransack(params[:q])
@@ -34,7 +33,12 @@ class TruckloadsController < UsersController
     end
   end
 
-  def edit; end
+  def edit
+    return if current_user.truckload_ids.include?(@truckload.id)
+
+    redirect_to(truckloads_path)
+    flash[:danger] = 'Você não possui permissão para editar carga de terceiros.'
+  end
 
   def update
     @truckload.validate_all = true
@@ -49,11 +53,19 @@ class TruckloadsController < UsersController
   end
 
   def destroy
-    if @truckload.destroy
-      redirect_to(truckloads_path)
-      flash[:success] = 'Carga excluída com sucesso.'
+    can_destroy_truckload = true if current_user.roles.kind_masters.present? ||
+                                    Truckload.find(params[:id]).user == current_user
+
+    if can_destroy_truckload
+      if @truckload.destroy
+        redirect_to(truckloads_path)
+        flash[:success] = 'Carga excluída com sucesso.'
+      else
+        render :index
+      end
     else
-      render :index
+      redirect_to(truckloads_path)
+      flash[:danger] = 'Você não pode deletar a carga de terceiros.'
     end
   end
 
@@ -65,14 +77,12 @@ class TruckloadsController < UsersController
   end
 
   def set_truckload
-    if current_user.truckload_ids.include?(Truckload.find(params[:id]).id) ||
-       current_user.roles.kind_masters.present? ||
-       (current_user.roles.kind_owners.present? &&
-        current_user.enterprise_id == Truckload.find(params[:id]).enterprise_id)
+    if current_user.roles.kind_masters.present? ||
+       current_user.enterprise_id == Truckload.find(params[:id]).enterprise_id
       @truckload = Truckload.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular esta carga.'
+      flash[:danger] = 'Você não possui permissão para manipular esta carga.'
     end
   end
 

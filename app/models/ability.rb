@@ -51,15 +51,15 @@ class Ability
       can(:manage, Agent, enterprise: @enterprise)
       can(:manage, TransferRequest, enterprise: @enterprise)
       can(%i[approve reject], TransferRequest, enterprise: @enterprise)
-      cannot(:update, Truckload)
-      cannot(:update, Cte)
     end
 
     def operational_abilities
-      can(:manage, Truckload, user: @user)
-      can(%i[read destroy], Cte, user: @user)
+      can(%i[read create], Truckload, enterprise: @enterprise)
+      can(%i[update destroy], Truckload, user: @user)
+      can(:read, Cte, enterprise: @enterprise)
+      can(%i[destroy], Cte, truckload: [user: @user])
       can(:manage, Client, enterprise: @enterprise)
-      can(:update, User, user: @user)
+      can(:update, User, id: @user.id)
       can(:manage, Driver, enterprise: @enterprise)
       can(:manage, Agent, enterprise: @enterprise)
       can(%i[create destroy], TransferRequest, enterprise: @enterprise, user: @user)
