@@ -1,13 +1,5 @@
 <div class="text-center">
-  <h4>
-    <% if user_owner?(current_user) %>
-      <%= t('.list_enterprise') %>: <%= current_user.enterprise.company_name %>
-    <% elsif user_master?(current_user) %>
-      <%= t('.list') %>
-    <% else %>
-      <%= t('.list_user') %>: <%= current_user.person.first_name %>
-    <% end %>
-  </h4>
+  <h4><%= t('.list') %></h4>
 </div>
 <%= render layout: 'layouts/filter' do %>
   <%= search_form_for @q, url: truckloads_path do |f| %>
@@ -40,14 +32,15 @@
             <th class="no-sort"><%= t('.client') %></th>
             <th class="no-sort"><%= t('.value') %></th>
             <th class="no-sort"><%= t('.value_driver') %></th>
+            <th class="no-sort"><%= t('.paid_value_driver') %></th>
+            <th class="no-sort"><%= t('.pending_value_driver') %></th>
+            <th class="no-sort"><%= t('.pending_balance') %></th>
             <th class="no-sort"><%= sort_link @q, :is_agent, t('.is_agent') %>?</th>
             <th class="no-sort"><%= sort_link @q, :created_at, t('.created_at') %></th>
             <th class="no-sort"><%= t('.cte') %></th>
             <th class="no-sort"><%= t('.qtd_cte') %></th>
             <th class="no-sort"><%= t('.driver') %></th>
-            <% if user_owner?(current_user) || user_master?(current_user) %>
-              <th class="no-sort"><%= sort_link @q, :created_by, t('.created_by') %></th>
-            <% end %>
+            <th class="no-sort"><%= sort_link @q, :created_by, t('.created_by') %></th>
             <% if user_master?(current_user) %>
               <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
@@ -72,6 +65,9 @@
               </td>
               <td><%= number_to_currency(truckload.truckload_value) %></td>
               <td><%= number_to_currency(truckload.value_driver) %></td>
+              <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'approved').sum(&:value)) %></td>
+              <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'pending').sum(&:value)) %></td>
+              <td><%= number_to_currency(truckload.value_driver - truckload.transfer_requests.where.not(status_cd: 'rejected').sum(&:value)) %></td>
               <td class="text-center">
                 <span class="badge badge-<%= agent_color(truckload.is_agent) %>">
                   <%= translate_boolean(truckload.is_agent) %>
@@ -109,13 +105,11 @@
               <% end %>
               <td><%= truckload.ctes_numbers.count %></td>
               <td><%= link_to(truckload.driver.person.full_name, driver_path(truckload.driver)) %></td>
-              <% if user_owner?(current_user) || user_master?(current_user) %>
-                <td>
-                  <%= link_to(admins_user_path(truckload.user)) do %>
-                    <%= truckload.user.person.first_name %> <%= truckload.user.person.last_name %>
-                  <% end %>
-                </td>
-              <% end %>
+              <td>
+                <%= link_to(admins_user_path(truckload.user)) do %>
+                  <%= truckload.user.person.first_name %> <%= truckload.user.person.last_name %>
+                <% end %>
+              </td>
               <% if user_master?(current_user) %>
                 <td><%= truckload.user.enterprise.company_name %></td>
               <% end %>

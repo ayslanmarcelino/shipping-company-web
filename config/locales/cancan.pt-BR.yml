@@ -1,14 +1,14 @@
 pt-BR:
   unauthorized:
     manage:
-      all: "Você não tem permissão para esse(a) %{subject}!"
+      all: "Você não possui permissão para esse(a) %{subject}!"
     index:
-      all: "Você não tem permissão para visualizar %{subject}!"
+      all: "Você não possui permissão para visualizar %{subject}!"
     read:
-      all: "Você não tem permissão para visualizar esse(a) %{subject}!"
+      all: "Você não possui permissão para visualizar esse(a) %{subject}!"
     update:
-      all: "Você não tem permissão para atualizar esse(a) %{subject}!"
+      all: "Você não possui permissão para atualizar esse(a) %{subject}!"
     destroy:
-      all: "Você não tem permissão para deletar esse(a) %{subject}!"
+      all: "Você não possui permissão para deletar esse(a) %{subject}!"
     create:
-      all: "Você não tem permissão para criar um(a) %{subject}!"
+      all: "Você não possui permissão para criar um(a) %{subject}!"

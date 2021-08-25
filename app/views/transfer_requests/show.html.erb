@@ -14,7 +14,7 @@
                 rel: 'noopener',
                 class: 'btn btn-primary') do %>
       <i class="fas fa-download"></i>
-      <%= t('.download_document') %>
+      <%= t('.view_document') %>
     <% end %>
   <% end %>
   <% if can?(:reject, TransferRequest) && @transfer_request.status_cd == 'pending' %>
@@ -88,12 +88,12 @@
       </tr>
       <tr>
         <th><%= t('.client') %></th>
-        <td><%= @transfer_request.truckload.client&.company_name %></td>
+        <td><%= @transfer_request.truckload.client&.company_name %> - <%= @transfer_request.truckload.client&.address&.state %></td>
       </tr>
       <tr>
         <th><%= t('.cte_number') %></th>
         <td>
-          <% @transfer_request.truckload.ctes.each do |cte| %>
+          <% @transfer_request.truckload.ctes.order(:cte_number).each do |cte| %>
             <%= link_to cte_path(cte.id) do %>
               <li><%= cte.cte_number %></li>
             <% end %>
@@ -131,7 +131,7 @@
       <% end %>
       <% sum_pending_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'pending').sum(&:value) %>
       <% sum_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved').sum(&:value) %>
-      <tr>
+      <tr class="no-print">
         <th><%= t('.total_pending') %></th>
         <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_pending_transfer_requests) %>;">
           <%= number_to_currency(sum_pending_transfer_requests) %>
@@ -143,6 +143,12 @@
           <%= number_to_currency(sum_transfer_requests) %>
         </td>
       </tr>
+      <% if @transfer_request.status_cd == 'pending' %>
+        <tr>
+          <th><%= t('.value_transfer') %></th>
+          <td class="td-value-transfer"><%= number_to_currency(@transfer_request.value) %></td>
+        </tr>
+      <% end %>
       <tr>
         <th><%= t('.value_transfer_remaining') %></th>
         <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests) %>;">
@@ -150,17 +156,13 @@
         </td>
       </tr>
       <% if @transfer_request.status_cd == 'pending' %>
-        <tr>
+        <tr class="no-print">
           <th><%= t('.balance') %></th>
           <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests - @transfer_request.value) %>;">
             <%= number_to_currency(@transfer_request.truckload.value_driver - sum_transfer_requests - @transfer_request.value) %>
           </td>
         </tr>
       <% end %>
-      <tr>
-        <th><%= t('.value_transfer') %></th>
-        <td class="td-value-transfer"><%= number_to_currency(@transfer_request.value) %></td>
-      </tr>
       <% if @transfer_request.observation.present? %>
         <tr>
           <th><%= t('.observation') %></th>

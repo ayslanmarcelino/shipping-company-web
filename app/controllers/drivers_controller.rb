@@ -28,7 +28,7 @@ class DriversController < UsersController
     @driver.person.address.validate_address = true
 
     if @driver.save
-      redirect_to drivers_path
+      redirect_to(drivers_path)
       flash[:success] = 'Motorista cadastrado com sucesso.'
     else
       render :new
@@ -43,7 +43,7 @@ class DriversController < UsersController
     @driver.person.address.validate_address = true
 
     if @driver.update(params_driver)
-      redirect_to drivers_path
+      redirect_to(drivers_path)
       flash[:success] = 'Motorista atualizado com sucesso.'
     else
       render :edit
@@ -54,7 +54,7 @@ class DriversController < UsersController
     bank_accounts = BankAccount.where(person: @driver.person)
 
     if @driver.destroy && bank_accounts.destroy_all && @driver.person.destroy
-      redirect_to drivers_path
+      redirect_to(drivers_path)
       flash[:success] = 'Motorista excluído com sucesso.'
     else
       render :index
@@ -64,7 +64,7 @@ class DriversController < UsersController
   private
 
   def invalid_foreign_key
-    redirect_to drivers_path
+    redirect_to(drivers_path)
     flash[:danger] = 'Motorista com dados vinculados não pode ser excluído.'
   end
 
@@ -75,7 +75,7 @@ class DriversController < UsersController
       @driver = Driver.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular este motorista.'
+      flash[:danger] = 'Você não possui permissão para manipular este motorista.'
     end
   end
 
