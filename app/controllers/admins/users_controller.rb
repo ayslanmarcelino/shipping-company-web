@@ -45,7 +45,13 @@ class Admins::UsersController < AdminsController
     @user.person.address.validate_address = true
 
     if @user.update(params_user)
-      redirect_to(admins_users_path)
+      if current_user.roles.kind_masters.present? ||
+         current_user.roles.kind_owners.present?
+        redirect_to(admins_users_path)
+      else
+        redirect_to(root_path)
+      end
+
       flash[:success] = 'Usuário atualizado com sucesso.'
     else
       render :edit
@@ -77,7 +83,7 @@ class Admins::UsersController < AdminsController
       @user = User.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular este usuário.'
+      flash[:danger] = 'Você não possui permissão para manipular este usuário.'
     end
   end
 

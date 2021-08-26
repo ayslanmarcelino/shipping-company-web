@@ -1,9 +1,7 @@
 pt-BR:
   ctes:
     index:
-      list_enterprise: Lista de CT-e da empresa
-      list_user: Lista de CT-e cadastrados por
-      list: Lista de CT-e
+      list: Lista de CT-es
       cte_number: Número do CT-e
       value: Valor
       client: Cliente

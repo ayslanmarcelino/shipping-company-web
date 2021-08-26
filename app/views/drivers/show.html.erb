@@ -61,7 +61,11 @@
             <%= render partial: 'drivers/components/address' %>
           </div>
           <div class="tab-pane fade" id="bank_accounts">
-            <%= render partial: 'drivers/components/bank_account' %>
+            <% if @driver.person.bank_accounts.present? %>
+              <%= render partial: 'drivers/components/bank_account' %>
+            <% else %>
+              <h4>Motorista não possui contas bancárias cadastradas</h4>
+            <% end %>
           </div>
         </div>
       </div>

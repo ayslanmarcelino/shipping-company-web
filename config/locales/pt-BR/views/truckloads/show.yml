@@ -28,4 +28,12 @@ pt-BR:
       address_city: Cidade
       address_state: Estado
       address_country: País
+      transfers: Transferências
+      id: Código da transferência
+      method: Método de envio
+      transfer_value: Valor
+      bank_account: Conta bancária
+      status: Status
+      view_document: Visualizar comprovante
+      reject_reason: Motivo de rejeição
       delete_confirm: Você deseja excluir a carga

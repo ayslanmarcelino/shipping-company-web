@@ -8,6 +8,9 @@ pt-BR:
       client: Cliente
       value: Valor da carga
       value_driver: Valor do motorista
+      paid_value_driver: Pago ao motorista
+      pending_value_driver: Transferências pendentes
+      pending_balance: Saldo
       is_agent: Contratado por agenciador
       cte: CT-e(s) vinculado
       qtd_cte: Qtd. CT-e(s)

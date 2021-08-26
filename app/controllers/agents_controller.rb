@@ -1,6 +1,7 @@
 class AgentsController < UsersController
   before_action :set_agent, only: %w[show edit update destroy]
   before_action :set_enterprise, only: %w[create new edit update destroy]
+  rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
     @q = Agent.includes(:person, :enterprise).accessible_by(current_ability)
@@ -58,6 +59,11 @@ class AgentsController < UsersController
 
   private
 
+  def invalid_foreign_key
+    redirect_to(agents_path)
+    flash[:danger] = 'Agenciador dados vinculados não pode ser excluído.'
+  end
+
   def set_agent
     can_view_agent = true if current_user.roles.kind_masters.present? ||
                              current_user.enterprise_id == Agent.find(params[:id]).enterprise_id
@@ -65,7 +71,7 @@ class AgentsController < UsersController
       @agent = Agent.find(params[:id])
     else
       redirect_to(root_path)
-      flash[:danger] = 'Você não tem permissão para manipular este agenciador.'
+      flash[:danger] = 'Você não possui permissão para manipular este agenciador.'
     end
   end
 

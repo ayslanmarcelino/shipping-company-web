@@ -49,7 +49,7 @@ class BankAccount < ApplicationRecord
   end
 
   def formatted_bank_account
-    "#{bank_code} - #{agency} | #{account_number} - #{person.full_name}"
+    "#{bank_code} - #{agency} | #{account_number} - #{account_name}"
   end
 
   def formatted_pix
@@ -57,6 +57,6 @@ class BankAccount < ApplicationRecord
       pix_key_type = I18n.t(pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types')
     end
 
-    "#{pix_key_type} - #{pix_key} | #{person.full_name}"
+    "Tipo: #{pix_key_type} | Chave pix: #{pix_key} | #{account_name}"
   end
 end

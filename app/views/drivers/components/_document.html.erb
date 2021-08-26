@@ -1,34 +1,38 @@
-<table class="table">
-  <tr>
-    <th><%= t('drivers.show.cnh_record') %></th>
-    <td><%= @driver.cnh_record %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.cnh_number') %></th>
-    <td><%= @driver.cnh_number %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.cnh_type') %></th>
-    <td><%= @driver.cnh_type %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.cnh_issuing_body') %></th>
-    <td><%= @driver.cnh_issuing_body %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.cnh_expires_at') %></th>
-    <td><%= l(@driver.cnh_expires_at.to_datetime, format: :date) %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.document_number') %></th>
-    <td><%= format_document_number(@driver.person.document_number) %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.rg') %></th>
-    <td><%= @driver.person.rg %></td>
-  </tr>
-  <tr>
-    <th><%= t('drivers.show.rg_issuing_body') %></th>
-    <td><%= @driver.person.rg_issuing_body %></td>
-  </tr>
-</table>
+<% @driver.person.bank_accounts.each_with_index do |bank_account, index| %>
+  <h4>Conta bancária #<%= index + 1 %></h4>
+  <table class="table">
+    <tr>
+      <th><%= t('drivers.show.cnh_record') %></th>
+      <td><%= @driver.cnh_record %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.cnh_number') %></th>
+      <td><%= @driver.cnh_number %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.cnh_type') %></th>
+      <td><%= @driver.cnh_type %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.cnh_issuing_body') %></th>
+      <td><%= @driver.cnh_issuing_body %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.cnh_expires_at') %></th>
+      <td><%= l(@driver.cnh_expires_at.to_datetime, format: :date) %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.document_number') %></th>
+      <td><%= format_document_number(@driver.person.document_number) %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.rg') %></th>
+      <td><%= @driver.person.rg %></td>
+    </tr>
+    <tr>
+      <th><%= t('drivers.show.rg_issuing_body') %></th>
+      <td><%= @driver.person.rg_issuing_body %></td>
+    </tr>
+  </table>
+<% end %>
+

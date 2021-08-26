@@ -1,13 +1,5 @@
 <div class="text-center">
-  <h4>
-    <% if user_owner?(current_user) %>
-      <%= t('.list_enterprise') %>: <%= current_user.enterprise.company_name %>
-    <% elsif user_master?(current_user) %>
-      <%= t('.list') %>
-    <% else %>
-      <%= t('.list_user') %>: <%= current_user.person.first_name %>
-    <% end %>
-  </h4>
+  <h4><%= t('.list') %></h4>
 </div>
 <%= render layout: 'layouts/filter' do %>
   <%= search_form_for @q, url: ctes_path do |f| %>

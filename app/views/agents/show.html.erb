@@ -60,9 +60,13 @@
           <div class="tab-pane fade" id="address">
             <%= render partial: 'agents/components/address' %>
           </div>
-          <div class="tab-pane fade" id="bank_accounts">
-            <%= render partial: 'agents/components/bank_account' %>
-          </div>
+            <div class="tab-pane fade" id="bank_accounts">
+            <% if @agent.person.bank_accounts.present? %>
+              <%= render partial: 'agents/components/bank_account' %>
+            <% else %>
+              <h4>Agente não tem contas bancárias cadastradas</h4>
+            <% end %>
+            </div>
         </div>
       </div>
     </div>
