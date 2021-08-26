@@ -22,12 +22,12 @@ module Admins
         @enterprise = Enterprise.find(params[:id])
       else
         redirect_to root_path
-        flash[:danger] = 'Você não tem permissão para editar esta empresa.' 
+        flash[:danger] = 'Você não tem permissão para editar esta empresa.'
       end
     end
 
     def params_enterprise
-      params.require(:enterprise).permit(:logo, :primary_color, :secondary_color)
+      params.require(:enterprise).permit(:logo, :primary_color, :secondary_color, :fantasy_name)
     end
   end
 end
