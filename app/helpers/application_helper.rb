@@ -39,12 +39,14 @@ module ApplicationHelper
   def role_master_select
     [['Master', 'master'],
      ['Proprietário', 'owner'],
-     ['Operacional', 'operational']].sort
+     ['Operacional', 'operational'],
+     ['Financeiro', 'financial']].sort
   end
 
   def role_select
     [['Proprietário', 'owner'],
-     ['Operacional', 'operational']].sort
+     ['Operacional', 'operational'],
+     ['Financeiro', 'financial']].sort
   end
 
   def pix_key_types_select

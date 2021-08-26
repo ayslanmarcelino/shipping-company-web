@@ -4,6 +4,8 @@ class CtesController < UsersController
   before_action :set_cte, only: %w[destroy show]
 
   def index
+    return if cannot?(:read, Cte) && unauthorized_redirect
+
     @q = Cte.includes([client: :address], :truckload)
             .accessible_by(current_ability)
             .page(params[:page])
@@ -12,7 +14,13 @@ class CtesController < UsersController
     @ctes = @q.result(distinct: false)
   end
 
+  def show
+    return if cannot?(:read, Cte) && unauthorized_redirect
+  end
+
   def destroy
+    return if cannot?(:destroy, Cte) && unauthorized_redirect
+
     can_destroy_cte = true if current_user.roles.kind_masters.present? ||
                               Cte.find(params[:id]).truckload.user == current_user
 
@@ -30,6 +38,11 @@ class CtesController < UsersController
   end
 
   private
+
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
 
   def set_cte
     if current_user.roles.kind_masters.present? ||

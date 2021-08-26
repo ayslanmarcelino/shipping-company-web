@@ -8,6 +8,8 @@ class TruckloadsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
+    return if cannot?(:read, Truckload) && unauthorized_redirect
+
     @q = Truckload.includes(:ctes, [driver: :person], [client: :address], [user: :person], [user: :enterprise])
                   .accessible_by(current_ability)
                   .page(params[:page])
@@ -16,11 +18,19 @@ class TruckloadsController < UsersController
     @truckloads = @q.result(distinct: false)
   end
 
+  def show
+    return if cannot?(:read, Truckload) && unauthorized_redirect
+  end
+
   def new
+    return if cannot?(:create, Truckload) && unauthorized_redirect
+
     @truckload = Truckload.new
   end
 
   def create
+    return if cannot?(:create, Truckload) && unauthorized_redirect
+
     @truckload = Truckload.new(params_truckload)
     @truckload.validate_all = true
     create_ctes
@@ -34,6 +44,7 @@ class TruckloadsController < UsersController
   end
 
   def edit
+    return if cannot?(:update, Truckload) && unauthorized_redirect
     return if current_user.truckload_ids.include?(@truckload.id)
 
     redirect_to(truckloads_path)
@@ -41,6 +52,8 @@ class TruckloadsController < UsersController
   end
 
   def update
+    return if cannot?(:update, Truckload) && unauthorized_redirect
+
     @truckload.validate_all = true
     create_ctes
 
@@ -53,6 +66,8 @@ class TruckloadsController < UsersController
   end
 
   def destroy
+    return if cannot?(:destroy, Truckload) && unauthorized_redirect
+
     can_destroy_truckload = true if current_user.roles.kind_masters.present? ||
                                     Truckload.find(params[:id]).user == current_user
 
@@ -70,6 +85,11 @@ class TruckloadsController < UsersController
   end
 
   private
+
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
 
   def invalid_foreign_key
     redirect_to truckloads_path

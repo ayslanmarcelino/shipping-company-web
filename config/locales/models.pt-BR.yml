@@ -92,6 +92,7 @@
           master: Master
           operational: Operacional
           owner: Proprietário
+          financial: Financeiro
       driver:
         enterprise: Empresa
         cnh_expires_at: Data de vencimento

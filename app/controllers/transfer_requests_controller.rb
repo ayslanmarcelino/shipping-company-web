@@ -1,13 +1,15 @@
 # frozen_string_literal: true
 
 class TransferRequestsController < UsersController
-  before_action :set_transfer_request, only: %w[show destroy update]
-  before_action :set_truckload, only: %w[show create new destroy update]
-  before_action :set_agent, only: %w[show create new destroy update]
-  before_action :set_driver, only: %w[show create new destroy update]
-  before_action :set_bank_account, only: %w[show create new destroy update]
+  before_action :set_transfer_request, only: %w[show update]
+  before_action :set_truckload, only: %w[show create new update]
+  before_action :set_agent, only: %w[show create new update]
+  before_action :set_driver, only: %w[show create new update]
+  before_action :set_bank_account, only: %w[show create new update]
 
   def index
+    return if cannot?(:read, TransferRequest) && unauthorized_redirect
+
     @q = TransferRequest.includes(:bank_account, :truckload, [user: :person])
                         .accessible_by(current_ability)
                         .page(params[:page])
@@ -16,7 +18,13 @@ class TransferRequestsController < UsersController
     @transfer_requests = @q.result(distinct: false)
   end
 
+  def show
+    return if cannot?(:read, TransferRequest) && unauthorized_redirect
+  end
+
   def new
+    return if cannot?(:create, TransferRequest) && unauthorized_redirect
+
     @transfer_request = TransferRequest.new
   end
 
@@ -32,6 +40,8 @@ class TransferRequestsController < UsersController
   end
 
   def update
+    return if cannot?(:update, TransferRequest) && unauthorized_redirect
+
     params_update_transfer_request = case params.require(:commit)
                                      when 'Aprovar'
                                        params_approve_transfer_request
@@ -56,6 +66,8 @@ class TransferRequestsController < UsersController
   end
 
   def cancel
+    return if cannot?(:cancel, TransferRequest) && unauthorized_redirect
+
     transfer_request = TransferRequest.find(params[:id])
 
     can_cancel_transfer_request = true if current_user.roles.kind_masters.present? ||
@@ -104,6 +116,8 @@ class TransferRequestsController < UsersController
   end
 
   def pending
+    return if cannot?(:read_pending, TransferRequest) && unauthorized_redirect
+
     @search_params = params[:q]
     transfer_request = TransferRequest.includes(:bank_account, :truckload, :user, :enterprise)
     @q = if current_user.roles.kind_masters.present?
@@ -116,6 +130,11 @@ class TransferRequestsController < UsersController
   end
 
   private
+
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
 
   def set_transfer_request
     can_view_transfer_request = true if current_user.roles.kind_masters.present? ||

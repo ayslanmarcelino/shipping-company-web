@@ -28,6 +28,8 @@ class Ability
         owner_abilities
       when :operational
         operational_abilities
+      when :financial
+        financial_abilities
       end
     end
 
@@ -64,6 +66,16 @@ class Ability
       can(:manage, Agent, enterprise: @enterprise)
       can(%i[create cancel], TransferRequest, enterprise: @enterprise, user: @user)
       can(:read, TransferRequest, enterprise: @enterprise)
+    end
+
+    def financial_abilities
+      can(%i[update read], TransferRequest)
+      can(:read_pending, TransferRequest)
+      can(%i[approve reject], TransferRequest, enterprise: @enterprise)
+      can(:read, Truckload)
+      can(:read, Cte)
+      can(:read, Driver)
+      can(:read, Agent)
     end
   end
 end
