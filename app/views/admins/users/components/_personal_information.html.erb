@@ -1,0 +1,28 @@
+<table class="table">
+  <tr>
+    <th><%= t('admins.users.show.full_name') %></th>
+    <td><%= @user.person.full_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('admins.users.show.nickname') %></th>
+    <td><%= @user.person.nickname %></td>
+  </tr>
+  <tr>
+    <th><%= t('admins.users.show.email') %></th>
+    <td><%= @user.email %></td>
+  </tr>
+  <% if @user.person.birth_date.present? %>
+    <tr>
+      <th><%= t('admins.users.show.birth_date') %></th>
+      <td><%= l(@user.person.birth_date, format: :date) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th><%= t('admins.users.show.phone_number') %></th>
+    <td><%= @user.person.phone_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('admins.users.show.telephone_number') %></th>
+    <td><%= @user.person.telephone_number %></td>
+  </tr>
+</table>

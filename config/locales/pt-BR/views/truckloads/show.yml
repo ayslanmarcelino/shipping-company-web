@@ -9,7 +9,7 @@ pt-BR:
       client: Cliente
       driver: Motorista
       dt_number: Número da DT
-      value_driver: Valor pago ao motorista
+      value_driver: Valor do motorista
       is_agent: Contratado por agenciador
       agent_name: Nome do agenciador
       cte_number:

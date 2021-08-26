@@ -80,7 +80,7 @@
         client: Cliente
         driver_id: Motorista
         dt_number: Número da DT
-        value_driver: Valor pago ao motorista
+        value_driver: Valor do motorista
         client_id: Cliente
         is_agent: Contratado por agenciador
         agent_id: Agenciador

@@ -1,0 +1,53 @@
+<table class="table">
+  <tr>
+    <th><%= t('truckloads.show.dt_number') %></th>
+    <td><%= @truckload.dt_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.value_driver') %></th>
+    <td><%= number_to_currency(@truckload.value_driver) %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.is_agent') %>?</th>
+    <td><%= translate_boolean(@truckload.is_agent) %></td>
+  </tr>
+  <% if @truckload.agent.present? %>
+    <tr>
+      <th><%= t('truckloads.show.agent_name') %></th>
+      <td><%= link_to(@truckload.agent.full_name, agent_path(@truckload.agent)) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <% if @truckload.ctes_numbers.count > 1 %>
+      <th><%= t('truckloads.show.cte_number.other') %></th>
+    <% else %>
+      <th><%= t('truckloads.show.cte_number.one') %></th>
+    <% end %>
+    <td>
+    <% @truckload.ctes.each do |cte| %>
+      <%= link_to cte_path(cte.id) do %>
+        <li><%= cte.cte_number %> - <%= number_to_currency(cte.value) %></li>
+      <% end %>
+    <% end %>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.created_at') %></th>
+    <td><%= l(@truckload.created_at, format: '%d/%m/%Y às %H:%M') %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.updated_at') %></th>
+    <td><%= l(@truckload.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
+  </tr>
+  <% if user_owner?(current_user) || user_master?(current_user) %>
+    <tr>
+      <th><%= t('truckloads.show.created_by') %></th>
+      <td><%= @truckload.user.person.first_name %> <%= @truckload.user.person.last_name %></td>
+    </tr>
+  <% end %>
+  <% if user_master?(current_user) %>
+    <tr>
+      <th><%= t('truckloads.show.enterprise') %></th>
+      <td><%= @truckload.user.enterprise.company_name %></td>
+    </tr>
+  <% end %>
+</table>

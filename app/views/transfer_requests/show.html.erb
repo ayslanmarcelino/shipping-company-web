@@ -83,7 +83,7 @@
       <tr>
         <th><%= t('.destiny') %></th>
         <td>
-          <%= @transfer_request.truckload.ctes.map { |k, _| "#{k.destiny_city} - #{k.destiny_state}"}.join(', ') %>
+          <%= @transfer_request.truckload.ctes.map { |transfer, _| "#{transfer.destiny_city} - #{transfer.destiny_state}"}.join(', ') %>
         </td>
       </tr>
       <tr>
