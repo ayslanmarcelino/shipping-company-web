@@ -102,7 +102,7 @@ class Admins::UsersController < AdminsController
                   :enterprise_id,
                   :password,
                   :password_confirmation,
-                  person_attributes: [User::Person.permitted_attributes,
+                  person_attributes: [Person.permitted_attributes,
                                       address_attributes: Address.permitted_attributes])
   end
 

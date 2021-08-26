@@ -8,6 +8,6 @@ FactoryBot.define do
     is_employee      { true }
     is_blocked       { false }
     enterprise       { create(:enterprise) }
-    person           { create(:user_person) }
+    person           { create(:person) }
   end
 end

@@ -86,7 +86,7 @@ class AgentsController < UsersController
   def params_agent
     params.require(:agent)
           .permit(:enterprise_id,
-                  person_attributes: [User::Person.permitted_attributes,
+                  person_attributes: [Person.permitted_attributes,
                                       address_attributes: Address.permitted_attributes,
                                       bank_accounts_attributes: BankAccount.permitted_attributes])
   end

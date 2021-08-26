@@ -11,7 +11,7 @@ FactoryBot.create(:user_role, kind: :operational, user: user_operational, enterp
 disabled_user = FactoryBot.create(:user, is_active: false, enterprise: enterprise1)
 FactoryBot.create(:user_role, user: disabled_user, enterprise: enterprise1)
 bank_account = FactoryBot.create(:bank_account)
-person = FactoryBot.create(:user_person)
+person = FactoryBot.create(:person)
 person.bank_accounts << bank_account
 client = FactoryBot.create(:client, enterprise: enterprise1)
 driver = FactoryBot.create(:driver, enterprise: enterprise1, person: person)

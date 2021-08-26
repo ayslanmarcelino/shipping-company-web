@@ -21,7 +21,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 FactoryBot.define do
   factory :bank_account do
@@ -33,6 +33,6 @@ FactoryBot.define do
     document_number { FFaker::IdentificationBR.pretty_cpf }
     pix_key         { FFaker::IdentificationBR.pretty_cpf }
     pix_key_type_cd { 'document_number'                   }
-    person          { create(:user_person)                }
+    person          { create(:person)                     }
   end
 end

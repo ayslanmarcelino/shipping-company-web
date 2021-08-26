@@ -97,7 +97,7 @@ class DriversController < UsersController
                   :cnh_type,
                   :is_employee,
                   :is_blocked,
-                  person_attributes: [User::Person.permitted_attributes,
+                  person_attributes: [Person.permitted_attributes,
                                       address_attributes: Address.permitted_attributes,
                                       bank_accounts_attributes: BankAccount.permitted_attributes])
   end

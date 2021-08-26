@@ -23,7 +23,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 class Driver < ApplicationRecord
   CNH_TYPES = %i[A B C D E].freeze
@@ -31,7 +31,7 @@ class Driver < ApplicationRecord
   attr_accessor :validate_all
 
   belongs_to :enterprise
-  belongs_to :person, class_name: 'User::Person'
+  belongs_to :person
   has_many :truckloads
 
   accepts_nested_attributes_for :person

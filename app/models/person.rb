@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: user_people
+# Table name: people
 #
 #  id               :bigint           not null, primary key
 #  birth_date       :datetime
@@ -18,13 +18,13 @@
 #
 # Indexes
 #
-#  index_user_people_on_address_id  (address_id)
+#  index_people_on_address_id  (address_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (address_id => addresses.id)
 #
-class User::Person < ApplicationRecord
+class Person < ApplicationRecord
   attr_accessor :validate_access_data, :validate_all
 
   has_one :user

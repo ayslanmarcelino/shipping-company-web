@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user_person, class: 'User::Person' do
+  factory :person do
     birth_date            { DateTime.now - 18.years }
     first_name            { FFaker::Name.first_name }
     last_name             { FFaker::Name.last_name }
