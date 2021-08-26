@@ -55,40 +55,40 @@ class TransferRequestsController < UsersController
     flash[:success] = notice
   end
 
-  def destroy
-    can_destroy_transfer_request = true if current_user.roles.kind_masters.present? ||
-                                           TransferRequest.find(params[:id]).user == current_user
+  def cancel
+    transfer_request = TransferRequest.find(params[:id])
 
-    if TransferRequest.find(params[:id]).status_cd != 'pending'
+    can_cancel_transfer_request = true if current_user.roles.kind_masters.present? ||
+                                          transfer_request.user == current_user
+
+    if transfer_request.status_cd != 'pending'
       redirect_to(transfer_requests_path)
-      flash[:danger] = 'Você não pode deletar solicitação que não esteja pendente.'
+      flash[:danger] = 'Você não pode cancelar solicitação que não esteja pendente.'
       return
     end
 
-    if can_destroy_transfer_request
-      if @transfer_request.destroy
-        @transfer_request.truckload.transfer_requests.last.balance_value_truckload += @transfer_request.value
-        redirect_to(transfer_requests_path)
-        flash[:success] = 'Solicitação de transferência excluída com sucesso.'
-      else
-        render :index
-      end
+    if can_cancel_transfer_request
+      transfer_request.update(status_cd: 'canceled')
+      redirect_to(transfer_requests_path)
+      flash[:success] = 'Solicitação de transferência cancelada com sucesso.'
     else
       redirect_to(transfer_requests_path)
-      flash[:danger] = 'Você não pode deletar a solicitação de transferência de terceiros.'
+      flash[:danger] = 'Você não pode cancelar a solicitação de transferência de terceiros.'
     end
   end
 
   def truckload_information
     @truckload = Truckload.find(params[:id])
     @balance_value_truckload = @truckload.value_driver
-    @balance_value = @balance_value_truckload - @truckload.transfer_requests.sum(&:value)
+    @balance_value = @balance_value_truckload - @truckload.transfer_requests
+                                                          .where.not(status_cd: %w[canceled rejected])
+                                                          .sum(&:value)
     @formatted_balance_value_truckload = @balance_value.to_currency
     @agent = @truckload&.agent&.person || []
     @driver = @truckload.driver.person
-    @driver_bank_account = @driver.bank_accounts
+    @driver_bank_account = @driver.bank_accounts.where(active: true)
     @agent_bank_account = if @agent.present?
-                            @agent.bank_accounts
+                            @agent.bank_accounts.where(active: true)
                           else
                             []
                           end

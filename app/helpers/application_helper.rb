@@ -19,6 +19,7 @@ module ApplicationHelper
     return 'warning' if status == 'pending'
     return 'danger' if status == 'rejected'
     return 'success' if status == 'approved'
+    return 'info' if status == 'canceled'
   end
 
   def money_color(value)

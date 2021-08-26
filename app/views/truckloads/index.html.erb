@@ -67,7 +67,7 @@
               <td><%= number_to_currency(truckload.value_driver) %></td>
               <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'approved').sum(&:value)) %></td>
               <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'pending').sum(&:value)) %></td>
-              <td><%= number_to_currency(truckload.value_driver - truckload.transfer_requests.where.not(status_cd: 'rejected').sum(&:value)) %></td>
+              <td><%= number_to_currency(truckload.value_driver - truckload.transfer_requests.where.not(status_cd: %w[rejected canceled]).sum(&:value)) %></td>
               <td class="text-center">
                 <span class="badge badge-<%= agent_color(truckload.is_agent) %>">
                   <%= translate_boolean(truckload.is_agent) %>

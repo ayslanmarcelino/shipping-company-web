@@ -119,6 +119,7 @@
         document_number: CPF/CNPJ
         pix_key_type: Tipo de chave Pix
         pix_key: Chave pix
+        active: Em uso
         pix_types:
           document_number: CPF/CNPJ
           phone_number: Celular
@@ -149,9 +150,10 @@
         observation: Observação
         reject_reason: Motivo de rejeição
         status:
-          rejected: Rejeitado
+          rejected: Rejeitada
           pending: Pendente
-          approved: Finalizado
+          approved: Finalizada
+          canceled: Cancelada
         methods:
           ted: TED
           pix: Pix

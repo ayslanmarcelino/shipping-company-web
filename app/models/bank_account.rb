@@ -6,6 +6,7 @@
 #  account_name    :string
 #  account_number  :string
 #  account_type_cd :string
+#  active          :boolean          default(TRUE)
 #  agency          :string
 #  bank_code       :string
 #  document_number :string
@@ -45,6 +46,7 @@ class BankAccount < ApplicationRecord
      :pix_key,
      :pix_key_type_cd,
      :person_id,
+     :active,
      :_destroy]
   end
 

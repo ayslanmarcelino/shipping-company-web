@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.string "document_number"
     t.string "pix_key"
     t.string "pix_key_type_cd"
+    t.boolean "active", default: true
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

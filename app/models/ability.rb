@@ -62,7 +62,7 @@ class Ability
       can(:update, User, id: @user.id)
       can(:manage, Driver, enterprise: @enterprise)
       can(:manage, Agent, enterprise: @enterprise)
-      can(%i[create destroy], TransferRequest, enterprise: @enterprise, user: @user)
+      can(%i[create cancel], TransferRequest, enterprise: @enterprise, user: @user)
       can(:read, TransferRequest, enterprise: @enterprise)
     end
   end
