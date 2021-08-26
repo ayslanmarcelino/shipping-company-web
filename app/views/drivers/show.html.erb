@@ -13,7 +13,10 @@
     <% end %>
   <% end %>
   <% if can?(:destroy, Driver) %>
-    <%= link_to driver_path(@driver), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@driver.person.first_name} #{@driver.person.last_name}?" } do %>
+    <%= link_to driver_path(@driver),
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: "#{t('.delete_confirm')}: #{@driver.person.first_name} #{@driver.person.last_name}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -23,179 +26,42 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-3">
-        <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+        <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" id="overview-pill-vertical" href="#personal" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link active" href="#personal" data-toggle="tab">
               <%= t('.personal') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="overview-pill-vertical" href="#document" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link" href="#document" data-toggle="tab">
               <%= t('.document') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#address" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" href="#address" data-toggle="tab">
               <%= t('.address') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#bank_accounts" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" href="#bank_accounts" data-toggle="tab">
               <%= t('.bank_accounts') %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
-        <div class="tab-content" id="cardPillContentVertical">
-          <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="overview-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.full_name') %></th>
-                <td><%= @driver.person.full_name %></td>
-              </tr>
-              <tr>
-                <th><%= t('.nickname') %></th>
-                <td><%= @driver.person.nickname %></td>
-              </tr>
-              <% if @driver.person.birth_date.present? %>
-                <tr>
-                  <th><%= t('.birth_date') %></th>
-                  <td><%= l(@driver.person.birth_date, format: :date) %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <th><%= t('.phone_number') %></th>
-                <td><%= @driver.person.phone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.telephone_number') %></th>
-                <td><%= @driver.person.telephone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.is_employee') %>?</th>
-                <td><%= translate_boolean(@driver.is_employee) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.is_blocked') %>?</th>
-                <td><%= translate_boolean(@driver.is_blocked) %></td>
-              </tr>
-            </table>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="personal">
+            <%= render partial: 'drivers/components/personal_information' %>
           </div>
-          <div class="tab-pane fade show" id="document" role="tabpanel" aria-labelledby="overview-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.cnh_record') %></th>
-                <td><%= @driver.cnh_record %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_number') %></th>
-                <td><%= @driver.cnh_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_type') %></th>
-                <td><%= @driver.cnh_type %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_issuing_body') %></th>
-                <td><%= @driver.cnh_issuing_body %></td>
-              </tr>
-              <tr>
-                <th><%= t('.cnh_expires_at') %></th>
-                <td><%= l(@driver.cnh_expires_at.to_datetime, format: :date) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.document_number') %></th>
-                <td><%= format_document_number(@driver.person.document_number) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.rg') %></th>
-                <td><%= @driver.person.rg %></td>
-              </tr>
-              <tr>
-                <th><%= t('.rg_issuing_body') %></th>
-                <td><%= @driver.person.rg_issuing_body %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade show" id="document">
+            <%= render partial: 'drivers/components/document' %>
           </div>
-          <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.address_zip_code') %></th>
-                <td><%= @driver.person.address.zip_code %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_street') %></th>
-                <td><%= @driver.person.address.street %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_number') %></th>
-                <td><%= @driver.person.address.number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_complement') %></th>
-                <td><%= @driver.person.address.complement %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_neighborhood') %></th>
-                <td><%= @driver.person.address.neighborhood %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_city') %></th>
-                <td><%= @driver.person.address.city %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_state') %></th>
-                <td><%= @driver.person.address.state %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_country') %></th>
-                <td><%= @driver.person.address.country %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade" id="address">
+            <%= render partial: 'drivers/components/address' %>
           </div>
-          <div class="tab-pane fade" id="bank_accounts" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <% if @driver.person.bank_accounts.present? %>
-              <% @driver.person.bank_accounts.each_with_index do |bank_account, index| %>
-                <h4>Conta bancária #<%= index + 1 %></h4>
-                <table class="table">
-                  <tr>
-                    <th><%= t('.bank_account_bank_code') %></th>
-                    <td><%= bank_account.bank_code %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_agency') %></th>
-                    <td><%= bank_account.agency %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_account_number') %></th>
-                    <td><%= bank_account.account_number %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_account_name') %></th>
-                    <td><%= bank_account.account_name %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_document_number') %></th>
-                    <td><%= format_document_number(bank_account.document_number) %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_account_type') %></th>
-                    <td><%= I18n.t(bank_account.account_type_cd, scope: 'activerecord.attributes.bank_account.account_types') if bank_account.account_type_cd.present? %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_pix_key_type') %></th>
-                    <td><%= I18n.t(bank_account.pix_key_type_cd, scope: 'activerecord.attributes.bank_account.pix_types') if bank_account.pix_key_type_cd.present? %></td>
-                  </tr>
-                  <tr>
-                    <th><%= t('.bank_account_pix_key') %></th>
-                    <td><%= bank_account.pix_key %></td>
-                  </tr>
-                </table>
-              <% end %>
-            <% else %>
-              <h4>Motorista não tem contas bancárias cadastradas</h4>
-            <% end %>
+          <div class="tab-pane fade" id="bank_accounts">
+            <%= render partial: 'drivers/components/bank_account' %>
           </div>
         </div>
       </div>

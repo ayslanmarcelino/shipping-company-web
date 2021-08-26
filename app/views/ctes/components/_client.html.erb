@@ -1,0 +1,42 @@
+<table class="table">
+  <tr>
+    <th><%= t('ctes.show.client') %></th>
+    <td><%= @cte.truckload.client.company_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.document_number') %></th>
+    <td><%= @cte.truckload.client.document_number.to_br_cnpj %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_zip_code') %></th>
+    <td><%= @cte.truckload.client.address.zip_code %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_street') %></th>
+    <td><%= @cte.truckload.client.address.street %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_number') %></th>
+    <td><%= @cte.truckload.client.address.number %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_complement') %></th>
+    <td><%= @cte.truckload.client.address.complement %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_neighborhood') %></th>
+    <td><%= @cte.truckload.client.address.neighborhood %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_city') %></th>
+    <td><%= @cte.truckload.client.address.city %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_state') %></th>
+    <td><%= @cte.truckload.client.address.state %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.address_country') %></th>
+    <td><%= @cte.truckload.client.address.country %></td>
+  </tr>
+</table>

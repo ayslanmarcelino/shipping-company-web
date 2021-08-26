@@ -13,7 +13,10 @@
     <% end %>
   <% end %>
   <% if can?(:destroy, Truckload) %>
-    <%= link_to truckload_path(@truckload), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@truckload.dt_number}?" } do %>
+    <%= link_to truckload_path(@truckload),
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: "#{t('.delete_confirm')}: #{@truckload.dt_number}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -23,235 +26,38 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-3">
-        <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+        <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" id="overview-pill-vertical" href="#overviewPillVertical" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link active" href="#general" data-toggle="tab">
               <%= t('.general') %>
             </a>
           </li>
           <% if @truckload.client.present? %>
             <li class="nav-item">
-              <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+              <a class="nav-link" href="#client" data-toggle="tab">
                 <%= t('.client') %>
               </a>
             </li>
           <% end %>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#driver" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" href="#driver" data-toggle="tab">
               <%= t('.driver') %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
-        <div class="tab-content" id="cardPillContentVertical">
-          <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.dt_number') %></th>
-                <td><%= @truckload.dt_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.value_driver') %></th>
-                <td><%= number_to_currency(@truckload.value_driver) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.is_agent') %>?</th>
-                <td><%= translate_boolean(@truckload.is_agent) %></td>
-              </tr>
-              <% if @truckload.agent.present? %>
-                <tr>
-                  <th><%= t('.agent_name') %></th>
-                  <td><%= link_to(@truckload.agent.full_name, agent_path(@truckload.agent)) %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <% if @truckload.ctes_numbers.count > 1 %>
-                  <th><%= t('.cte_number.other') %></th>
-                <% else %>
-                  <th><%= t('.cte_number.one') %></th>
-                <% end %>
-                <td>
-                <% @truckload.ctes.each do |cte| %>
-                  <%= link_to cte_path(cte.id) do %>
-                    <li><%= cte.cte_number %> - <%= number_to_currency(cte.value) %></li>
-                  <% end %>
-                <% end %>
-              </tr>
-              <tr>
-                <th><%= t('.created_at') %></th>
-                <td><%= l(@truckload.created_at, format: '%d/%m/%Y às %H:%M') %></td>
-              </tr>
-              <tr>
-                <th><%= t('.updated_at') %></th>
-                <td><%= l(@truckload.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
-              </tr>
-              <% if user_owner?(current_user) || user_master?(current_user) %>
-                <tr>
-                  <th><%= t('.created_by') %></th>
-                  <td><%= @truckload.user.person.first_name %> <%= @truckload.user.person.last_name %></td>
-                </tr>
-              <% end %>
-              <% if user_master?(current_user) %>
-                <tr>
-                  <th><%= t('.enterprise') %></th>
-                  <td><%= @truckload.user.enterprise.company_name %></td>
-                </tr>
-              <% end %>
-            </table>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="general">
+            <%= render partial: 'truckloads/components/general_information' %>
           </div>
           <% if @truckload.client.present? %>
-            <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
-              <table class="table">
-                <tr>
-                  <th><%= t('.client') %></th>
-                  <td><%= @truckload.client.company_name %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.document_number') %></th>
-                  <td><%= @truckload.client.document_number.to_br_cnpj %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_zip_code') %></th>
-                  <td><%= @truckload.client.address.zip_code %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_street') %></th>
-                  <td><%= @truckload.client.address.street %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_number') %></th>
-                  <td><%= @truckload.client.address.number %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_complement') %></th>
-                  <td><%= @truckload.client.address.complement %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_neighborhood') %></th>
-                  <td><%= @truckload.client.address.neighborhood %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_city') %></th>
-                  <td><%= @truckload.client.address.city %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_state') %></th>
-                  <td><%= @truckload.client.address.state %></td>
-                </tr>
-                <tr>
-                  <th><%= t('.address_country') %></th>
-                  <td><%= @truckload.client.address.country %></td>
-                </tr>
-              </table>
+            <div class="tab-pane fade" id="client">
+              <%= render partial: 'truckloads/components/client' %>  
             </div>
           <% end %>
-          <div class="tab-pane fade" id="driver" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <h5 class="text-divider">
-              <span><%= t('drivers.show.personal') %></span>
-            </h5>
-            <table class="table">
-              <tr>
-                <th><%= t('drivers.show.full_name') %></th>
-                <td><%= link_to(@truckload.driver.person.full_name, driver_path(@truckload.driver)) %></td>
-              </tr>
-              <% if @truckload.driver.person.birth_date.present? %>
-                <tr>
-                  <th><%= t('drivers.show.birth_date') %></th>
-                  <td><%= l(@truckload.driver.person.birth_date, format: :date) %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <th><%= t('drivers.show.phone_number') %></th>
-                <td><%= @truckload.driver.person.phone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.telephone_number') %></th>
-                <td><%= @truckload.driver.person.telephone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.is_employee') %>?</th>
-                <td><%= translate_boolean(@truckload.driver.is_employee) %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.is_blocked') %>?</th>
-                <td><%= translate_boolean(@truckload.driver.is_blocked) %></td>
-              </tr>
-            </table>
-            <h5 class="text-divider">
-              <span><%= t('drivers.show.document') %></span>
-            </h5>
-            <table class="table">
-              <tr>
-                <th><%= t('drivers.show.cnh_record') %></th>
-                <td><%= @truckload.driver.cnh_record %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.cnh_number') %></th>
-                <td><%= @truckload.driver.cnh_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.cnh_type') %></th>
-                <td><%= @truckload.driver.cnh_type %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.cnh_issuing_body') %></th>
-                <td><%= @truckload.driver.cnh_issuing_body %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.cnh_expires_at') %></th>
-                <td><%= l(@truckload.driver.cnh_expires_at.to_datetime, format: :date) %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.document_number') %></th>
-                <td><%= @truckload.driver.person.document_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.rg') %></th>
-                <td><%= @truckload.driver.person.rg %></td>
-              </tr>
-              <tr>
-                <th><%= t('drivers.show.rg_issuing_body') %></th>
-                <td><%= @truckload.driver.person.rg_issuing_body %></td>
-              </tr>
-            </table>
-            <h5 class="text-divider">
-              <span><%= t('drivers.show.address') %></span>
-            </h5>
-            <table class="table">
-              <tr>
-                <th><%= t('.address_zip_code') %></th>
-                <td><%= @truckload.driver.person.address.zip_code %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_street') %></th>
-                <td><%= @truckload.driver.person.address.street %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_number') %></th>
-                <td><%= @truckload.driver.person.address.number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_complement') %></th>
-                <td><%= @truckload.driver.person.address.complement %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_neighborhood') %></th>
-                <td><%= @truckload.driver.person.address.neighborhood %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_city') %></th>
-                <td><%= @truckload.driver.person.address.city %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_state') %></th>
-                <td><%= @truckload.driver.person.address.state %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_country') %></th>
-                <td><%= @truckload.driver.person.address.country %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade" id="driver">
+            <%= render partial: 'truckloads/components/driver' %>
           </div>
         </div>
       </div>

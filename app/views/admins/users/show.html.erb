@@ -13,7 +13,11 @@
     <% end %>
   <% end %>
   <% if can?(:destroy, User) %>
-    <%= link_to admins_user_path(@user), id: "delete-user-#{@user.id}", method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@user.person.first_name} #{@user.person.last_name}?" } do %>
+    <%= link_to admins_user_path(@user),
+                id: "delete-user-#{@user.id}",
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: "#{t('.delete_confirm')}: #{@user.person.first_name} #{@user.person.last_name}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -23,107 +27,34 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-3">
-        <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+        <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" id="personal-menu" href="#personal" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link active" id="personal-menu" href="#personal" data-toggle="tab">
               <%= t('.personal') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="document-menu" href="#document" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link" id="document-menu" href="#document" data-toggle="tab">
               <%= t('.document') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="address-menu" href="#address" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" id="address-menu" href="#address" data-toggle="tab">
               <%= t('.address') %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
-        <div class="tab-content" id="cardPillContentVertical">
-          <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="personal-menu">
-            <table class="table">
-              <tr>
-                <th><%= t('.full_name') %></th>
-                <td><%= @user.person.full_name %></td>
-              </tr>
-              <tr>
-                <th><%= t('.nickname') %></th>
-                <td><%= @user.person.nickname %></td>
-              </tr>
-              <tr>
-                <th><%= t('.email') %></th>
-                <td><%= @user.email %></td>
-              </tr>
-              <% if @user.person.birth_date.present? %>
-                <tr>
-                  <th><%= t('.birth_date') %></th>
-                  <td><%= l(@user.person.birth_date, format: :date) %></td>
-                </tr>
-              <% end %>
-              <tr>
-                <th><%= t('.phone_number') %></th>
-                <td><%= @user.person.phone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.telephone_number') %></th>
-                <td><%= @user.person.telephone_number %></td>
-              </tr>
-            </table>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="personal">
+            <%= render partial: 'admins/users/components/personal_information' %>
           </div>
-          <div class="tab-pane fade show" id="document" role="tabpanel" aria-labelledby="document-menu">
-            <table class="table">
-              <tr>
-                <th><%= t('.document_number') %></th>
-                <td><%= @user.person.document_number.to_br_cpf %></td>
-              </tr>
-              <tr>
-                <th><%= t('.rg') %></th>
-                <td><%= @user.person.rg %></td>
-              </tr>
-              <tr>
-                <th><%= t('.rg_issuing_body') %></th>
-                <td><%= @user.person.rg_issuing_body %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade show" id="document">
+            <%= render partial: 'admins/users/components/document' %>
           </div>
-          <div class="tab-pane fade" id="address" role="tabpanel" aria-labelledby="address-menu">
-            <table class="table">
-              <tr>
-                <th><%= t('.address_zip_code') %></th>
-                <td><%= @user.person.address.zip_code %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_street') %></th>
-                <td><%= @user.person.address.street %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_number') %></th>
-                <td><%= @user.person.address.number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_complement') %></th>
-                <td><%= @user.person.address.complement %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_neighborhood') %></th>
-                <td><%= @user.person.address.neighborhood %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_city') %></th>
-                <td><%= @user.person.address.city %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_state') %></th>
-                <td><%= @user.person.address.state %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_country') %></th>
-                <td><%= @user.person.address.country %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade" id="address">
+            <%= render partial: 'admins/users/components/address' %>
           </div>
         </div>
       </div>

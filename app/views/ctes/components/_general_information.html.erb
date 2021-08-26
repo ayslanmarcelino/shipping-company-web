@@ -1,0 +1,45 @@
+<table class="table">
+  <tr>
+    <th><%= t('ctes.show.cte_id') %></th>
+    <td><%= @cte.cte_id %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.cte_number') %></th>
+    <td><%= @cte.cte_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.value') %></th>
+    <td><%= number_to_currency(@cte.value) %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.dt_number') %></th>
+    <td>
+    <%= link_to truckload_path(@cte.truckload.id) do %>
+      <%= @cte.truckload.dt_number %></td>
+    <% end %>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.observation') %></th>
+    <td><%= @cte.observation %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.created_at') %></th>
+    <td><%= l(@cte.created_at, format: '%d/%m/%Y às %H:%M') %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.updated_at') %></th>
+    <td><%= l(@cte.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
+  </tr>
+  <% if user_owner?(current_user) || user_master?(current_user) %>
+    <tr>
+      <th><%= t('ctes.show.created_by') %></th>
+      <td><%= @cte.user.person.first_name %> <%= @cte.user.person.last_name %></td>
+    </tr>
+  <% end %>
+  <% if user_master?(current_user) %>
+    <tr>
+      <th><%= t('ctes.show.enterprise') %></th>
+      <td><%= @cte.user.enterprise.company_name %></td>
+    </tr>
+  <% end %>
+</table>

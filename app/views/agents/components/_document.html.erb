@@ -1,0 +1,14 @@
+<table class="table">
+  <tr>
+    <th><%= t('agents.show.document_number') %></th>
+    <td><%= @agent.person.document_number.to_br_cpf %></td>
+  </tr>
+  <tr>
+    <th><%= t('agents.show.rg') %></th>
+    <td><%= @agent.person.rg %></td>
+  </tr>
+  <tr>
+    <th><%= t('agents.show.rg_issuing_body') %></th>
+    <td><%= @agent.person.rg_issuing_body %></td>
+  </tr>
+</table>
