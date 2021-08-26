@@ -62,7 +62,7 @@ class ClientsController < UsersController
       @client = Client.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para editar este cliente.'
+      flash[:danger] = 'Você não possui permissão para editar este cliente.'
     end
   end
 

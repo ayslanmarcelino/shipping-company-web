@@ -8,7 +8,7 @@ class TransferRequestsController < UsersController
   before_action :set_bank_account, only: %w[show create new destroy update]
 
   def index
-    @q = TransferRequest.includes([bank_account: :person], :truckload, :user, :enterprise)
+    @q = TransferRequest.includes(:bank_account, :truckload, [user: :person])
                         .accessible_by(current_ability)
                         .page(params[:page])
                         .ransack(params[:q])
@@ -105,7 +105,7 @@ class TransferRequestsController < UsersController
 
   def pending
     @search_params = params[:q]
-    transfer_request = TransferRequest.includes([bank_account: :person], :truckload, :user, :enterprise)
+    transfer_request = TransferRequest.includes(:bank_account, :truckload, :user, :enterprise)
     @q = if current_user.roles.kind_masters.present?
            transfer_request.where(status_cd: :pending).ransack(@search_params)
          else
@@ -124,7 +124,7 @@ class TransferRequestsController < UsersController
       @transfer_request = TransferRequest.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular esta solicitação de transferência.'
+      flash[:danger] = 'Você não possui permissão para manipular esta solicitação de transferência.'
     end
   end
 
@@ -132,7 +132,7 @@ class TransferRequestsController < UsersController
     @truckloads = if current_user.roles.kind_masters.present?
                     Truckload.all
                   else
-                    Truckload.where(enterprise: current_user.enterprise, user: current_user)
+                    Truckload.where(enterprise: current_user.enterprise)
                   end
   end
 
