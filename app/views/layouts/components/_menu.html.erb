@@ -34,9 +34,13 @@
                                               id: 'pending_transfer_requests' do %>
     <div style="display: inline-flex">
       <div style="width: 25px;">
-        <i class="fas fa-exchange-alt"></i>
+        <i class="fas fa-hourglass-start"></i>
       </div>
       <span><%= t('layouts.application.pending_transfer_request') %></span>
+      <% count_pending = TransferRequest.where(status_cd: 'pending').count %>
+      <% if count_pending.positive? %>
+        (<%= count_pending %>)
+      <% end %>
     </div>
   <% end %>
 <% end %>
