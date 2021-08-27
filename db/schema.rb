@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_145552) do
+ActiveRecord::Schema.define(version: 2021_08_27_033507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,19 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "index_clients_on_address_id"
     t.index ["enterprise_id"], name: "index_clients_on_enterprise_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "description"
+    t.string "attachment"
+    t.bigint "truckload_id"
+    t.bigint "user_id"
+    t.bigint "enterprise_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enterprise_id"], name: "index_comments_on_enterprise_id"
+    t.index ["truckload_id"], name: "index_comments_on_truckload_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "ctes", force: :cascade do |t|
@@ -237,6 +250,9 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
   add_foreign_key "bank_accounts", "people"
   add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "enterprises"
+  add_foreign_key "comments", "enterprises"
+  add_foreign_key "comments", "truckloads"
+  add_foreign_key "comments", "users"
   add_foreign_key "ctes", "clients"
   add_foreign_key "ctes", "enterprises"
   add_foreign_key "ctes", "truckloads"

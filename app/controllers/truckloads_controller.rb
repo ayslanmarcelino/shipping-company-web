@@ -5,6 +5,7 @@ class TruckloadsController < UsersController
   before_action :set_client, only: %w[new create edit update]
   before_action :set_driver, only: %w[new create edit update]
   before_action :set_agent, only: %w[new create edit update]
+  before_action :new_comment, only: %w[show]
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
@@ -58,6 +59,11 @@ class TruckloadsController < UsersController
     create_ctes
 
     if @truckload.update(params_truckload) && (@new_cte&.errors&.full_messages&.empty? || @new_cte&.errors&.full_messages.nil?)
+      if params_comment.present?
+        comments = Comment.new
+        comments.update(params_comment)
+      end
+
       redirect_to(truckloads_path)
       flash[:success] = 'Carga atualizada com sucesso.'
     else
@@ -118,10 +124,20 @@ class TruckloadsController < UsersController
     @agents = Agent.where(enterprise_id: current_user.enterprise.id)
   end
 
+  def new_comment
+    @comment = Comment.new
+  end
+
   def params_truckload
     params.require(:truckload)
           .permit(:dt_number, :value_driver, :is_agent, :user_id, :driver_id, :agent_id)
           .with_defaults(user: current_user, enterprise: current_user.enterprise)
+  end
+
+  def params_comment
+    params.require(:truckload)
+          .permit(:description, :attachment)
+          .with_defaults(user: current_user, enterprise: current_user.enterprise, truckload: @truckload)
   end
 
   def create_ctes

@@ -21,6 +21,40 @@
       <%= t('.delete') %>
     <% end %>
   <% end %>
+  <% if can?(:update_monitoring, Truckload) %>
+    <a class='col-xs-3 btn btn-info btn-sm no-print mr-2' href="#" data-toggle="modal" data-target="#truckload-<%= @truckload.id %>">
+      <i class="fas fa-clock"></i>
+      <%= t('.update_monitoring') %>
+    </a>
+    <div id="truckload-<%= @truckload.id %>" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"><%= t('.update_monitoring') %></h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <%= form_with(model: [@truckload], local: true) do |form| %>
+              <div class="col-lg-12 mb-2">
+                <%= form.label(:description) %>
+                <%= form.text_area(:description, class: 'form-control form-control-user', cols: '10', rows: '10', required: true) %>
+              </div>
+              <div class="col-lg-12 mb-2">
+                <div>
+                  <%= form.label(:attachment) %>
+                </div>
+                <%= form.file_field(:attachment, key: :file, input_opts: { as: :select2 }) %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.cancel') %></button>
+                <%= form.submit(t('.create'), class: 'btn btn-success') %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 <div class="card">
   <div class="card-body">
@@ -45,8 +79,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical2" href="#transfers" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" href="#transfers" data-toggle="tab">
               <%= t('.transfers') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#monitorings" data-toggle="tab">
+              <%= t('.monitorings') %>
             </a>
           </li>
         </ul>
@@ -70,6 +109,9 @@
             <% else %>
               <h4>Carga não possui solicitação de transferência cadastrada</h4>
             <% end %>
+          </div>
+          <div class="tab-pane fade" id="monitorings">
+            <%= render partial: 'truckloads/components/monitoring' %>
           </div>
         </div>
       </div>

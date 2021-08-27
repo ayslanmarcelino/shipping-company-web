@@ -84,6 +84,8 @@
         client_id: Cliente
         is_agent: Contratado por agenciador
         agent_id: Agenciador
+        description: Descrição
+        attachment: Anexo
       user/role:
         kind_cd: Regra
         enterprise_id: Empresa
