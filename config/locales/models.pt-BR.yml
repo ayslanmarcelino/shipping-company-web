@@ -95,6 +95,7 @@
           operational: Operacional
           owner: Proprietário
           financial: Financeiro
+          monitoring: Monitoramento
       driver:
         enterprise: Empresa
         cnh_expires_at: Data de vencimento

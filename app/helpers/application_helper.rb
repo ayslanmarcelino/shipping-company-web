@@ -40,12 +40,14 @@ module ApplicationHelper
     [['Master', 'master'],
      ['Proprietário', 'owner'],
      ['Operacional', 'operational'],
+     ['Monitoramento', 'monitoring'],
      ['Financeiro', 'financial']].sort
   end
 
   def role_select
     [['Proprietário', 'owner'],
      ['Operacional', 'operational'],
+     ['Monitoramento', 'monitoring'],
      ['Financeiro', 'financial']].sort
   end
 

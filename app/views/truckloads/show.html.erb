@@ -21,7 +21,7 @@
       <%= t('.delete') %>
     <% end %>
   <% end %>
-  <% if can?(:update_monitoring, Truckload) %>
+  <% if can?(:create, Comment) %>
     <a class='col-xs-3 btn btn-info btn-sm no-print mr-2' href="#" data-toggle="modal" data-target="#truckload-<%= @truckload.id %>">
       <i class="fas fa-clock"></i>
       <%= t('.update_monitoring') %>
@@ -34,7 +34,7 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-body">
-            <%= form_with(model: [@truckload], local: true) do |form| %>
+            <%= form_with(model: [@comment], local: true) do |form| %>
               <div class="col-lg-12 mb-2">
                 <%= form.label(:description) %>
                 <%= form.text_area(:description, class: 'form-control form-control-user', cols: '10', rows: '10', required: true) %>
@@ -44,6 +44,7 @@
                   <%= form.label(:attachment) %>
                 </div>
                 <%= form.file_field(:attachment, key: :file, input_opts: { as: :select2 }) %>
+                <%= form.hidden_field :id, value: @truckload.id %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.cancel') %></button>

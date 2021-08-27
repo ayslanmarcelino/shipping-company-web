@@ -1,22 +1,23 @@
 <% @truckload.comments.order(created_at: :desc).each do |comment| %>
-    <ul>
-      <li>
-        <div class="time capitalize">
-          <%= l(comment.created_at, format: :with_full_hour_and_day) %>
+  <ul>
+    <li>
+      <div class="time capitalize">
+        <%= l(comment.created_at, format: :with_full_hour_and_day) %>
+      </div>
+      <p><%= comment.description %></p>
+      <p><%= t('truckloads.show.updated_by') %>: <%= comment.user.person.full_name %></p>
+      <% if comment.attachment.present? %>
+        <div class="attachment">
+          <%= link_to(comment.attachment.url,
+                      download: "Monitoramento-DT-#{@truckload.dt_number}",
+                      target: '_blank',
+                      rel: 'noopener') do %>
+            <i class="fas fa-eye"></i>
+            <%= t('truckloads.show.view_attachment') %>
+          <% end %>
         </div>
-        <p><%= comment.description %></p>
-        <p><%= t('truckloads.show.updated_by') %>: <%= comment.user.person.full_name %></p>
-        <% if comment.attachment.present? %>
-          <div class="attachment">
-            <%= link_to(comment.attachment.url,
-                        download: "Monitoramento-DT-#{@truckload.dt_number}",
-                        target: '_blank',
-                        rel: 'noopener') do %>
-              <i class="fas fa-eye"></i>
-              <%= t('truckloads.show.view_attachment') %>
-            <% end %>
-          </div>
-        <% end %>
-      </li>
-    </ul>
+      <% end %>
+      <hr>
+    </li>
+  </ul>
 <% end %>

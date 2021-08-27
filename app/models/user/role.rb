@@ -21,7 +21,7 @@
 #
 class User::Role < ApplicationRecord
   KINDS_MASTER = [:master].freeze
-  KINDS_CLIENT = %i[owner operational financial].freeze
+  KINDS_CLIENT = %i[owner operational financial monitoring].freeze
 
   KINDS = KINDS_MASTER + KINDS_CLIENT
 

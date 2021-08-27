@@ -37,6 +37,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :drivers
   resources :agents
+  resources :comments
   resources :transfer_requests do
     collection do
       get :truckload_information
