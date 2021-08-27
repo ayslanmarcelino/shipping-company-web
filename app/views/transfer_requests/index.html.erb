@@ -101,15 +101,6 @@
                         <%= t('.view_details') %>
                       <% end %>
                     <% end %>
-                    <% if can?(:destroy, TransferRequest) && transfer_request.status_cd == 'pending' %>
-                      <%= link_to transfer_request_path(transfer_request),
-                                  method: :delete,
-                                  class: 'btn btn-sm dropdown-item',
-                                  data: { confirm: "#{t('.delete_confirm')}: #{transfer_request.id} - #{I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods')} - #{transfer_request.bank_account.formatted_bank_account}?" } do %>
-                        <i class="fas fa-trash"></i>
-                        <%= t('.destroy') %>
-                      <% end %>
-                    <% end %>
                     <% if transfer_request.status_cd == 'approved' %>
                       <%= link_to(transfer_request.voucher.url,
                                   download: "Comprovante-#{translated_type_cd}-DT-#{transfer_request.truckload.dt_number}",

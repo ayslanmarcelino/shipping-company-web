@@ -36,4 +36,10 @@ pt-BR:
       status: Status
       view_document: Visualizar comprovante
       reject_reason: Motivo de rejeição
+      monitorings: Monitoramento
+      update_monitoring: Atualizar monitoramento
+      create: Criar nova atualização
+      view_attachment: Visualizar anexo
+      cancel: Cancelar
+      updated_by: Atualizado por
       delete_confirm: Você deseja excluir a carga

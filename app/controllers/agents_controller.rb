@@ -4,6 +4,8 @@ class AgentsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
+    return if cannot?(:read, Agent) && unauthorized_redirect
+
     @q = Agent.includes(:person, :enterprise).accessible_by(current_ability)
               .page(params[:page])
               .ransack(params[:q])
@@ -11,15 +13,21 @@ class AgentsController < UsersController
     @agents = @q.result(distinct: false)
   end
 
+  def show
+    return if cannot?(:read, Agent) && unauthorized_redirect
+  end
+
   def new
+    return if cannot?(:create, Agent) && unauthorized_redirect
+
     @agent = Agent.new
     @agent.build_person
     @agent.person.build_address
   end
 
-  def show; end
-
   def create
+    return if cannot?(:create, Agent) && unauthorized_redirect
+
     @agent = Agent.new(params_agent)
     @agent.person.validate_all = true
     @agent.person.address.validate_address = true
@@ -32,9 +40,13 @@ class AgentsController < UsersController
     end
   end
 
-  def edit; end
+  def edit
+    return if cannot?(:update, Agent) && unauthorized_redirect
+  end
 
   def update
+    return if cannot?(:update, Agent) && unauthorized_redirect
+
     @agent.person.validate_all = true
     @agent.person.address.validate_address = true
 
@@ -47,6 +59,8 @@ class AgentsController < UsersController
   end
 
   def destroy
+    return if cannot?(:destroy, Agent) && unauthorized_redirect
+
     bank_accounts = BankAccount.where(person: @agent.person)
 
     if @agent.destroy && bank_accounts.destroy_all && @agent.person.destroy
@@ -58,6 +72,11 @@ class AgentsController < UsersController
   end
 
   private
+
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
 
   def invalid_foreign_key
     redirect_to(agents_path)
@@ -86,7 +105,7 @@ class AgentsController < UsersController
   def params_agent
     params.require(:agent)
           .permit(:enterprise_id,
-                  person_attributes: [User::Person.permitted_attributes,
+                  person_attributes: [Person.permitted_attributes,
                                       address_attributes: Address.permitted_attributes,
                                       bank_accounts_attributes: BankAccount.permitted_attributes])
   end

@@ -16,11 +16,11 @@
 # Foreign Keys
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 FactoryBot.define do
   factory :agent do
     enterprise { create(:enterprise) }
-    person { create(:user_person) }
+    person { create(:person) }
   end
 end

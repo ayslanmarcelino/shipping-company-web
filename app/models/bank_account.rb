@@ -6,6 +6,7 @@
 #  account_name    :string
 #  account_number  :string
 #  account_type_cd :string
+#  active          :boolean          default(TRUE)
 #  agency          :string
 #  bank_code       :string
 #  document_number :string
@@ -21,13 +22,13 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 class BankAccount < ApplicationRecord
   KEY_TYPES = [:document_number, :email, :phone_number, :random_key].freeze
   ACCOUNT_TYPES = [:saving_account, :current_account, :salary_account, :investment_account, :joint_account, :payment_account].freeze
 
-  belongs_to :person, class_name: 'User::Person'
+  belongs_to :person
 
   as_enum :pix_key_type, KEY_TYPES, map: :string, source: :pix_key_type
   as_enum :account_type, KEY_TYPES, map: :string, source: :account_type
@@ -45,6 +46,7 @@ class BankAccount < ApplicationRecord
      :pix_key,
      :pix_key_type_cd,
      :person_id,
+     :active,
      :_destroy]
   end
 

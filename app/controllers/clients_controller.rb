@@ -5,6 +5,8 @@ class ClientsController < UsersController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
+    return if cannot?(:read, Client) && unauthorized_redirect
+
     @q = Client.includes(:address, :enterprise)
                .accessible_by(current_ability)
                .page(params[:page])
@@ -13,14 +15,20 @@ class ClientsController < UsersController
     @clients = @q.result(distinct: false)
   end
 
+  def show
+    return if cannot?(:read, Client) && unauthorized_redirect
+  end
+
   def new
+    return if cannot?(:create, Client) && unauthorized_redirect
+
     @client = Client.new
     @client.build_address
   end
 
-  def show; end
-
   def create
+    return if cannot?(:create, Client) && unauthorized_redirect
+
     @client = Client.new(params_client)
     @client.validate_all = true
     @client.address.validate_address = true
@@ -33,9 +41,13 @@ class ClientsController < UsersController
     end
   end
 
-  def edit; end
+  def edit
+    return if cannot?(:update, Client) && unauthorized_redirect
+  end
 
   def update
+    return if cannot?(:update, Client) && unauthorized_redirect
+
     @client.validate_all = true
     @client.address.validate_address = true
     if @client.update(params_client)
@@ -47,6 +59,8 @@ class ClientsController < UsersController
   end
 
   def destroy
+    return if cannot?(:destroy, Client) && unauthorized_redirect
+
     if @client.destroy
       redirect_to(clients_path)
       flash[:success] = 'Cliente excluído com sucesso'
@@ -56,6 +70,11 @@ class ClientsController < UsersController
   end
 
   private
+
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
 
   def set_client
     if Enterprise.find(current_user.enterprise_id).client_ids.include?(Client.find(params[:id]).id) || current_user.roles.kind_masters.present?

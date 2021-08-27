@@ -34,7 +34,7 @@ class Address < ApplicationRecord
   end
 
   as_enum :state, STATES, map: :string, source: :state
-  has_many :user_person
+  has_many :person
 
   def normalized_zip_code
     zip_code.gsub!(/\D/, '')

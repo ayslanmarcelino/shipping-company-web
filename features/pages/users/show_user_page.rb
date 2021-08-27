@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ShowUserPage < SitePrism::Page
-  element :nav_pills, '#cardPillVertical'
+  element :nav_pills, '#card-user-show'
   element :nav_personal, '#personal-menu'
   element :nav_document, '#document-menu'
   element :nav_address, '#address-menu'

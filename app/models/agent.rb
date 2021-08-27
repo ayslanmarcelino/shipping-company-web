@@ -16,11 +16,11 @@
 # Foreign Keys
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 class Agent < ApplicationRecord
   belongs_to :enterprise
-  belongs_to :person, class_name: 'User::Person'
+  belongs_to :person
   accepts_nested_attributes_for :person
   paginates_per 25
   has_many :truckloads

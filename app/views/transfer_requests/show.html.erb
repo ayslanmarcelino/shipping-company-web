@@ -12,9 +12,19 @@
                 download: "Comprovante-#{translated_type_cd}-DT-#{@transfer_request.truckload.dt_number}",
                 target: '_blank',
                 rel: 'noopener',
-                class: 'btn btn-primary') do %>
+                class: 'col-xs-3 btn btn-info btn-sm btn-user mr-2') do %>
       <i class="fas fa-download"></i>
       <%= t('.view_document') %>
+    <% end %>
+  <% end %>
+  <% if can?(:cancel, TransferRequest) && @transfer_request.status_cd == 'pending' %>
+    <% bank_account_info = @transfer_request.method_cd == 'pix' ? "#{@transfer_request.bank_account.formatted_pix}" : "#{@transfer_request.bank_account.formatted_bank_account}" %>
+    <%= link_to(cancel_transfer_requests_path(@transfer_request, id: @transfer_request.id),
+                                              class: 'col-xs-3 btn btn-info btn-sm btn-user mr-2',
+                                              data: { confirm: "#{t('.cancel_confirm')}: #{@transfer_request.id} - #{I18n.t(@transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods')} - #{bank_account_info}?" },
+                                              method: :patch) do %>
+      <i class="fas fa-ban"></i>
+      <%= t('.cancel') %>
     <% end %>
   <% end %>
   <% if can?(:reject, TransferRequest) && @transfer_request.status_cd == 'pending' %>

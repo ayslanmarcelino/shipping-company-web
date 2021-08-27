@@ -29,4 +29,5 @@ pt-BR:
       agency: Agência
       account_number: Número da conta (com dígito)
       type: Tipo da conta
+      cancel_confirm: Você tem certeza que deseja cancelar a solicitação de transferência
 
