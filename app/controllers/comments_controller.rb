@@ -19,6 +19,11 @@ class CommentsController < UsersController
 
   private
 
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
+
   def params_comment
     params.require(:comment)
           .permit(:description, :attachment)
