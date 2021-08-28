@@ -6,19 +6,19 @@
       <%= translated_type_cd if transfer_request.type_cd.present? %>
     </div>
     <tr>
-      <th><%= t('.id') %></th>
+      <th><%= t('truckloads.show.id') %></th>
       <td><%= transfer_request.id %></td>
     </tr>
     <tr>
-      <th><%= t('.method') %></th>
+      <th><%= t('truckloads.show.method') %></th>
       <td><%= I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods') if transfer_request.method_cd.present? %></td>
     </tr>
     <tr>
-      <th><%= t('.transfer_value') %></th>
+      <th><%= t('truckloads.show.transfer_value') %></th>
       <td><%= number_to_currency(transfer_request.value) %></td>
     </tr>
     <tr>
-      <th><%= t('.bank_account') %></th>
+      <th><%= t('truckloads.show.bank_account') %></th>
       <td>
         <% if transfer_request.method_cd == 'pix' %>
           <%= transfer_request.bank_account.formatted_pix %>
@@ -28,7 +28,7 @@
       </td>
     </tr>
     <tr>
-      <th><%= t('.status') %></th>
+      <th><%= t('truckloads.show.status') %></th>
       <td>
         <span class="badge badge-<%= status_color(transfer_request.status_cd) %>">
           <%= I18n.t(transfer_request.status_cd, scope: 'activerecord.attributes.transfer_request.status') if transfer_request.status_cd.present? %>
@@ -37,7 +37,7 @@
     </tr>
     <% if transfer_request.status_cd == 'approved' && transfer_request.voucher.file.present? %>
       <tr>
-        <th><%= t('.view_document') %></th>
+        <th><%= t('truckloads.show.view_document') %></th>
         <td>
         <%= link_to(transfer_request.voucher.url,
                     download: "Comprovante-#{translated_type_cd}-DT-#{transfer_request.truckload.dt_number}",
@@ -50,7 +50,7 @@
     <% end %>
     <% if transfer_request.status_cd == 'rejected' %>
       <tr>
-        <th><%= t('.reject_reason') %></th>
+        <th><%= t('truckloads.show.reject_reason') %></th>
         <td><%= transfer_request.reject_reason %></td>
       </tr>
     <% end %>

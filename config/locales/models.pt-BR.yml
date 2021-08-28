@@ -84,8 +84,6 @@
         client_id: Cliente
         is_agent: Contratado por agenciador
         agent_id: Agenciador
-        description: Descrição
-        attachment: Anexo
       user/role:
         kind_cd: Regra
         enterprise_id: Empresa
@@ -153,6 +151,8 @@
         voucher: Comprovante de transferência
         observation: Observação
         reject_reason: Motivo de rejeição
+        deduct_from_balance: Descontar do saldo
+        attachment: Anexo
         status:
           rejected: Rejeitada
           pending: Pendente
@@ -173,3 +173,6 @@
           full: Frete todo
           daily: Diária
           other: Outros
+      comment:
+        description: Descrição
+        attachment: Anexo

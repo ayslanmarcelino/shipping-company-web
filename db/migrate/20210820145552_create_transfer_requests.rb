@@ -10,6 +10,8 @@ class CreateTransferRequests < ActiveRecord::Migration[6.0]
       t.string :observation
       t.string :updated_by_id
       t.float :balance_value_truckload, default: 0.0
+      t.boolean :deduct_from_balance, default: true
+      t.string :attachment
       t.references :user, foreign_key: true
       t.references :truckload, foreign_key: true
       t.references :driver, foreign_key: true

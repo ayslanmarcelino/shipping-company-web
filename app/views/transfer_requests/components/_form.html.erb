@@ -31,6 +31,21 @@
   <%= form.label(:type_cd) %>
   <%= form.select(:type_cd, transfer_types_select, { include_blank: 'Selecione o tipo de solicitação' }, { class: 'select2_single form-control', required: true} ) %>
 </div>
+<div class="col-lg-12 mb-2">
+  <div>
+    <%= form.label(:attachment) %>
+  </div>
+  <div>
+    <%= form.file_field(:attachment, key: :file, input_opts: { as: :select2 }) %>
+  </div>
+</div>
+<div class="col-lg-12 custom-control custom-switch">
+  <%= form.label(:deduct_from_balance) %>?
+  <%= form.check_box(:deduct_from_balance, checked: true, class: "custom-control-input", id: "deduct_from_balance_switch") %></br>
+  <label style="font-size: 13px">Não</label>
+  <label class="custom-control-label switch-user" for="deduct_from_balance_switch"></label>
+  <label style="font-size: 13px">Sim</label>
+</div>
 <div class="col-lg-12">
   <%= form.label(:observation) %>
   <%= form.text_field(:observation, class: 'form-control form-control-user') %>

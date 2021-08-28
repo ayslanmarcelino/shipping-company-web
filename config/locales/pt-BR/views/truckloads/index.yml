@@ -9,7 +9,8 @@ pt-BR:
       value: Valor da carga
       value_driver: Valor do motorista
       paid_value_driver: Pago ao motorista
-      pending_value_driver: Transferências pendentes
+      discharge: Descarga(s)
+      pending_value_driver: Transferência(s) pendente(s)
       pending_balance: Saldo
       is_agent: Contratado por agenciador
       cte: CT-e(s) vinculado

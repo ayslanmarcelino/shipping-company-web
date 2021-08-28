@@ -24,13 +24,13 @@
       <table id="table" class="ui celled table">
         <thead>
           <tr class="text-center">
-            <th class="no-sort"><%= t('.id') %></th>
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
             <th class="no-sort"><%= t('.value') %></th>
             <th class="no-sort"><%= t('.type_cd') %></th>
             <th class="no-sort"><%= t('.method_cd') %></th>
             <th class="no-sort"><%= t('.bank_account') %></th>
-            <th class="no-sort"><%= t('.truckload_number') %></th>
-            <th class="no-sort"><%= t('.status') %></th>
+            <th class="no-sort"><%= sort_link @q, :truckload_dt_number, t('.truckload_number') %></th>
+            <th class="no-sort"><%= sort_link @q, :status_cd, t('.status') %></th>
             <th class="no-sort"><%= t('.requested_by') %></th>
             <th class="no-sort"><%= t('.updated_by') %></th>
             <th class="no-sort"><%= t('.reject_reason') %></th>

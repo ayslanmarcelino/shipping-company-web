@@ -3,7 +3,9 @@
 # Table name: transfer_requests
 #
 #  id                      :bigint           not null, primary key
+#  attachment              :string
 #  balance_value_truckload :float            default(0.0)
+#  deduct_from_balance     :boolean          default(TRUE)
 #  method_cd               :string
 #  observation             :string
 #  reject_reason           :string
@@ -52,6 +54,7 @@ class TransferRequest < ApplicationRecord
   belongs_to :bank_account
   paginates_per 15
   mount_uploader :voucher, Uploader::ScannedDocument
+  mount_uploader :attachment, Uploader::ScannedDocument
 
   as_enum :type, TYPES, map: :string, source: :type
   as_enum :method, METHODS, map: :string, source: :method
