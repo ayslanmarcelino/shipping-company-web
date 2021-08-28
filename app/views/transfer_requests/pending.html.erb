@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h4><%= t('.registered') %>: <%= @pending_transfer_request_count %> </h4>
+  <h4><%= t('.registered') %></h4>
 </div>
 <%= render layout: 'layouts/filter' do %>
   <%= search_form_for @q, url: transfer_requests_path do |f| %>
@@ -24,15 +24,16 @@
       <table id="table" class="ui celled table">
         <thead>
           <tr class="text-center">
-            <th class="no-sort"><%= t('.id') %></th>
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
             <th class="no-sort"><%= t('.value') %></th>
             <th class="no-sort"><%= t('.type_cd') %></th>
             <th class="no-sort"><%= t('.method_cd') %></th>
             <th class="no-sort"><%= t('.bank_account') %></th>
-            <th class="no-sort"><%= t('.truckload_number') %></th>
+            <th class="no-sort"><%= sort_link @q, :truckload_dt_number, t('.truckload_number') %></th>
             <th class="no-sort"><%= t('.requested_at') %></th>
             <th class="no-sort"><%= t('.requested_by') %></th>
             <th class="no-sort"><%= t('.observation') %>?</th>
+            <th class="no-sort"><%= t('.deduct_from_balance') %>?</th>
             <% if user_master?(current_user) %>
               <th class="no-sort"><%= t('.enterprise') %></th>
             <% end %>
@@ -57,6 +58,11 @@
               <td class="text-center">
                 <span class="badge badge-<%= boolean_color(!transfer_request.observation.present?) %>">
                   <%= translate_boolean(transfer_request.observation.present?) %>
+                </span>
+              </td>
+              <td class="text-center">
+                <span class="badge badge-<%= boolean_color(transfer_request.deduct_from_balance) %>">
+                  <%= translate_boolean(transfer_request.deduct_from_balance) %>
                 </span>
               </td>
               <% if user_master?(current_user) %>

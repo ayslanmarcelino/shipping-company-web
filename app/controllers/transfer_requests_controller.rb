@@ -10,7 +10,7 @@ class TransferRequestsController < UsersController
   def index
     return if cannot?(:read, TransferRequest) && unauthorized_redirect
 
-    @q = TransferRequest.includes(:bank_account, :truckload, [user: :person])
+    @q = TransferRequest.includes(:bank_account, :truckload, :enterprise, [user: :person])
                         .accessible_by(current_ability)
                         .page(params[:page])
                         .ransack(params[:q])
@@ -94,6 +94,7 @@ class TransferRequestsController < UsersController
     @balance_value_truckload = @truckload.value_driver
     @balance_value = @balance_value_truckload - @truckload.transfer_requests
                                                           .where.not(status_cd: %w[canceled rejected])
+                                                          .where(deduct_from_balance: true)
                                                           .sum(&:value)
     @formatted_balance_value_truckload = @balance_value.to_currency
     @agent = @truckload&.agent&.person || []
@@ -126,7 +127,6 @@ class TransferRequestsController < UsersController
            transfer_request.where(status_cd: :pending, enterprise: current_user.enterprise).ransack(@search_params)
          end
     @transfer_requests = @q.result.page(params[:page]).per(15)
-    @pending_transfer_request_count = @q.result.count
   end
 
   private
@@ -202,6 +202,8 @@ class TransferRequestsController < UsersController
                   :observation,
                   :type_cd,
                   :method_cd,
+                  :deduct_from_balance,
+                  :attachment,
                   :truckload_id,
                   :bank_account_id)
           .with_defaults(enterprise: current_user.enterprise,

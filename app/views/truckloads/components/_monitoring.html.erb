@@ -1,4 +1,4 @@
-<% @truckload.comments.order(created_at: :desc).each do |comment| %>
+<% @truckload.comments.includes(:user).order(created_at: :desc).each do |comment| %>
   <ul>
     <li>
       <div class="time capitalize">

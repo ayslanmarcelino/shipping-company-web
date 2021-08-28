@@ -179,6 +179,8 @@ ActiveRecord::Schema.define(version: 2021_08_27_033507) do
     t.string "observation"
     t.string "updated_by_id"
     t.float "balance_value_truckload", default: 0.0
+    t.boolean "deduct_from_balance", default: true
+    t.string "attachment"
     t.bigint "user_id"
     t.bigint "truckload_id"
     t.bigint "driver_id"

@@ -7,7 +7,7 @@
     <%= t('.back') %>
   <% end %>
   <% if can?(:update, Truckload) %>
-    <%= link_to edit_truckload_path(@truckload), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
+    <%= link_to edit_truckload_path(@truckload), class: 'col-xs-3 btn btn-info btn-sm' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
@@ -112,7 +112,11 @@
             <% end %>
           </div>
           <div class="tab-pane fade" id="monitorings">
-            <%= render partial: 'truckloads/components/monitoring' %>
+            <% if @truckload.comments.present? %>
+              <%= render partial: 'truckloads/components/monitoring' %>
+            <% else %>
+              <h4>Carga não possui monitoramento</h4>
+            <% end %>
           </div>
         </div>
       </div>
