@@ -5,9 +5,10 @@
   <%= search_form_for @q, url: truckloads_path do |f| %>
     <div class="d-inline-flex col-md-12" style="padding-left: 0;">
       <%= f.number_field :dt_number_eq, placeholder: 'Número da DT', class: 'form-control mb-2 col-md-2 mr-2' %>
-      <%= f.text_field :client_company_name_cont, placeholder: 'Razão social do cliente', class: 'form-control mb-2 col-md-3 mr-2' %>
+      <%= f.number_field :ctes_cte_number_eq, placeholder: 'CT-e', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.text_field :client_company_name_cont, placeholder: 'Razão social do cliente', class: 'form-control mb-2 col-md-2 mr-2' %>
       <%= f.number_field :client_document_number_cont, placeholder: 'CNPJ do cliente', class: 'form-control mb-2 col-md-4 mr-2' %>
-      <%= f.select(:client_id_eq, clients_collection, { include_blank: 'Selecione o cliente' }, { class: 'select2_single mb-2 col-md-3 mr-2 form-control' }) %>
+      <%= f.select(:client_id_eq, clients_collection, { include_blank: 'Selecione o cliente' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control' }) %>
     </div>
     <hr>
     <div>

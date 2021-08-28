@@ -10,7 +10,7 @@ class TransferRequestsController < UsersController
   def index
     return if cannot?(:read, TransferRequest) && unauthorized_redirect
 
-    @q = TransferRequest.includes(:bank_account, :truckload, [user: :person])
+    @q = TransferRequest.includes(:bank_account, :truckload, :enterprise, [user: :person])
                         .accessible_by(current_ability)
                         .page(params[:page])
                         .ransack(params[:q])
