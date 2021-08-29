@@ -7,8 +7,8 @@ Dado('que acesso a página de login da aplicação') do
   expect(page).to have_current_path(@login_page.current_path)
 end
 
-Dado('tenha um usuário operacional') do
-  create_user(:operational)
+Dado('tenha um usuário {string}') do |role|
+  create_user(role)
 end
 
 Quando('preencher os dados corretamente para logar') do
@@ -34,31 +34,34 @@ end
 Então('quero visualizar o menu disponível para o usuário operacional') do
   @menu_page = MenuPage.new
 
-  expect(@menu_page.operational_menu?).to eq true
+  expect(@menu_page.operational_menu?).to eq(true)
   expect(page).to have_no_selector('#users')
   expect(page).to have_no_selector('#user_roles')
   expect(page).to have_no_selector('#enterprises')
+  expect(page).to have_no_selector('#pending-transfer-requests')
 end
 
 Então('quero visualizar o menu disponível para o usuário proprietário') do
   @menu_page = MenuPage.new
 
-  expect(@menu_page.owner_menu?).to eq true
+  expect(@menu_page.owner_menu?).to eq(true)
   expect(page).to have_no_selector('#enterprises')
 end
 
 Então('quero visualizar o menu disponível para o usuário master') do
   @menu_page = MenuPage.new
 
-  expect(@menu_page.master_menu?).to eq true
+  expect(@menu_page.master_menu?).to eq(true)
 end
 
-Dado('tenha um usuário proprietário') do
-  create_user(:owner)
-end
+Então('quero visualizar o menu disponível para o usuário financeiro') do
+  @menu_page = MenuPage.new
 
-Dado('tenha um usuário master') do
-  create_user(:master)
+  expect(@menu_page.financial_menu?).to eq(true)
+  expect(page).to have_no_selector('#users')
+  expect(page).to have_no_selector('#user-roles')
+  expect(page).to have_no_selector('#enterprises')
+  expect(page).to have_no_selector('#clients')
 end
 
 Dado('tenha um usuário desativado') do
