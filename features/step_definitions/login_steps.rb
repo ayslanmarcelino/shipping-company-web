@@ -64,6 +64,17 @@ Então('quero visualizar o menu disponível para o usuário financeiro') do
   expect(page).to have_no_selector('#clients')
 end
 
+Então('quero visualizar o menu disponível para o usuário monitoramento') do
+  @menu_page = MenuPage.new
+
+  expect(@menu_page.monitoring_menu?).to eq(true)
+  expect(page).to have_no_selector('#users')
+  expect(page).to have_no_selector('#user-roles')
+  expect(page).to have_no_selector('#enterprises')
+  expect(page).to have_no_selector('#transfer-requests')
+  expect(page).to have_no_selector('#pending-transfer-requests')
+end
+
 Dado('tenha um usuário desativado') do
   create_user(:master)
   @user.update(is_active: false)

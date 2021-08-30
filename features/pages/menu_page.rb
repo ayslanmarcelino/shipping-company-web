@@ -39,10 +39,19 @@ class MenuPage < SitePrism::Page
     menu_agents.present?
   end
 
+  def monitoring_menu?
+    menu_dashboard.present?
+    menu_ctes.present?
+    menu_drivers.present?
+    menu_clients.present?
+    menu_truckloads.present?
+  end
+
   def master_menu?
     operational_menu?
     owner_menu?
     financial_menu?
+    monitoring_menu?
   end
 
   def click_users
