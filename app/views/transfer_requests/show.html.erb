@@ -167,6 +167,15 @@
         <th><%= t('.value_transfer') %></th>
         <td class="td-value-transfer"><%= number_to_currency(@transfer_request.value) %></td>
       </tr>
+      <% if @transfer_request.observation.present? %>
+        <tr>
+          <th><%= t('.observation') %></th>
+          <td class="td-observation">
+            <i class="fas fa-exclamation-triangle"></i>
+            <%= @transfer_request.observation %>
+          </td>
+        </tr>
+      <% end %>
       <% if @transfer_request.status_cd == 'pending' && @transfer_request.deduct_from_balance %>
         <tr>
           <th><%= t('.balance') %></th>
@@ -181,20 +190,11 @@
           </td>
         </tr>
       <% elsif @transfer_request.status_cd == 'pending' %>
-        <tr class="no-print">
+        <tr>
           <th></th>
           <td class="td-observation">
             <i class="fas fa-times-circle"></i>
             <%= t('.deduct_from_balance_alert') %>
-          </td>
-        </tr>
-      <% end %>
-      <% if @transfer_request.observation.present? %>
-        <tr>
-          <th><%= t('.observation') %></th>
-          <td class="td-observation">
-            <i class="fas fa-exclamation-triangle"></i>
-            <%= @transfer_request.observation %>
           </td>
         </tr>
       <% end %>

@@ -2,7 +2,7 @@
   <ul>
     <li>
       <div class="time capitalize">
-        <%= l(comment.created_at, format: :with_full_hour_and_day) %>
+        <%= l(comment.created_at, format: :with_full_hour_and_day) %> - (Há <%= time_ago_in_words(comment.created_at) %>)
       </div>
       <p><%= comment.description %></p>
       <p><%= t('truckloads.show.updated_by') %>: <%= comment.user.person.full_name %></p>

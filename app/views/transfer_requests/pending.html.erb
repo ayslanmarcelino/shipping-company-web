@@ -2,20 +2,8 @@
   <h4><%= t('.registered') %></h4>
 </div>
 <%= render layout: 'layouts/filter' do %>
-  <%= search_form_for @q, url: transfer_requests_path do |f| %>
-    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
-    </div>
-    <hr>
-    <div>
-      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
-        <i class="fas fa-broom"></i>
-        <%= t('layouts.filter.clear') %>
-      <% end %>
-      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
-        <i class="fas fa-search"></i>
-        <%= t('layouts.filter.search') %>
-      <% end %>
-    </div>
+  <%= search_form_for @q, url: pending_transfer_requests_path do |f| %>
+    <%= render partial: 'transfer_requests/components/filter', locals: { f: f } %>
   <% end %>
 <% end %>
 <div class="table-responsive">
