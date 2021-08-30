@@ -4,7 +4,7 @@
 
 @usuarios_como_proprietario
 
-Funcionalidade: Visualizar usuários cadastrados na plataforma como proprietario
+Funcionalidade: Visualizar usuários cadastrados na plataforma como proprietário
 
   COMO um usuário proprietário
   EU QUERO acessar a tela de usuários

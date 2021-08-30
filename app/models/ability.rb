@@ -53,8 +53,7 @@ class Ability
       can(:manage, User::Role, enterprise: @enterprise)
       can(:manage, Driver, enterprise: @enterprise)
       can(:manage, Agent, enterprise: @enterprise)
-      can(:manage, TransferRequest, enterprise: @enterprise)
-      can(%i[approve reject], TransferRequest, enterprise: @enterprise)
+      can(%i[manage approve reject], TransferRequest, enterprise: @enterprise)
     end
 
     def operational_abilities
@@ -72,9 +71,7 @@ class Ability
     end
 
     def financial_abilities
-      can(%i[update read], TransferRequest)
-      can(:read_pending, TransferRequest)
-      can(%i[approve reject], TransferRequest, enterprise: @enterprise)
+      can(%i[update read read_pending approve reject], TransferRequest, enterprise: @enterprise)
       can(:read, Truckload, enterprise: @enterprise)
       can(:read, Cte, enterprise: @enterprise)
       can(:read, Driver, enterprise: @enterprise)
