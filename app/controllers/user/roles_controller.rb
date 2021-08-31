@@ -59,7 +59,7 @@ class User::RolesController < AdminsController
     if can?(:delete, User::Role)
       if @user_role.destroy
         redirect_to user_roles_path
-        flash[:success] = 'Regra de usuário excluída com sucesso'
+        flash[:success] = 'Regra de usuário excluída com sucesso.'
       else
         render :index
       end
