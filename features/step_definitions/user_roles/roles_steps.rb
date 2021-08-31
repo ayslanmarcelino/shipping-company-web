@@ -7,7 +7,7 @@ Dado('tiver {string} regras de usuários cadastradas') do |times|
   expect(registered_user_roles_count_after_create).to eql(registered_user_roles_count + times.to_i)
 end
 
-Então('quero visualizar a página de regra usuários como usuário proprietário') do
+Então('quero visualizar a página de regra de usuários como usuário proprietário') do
   @user_roles_page.owner_user_roles_page?
 
   user_roles_expect_content_owner(@user_roles)

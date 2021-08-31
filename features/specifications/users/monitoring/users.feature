@@ -36,7 +36,6 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma como monitorament
   @visualizar_detalhes_usuario_como_monitoramento
 
   Cenário: Acessar tela de detalhes do usuário cadastrado
-    Dado que realizo login na aplicação como usuário 'monitoring'
     E tiver '3' usuários cadastrados
     Quando digitar a URL de admins de detalhes 'users'
     Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
