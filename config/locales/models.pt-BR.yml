@@ -88,6 +88,8 @@
         kind_cd: Regra
         enterprise_id: Empresa
         user_id: Usuário
+        enterprise: Empresa
+        user: Usuário
         kinds:
           master: Master
           operational: Operacional

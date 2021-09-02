@@ -21,4 +21,8 @@ class UserRolesPage < SitePrism::Page
     th_created_at.present?
     button_create_new_user_role.present?
   end
+
+  def click_new_user_role
+    button_create_new_user_role.click
+  end
 end

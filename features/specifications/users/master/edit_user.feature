@@ -12,7 +12,7 @@ Funcionalidade: Editar usuários cadastrados na plataforma como master
 
   @editar_usuario_como_master_com_sucesso
 
-  Cenário: Criar usuário como proprietário com sucesso
+  Cenário: Editar usuário como proprietário com sucesso
     Dado que realizo login na aplicação como usuário "master"
     E tiver "3" usuários cadastrados
     Quando clicar no menu Usuários

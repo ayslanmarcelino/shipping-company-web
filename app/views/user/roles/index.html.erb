@@ -11,9 +11,9 @@
       <% end %>
       <%= f.select :user_id_eq, users_collection, { include_blank: 'Selecione o usuário' }, class: 'form-control col-md-4 mr-2 mb-1' %>
       <% if user_master?(current_user) %>
-        <%= f.select :kind_cd_eq, role_master_select, { include_blank: 'Selecione a regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+        <%= f.select :kind_cd_eq, role_master_select, { include_blank: 'Selecione um tipo de regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
       <% else %>
-        <%= f.select :kind_cd_eq, role_select, { include_blank: 'Selecione a regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+        <%= f.select :kind_cd_eq, role_select, { include_blank: 'Selecione um tipo de regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
       <% end %>
     </div>
     <hr>

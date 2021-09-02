@@ -8,7 +8,7 @@ Funcionalidade: Criar usuários na plataforma como master
 
   COMO um usuário master
   EU QUERO acessar a tela de usuários
-  PARA criar os usuários cadastrados na plataforma
+  PARA criar os usuários na plataforma
 
   Contexto: Acessar página de novo usuário
     Dado que realizo login na aplicação como usuário 'master'

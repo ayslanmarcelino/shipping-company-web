@@ -1,4 +1,4 @@
-Dado('tiver {string} regras de usuários cadastradas') do |times|
+Dado('tiver {string} regras de usuário cadastradas') do |times|
   registered_user_roles_count = User::Role.count
   @user_roles = FactoryBot.create_list(:user_role, times.to_i, enterprise: @enterprise)
 
@@ -7,17 +7,31 @@ Dado('tiver {string} regras de usuários cadastradas') do |times|
   expect(registered_user_roles_count_after_create).to eql(registered_user_roles_count + times.to_i)
 end
 
-Então('quero visualizar a página de regra de usuários como usuário proprietário') do
+Dado('tiver {string} regras de usuário do tipo {string} cadastradas') do |times, kind|
+  registered_user_roles_count = User::Role.count
+  users = FactoryBot.create_list(:user, times.to_i, enterprise: @enterprise)
+  @user_roles = []
+  users.each do |user|
+    @user_roles << FactoryBot.create(:user_role, enterprise: @enterprise, kind: kind, user: user)
+  end
+
+  registered_user_roles_count_after_create = User::Role.count
+
+  expect(registered_user_roles_count_after_create).to eql(registered_user_roles_count + times.to_i)
+end
+
+Então('quero visualizar a página de regras de usuário como usuário proprietário') do
   @user_roles_page.owner_user_roles_page?
 
   user_roles_expect_content_owner(@user_roles)
 end
 
-Quando('verificar a quantidade de regras de usuários cadastrados no sistema') do
+Quando('verificar a quantidade de regras de usuário cadastrados no sistema') do
   @user_roles_count = User::Role.count
 end
 
-Quando("clicar no botão de {string} em regra de usuário") do |action|
+Quando('clicar no botão de {string} em regra de usuário') do |action|
+  @last_user_role_before_update = @user_roles.last
   button = find_by_id("#{action}-user-role-#{@user_roles.last.id}")
 
   button.click
@@ -30,6 +44,11 @@ Então('a regra de usuário deve ser excluída') do
 
   expect(user_roles_count).to eq(subtraction_excluded_user_role)
   expect(has_excluded_user_role_on_db).to eql(false)
+end
+
+Quando('clicar no botão de nova regra de usuário') do
+  @user_roles_page.click_new_user_role
+  @last_user_role_before_create = User::Role.last
 end
 
 private

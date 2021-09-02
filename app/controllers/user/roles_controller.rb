@@ -2,8 +2,8 @@
 
 class User::RolesController < AdminsController
   before_action :set_user_role, only: %w[edit update destroy show]
-  before_action :set_user, only: %w[new create edit]
-  before_action :set_enterprise, only: %w[new create edit]
+  before_action :set_user, only: %w[new create edit update]
+  before_action :set_enterprise, only: %w[new create edit update]
 
   def index
     @q = User::Role.includes(:user)
