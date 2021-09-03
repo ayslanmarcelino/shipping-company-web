@@ -1,7 +1,7 @@
 <div class="text-center">
   <h4>
     <%= t('.editing') %>:
-    <% if @user_role.kind_cd.present? && @user_role.user.person.present? %>
+    <% if @user_role.kind_cd.present? && @user_role.user.present? %>
       <%= I18n.t(@user_role.kind_cd, scope: 'activerecord.attributes.user/role.kinds') %> do(a) <%= @user_role.user.person.full_name %>
     <% end %>
   </h4>

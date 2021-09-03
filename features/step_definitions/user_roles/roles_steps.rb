@@ -30,6 +30,12 @@ Então('quero visualizar a página de regras de usuário como usuário propriet�
   user_roles_expect_content_owner(@user_roles)
 end
 
+Então('quero visualizar a página de regras de usuário como usuário master') do
+  @user_roles_page.master_user_roles_page?
+
+  user_roles_expect_content_master(@user_roles)
+end
+
 Quando('verificar a quantidade de regras de usuário cadastrados no sistema') do
   @user_roles_count = User::Role.count
 end
@@ -72,5 +78,14 @@ def user_roles_expect_content_owner(user_roles)
     expect(page).to have_content(created_at)
     expect(button_edit).to eql(true)
     expect(button_delete).to eql(true)
+  end
+end
+
+def user_roles_expect_content_master(user_roles)
+  user_roles.each do |role|
+    user_roles_expect_content_owner(user_roles)
+    enterprise = role.enterprise.company_name
+
+    expect(page).to have_content(enterprise)
   end
 end

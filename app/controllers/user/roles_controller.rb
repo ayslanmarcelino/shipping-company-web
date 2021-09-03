@@ -7,6 +7,7 @@ class User::RolesController < AdminsController
 
   def index
     @q = User::Role.includes(:user)
+                   .includes(:enterprise)
                    .includes(user: :person)
                    .accessible_by(current_ability)
                    .page(params[:page])

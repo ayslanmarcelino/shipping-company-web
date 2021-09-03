@@ -9,7 +9,7 @@ class UserRolesPage < SitePrism::Page
   element :th_user, 'th', text: 'Usuário'
   element :th_created_at, 'th', text: 'Criado em'
   element :button_create_new_user_role, '#create-new-user-role'
-  # element :th_enterprise, 'th', text: 'Empresa'
+  element :th_enterprise, 'th', text: 'Empresa'
 
   def owner_user_roles_page?
     label_registered_user_roles.present?
@@ -20,6 +20,11 @@ class UserRolesPage < SitePrism::Page
     th_user.present?
     th_created_at.present?
     button_create_new_user_role.present?
+  end
+
+  def master_user_roles_page?
+    owner_user_roles_page?
+    th_enterprise.present?
   end
 
   def click_new_user_role

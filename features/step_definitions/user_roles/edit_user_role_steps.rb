@@ -25,6 +25,10 @@ Então('quero visualizar a regra de usuário atualizada como proprietário') do
   user_roles_expect_content_owner(@user_roles)
 end
 
+Então('quero visualizar a regra de usuário atualizada como master') do
+  user_roles_expect_content_master(@user_roles)
+end
+
 Quando('remover o tipo de regra de usuário') do
   @form_user_role_page.remove_role
 end

@@ -22,6 +22,14 @@ Então('quero visualizar a regra de usuário criada como proprietário') do
   expect(registered_user_roles_count_after_create).to eql(@registered_user_roles_count + 1)
 end
 
+Então('quero visualizar a regra de usuário criada como master') do
+  view_created_user_role
+  user_roles_expect_content_master(@user_roles)
+
+  registered_user_roles_count_after_create = User::Role.count
+  expect(registered_user_roles_count_after_create).to eql(@registered_user_roles_count + 1)
+end
+
 Quando('preencher todos os dados solicitados para nova regra de usuário com regra já cadastrada') do
   @form_user_role_page.fill_existing_role(@last_user_role_before_create)
 end
