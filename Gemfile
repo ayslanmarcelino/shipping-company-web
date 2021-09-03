@@ -56,6 +56,7 @@ group :test do
   gem 'chronic'
   gem 'cucumber'
   gem 'cucumber-rails', require: false
+  gem 'database_cleaner-active_record'
   gem 'report_builder'
   gem 'selenium-webdriver'
   gem 'site_prism'

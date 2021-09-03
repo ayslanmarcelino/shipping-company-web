@@ -3,7 +3,7 @@ Dado('tiver {string} usuários cadastrados') do |times|
   @users = []
 
   @users << @user
-  @users += FactoryBot.create_list(:user, times.to_i, enterprise: @enterprise)
+  @users += FactoryBot.create_list(:user, times.to_i, enterprise: @user.enterprise)
 
   registered_users_count_after_create = User.count
 

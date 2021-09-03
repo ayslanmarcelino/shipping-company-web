@@ -28,8 +28,6 @@ class User::Role < ApplicationRecord
   attr_accessor :validate_all
 
   validates :kind_cd,
-            :enterprise_id,
-            :user_id,
             presence: true,
             if: -> { validate_all }
 

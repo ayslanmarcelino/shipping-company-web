@@ -57,4 +57,8 @@ class MenuPage < SitePrism::Page
   def click_users
     menu_users.click
   end
+
+  def click_user_roles
+    menu_user_roles.click
+  end
 end
