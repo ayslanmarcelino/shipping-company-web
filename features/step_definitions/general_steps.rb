@@ -29,3 +29,11 @@ end
 Quando('digitar a URL de admins de detalhes {string}') do |controller|
   visit("admins/#{controller}/#{@users.last.id}")
 end
+
+Quando('digitar a URL de {string} {string}') do |method, controller|
+  visit("#{controller}/#{method}")
+end
+
+Quando('digitar a URL de atualizar {string}') do |controller|
+  visit("#{controller}/#{@user_roles.last.id}/edit")
+end
