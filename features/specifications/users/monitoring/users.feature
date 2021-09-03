@@ -18,24 +18,24 @@ Funcionalidade: Visualizar usuários cadastrados na plataforma como monitorament
   Cenário: Visualizar usuários cadastrados
     E tiver '3' usuários cadastrados
     Quando digitar a URL de admins de 'index' 'users'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'
 
   @criar_usuarios_como_monitoramento
 
   Cenário: Acessar tela de criar usuário como monitoramento
     Quando digitar a URL de admins de 'new' 'users'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'
 
   @atualizar_usuarios_como_monitoramento
 
   Cenário: Acessar tela de atualizar usuário como monitoramento
     E tiver '3' usuários cadastrados
     Quando digitar a URL de admins de atualizar 'users'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'
 
   @visualizar_detalhes_usuario_como_monitoramento
 
   Cenário: Acessar tela de detalhes do usuário cadastrado
     E tiver '3' usuários cadastrados
     Quando digitar a URL de admins de detalhes 'users'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'

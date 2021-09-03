@@ -18,17 +18,17 @@ Funcionalidade: Visualizar regras de usuário cadastradas na plataforma como mon
   Cenário: Visualizar regras de usuário cadastradas
     E tiver '3' regras de usuário cadastradas
     Quando digitar a URL de 'index' 'user/roles'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'
 
   @criar_regras_de_usuario_como_monitoramento
 
   Cenário: Acessar tela de criar usuário como monitoramento
     Quando digitar a URL de 'new' 'user/roles'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'
 
   @atualizar_regras_de_usuario_como_monitoramento
 
   Cenário: Acessar tela de atualizar usuário como monitoramento
     E tiver '3' regras de usuário cadastradas
     Quando digitar a URL de atualizar 'user/roles'
-    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página'
+    Então o sistema deve retornar a seguinte mensagem 'Você não possui permissão para acessar esta página.'
