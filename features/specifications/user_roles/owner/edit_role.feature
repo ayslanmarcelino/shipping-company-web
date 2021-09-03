@@ -27,6 +27,14 @@ Funcionalidade: Editar usuários cadastrados na plataforma como proprietário
     E a regra de usuário for atualizada
     Então quero visualizar a regra de usuário atualizada como proprietário
 
+  @editar_regra_de_usuario_como_proprietario_sem_preencher_nova_regra
+
+  Cenário: Editar regra de usuário como proprietário sem preencher nova regra
+    E remover o tipo de regra de usuário
+    E clicar em Editar regra de usuário
+    Então o sistema deve retornar os seguintes valores da tabela
+      | Regra não pode ficar em branco |
+
   @editar_regra_de_usuario_como_proprietario_sem_preencher_empresa
 
   Cenário: Editar regra de usuário como proprietário sem preencher empresa
@@ -42,15 +50,12 @@ Funcionalidade: Editar usuários cadastrados na plataforma como proprietário
     E clicar em Editar regra de usuário
     Então o sistema deve retornar os seguintes valores da tabela
       | Usuário é obrigatório(a) |
-  
-  # @editar_regra_de_usuario_como_proprietario_com_regra_ja_existente
 
-  # Cenário: Editar regra de usuário como proprietário com regra já existente
+  @editar_regra_de_usuario_como_proprietario_com_regra_ja_existente
 
-  # @editar_regra_de_usuario_como_proprietario_sem_preencher_nova_regra
-
-  # Cenário: Editar regra de usuário como proprietário sem preencher nova regra
-  #   E remover o tipo de regra de usuário
-  #   E clicar em Editar regra de usuário
-  #   Então o sistema deve retornar os seguintes valores da tabela
-  #     | Regra não pode ficar em branco |
+  Cenário: Editar regra de usuário como proprietário com regra já existente
+    E tiver a regra de usuário 'financial' no usuário da última regra criada
+    E atualizar tipo de regra de usuário já existente no usuário
+    E clicar em Editar regra de usuário
+    Então o sistema deve retornar os seguintes valores da tabela
+      | Regra já está em uso |

@@ -25,12 +25,20 @@ Então('quero visualizar a regra de usuário atualizada como proprietário') do
   user_roles_expect_content_owner(@user_roles)
 end
 
+Quando('remover o tipo de regra de usuário') do
+  @form_user_role_page.remove_role
+end
+
 Quando('remover a empresa da regra de usuário') do
   @form_user_role_page.remove_enterprise
 end
 
 Quando('remover o usuário da regra de usuário') do
   @form_user_role_page.remove_user
+end
+
+Quando('atualizar tipo de regra de usuário já existente no usuário') do
+  @form_user_role_page.update_kind_to_existing(@user_roles.last.user.roles.last)
 end
 
 private

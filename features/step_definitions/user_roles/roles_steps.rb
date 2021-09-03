@@ -20,6 +20,10 @@ Dado('tiver {string} regras de usuário do tipo {string} cadastradas') do |times
   expect(registered_user_roles_count_after_create).to eql(registered_user_roles_count + times.to_i)
 end
 
+Dado('tiver a regra de usuário {string} no usuário da última regra criada') do |role|
+  FactoryBot.create(:user_role, user: @user_roles.last.user, kind_cd: role)
+end
+
 Então('quero visualizar a página de regras de usuário como usuário proprietário') do
   @user_roles_page.owner_user_roles_page?
 

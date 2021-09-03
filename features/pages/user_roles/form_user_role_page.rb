@@ -57,12 +57,20 @@ class FormUserRolePage < SitePrism::Page
     select_role.select('Financeiro')
   end
 
+  def remove_role
+    select_role.select('Selecione um tipo de regra')
+  end
+
   def remove_enterprise
     select_enterprise.select('Selecione uma empresa')
   end
 
   def remove_user
     select_user.select('Selecione um usuário')
+  end
+
+  def update_kind_to_existing(user_role)
+    select_role.select(I18n.t(user_role.kind_cd, scope: 'activerecord.attributes.user/role.kinds'))
   end
 
   def click_new_user_role
