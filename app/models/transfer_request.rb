@@ -3,7 +3,9 @@
 # Table name: transfer_requests
 #
 #  id                      :bigint           not null, primary key
+#  attachment              :string
 #  balance_value_truckload :float            default(0.0)
+#  deduct_from_balance     :boolean          default(TRUE)
 #  method_cd               :string
 #  observation             :string
 #  reject_reason           :string
@@ -40,9 +42,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class TransferRequest < ApplicationRecord
-  TYPES = [:advance, :discharge, :balance, :agency, :full, :daily, :other].freeze
-  METHODS = [:ted, :pix, :doc, :boleto, :tev, :other].freeze
-  STATUS = [:rejected, :pending, :approved]
+  TYPES = %i[advance discharge balance agency full daily other].freeze
+  METHODS = %i[ted pix doc boleto tev other].freeze
+  STATUS = %i[rejected pending approved canceled].freeze
 
   belongs_to :enterprise
   belongs_to :truckload
@@ -52,6 +54,7 @@ class TransferRequest < ApplicationRecord
   belongs_to :bank_account
   paginates_per 15
   mount_uploader :voucher, Uploader::ScannedDocument
+  mount_uploader :attachment, Uploader::ScannedDocument
 
   as_enum :type, TYPES, map: :string, source: :type
   as_enum :method, METHODS, map: :string, source: :method
@@ -67,9 +70,10 @@ class TransferRequest < ApplicationRecord
            else
              "CT-e #{truckload.ctes_numbers.first} - MOT. #{truckload.driver.person.full_name}"
            end
+    client_info = "#{truckload.client.company_name} - #{truckload.client.address.city} - #{truckload.client.address.state} | " if truckload.client.present?
 
     "#{I18n.t(type_cd, scope: 'activerecord.attributes.transfer_request.types')} - " \
-    "#{truckload.client.company_name} - #{truckload.client.address.city} - #{truckload.client.address.state} | " \
+    "#{client_info}" \
     "#{info}"
   end
 end

@@ -1,0 +1,24 @@
+<table class="table">
+  <tr>
+    <th><%= t('agents.show.full_name') %></th>
+    <td><%= @agent.person.full_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('agents.show.nickname') %></th>
+    <td><%= @agent.person.nickname %></td>
+  </tr>
+  <% if @agent.person.birth_date.present? %>
+    <tr>
+      <th><%= t('agents.show.birth_date') %></th>
+      <td><%= l(@agent.person.birth_date, format: :date) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th><%= t('agents.show.phone_number') %></th>
+    <td><%= @agent.person.phone_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('agents.show.telephone_number') %></th>
+    <td><%= @agent.person.telephone_number %></td>
+  </tr>
+</table>

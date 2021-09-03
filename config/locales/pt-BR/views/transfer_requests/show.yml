@@ -18,6 +18,10 @@ pt-BR:
       value_transfer_remaining: Saldo do motorista
       value_transfer: Valor de transferência
       balance: Saldo do motorista (após esta transferência)
+      balance_after_all_transfers: Saldo do motorista (após finalizar todas as transferências)
+      attachment: Anexo
+      view_attachment: Visualizar anexo
+      deduct_from_balance_alert: Atenção! Essa transferência não será descontada do saldo. Por favor, verifique se está correto.
       observation: Observação
       bank_account_info: Dados bancários
       transfer_type: Tipo de transferência
@@ -29,4 +33,4 @@ pt-BR:
       agency: Agência
       account_number: Número da conta (com dígito)
       type: Tipo da conta
-
+      cancel_confirm: Você tem certeza que deseja cancelar a solicitação de transferência

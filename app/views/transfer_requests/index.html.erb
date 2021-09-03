@@ -3,19 +3,7 @@
 </div>
 <%= render layout: 'layouts/filter' do %>
   <%= search_form_for @q, url: transfer_requests_path do |f| %>
-    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
-    </div>
-    <hr>
-    <div>
-      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
-        <i class="fas fa-broom"></i>
-        <%= t('layouts.filter.clear') %>
-      <% end %>
-      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
-        <i class="fas fa-search"></i>
-        <%= t('layouts.filter.search') %>
-      <% end %>
-    </div>
+    <%= render partial: 'transfer_requests/components/filter', locals: { f: f } %>
   <% end %>
 <% end %>
 <div class="table-responsive">
@@ -24,13 +12,13 @@
       <table id="table" class="ui celled table">
         <thead>
           <tr class="text-center">
-            <th class="no-sort"><%= t('.id') %></th>
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
             <th class="no-sort"><%= t('.value') %></th>
             <th class="no-sort"><%= t('.type_cd') %></th>
             <th class="no-sort"><%= t('.method_cd') %></th>
             <th class="no-sort"><%= t('.bank_account') %></th>
-            <th class="no-sort"><%= t('.truckload_number') %></th>
-            <th class="no-sort"><%= t('.status') %></th>
+            <th class="no-sort"><%= sort_link @q, :truckload_dt_number, t('.truckload_number') %></th>
+            <th class="no-sort"><%= sort_link @q, :status_cd, t('.status') %></th>
             <th class="no-sort"><%= t('.requested_by') %></th>
             <th class="no-sort"><%= t('.updated_by') %></th>
             <th class="no-sort"><%= t('.reject_reason') %></th>
@@ -99,15 +87,6 @@
                       <%= link_to transfer_request_path(transfer_request), id: "show-transfer-request-#{transfer_request.id}", class: 'btn btn-sm dropdown-item' do %>
                         <i class="fas fa-eye"></i>
                         <%= t('.view_details') %>
-                      <% end %>
-                    <% end %>
-                    <% if can?(:destroy, TransferRequest) && transfer_request.status_cd == 'pending' %>
-                      <%= link_to transfer_request_path(transfer_request),
-                                  method: :delete,
-                                  class: 'btn btn-sm dropdown-item',
-                                  data: { confirm: "#{t('.delete_confirm')}: #{transfer_request.id} - #{I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods')} - #{transfer_request.bank_account.formatted_bank_account}?" } do %>
-                        <i class="fas fa-trash"></i>
-                        <%= t('.destroy') %>
                       <% end %>
                     <% end %>
                     <% if transfer_request.status_cd == 'approved' %>

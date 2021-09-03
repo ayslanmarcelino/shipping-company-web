@@ -12,9 +12,19 @@
                 download: "Comprovante-#{translated_type_cd}-DT-#{@transfer_request.truckload.dt_number}",
                 target: '_blank',
                 rel: 'noopener',
-                class: 'btn btn-primary') do %>
+                class: 'col-xs-3 btn btn-info btn-sm btn-user mr-2') do %>
       <i class="fas fa-download"></i>
       <%= t('.view_document') %>
+    <% end %>
+  <% end %>
+  <% if can?(:cancel, TransferRequest) && @transfer_request.status_cd == 'pending' %>
+    <% bank_account_info = @transfer_request.method_cd == 'pix' ? "#{@transfer_request.bank_account.formatted_pix}" : "#{@transfer_request.bank_account.formatted_bank_account}" %>
+    <%= link_to(cancel_transfer_requests_path(@transfer_request, id: @transfer_request.id),
+                                              class: 'col-xs-3 btn btn-info btn-sm btn-user mr-2',
+                                              data: { confirm: "#{t('.cancel_confirm')}: #{@transfer_request.id} - #{I18n.t(@transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods')} - #{bank_account_info}?" },
+                                              method: :patch) do %>
+      <i class="fas fa-ban"></i>
+      <%= t('.cancel') %>
     <% end %>
   <% end %>
   <% if can?(:reject, TransferRequest) && @transfer_request.status_cd == 'pending' %>
@@ -83,7 +93,7 @@
       <tr>
         <th><%= t('.destiny') %></th>
         <td>
-          <%= @transfer_request.truckload.ctes.map { |k, _| "#{k.destiny_city} - #{k.destiny_state}"}.join(', ') %>
+          <%= @transfer_request.truckload.ctes.map { |transfer, _| "#{transfer.destiny_city} - #{transfer.destiny_state}"}.join(', ') %>
         </td>
       </tr>
       <tr>
@@ -119,56 +129,86 @@
           <td class="td-all-transfers">
             <% transfer_requests.each do |other_transfer| %>
               <%= link_to transfer_request_path(other_transfer.id) do %>
-                <% if other_transfer.id == @transfer_request.id %>
-                  <li><%= other_transfer.basic_information %> - Transferência atual</li>
-                <% else %>
-                  <li><%= other_transfer.basic_information %></li>
-                <% end %>
+                <li>
+                  <%= other_transfer.basic_information %>
+                  <% if !other_transfer.deduct_from_balance %>
+                    - (Não foi descontado do saldo)
+                  <% end %>
+                  <% if other_transfer.id == @transfer_request.id %>
+                     - Transferência atual
+                  <% end %>
+                </li>
               <% end %>
             <% end %>
           </td>
         </tr>
       <% end %>
-      <% sum_pending_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'pending').sum(&:value) %>
-      <% sum_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved').sum(&:value) %>
+      <% pending_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'pending', deduct_from_balance: true).sum(&:value) %>
+      <% approved_transfer_requests = @transfer_request.truckload.transfer_requests.where(status_cd: 'approved', deduct_from_balance: true).sum(&:value) %>
       <tr class="no-print">
         <th><%= t('.total_pending') %></th>
-        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_pending_transfer_requests) %>;">
-          <%= number_to_currency(sum_pending_transfer_requests) %>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - pending_transfer_requests) %>;">
+          <%= number_to_currency(pending_transfer_requests) %>
+        </td>
+      </tr>
+      <tr class="no-print">
+        <th><%= t('.value_transfer_remaining') %></th>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - approved_transfer_requests) %>;">
+          <%= number_to_currency(@transfer_request.truckload.value_driver - approved_transfer_requests) %>
         </td>
       </tr>
       <tr>
         <th><%= t('.total_paid') %></th>
-        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests) %>;">
-          <%= number_to_currency(sum_transfer_requests) %>
+        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - approved_transfer_requests) %>;">
+          <%= number_to_currency(approved_transfer_requests) %>
         </td>
       </tr>
-      <% if @transfer_request.status_cd == 'pending' %>
-        <tr>
-          <th><%= t('.value_transfer') %></th>
-          <td class="td-value-transfer"><%= number_to_currency(@transfer_request.value) %></td>
-        </tr>
-      <% end %>
       <tr>
-        <th><%= t('.value_transfer_remaining') %></th>
-        <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests) %>;">
-          <%= number_to_currency(@transfer_request.truckload.value_driver - sum_transfer_requests) %>
-        </td>
+        <th><%= t('.value_transfer') %></th>
+        <td class="td-value-transfer"><%= number_to_currency(@transfer_request.value) %></td>
       </tr>
-      <% if @transfer_request.status_cd == 'pending' %>
-        <tr class="no-print">
-          <th><%= t('.balance') %></th>
-          <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - sum_transfer_requests - @transfer_request.value) %>;">
-            <%= number_to_currency(@transfer_request.truckload.value_driver - sum_transfer_requests - @transfer_request.value) %>
-          </td>
-        </tr>
-      <% end %>
       <% if @transfer_request.observation.present? %>
         <tr>
           <th><%= t('.observation') %></th>
           <td class="td-observation">
             <i class="fas fa-exclamation-triangle"></i>
             <%= @transfer_request.observation %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @transfer_request.status_cd == 'pending' && @transfer_request.deduct_from_balance %>
+        <tr>
+          <th><%= t('.balance') %></th>
+          <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - approved_transfer_requests - @transfer_request.value) %>;">
+            <%= number_to_currency(@transfer_request.truckload.value_driver - approved_transfer_requests - @transfer_request.value) %>
+          </td>
+        </tr>
+        <tr class="no-print">
+          <th><%= t('.balance_after_all_transfers') %></th>
+          <td style="font-weight: bold; color: <%= money_color(@transfer_request.truckload.value_driver - approved_transfer_requests - pending_transfer_requests) %>;">
+            <%= number_to_currency(@transfer_request.truckload.value_driver - approved_transfer_requests - pending_transfer_requests) %>
+          </td>
+        </tr>
+      <% elsif @transfer_request.status_cd == 'pending' %>
+        <tr>
+          <th></th>
+          <td class="td-observation">
+            <i class="fas fa-times-circle"></i>
+            <%= t('.deduct_from_balance_alert') %>
+          </td>
+        </tr>
+      <% end %>
+      <% if @transfer_request.attachment.present? %>
+        <tr>
+          <th><%= t('.attachment') %></th>
+          <td>
+            <%= link_to(@transfer_request.voucher.url,
+                        download: "anexo-transferencia-#{@transfer_request.id}",
+                        target: '_blank',
+                        rel: 'noopener') do %>
+              <i class="fas fa-eye"></i>
+              <%= t('.view_attachment') %>
+            <% end %>
           </td>
         </tr>
       <% end %>

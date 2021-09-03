@@ -5,6 +5,6 @@ FactoryBot.define do
     password_confirmation { '12345678' }
     is_active             { true }
     enterprise            { create(:enterprise) }
-    person                { create(:user_person) }
+    person                { create(:person) }
   end
 end

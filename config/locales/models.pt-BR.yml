@@ -80,7 +80,7 @@
         client: Cliente
         driver_id: Motorista
         dt_number: Número da DT
-        value_driver: Valor pago ao motorista
+        value_driver: Valor do motorista
         client_id: Cliente
         is_agent: Contratado por agenciador
         agent_id: Agenciador
@@ -88,10 +88,14 @@
         kind_cd: Regra
         enterprise_id: Empresa
         user_id: Usuário
+        enterprise: Empresa
+        user: Usuário
         kinds:
           master: Master
           operational: Operacional
           owner: Proprietário
+          financial: Financeiro
+          monitoring: Monitoramento
       driver:
         enterprise: Empresa
         cnh_expires_at: Data de vencimento
@@ -119,6 +123,7 @@
         document_number: CPF/CNPJ
         pix_key_type: Tipo de chave Pix
         pix_key: Chave pix
+        active: Em uso
         pix_types:
           document_number: CPF/CNPJ
           phone_number: Celular
@@ -148,10 +153,13 @@
         voucher: Comprovante de transferência
         observation: Observação
         reject_reason: Motivo de rejeição
+        deduct_from_balance: Descontar do saldo
+        attachment: Anexo
         status:
-          rejected: Rejeitado
+          rejected: Rejeitada
           pending: Pendente
-          approved: Finalizado
+          approved: Finalizada
+          canceled: Cancelada
         methods:
           ted: TED
           pix: Pix
@@ -167,3 +175,6 @@
           full: Frete todo
           daily: Diária
           other: Outros
+      comment:
+        description: Descrição
+        attachment: Anexo

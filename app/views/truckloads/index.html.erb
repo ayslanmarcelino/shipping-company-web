@@ -5,9 +5,10 @@
   <%= search_form_for @q, url: truckloads_path do |f| %>
     <div class="d-inline-flex col-md-12" style="padding-left: 0;">
       <%= f.number_field :dt_number_eq, placeholder: 'Número da DT', class: 'form-control mb-2 col-md-2 mr-2' %>
-      <%= f.text_field :client_company_name_cont, placeholder: 'Razão social do cliente', class: 'form-control mb-2 col-md-3 mr-2' %>
+      <%= f.number_field :ctes_cte_number_eq, placeholder: 'CT-e', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.text_field :client_company_name_cont, placeholder: 'Razão social do cliente', class: 'form-control mb-2 col-md-2 mr-2' %>
       <%= f.number_field :client_document_number_cont, placeholder: 'CNPJ do cliente', class: 'form-control mb-2 col-md-4 mr-2' %>
-      <%= f.select(:client_id_eq, clients_collection, { include_blank: 'Selecione o cliente' }, { class: 'select2_single mb-2 col-md-3 mr-2 form-control' }) %>
+      <%= f.select(:client_id_eq, clients_collection, { include_blank: 'Selecione o cliente' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control' }) %>
     </div>
     <hr>
     <div>
@@ -33,6 +34,7 @@
             <th class="no-sort"><%= t('.value') %></th>
             <th class="no-sort"><%= t('.value_driver') %></th>
             <th class="no-sort"><%= t('.paid_value_driver') %></th>
+            <th class="no-sort"><%= t('.discharge') %></th>
             <th class="no-sort"><%= t('.pending_value_driver') %></th>
             <th class="no-sort"><%= t('.pending_balance') %></th>
             <th class="no-sort"><%= sort_link @q, :is_agent, t('.is_agent') %>?</th>
@@ -66,8 +68,10 @@
               <td><%= number_to_currency(truckload.truckload_value) %></td>
               <td><%= number_to_currency(truckload.value_driver) %></td>
               <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'approved').sum(&:value)) %></td>
+              <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'approved', type_cd: 'discharge').sum(&:value)) %></td>
               <td><%= number_to_currency(truckload.transfer_requests.where(status_cd: 'pending').sum(&:value)) %></td>
-              <td><%= number_to_currency(truckload.value_driver - truckload.transfer_requests.where.not(status_cd: 'rejected').sum(&:value)) %></td>
+              <% balance = truckload.value_driver - truckload.transfer_requests.where(status_cd: %w[approved pending], deduct_from_balance: true).sum(&:value) %>
+              <td style="<%= "color: red;" if balance.negative? %>"><%= number_to_currency(balance) %></td>
               <td class="text-center">
                 <span class="badge badge-<%= agent_color(truckload.is_agent) %>">
                   <%= translate_boolean(truckload.is_agent) %>

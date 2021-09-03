@@ -27,7 +27,7 @@ module Admins
     end
 
     def params_enterprise
-      params.require(:enterprise).permit(:logo, :primary_color, :secondary_color)
+      params.require(:enterprise).permit(:logo, :primary_color, :secondary_color, :fantasy_name)
     end
   end
 end

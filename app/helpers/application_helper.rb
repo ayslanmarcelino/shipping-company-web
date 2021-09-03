@@ -19,6 +19,7 @@ module ApplicationHelper
     return 'warning' if status == 'pending'
     return 'danger' if status == 'rejected'
     return 'success' if status == 'approved'
+    return 'info' if status == 'canceled'
   end
 
   def money_color(value)
@@ -38,12 +39,16 @@ module ApplicationHelper
   def role_master_select
     [['Master', 'master'],
      ['Proprietário', 'owner'],
-     ['Operacional', 'operational']].sort
+     ['Operacional', 'operational'],
+     ['Monitoramento', 'monitoring'],
+     ['Financeiro', 'financial']].sort
   end
 
   def role_select
     [['Proprietário', 'owner'],
-     ['Operacional', 'operational']].sort
+     ['Operacional', 'operational'],
+     ['Monitoramento', 'monitoring'],
+     ['Financeiro', 'financial']].sort
   end
 
   def pix_key_types_select

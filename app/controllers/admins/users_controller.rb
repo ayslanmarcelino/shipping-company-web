@@ -7,6 +7,8 @@ class Admins::UsersController < AdminsController
   rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   def index
+    return if cannot?(:read, User) && unauthorized_redirect
+
     @q = User.includes(:enterprise)
              .includes(:roles)
              .includes(:person)
@@ -17,15 +19,21 @@ class Admins::UsersController < AdminsController
     @users = @q.result(distinct: true)
   end
 
+  def show
+    return if cannot?(:read, User) && unauthorized_redirect
+  end
+
   def new
+    return if cannot?(:create, User) && unauthorized_redirect
+
     @user = User.new
     @user.build_person
     @user.person.build_address
   end
 
-  def show; end
-
   def create
+    return if cannot?(:create, User) && unauthorized_redirect
+
     @user = User.new(params_user)
     @user.person.validate_access_data = true
 
@@ -37,9 +45,13 @@ class Admins::UsersController < AdminsController
     end
   end
 
-  def edit; end
+  def edit
+    return if cannot?(:update, User) && unauthorized_redirect
+  end
 
   def update
+    return if cannot?(:update, User) && unauthorized_redirect
+
     @user.validate_all = true
     @user.person.validate_all = true
     @user.person.address.validate_address = true
@@ -59,6 +71,8 @@ class Admins::UsersController < AdminsController
   end
 
   def destroy
+    return if cannot?(:destroy, User) && unauthorized_redirect
+
     if @user.destroy && @user.person.destroy
       redirect_to admins_users_path
       flash[:success] = 'Usuário excluído com sucesso.'
@@ -68,6 +82,11 @@ class Admins::UsersController < AdminsController
   end
 
   private
+
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
 
   def invalid_foreign_key
     redirect_to admins_users_path
@@ -102,7 +121,7 @@ class Admins::UsersController < AdminsController
                   :enterprise_id,
                   :password,
                   :password_confirmation,
-                  person_attributes: [User::Person.permitted_attributes,
+                  person_attributes: [Person.permitted_attributes,
                                       address_attributes: Address.permitted_attributes])
   end
 

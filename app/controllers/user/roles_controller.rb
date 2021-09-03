@@ -2,8 +2,8 @@
 
 class User::RolesController < AdminsController
   before_action :set_user_role, only: %w[edit update destroy show]
-  before_action :set_user, only: %w[new create edit]
-  before_action :set_enterprise, only: %w[new create edit]
+  before_action :set_user, only: %w[new create edit update]
+  before_action :set_enterprise, only: %w[new create edit update]
 
   def index
     @q = User::Role.includes(:user)
@@ -59,7 +59,7 @@ class User::RolesController < AdminsController
     if can?(:delete, User::Role)
       if @user_role.destroy
         redirect_to user_roles_path
-        flash[:success] = 'Regra de usuário excluída com sucesso'
+        flash[:success] = 'Regra de usuário excluída com sucesso.'
       else
         render :index
       end

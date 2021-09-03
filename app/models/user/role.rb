@@ -21,15 +21,13 @@
 #
 class User::Role < ApplicationRecord
   KINDS_MASTER = [:master].freeze
-  KINDS_CLIENT = [:owner, :operational].freeze
+  KINDS_CLIENT = %i[owner operational financial monitoring].freeze
 
   KINDS = KINDS_MASTER + KINDS_CLIENT
 
   attr_accessor :validate_all
 
   validates :kind_cd,
-            :enterprise_id,
-            :user_id,
             presence: true,
             if: -> { validate_all }
 

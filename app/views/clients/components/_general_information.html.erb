@@ -1,0 +1,50 @@
+<table class="table">
+  <tr>
+    <th><%= t('clients.show.company_name') %></th>
+    <td><%= @client.company_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.fantasy_name') %></th>
+    <td><%= @client.fantasy_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.document_number') %></th>
+    <td><%= @client.document_number.to_br_cnpj %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.state_tax_number') %></th>
+    <td><%= @client.state_tax_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.email') %></th>
+    <td><%= @client.email %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.telephone_number') %></th>
+    <td><%= @client.telephone_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.phone_number') %></th>
+    <td><%= @client.phone_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.responsible') %></th>
+    <td><%= @client.responsible %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.observation') %></th>
+    <td><%= @client.observation %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.is_active') %>?</th>
+    <td><%= translate_boolean(@client.is_active) %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.created_at') %></th>
+    <td><%= l(@client.created_at, format: '%d/%m/%Y às %H:%M') %></td>
+  </tr>
+  <tr>
+    <th><%= t('clients.show.updated_at') %></th>
+    <td><%= l(@client.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
+  </tr>
+</table>

@@ -1,0 +1,42 @@
+<table class="table">
+  <tr>
+    <th><%= t('truckloads.show.client') %></th>
+    <td><%= @truckload.client.company_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.document_number') %></th>
+    <td><%= @truckload.client.document_number.to_br_cnpj %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_zip_code') %></th>
+    <td><%= @truckload.client.address.zip_code %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_street') %></th>
+    <td><%= @truckload.client.address.street %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_number') %></th>
+    <td><%= @truckload.client.address.number %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_complement') %></th>
+    <td><%= @truckload.client.address.complement %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_neighborhood') %></th>
+    <td><%= @truckload.client.address.neighborhood %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_city') %></th>
+    <td><%= @truckload.client.address.city %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_state') %></th>
+    <td><%= @truckload.client.address.state %></td>
+  </tr>
+  <tr>
+    <th><%= t('truckloads.show.address_country') %></th>
+    <td><%= @truckload.client.address.country %></td>
+  </tr>
+</table>

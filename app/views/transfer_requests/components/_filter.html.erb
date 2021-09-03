@@ -1,0 +1,20 @@
+<div class="d-inline-flex col-md-12" style="padding-left: 0;">
+  <%= f.number_field :id_eq, placeholder: 'Código da solicitação', class: 'form-control mb-2 col-md-2 mr-2' %>
+  <%= f.number_field :truckload_dt_number_eq, placeholder: 'Número da DT', class: 'form-control mb-2 col-md-2 mr-2' %>
+  <%= f.number_field :truckload_ctes_cte_number_eq, placeholder: 'Número do CT-e', class: 'form-control mb-2 col-md-2 mr-2' %>
+  <%= f.select(:type_cd_eq, transfer_types_collection, { include_blank: 'Selecione o tipo' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control' }) %>
+  <% if controller.action_name == 'index' %>
+    <%= f.select(:status_cd_eq, transfer_status_collection, { include_blank: 'Selecione o status' }, { class: 'select2_single mb-2 col-md-2 mr-2 form-control' }) %>
+  <% end %>
+</div>
+<hr>
+<div>
+  <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+    <i class="fas fa-broom"></i>
+    <%= t('layouts.filter.clear') %>
+  <% end %>
+  <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+    <i class="fas fa-search"></i>
+    <%= t('layouts.filter.search') %>
+  <% end %>
+</div>

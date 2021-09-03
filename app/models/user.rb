@@ -29,7 +29,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:

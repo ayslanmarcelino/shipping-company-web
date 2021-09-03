@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_20_145552) do
+ActiveRecord::Schema.define(version: 2021_08_27_033507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.string "document_number"
     t.string "pix_key"
     t.string "pix_key_type_cd"
+    t.boolean "active", default: true
     t.bigint "person_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -71,6 +72,19 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["address_id"], name: "index_clients_on_address_id"
     t.index ["enterprise_id"], name: "index_clients_on_enterprise_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string "description"
+    t.string "attachment"
+    t.bigint "truckload_id"
+    t.bigint "user_id"
+    t.bigint "enterprise_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enterprise_id"], name: "index_comments_on_enterprise_id"
+    t.index ["truckload_id"], name: "index_comments_on_truckload_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "ctes", force: :cascade do |t|
@@ -139,6 +153,22 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.index ["document_number"], name: "index_enterprises_on_document_number", unique: true
   end
 
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "nickname"
+    t.string "document_number"
+    t.string "phone_number"
+    t.string "telephone_number"
+    t.string "rg"
+    t.string "rg_issuing_body"
+    t.datetime "birth_date"
+    t.bigint "address_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["address_id"], name: "index_people_on_address_id"
+  end
+
   create_table "transfer_requests", force: :cascade do |t|
     t.float "value"
     t.string "type_cd"
@@ -149,6 +179,8 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.string "observation"
     t.string "updated_by_id"
     t.float "balance_value_truckload", default: 0.0
+    t.boolean "deduct_from_balance", default: true
+    t.string "attachment"
     t.bigint "user_id"
     t.bigint "truckload_id"
     t.bigint "driver_id"
@@ -181,22 +213,6 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
     t.index ["driver_id"], name: "index_truckloads_on_driver_id"
     t.index ["enterprise_id"], name: "index_truckloads_on_enterprise_id"
     t.index ["user_id"], name: "index_truckloads_on_user_id"
-  end
-
-  create_table "user_people", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "nickname"
-    t.string "document_number"
-    t.string "phone_number"
-    t.string "telephone_number"
-    t.string "rg"
-    t.string "rg_issuing_body"
-    t.datetime "birth_date"
-    t.bigint "address_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["address_id"], name: "index_user_people_on_address_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -232,16 +248,20 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
   end
 
   add_foreign_key "agents", "enterprises"
-  add_foreign_key "agents", "user_people", column: "person_id"
-  add_foreign_key "bank_accounts", "user_people", column: "person_id"
+  add_foreign_key "agents", "people"
+  add_foreign_key "bank_accounts", "people"
   add_foreign_key "clients", "addresses"
   add_foreign_key "clients", "enterprises"
+  add_foreign_key "comments", "enterprises"
+  add_foreign_key "comments", "truckloads"
+  add_foreign_key "comments", "users"
   add_foreign_key "ctes", "clients"
   add_foreign_key "ctes", "enterprises"
   add_foreign_key "ctes", "truckloads"
   add_foreign_key "ctes", "users"
   add_foreign_key "drivers", "enterprises"
-  add_foreign_key "drivers", "user_people", column: "person_id"
+  add_foreign_key "drivers", "people"
+  add_foreign_key "people", "addresses"
   add_foreign_key "transfer_requests", "agents"
   add_foreign_key "transfer_requests", "bank_accounts"
   add_foreign_key "transfer_requests", "drivers"
@@ -253,9 +273,8 @@ ActiveRecord::Schema.define(version: 2021_08_20_145552) do
   add_foreign_key "truckloads", "drivers"
   add_foreign_key "truckloads", "enterprises"
   add_foreign_key "truckloads", "users"
-  add_foreign_key "user_people", "addresses"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "enterprises"
-  add_foreign_key "users", "user_people", column: "person_id"
+  add_foreign_key "users", "people"
 end

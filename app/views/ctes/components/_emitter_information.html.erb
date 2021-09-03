@@ -1,0 +1,28 @@
+<table class="table">
+  <% if @cte.emitted_by_enterprise %>
+    <tr>
+      <th><%= t('ctes.show.emitter') %></th>
+      <td><%= @cte.emitter %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th><%= t('ctes.show.emitted_at') %></th>
+    <td><%= l(@cte.emitted_at, format: :with_full_hour)  %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.company_name_emitter') %></th>
+    <td><%= @cte.company_name_emitter %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.fantasy_name_emitter') %></th>
+    <td><%= @cte.fantasy_name_emitter %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.document_number_emitter') %></th>
+    <td><%= @cte.document_number_emitter&.to_br_cnpj %></td>
+  </tr>
+  <tr>
+    <th><%= t('ctes.show.state_tax_number_emitter') %></th>
+    <td><%= @cte.state_tax_number_emitter %></td>
+  </tr>
+</table>

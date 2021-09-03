@@ -11,9 +11,9 @@
       <% end %>
       <%= f.select :user_id_eq, users_collection, { include_blank: 'Selecione o usuário' }, class: 'form-control col-md-4 mr-2 mb-1' %>
       <% if user_master?(current_user) %>
-        <%= f.select :kind_cd_eq, role_master_select, { include_blank: 'Selecione a regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+        <%= f.select :kind_cd_eq, role_master_select, { include_blank: 'Selecione um tipo de regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
       <% else %>
-        <%= f.select :kind_cd_eq, role_select, { include_blank: 'Selecione a regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
+        <%= f.select :kind_cd_eq, role_select, { include_blank: 'Selecione um tipo de regra' }, class: 'form-control col-md-4 mr-2 mb-1' %>
       <% end %>
     </div>
     <hr>
@@ -38,11 +38,13 @@
             <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
             <th class="no-sort"><%= sort_link @q, :kind_cd, t('.kind') %></th>
             <th class="no-sort"><%= t('.user') %></th>
-            <th class="no-sort"><%= t('.enterprise') %></th>
             <th class="no-sort"><%= sort_link @q, :created_at, t('.created_at') %></th>
+            <% if user_master?(current_user) %>
+              <th class="no-sort"><%= t('.enterprise') %></th>
+            <% end %>
             <th class="no-sort table-buttons">
               <% if can?(:create, User::Role) %>
-                <%= link_to new_user_role_path(@user_role), class: 'btn btn-sm btn-success btn-circle' do %>
+                <%= link_to new_user_role_path(@user_role), class: 'btn btn-sm btn-success btn-circle', id: 'create-new-user-role' do %>
                   <i class="fas fa-plus"></i>
                 <% end %>
               <% end %>
@@ -55,17 +57,20 @@
               <td><%= role.id %></td>
               <td><%= I18n.t(role.kind_cd, scope: 'activerecord.attributes.user/role.kinds') %></td>
               <td><%= link_to(role.user.person.full_name, admins_user_path(role.user)) %></td>
-              <td><%= role.enterprise.company_name %></td>
               <td><%= l(role.created_at, format: :with_full_hour) %></td>
+              <% if user_master?(current_user) %>
+                <td><%= role.enterprise.company_name %></td>
+              <% end %>
               <td>
                 <% if can?(:update, User::Role) %>
-                  <%= link_to edit_user_role_path(role), class: 'btn btn-sm btn-info btn-circle' do %>
+                  <%= link_to edit_user_role_path(role), id: "edit-user-role-#{role.id}", class: 'btn btn-sm btn-info btn-circle' do %>
                     <i class="fas fa-edit"></i>
                   <% end %>
                 <% end %>
                 <% if can?(:destroy, User::Role) %>
                   <%= link_to user_role_path(role),
                               method: :delete,
+                              id: "delete-user-role-#{role.id}",
                               class: 'btn btn-sm btn-danger btn-circle',
                               data: { confirm: "#{t('.delete_confirm')}: #{role.id} associado ao usuário #{role.user.person.full_name}?" } do %>
                     <i class="fas fa-trash"></i>

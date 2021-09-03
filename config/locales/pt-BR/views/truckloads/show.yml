@@ -9,7 +9,7 @@ pt-BR:
       client: Cliente
       driver: Motorista
       dt_number: Número da DT
-      value_driver: Valor pago ao motorista
+      value_driver: Valor do motorista
       is_agent: Contratado por agenciador
       agent_name: Nome do agenciador
       cte_number:
@@ -36,4 +36,10 @@ pt-BR:
       status: Status
       view_document: Visualizar comprovante
       reject_reason: Motivo de rejeição
+      monitorings: Monitoramento
+      update_monitoring: Atualizar monitoramento
+      create: Criar nova atualização
+      view_attachment: Visualizar anexo
+      cancel: Cancelar
+      updated_by: Atualizado por
       delete_confirm: Você deseja excluir a carga
