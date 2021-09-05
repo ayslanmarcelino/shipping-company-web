@@ -1,0 +1,39 @@
+<div class="nested-fields">
+  <div class="bank-account-fields">
+    <div>
+      <%= f.label(:account_name) %>
+      <%= f.text_field(:account_name, class: 'form-control form-control-user') %>
+    </div>
+    <div>
+      <%= f.label(:bank_code) %>
+      <%= f.number_field(:bank_code, class: 'form-control form-control-user') %>
+    </div>
+    <div>
+      <%= f.label(:agency) %>
+      <%= f.text_field(:agency, class: 'form-control form-control-user input--bank-agency') %>
+    </div>
+    <div>
+      <%= f.label(:account_number) %>
+      <%= f.text_field(:account_number, class: 'form-control form-control-user input--bank-account') %>
+    </div>
+    <div>
+      <%= f.label(:account_type) %>
+      <%= f.select(:account_type_cd, account_types_select, { include_blank: 'Selecione o tipo da conta' }, { class: 'select2_single form-control' }) %>
+    </div>
+    <div>
+      <%= f.label(:document_number) %>
+      <%= f.text_field(:document_number, class: 'form-control form-control-user document_number') %>
+    </div>
+    <div>
+      <%= f.label(:pix_key_type) %>
+      <%= f.select(:pix_key_type_cd, pix_key_types_select, { include_blank: 'Selecione o tipo da chave Pix' }, { class: 'select2_single form-control' }) %>
+    </div>
+    <div>
+      <%= f.label(:pix_key) %>
+      <%= f.text_field(:pix_key, class: 'form-control form-control-user') %>
+    </div>
+    <div class="mt-3 text-center">
+      <%= link_to_remove_association 'Remover', f, class: 'btn btn-danger btn-cocoon-danger', data: { confirm: 'Você deseja remover esta conta bancária?' } %>
+    </div>
+  </div>
+</div>

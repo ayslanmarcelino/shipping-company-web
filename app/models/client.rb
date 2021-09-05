@@ -11,6 +11,7 @@
 #  observation      :string
 #  phone_number     :string
 #  responsible      :string
+#  state_tax_number :string
 #  telephone_number :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -46,6 +47,9 @@ class Client < ApplicationRecord
             :enterprise_id,
             presence: true,
             if: -> { validate_all }
+
+  cnpj_column :document_number
+  paginates_per 25
 
   def formatted_name
     "#{company_name} - #{address.state} | #{document_number.to_br_cnpj}"

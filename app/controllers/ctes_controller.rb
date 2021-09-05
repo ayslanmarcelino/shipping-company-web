@@ -1,76 +1,56 @@
 # frozen_string_literal: true
 
 class CtesController < UsersController
-  before_action :set_cte, only: %w[edit update destroy show]
-  before_action :set_user, only: %w[new create edit]
-  before_action :set_truckload, only: %w[new create edit]
+  before_action :set_cte, only: %w[destroy show]
 
   def index
-    @ctes = Cte.accessible_by(current_ability).order(created_at: :desc)
+    return if cannot?(:read, Cte) && unauthorized_redirect
+
+    @q = Cte.includes([client: :address], :truckload)
+            .accessible_by(current_ability)
+            .page(params[:page])
+            .ransack(params[:q])
+
+    @ctes = @q.result(distinct: false)
   end
 
-  def new
-    @cte = Cte.new
-  end
-
-  def create
-    @cte = Cte.new(params_cte)
-    @cte.validate_all = true
-
-    if @cte.save
-      redirect_to(ctes_path)
-      flash[:success] = 'CT-e cadastrado com sucesso'
-    else
-      render :new
-    end
-  end
-
-  def edit; end
-
-  def update
-    @cte.validate_all = true
-    if @cte.update(params_cte)
-      redirect_to ctes_path
-      flash[:success] = 'CT-e atualizado com sucesso'
-    else
-      render :edit
-    end
+  def show
+    return if cannot?(:read, Cte) && unauthorized_redirect
   end
 
   def destroy
-    if @cte.destroy
-      redirect_to ctes_path
-      flash[:success] = 'CT-e excluído com sucesso'
+    return if cannot?(:destroy, Cte) && unauthorized_redirect
+
+    can_destroy_cte = true if current_user.roles.kind_masters.present? ||
+                              Cte.find(params[:id]).truckload.user == current_user
+
+    if can_destroy_cte
+      if @cte.destroy
+        redirect_to ctes_path
+        flash[:success] = 'CT-e excluído com sucesso'
+      else
+        render :index
+      end
     else
-      render :index
+      redirect_to(ctes_path)
+      flash[:danger] = 'Você não pode deletar o CT-e de terceiros.'
     end
   end
 
   private
 
+  def unauthorized_redirect
+    redirect_to(root_path)
+    flash[:danger] = 'Você não possui permissão para realizar esta ação.'
+  end
+
   def set_cte
-    if current_user.cte_ids.include?(Cte.find(params[:id]).id) ||
-       current_user.roles.kind_masters.present? ||
-       (current_user.roles.kind_owners.present? &&
-        current_user.enterprise_id == Cte.find(params[:id]).enterprise_id)
+    if current_user.roles.kind_masters.present? ||
+       current_user.enterprise_id == Cte.find(params[:id]).enterprise_id
       @cte = Cte.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular este CT-e.'
+      flash[:danger] = 'Você não possui permissão para manipular este CT-e.'
     end
-  end
-
-  def set_user
-    @user = User.where(id: current_user.id)
-  end
-
-  def set_truckload
-    @truckloads = Truckload.where(user: current_user).order(created_at: :desc)
-  end
-
-  def params_cte
-    params.require(:cte)
-          .permit(:cte_number, :value, :truckload_id, :user_id)
-          .with_defaults(user: current_user, enterprise: current_user.enterprise)
   end
 end

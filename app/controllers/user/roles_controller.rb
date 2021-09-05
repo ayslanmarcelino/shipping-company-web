@@ -2,14 +2,18 @@
 
 class User::RolesController < AdminsController
   before_action :set_user_role, only: %w[edit update destroy show]
-  before_action :set_user, only: %w[new create edit]
-  before_action :set_enterprise, only: %w[new create edit]
+  before_action :set_user, only: %w[new create edit update]
+  before_action :set_enterprise, only: %w[new create edit update]
 
   def index
-    @user_roles = User::Role.includes(:user)
-                            .includes(:enterprise)
-                            .includes(user: :person)
-                            .accessible_by(current_ability)
+    @q = User::Role.includes(:user)
+                   .includes(:enterprise)
+                   .includes(user: :person)
+                   .accessible_by(current_ability)
+                   .page(params[:page])
+                   .ransack(params[:q])
+
+    @user_roles = @q.result(distinct: false)
   end
 
   def new
@@ -29,7 +33,7 @@ class User::RolesController < AdminsController
       end
     else
       redirect_to(user_roles_path)
-      flash[:danger] = 'Você não tem permissão para realizar esta ação.'
+      flash[:danger] = 'Você não possui permissão para realizar esta ação.'
     end
   end
 
@@ -47,7 +51,7 @@ class User::RolesController < AdminsController
       end
     else
       redirect_to(user_roles_path)
-      flash[:danger] = 'Você não tem permissão para realizar esta ação.'
+      flash[:danger] = 'Você não possui permissão para realizar esta ação.'
     end
   end
 
@@ -55,13 +59,13 @@ class User::RolesController < AdminsController
     if can?(:delete, User::Role)
       if @user_role.destroy
         redirect_to user_roles_path
-        flash[:success] = 'Regra de usuário excluída com sucesso'
+        flash[:success] = 'Regra de usuário excluída com sucesso.'
       else
         render :index
       end
     else
       redirect_to(user_roles_path)
-      flash[:danger] = 'Você não tem permissão para realizar esta ação.'
+      flash[:danger] = 'Você não possui permissão para realizar esta ação.'
     end
   end
 
@@ -72,7 +76,7 @@ class User::RolesController < AdminsController
       @user_role = User::Role.find(params[:id])
     else
       redirect_to root_path
-      flash[:danger] = 'Você não tem permissão para manipular esta regra de usuário.'
+      flash[:danger] = 'Você não possui permissão para manipular esta regra de usuário.'
     end
   end
 

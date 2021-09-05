@@ -1,0 +1,32 @@
+<table class="table">
+  <tr>
+    <th><%= t('drivers.show.full_name') %></th>
+    <td><%= @driver.person.full_name %></td>
+  </tr>
+  <tr>
+    <th><%= t('drivers.show.nickname') %></th>
+    <td><%= @driver.person.nickname %></td>
+  </tr>
+  <% if @driver.person.birth_date.present? %>
+    <tr>
+      <th><%= t('drivers.show.birth_date') %></th>
+      <td><%= l(@driver.person.birth_date, format: :date) %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <th><%= t('drivers.show.phone_number') %></th>
+    <td><%= @driver.person.phone_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('drivers.show.telephone_number') %></th>
+    <td><%= @driver.person.telephone_number %></td>
+  </tr>
+  <tr>
+    <th><%= t('drivers.show.is_employee') %>?</th>
+    <td><%= translate_boolean(@driver.is_employee) %></td>
+  </tr>
+  <tr>
+    <th><%= t('drivers.show.is_blocked') %>?</th>
+    <td><%= translate_boolean(@driver.is_blocked) %></td>
+  </tr>
+</table>

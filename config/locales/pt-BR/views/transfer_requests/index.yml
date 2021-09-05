@@ -1,0 +1,19 @@
+pt-BR:
+  transfer_requests:
+    index:
+      registered: Solicitações de transferência cadastrados
+      id: Código
+      value: Valor
+      type_cd: Tipo de solicitação
+      method_cd: Método de envio
+      truckload_number: Número DT
+      bank_account: Conta bancária
+      enterprise: Empresa
+      requested_by: Solicitado por
+      updated_by: Atualizado por
+      view_details: Mais detalhes
+      destroy: Excluir
+      view: Visualizar
+      reject_reason: Motivo de rejeição
+      close: Fechar
+      view_document: Visualizar comprovante

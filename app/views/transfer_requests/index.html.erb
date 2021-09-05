@@ -1,0 +1,112 @@
+<div class="text-center">
+  <h4><%= t('.registered') %></h4>
+</div>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: transfer_requests_path do |f| %>
+    <%= render partial: 'transfer_requests/components/filter', locals: { f: f } %>
+  <% end %>
+<% end %>
+<div class="table-responsive">
+  <div class="row">
+    <div class="col-sm-12">
+      <table id="table" class="ui celled table">
+        <thead>
+          <tr class="text-center">
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
+            <th class="no-sort"><%= t('.value') %></th>
+            <th class="no-sort"><%= t('.type_cd') %></th>
+            <th class="no-sort"><%= t('.method_cd') %></th>
+            <th class="no-sort"><%= t('.bank_account') %></th>
+            <th class="no-sort"><%= sort_link @q, :truckload_dt_number, t('.truckload_number') %></th>
+            <th class="no-sort"><%= sort_link @q, :status_cd, t('.status') %></th>
+            <th class="no-sort"><%= t('.requested_by') %></th>
+            <th class="no-sort"><%= t('.updated_by') %></th>
+            <th class="no-sort"><%= t('.reject_reason') %></th>
+            <% if user_master?(current_user) %>
+              <th class="no-sort"><%= t('.enterprise') %></th>
+            <% end %>
+            <th class="no-sort table-buttons">
+              <% if can?(:create, TransferRequest) %>
+                <%= link_to new_transfer_request_path(@transfer_request), class: 'btn btn-sm btn-success btn-circle' do %>
+                  <i class="fas fa-plus"></i>
+                <% end %>
+              <% end %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @transfer_requests.order(created_at: :desc).each do |transfer_request| %>
+            <% translated_type_cd = I18n.t(transfer_request.type_cd, scope: 'activerecord.attributes.transfer_request.types') %>
+            <tr class="text-center">
+              <td><%= transfer_request.id %></td>
+              <td><%= number_to_currency(transfer_request.value) %></td>
+              <td><%= translated_type_cd if transfer_request.type_cd.present? %></td>
+              <td><%= I18n.t(transfer_request.method_cd, scope: 'activerecord.attributes.transfer_request.methods') if transfer_request.method_cd.present? %></td>
+              <% if transfer_request.method_cd == 'pix' %>
+                <td><%= transfer_request.bank_account.formatted_pix %></td>
+              <% else %>
+                <td><%= transfer_request.bank_account.formatted_bank_account %></td>
+              <% end %>
+              <td><%= link_to(transfer_request.truckload.dt_number, truckload_path(transfer_request.truckload)) %></td>
+              <td class="text-center">
+                <span class="badge badge-<%= status_color(transfer_request.status_cd) %>">
+                  <%= I18n.t(transfer_request.status_cd, scope: 'activerecord.attributes.transfer_request.status') if transfer_request.status_cd.present? %>
+                </span>
+              </td>
+              <td><%= link_to(transfer_request.user.person.full_name, admins_user_path(transfer_request.user)) %></td>
+              <td><%= link_to(User.find(transfer_request.updated_by_id.to_i).person.full_name, admins_user_path(User.find(transfer_request.updated_by_id.to_i))) if transfer_request.updated_by_id.present? %></td>
+              <td>
+                <% if transfer_request.reject_reason.present? && transfer_request.status_cd == 'rejected' %>
+                  <a href="#" data-toggle="modal" data-target="#reject-reason-truckload-<%= transfer_request.id %>">
+                    <%= t('.view') %>
+                  </a>
+                  <div id="reject-reason-truckload-<%= transfer_request.id %>" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <h4><%= transfer_request.reject_reason %></h4>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-dark" data-dismiss="modal"><%= t('.close') %></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </td>
+              <% if user_master?(current_user) %>
+                <td><%= transfer_request.enterprise.company_name %></td>
+              <% end %>
+              <td>
+                <div class="dropdown">
+                  <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <% if can?(:read, TransferRequest) %>
+                      <%= link_to transfer_request_path(transfer_request), id: "show-transfer-request-#{transfer_request.id}", class: 'btn btn-sm dropdown-item' do %>
+                        <i class="fas fa-eye"></i>
+                        <%= t('.view_details') %>
+                      <% end %>
+                    <% end %>
+                    <% if transfer_request.status_cd == 'approved' %>
+                      <%= link_to(transfer_request.voucher.url,
+                                  download: "Comprovante-#{translated_type_cd}-DT-#{transfer_request.truckload.dt_number}",
+                                  target: '_blank',
+                                  rel: 'noopener',
+                                  class: 'btn btn-sm dropdown-item') do %>
+                        <i class="fas fa-download"></i>
+                        <%= t('.view_document') %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @transfer_requests %>
+    </div>
+  </div>
+</div>

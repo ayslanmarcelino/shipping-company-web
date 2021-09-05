@@ -1,0 +1,74 @@
+<div class="col-xs-12 text-center">
+  <h4><%= t('.view') %>: <%= @agent.person.full_name %></h4>
+</div>
+<div class="col-xs-12 mb-2">
+  <%= link_to :back, class: 'col-xs-3 btn btn-secondary btn-sm  btn-user' do %>
+    <i class="fas fa-arrow-left"></i>
+    <%= t('.back') %>
+  <% end %>
+  <% if can?(:update, Agent) %>
+    <%= link_to edit_agent_path(@agent), class: 'col-xs-3 btn btn-info btn-sm' do %>
+      <i class="fas fa-edit"></i>
+      <%= t('.edit') %>
+    <% end %>
+  <% end %>
+  <% if can?(:destroy, Agent) %>
+    <%= link_to agent_path(@agent),
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: "#{t('.delete_confirm')}: #{@agent.person.first_name} #{@agent.person.last_name}?" } do %>
+      <i class="fas fa-trash"></i>
+      <%= t('.delete') %>
+    <% end %>
+  <% end %>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#personal" data-toggle="tab" role="tab">
+              <%= t('.personal') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#document" data-toggle="tab" role="tab">
+              <%= t('.document') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#address" data-toggle="tab" role="tab">
+              <%= t('.address') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#bank_accounts" data-toggle="tab" role="tab">
+              <%= t('.bank_accounts') %>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="personal">
+            <%= render partial: 'agents/components/personal_information' %>
+          </div>
+          <div class="tab-pane fade show" id="document">
+            <%= render partial: 'agents/components/document' %>
+          </div>
+          <div class="tab-pane fade" id="address">
+            <%= render partial: 'agents/components/address' %>
+          </div>
+            <div class="tab-pane fade" id="bank_accounts">
+            <% if @agent.person.bank_accounts.present? %>
+              <%= render partial: 'agents/components/bank_account' %>
+            <% else %>
+              <h4>Agente não possui contas bancárias cadastradas</h4>
+            <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

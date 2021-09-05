@@ -6,8 +6,8 @@ FactoryBot.define do
     cnh_type         { 'B' }
     cnh_expires_at   { Time.zone.today + 2.years }
     is_employee      { true }
-    is_blocked      { false }
+    is_blocked       { false }
     enterprise       { create(:enterprise) }
-    person           { create(:user_person) }
+    person           { create(:person) }
   end
 end

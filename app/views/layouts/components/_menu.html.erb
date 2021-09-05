@@ -9,6 +9,41 @@
     <span><%= t('layouts.application.dashboard') %></span>
   </div>
 <% end %>
+<% if can?(:read, TransferRequest) %>
+  <div class="text-center">
+    <%= t('layouts.application.financial') %>
+  </div>
+<% end %>
+<% if can?(:read, TransferRequest) %>
+  <%= link_to transfer_requests_index_path, class: "#{'active-menu' if request.path.include?(transfer_requests_path) && request.path.exclude?(pending_transfer_requests_path)} list-item-menu list-group-item-action",
+                                            style: "color: #{current_user.enterprise.secondary_color};
+                                                    background-color: #{current_user.enterprise.primary_color}",
+                                            id: 'transfer-requests' do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-exchange-alt"></i>
+      </div>
+      <span><%= t('layouts.application.transfer_request') %></span>
+    </div>
+  <% end %>
+<% end %>
+<% if can?(:read_pending, TransferRequest) %>
+  <%= link_to pending_transfer_requests_path, class: "#{'active-menu' if request.path.include?(pending_transfer_requests_path)} list-item-menu list-group-item-action",
+                                              style: "color: #{current_user.enterprise.secondary_color};
+                                                      background-color: #{current_user.enterprise.primary_color}",
+                                              id: 'pending-transfer-requests' do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-hourglass-start"></i>
+      </div>
+      <span><%= t('layouts.application.pending_transfer_request') %></span>
+      <% count_pending = TransferRequest.where(status_cd: 'pending').count %>
+      <% if count_pending.positive? %>
+        (<%= count_pending %>)
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
 <% if can?(:read, Truckload) || can?(:read, Cte) %>
   <div class="text-center">
     <%= t('layouts.application.operational') %>
@@ -62,25 +97,12 @@
   <%= link_to user_roles_index_path, class: "#{'active-menu' if request.path.include?(user_roles_path)} list-item-menu list-group-item-action",
                                      style: "color: #{current_user.enterprise.secondary_color};
                                              background-color: #{current_user.enterprise.primary_color}",
-                                     id: 'user_roles' do %>
+                                     id: 'user-roles' do %>
     <div style="display: inline-flex">
       <div style="width: 25px;">
         <i class="fas fa-users-cog"></i>
       </div>
       <span><%= t('layouts.application.user_roles') %></span>
-    </div>
-  <% end %>
-<% end %>
-<% if can?(:read, Client) %>
-  <%= link_to clients_index_path, class: "#{'active-menu' if request.path.include?(clients_path)} list-item-menu list-group-item-action",
-                                  style: "color: #{current_user.enterprise.secondary_color};
-                                          background-color: #{current_user.enterprise.primary_color}",
-                                  id: 'clients' do %>
-    <div style="display: inline-flex">
-      <div style="width: 25px;">
-        <i class="fas fa-building"></i>
-      </div>
-      <span><%= t('layouts.application.clients') %></span>
     </div>
   <% end %>
 <% end %>
@@ -94,6 +116,32 @@
         <i class="fas fa-user"></i>
       </div>
       <span><%= t('layouts.application.drivers') %></span>
+    </div>
+  <% end %>
+<% end %>
+<% if can?(:read, Agent) %>
+  <%= link_to agents_index_path, class: "#{'active-menu' if request.path.include?(agents_path)} list-item-menu list-group-item-action",
+                                  style: "color: #{current_user.enterprise.secondary_color};
+                                          background-color: #{current_user.enterprise.primary_color}",
+                                  id: 'agents' do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-user-secret"></i>
+      </div>
+      <span><%= t('layouts.application.agents') %></span>
+    </div>
+  <% end %>
+<% end %>
+<% if can?(:read, Client) %>
+  <%= link_to clients_index_path, class: "#{'active-menu' if request.path.include?(clients_path)} list-item-menu list-group-item-action",
+                                  style: "color: #{current_user.enterprise.secondary_color};
+                                          background-color: #{current_user.enterprise.primary_color}",
+                                  id: 'clients' do %>
+    <div style="display: inline-flex">
+      <div style="width: 25px;">
+        <i class="fas fa-building"></i>
+      </div>
+      <span><%= t('layouts.application.clients') %></span>
     </div>
   <% end %>
 <% end %>
@@ -112,9 +160,12 @@
 <% end %>
 
 <style>
+  <% primary_color = current_user.enterprise.primary_color %>
+  <% secondary_color = current_user.enterprise.secondary_color %>
+
   .active-menu {
-    background-color: <%= current_user.enterprise.secondary_color %> !important;
-    color: <%= current_user.enterprise.primary_color %> !important;
+    background-color: <%= secondary_color %> !important;
+    color: <%= primary_color %> !important;
   }
 
   a.list-item-menu:hover {
@@ -123,12 +174,24 @@
   }
 
   .nav-link.active {
-    background-color: <%= current_user.enterprise.primary_color %> !important;
-    color: <%= current_user.enterprise.secondary_color %> !important;
-    border: 1px solid <%= current_user.enterprise.secondary_color %> !important;
+    background-color: <%= primary_color %> !important;
+    color: <%= secondary_color %> !important;
+    border: 1px solid <%= secondary_color %> !important;
   }
 
   .nav-link {
-    color: <%= current_user.enterprise.secondary_color %> !important;
+    color: <%= secondary_color %> !important;
+  }
+
+  .page-link {
+    margin-top: 20px;
+    color: <%= secondary_color %> !important;
+    background-color: <%= primary_color %> !important;
+    border-color: <%= secondary_color %> !important;
+  }
+
+  .page-item.active .page-link {
+    color: <%= primary_color %> !important;
+    background-color: <%= secondary_color %> !important;
   }
 </style>

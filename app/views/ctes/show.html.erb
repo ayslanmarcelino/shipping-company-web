@@ -6,14 +6,11 @@
     <i class="fas fa-arrow-left"></i>
     <%= t('.back') %>
   <% end %>
-  <% if can?(:update, Cte) %>
-    <%= link_to edit_cte_path(@cte), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
-      <i class="fas fa-edit"></i>
-      <%= t('.edit') %>
-    <% end %>
-  <% end %>
   <% if can?(:destroy, Cte) %>
-    <%= link_to cte_path(@cte), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
+    <%= link_to cte_path(@cte),
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: "#{t('.delete_confirm')}: #{@cte.cte_number} - #{number_to_currency(@cte.value)}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -23,103 +20,34 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-3">
-        <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+        <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" id="overview-pill-vertical" href="#overviewPillVertical" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link active" id="general-info" href="#general" data-toggle="tab">
               <%= t('.general') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" id="emitter-info" href="#emitter" data-toggle="tab">
+              <%= t('.emitter_info') %>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="client-info" href="#client" data-toggle="tab">
               <%= t('.client') %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
-        <div class="tab-content" id="cardPillContentVertical">
-          <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.cte_number') %></th>
-                <td><%= @cte.cte_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.value') %></th>
-                <td><%= number_to_currency(@cte.value) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.dt_number') %></th>
-                <td>
-                <%= link_to truckload_path(@cte.truckload.id) do %>
-                  <%= @cte.truckload.dt_number %></td>
-                <% end %>
-              </tr>
-              <tr>
-                <th><%= t('.created_at') %></th>
-                <td><%= l(@cte.created_at, format: '%d/%m/%Y às %H:%M') %></td>
-              </tr>
-              <tr>
-                <th><%= t('.updated_at') %></th>
-                <td><%= l(@cte.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
-              </tr>
-              <% if user_owner?(current_user) || user_master?(current_user) %>
-                <tr>
-                  <th><%= t('.created_by') %></th>
-                  <td><%= @cte.user.person.first_name %> <%= @cte.user.person.last_name %></td>
-                </tr>
-              <% end %>
-              <% if user_master?(current_user) %>
-                <tr>
-                  <th><%= t('.enterprise') %></th>
-                  <td><%= @cte.user.enterprise.company_name %></td>
-                </tr>
-              <% end %>
-            </table>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="general">
+            <%= render partial: 'ctes/components/general_information' %>
           </div>
-          <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.client') %></th>
-                <td><%= @cte.truckload.client.company_name %></td>
-              </tr>
-              <tr>
-                <th><%= t('.document_number') %></th>
-                <td><%= @cte.truckload.client.document_number.to_br_cnpj %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_zip_code') %></th>
-                <td><%= @cte.truckload.client.address.zip_code %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_street') %></th>
-                <td><%= @cte.truckload.client.address.street %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_number') %></th>
-                <td><%= @cte.truckload.client.address.number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_complement') %></th>
-                <td><%= @cte.truckload.client.address.complement %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_neighborhood') %></th>
-                <td><%= @cte.truckload.client.address.neighborhood %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_city') %></th>
-                <td><%= @cte.truckload.client.address.city %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_state') %></th>
-                <td><%= @cte.truckload.client.address.state %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_country') %></th>
-                <td><%= @cte.truckload.client.address.country %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade" id="emitter">
+            <%= render partial: 'ctes/components/emitter_information' %>
+          </div>
+          <div class="tab-pane fade" id="client">
+            <%= render partial: 'ctes/components/client' %>
           </div>
         </div>
       </div>

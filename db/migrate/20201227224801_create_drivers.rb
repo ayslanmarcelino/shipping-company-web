@@ -9,7 +9,7 @@ class CreateDrivers < ActiveRecord::Migration[6.0]
       t.boolean :is_employee, default: false
       t.boolean :is_blocked, default: false
       t.references :enterprise, foreign_key: true
-      t.references :person, foreign_key: { to_table: :user_people }
+      t.references :person, foreign_key: true
 
       t.timestamps
     end

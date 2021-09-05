@@ -7,6 +7,11 @@ pt-BR:
       dt_number: Número DT
       client: Cliente
       value: Valor da carga
+      value_driver: Valor do motorista
+      paid_value_driver: Pago ao motorista
+      discharge: Descarga(s)
+      pending_value_driver: Transferência(s) pendente(s)
+      pending_balance: Saldo
       is_agent: Contratado por agenciador
       cte: CT-e(s) vinculado
       qtd_cte: Qtd. CT-e(s)

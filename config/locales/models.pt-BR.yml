@@ -28,7 +28,7 @@
         birth_date: Data de nascimento
         phone_number: Telefone
         telephone_number: Celular
-        document_number: CPF/CNPJ
+        document_number: CPF
         rg: RG
         rg_issuing_body: Órgão expedidor
       person/address:
@@ -40,10 +40,17 @@
         zip_code: CEP
         country: País
         complement: Complemento
+      person/bank_accounts:
+        bank_code: Código do banco
+        account_number: Número da conta (com dígito)
+        agency: Agência
+        document_number: CPF/CNPJ
+        pix_key_type: Tipo de chave Pix
+        pix_key: Chave pix
       enterprise:
         company_name: Razão social
         fantasy_name: Nome fantasia
-        document_number: CPF/CNPJ
+        document_number: CNPJ
         email: E-mail
         opening_date: Data de abertura da empresa
         primary_color: Cor primária
@@ -73,17 +80,22 @@
         client: Cliente
         driver_id: Motorista
         dt_number: Número da DT
-        value_driver: Valor pago ao motorista
+        value_driver: Valor do motorista
         client_id: Cliente
         is_agent: Contratado por agenciador
+        agent_id: Agenciador
       user/role:
         kind_cd: Regra
         enterprise_id: Empresa
         user_id: Usuário
+        enterprise: Empresa
+        user: Usuário
         kinds:
           master: Master
           operational: Operacional
           owner: Proprietário
+          financial: Financeiro
+          monitoring: Monitoramento
       driver:
         enterprise: Empresa
         cnh_expires_at: Data de vencimento
@@ -99,6 +111,70 @@
         birth_date: Data de nascimento
         phone_number: Telefone
         telephone_number: Celular
-        document_number: CPF/CNPJ
+        document_number: CPF
         rg: RG
         rg_issuing_body: Órgão expedidor
+      bank_account:
+        account_name: Nome do favorecido
+        bank_code: Código do banco
+        account_number: Número da conta (com dígito)
+        agency: Agência
+        account_type: Tipo de conta
+        document_number: CPF/CNPJ
+        pix_key_type: Tipo de chave Pix
+        pix_key: Chave pix
+        active: Em uso
+        pix_types:
+          document_number: CPF/CNPJ
+          phone_number: Celular
+          email: E-mail
+          random_key: Chave aleatória
+        account_types:
+          saving_account: Conta Poupança
+          current_account: Conta Corrente
+          salary_account: Conta Salário
+          investment_account: Conta Investimento
+          joint_account: Conta Conjunta
+          payment_account: Conta Pagamento
+      cte:
+        cte_id: CT-e
+        cte_number: Número do CT-e
+      agent:
+        enterprise: Empresa
+      transfer_request:
+        truckload_id: Carga (DT | Cliente - UF | CNPJ)
+        value: Valor
+        driver: Motorista
+        agent: Agenciador
+        type_cd: Tipo de solicitação
+        bank_account: Conta bancária (Cód. banco - Agência | Conta - Favorecido)
+        method_cd: Método de envio
+        status: Status
+        voucher: Comprovante de transferência
+        observation: Observação
+        reject_reason: Motivo de rejeição
+        deduct_from_balance: Descontar do saldo
+        attachment: Anexo
+        status:
+          rejected: Rejeitada
+          pending: Pendente
+          approved: Finalizada
+          canceled: Cancelada
+        methods:
+          ted: TED
+          pix: Pix
+          doc: DOC
+          boleto: Boleto
+          tev: TEV
+          other: Outros
+        types:
+          advance: Adiantamento
+          discharge: Descarga
+          balance: Saldo
+          agency: Agenciamento
+          full: Frete todo
+          daily: Diária
+          other: Outros
+      comment:
+        description: Descrição
+        attachment: Anexo

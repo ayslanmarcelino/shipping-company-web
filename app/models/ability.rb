@@ -8,8 +8,8 @@ class Ability
     @user = user
     roles = @user.roles
 
-    roles.includes(:enterprise).each do |role|
-      PerEnterpriseAbility.new(self, enterprise: role.enterprise, user: @user).compile(role.kind)
+    roles.each do |role|
+      PerEnterpriseAbility.new(self, enterprise: @user.enterprise, user: @user).compile(role.kind)
     end
   end
 
@@ -28,6 +28,10 @@ class Ability
         owner_abilities
       when :operational
         operational_abilities
+      when :financial
+        financial_abilities
+      when :monitoring
+        monitoring_abilities
       end
     end
 
@@ -48,16 +52,38 @@ class Ability
       can(:manage, User, enterprise: @enterprise)
       can(:manage, User::Role, enterprise: @enterprise)
       can(:manage, Driver, enterprise: @enterprise)
-      cannot(:update, Truckload)
-      cannot(:update, Cte)
+      can(:manage, Agent, enterprise: @enterprise)
+      can(%i[manage approve reject], TransferRequest, enterprise: @enterprise)
     end
 
     def operational_abilities
-      can(:manage, Truckload, user: @user)
-      can(:manage, Cte, user: @user)
+      can(%i[read create], Truckload, enterprise: @enterprise)
+      can(%i[update destroy], Truckload, user: @user, enterprise: @enterprise)
+      can(:read, Cte, enterprise: @enterprise)
+      can(%i[destroy], Cte, truckload: [user: @user], enterprise: @enterprise)
       can(:manage, Client, enterprise: @enterprise)
-      can(:update, User, user: @user)
+      can(:update, User, id: @user.id)
       can(:manage, Driver, enterprise: @enterprise)
+      can(:manage, Agent, enterprise: @enterprise)
+      can(%i[create cancel], TransferRequest, user: @user, enterprise: @enterprise)
+      can(:read, TransferRequest, enterprise: @enterprise)
+      can(:create, Comment)
+    end
+
+    def financial_abilities
+      can(%i[update read read_pending approve reject], TransferRequest, enterprise: @enterprise)
+      can(:read, Truckload, enterprise: @enterprise)
+      can(:read, Cte, enterprise: @enterprise)
+      can(:read, Driver, enterprise: @enterprise)
+      can(:read, Agent, enterprise: @enterprise)
+    end
+
+    def monitoring_abilities
+      can(:read, Cte, enterprise: @enterprise)
+      can(:read, Driver, enterprise: @enterprise)
+      can(:read, Client, enterprise: @enterprise)
+      can(:read, Truckload, enterprise: @enterprise)
+      can(:create, Comment)
     end
   end
 end

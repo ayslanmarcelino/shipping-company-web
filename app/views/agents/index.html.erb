@@ -1,0 +1,83 @@
+<div class="text-center">
+  <h4><%= t('.registered') %></h4>
+</div>
+<%= render layout: 'layouts/filter' do %>
+  <%= search_form_for @q, url: agents_path do |f| %>
+    <div class="d-inline-flex col-md-12" style="padding-left: 0;">
+      <%= f.text_field :person_first_name_cont, placeholder: 'Primeiro Nome', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.text_field :person_nickname_cont, placeholder: 'Apelido', class: 'form-control mb-2 col-md-2 mr-2' %>
+      <%= f.number_field :person_document_number_cont, placeholder: 'CPF', class: 'form-control mb-2 col-md-3 mr-2' %>
+    </div>
+    <hr>
+    <div>
+      <%= link_to url_for, class: 'btn btn-sm btn-secondary' do %>
+        <i class="fas fa-broom"></i>
+        <%= t('layouts.filter.clear') %>
+      <% end %>
+      <%= button_tag(class: 'btn btn-sm', style: "background-color: #{current_user.enterprise.primary_color}; color: #{current_user.enterprise.secondary_color}; border-color: #{current_user.enterprise.secondary_color}") do %>
+        <i class="fas fa-search"></i>
+        <%= t('layouts.filter.search') %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+<div class="table-responsive">
+  <div class="row">
+    <div class="col-sm-12">
+      <table id="table" class="ui celled table">
+        <thead>
+          <tr class="text-center">
+            <th class="no-sort"><%= sort_link @q, :id, t('.id') %></th>
+            <th class="no-sort"><%= sort_link @q, :person_first_name, t('.full_name') %></th>
+            <th class="no-sort"><%= sort_link @q, :person_nickname, t('.nickname') %></th>
+            <th class="no-sort"><%= t('.document_number') %></th>
+            <% if user_master?(current_user) %>
+              <th class="no-sort"><%= t('.enterprise')%></th>
+            <% end %>
+            <th class="no-sort table-buttons">
+              <% if can?(:create, Agent) %>
+                <%= link_to new_agent_path(@agent), class: 'btn btn-sm btn-success btn-circle' do %>
+                  <i class="fas fa-plus"></i>
+                <% end %>
+              <% end %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @agents.order(created_at: :desc).each do |agent| %>
+            <tr class="text-center">
+              <td><%= agent.id %></td>
+              <td><%= agent.person.full_name %></td>
+              <td><%= agent.person.nickname %></td>
+              <td><%= format_document_number(agent.person.document_number) %></td>
+              <% if user_master?(current_user) %>
+                <td><%= agent.enterprise.company_name %></td>
+              <% end %>
+              <td>
+                <% if can?(:read, Driver) %>
+                  <%= link_to agent_path(agent), class: 'btn btn-sm btn-dark' do %>
+                    <i class="fas fa-eye"></i>
+                  <% end %>
+                <% end %>
+                <% if can?(:update, Driver) %>
+                  <%= link_to edit_agent_path(agent), class: 'btn btn-sm btn-info btn-circle' do %>
+                    <i class="fas fa-edit"></i>
+                  <% end %>
+                <% end %>
+                <% if can?(:destroy, Driver) %>
+                  <%= link_to agent_path(agent),
+                              method: :delete,
+                              class: 'btn btn-sm btn-danger btn-circle',
+                              data: { confirm: "#{t('.delete_confirm')}: #{agent.person.first_name} #{agent.person.last_name}?" } do %>
+                    <i class="fas fa-trash"></i>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @agents %>
+    </div>
+  </div>
+</div>

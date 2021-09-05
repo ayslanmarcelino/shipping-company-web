@@ -1,0 +1,6 @@
+pt-BR:
+  transfer_requests:
+    new:
+      new: Nova solicitação de transferência
+      cancel: Cancelar
+      create_new: Criar nova solicitação de transferência

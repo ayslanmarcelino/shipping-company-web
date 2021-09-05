@@ -3,9 +3,7 @@
 class UsersPage < SitePrism::Page
   element :label_registered_users, 'h4', text: 'Usuários cadastrados'
   element :button_filter, '#filter'
-  element :table_users, '.card-body'
-  element :table_length, '#table_length'
-  element :table_filter, '#table_filter'
+  element :table_users, '#table'
   element :th_id, 'th', text: 'Código'
   element :th_full_name, 'th', text: 'Nome completo'
   element :th_nickname, 'th', text: 'Apelido'
@@ -14,12 +12,10 @@ class UsersPage < SitePrism::Page
   element :th_roles, 'th', text: 'Regra(s) de usuário'
   element :th_is_active, 'th', text: 'Ativo?'
   element :th_enterprise, 'th', text: 'Empresa'
-  element :button_new_user, 'a[href="/admins/users/new"]'
+  element :button_new_user, '#create-new-user'
 
   def owner_table?
     table_users.present?
-    table_length.present?
-    table_filter.present?
     th_id.present?
     th_full_name.present?
     th_nickname.present?
@@ -36,14 +32,14 @@ class UsersPage < SitePrism::Page
   end
 
   def owner_users_page?
+    owner_table?
     label_registered_users.present?
     button_filter.present?
-    owner_table?
   end
 
   def master_users_page?
-    master_table?
     owner_users_page?
+    master_table?
   end
 
   def click_new_user

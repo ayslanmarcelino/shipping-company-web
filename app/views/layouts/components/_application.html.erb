@@ -1,5 +1,5 @@
 <div class="d-flex" id="wrapper">
-  <div class="border-right" id="sidebar-wrapper" style="background-color: <%= current_user.enterprise.primary_color %>; width: 14.6rem;">
+  <div class="border-right no-print" id="sidebar-wrapper" style="background-color: <%= current_user.enterprise.primary_color %>; width: 14.6rem;">
     <div class="sidebar-heading text-center">
       <%= image_tag(current_user.enterprise.logo.url, style: 'max-height: 110px; max-width: 150px;') if current_user.enterprise.logo.present? %>
     </div>
@@ -13,7 +13,7 @@
               style="background-color: <%= current_user.enterprise.primary_color %>;
                      color: <%= current_user.enterprise.secondary_color %>;"
               id="menu-toggle">
-        <i class="fas fa-bars"></i>
+        <i id="icon-menu" class="fas fa-chevron-left"></i>
       </button>
       <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
         <li class="nav-item dropdown">
@@ -44,5 +44,15 @@
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
+
+    let classes = document.getElementById('icon-menu').classList
+
+    if (classes.contains('fa-chevron-left')) {
+      classes.add("fa-bars")
+      classes.remove("fa-chevron-left")
+    } else {
+      classes.add("fa-chevron-left")
+      classes.remove("fa-bars")
+    }
   });
 </script>

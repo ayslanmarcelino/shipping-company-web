@@ -7,13 +7,16 @@
     <%= t('.back') %>
   <% end %>
   <% if can?(:update, Client) %>
-    <%= link_to edit_client_path(@client), class: 'col-xs-3 btn btn-info btn-sm  ' do %>
+    <%= link_to edit_client_path(@client), class: 'col-xs-3 btn btn-info btn-sm' do %>
       <i class="fas fa-edit"></i>
       <%= t('.edit') %>
     <% end %>
   <% end %>
   <% if can?(:destroy, Client) %>
-    <%= link_to client_path(@client), method: :delete, class: 'btn btn-sm btn-danger', data: { confirm: "#{t('.delete_confirm')}: #{@client.company_name}?" } do %>
+    <%= link_to client_path(@client),
+                method: :delete,
+                class: 'btn btn-sm btn-danger',
+                data: { confirm: "#{t('.delete_confirm')}: #{@client.company_name}?" } do %>
       <i class="fas fa-trash"></i>
       <%= t('.delete') %>
     <% end %>
@@ -23,104 +26,26 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-3">
-        <ul class="nav nav-pills flex-column" id="cardPillVertical" role="tablist">
+        <ul class="nav nav-pills flex-column">
           <li class="nav-item">
-            <a class="nav-link active" id="overview-pill-vertical" href="#overviewPillVertical" data-toggle="tab" role="tab" aria-controls="overview" aria-selected="true">
+            <a class="nav-link active" href="#general" data-toggle="tab" role="tab" aria-selected="true">
               <%= t('.general') %>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="example-pill-vertical" href="#examplePillVertical" data-toggle="tab" role="tab" aria-controls="example" aria-selected="false">
+            <a class="nav-link" href="#address" data-toggle="tab" role="tab" aria-selected="false">
               <%= t('.address') %>
             </a>
           </li>
         </ul>
       </div>
       <div class="col-md-9">
-        <div class="tab-content" id="cardPillContentVertical">
-          <div class="tab-pane fade show active" id="overviewPillVertical" role="tabpanel" aria-labelledby="overview-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.company_name') %></th>
-                <td><%= @client.company_name %></td>
-              </tr>
-              <tr>
-                <th><%= t('.fantasy_name') %></th>
-                <td><%= @client.fantasy_name %></td>
-              </tr>
-              <tr>
-                <th><%= t('.document_number') %></th>
-                <td><%= @client.document_number.to_br_cnpj %></td>
-              </tr>
-              <tr>
-                <th><%= t('.email') %></th>
-                <td><%= @client.email %></td>
-              </tr>
-              <tr>
-                <th><%= t('.telephone_number') %></th>
-                <td><%= @client.telephone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.phone_number') %></th>
-                <td><%= @client.phone_number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.responsible') %></th>
-                <td><%= @client.responsible %></td>
-              </tr>
-              <tr>
-                <th><%= t('.observation') %></th>
-                <td><%= @client.observation %></td>
-              </tr>
-              <tr>
-                <th><%= t('.is_active') %>?</th>
-                <td><%= translate_boolean(@client.is_active) %></td>
-              </tr>
-              <tr>
-                <th><%= t('.created_at') %></th>
-                <td><%= l(@client.created_at, format: '%d/%m/%Y às %H:%M') %></td>
-              </tr>
-              <tr>
-                <th><%= t('.updated_at') %></th>
-                <td><%= l(@client.updated_at, format: '%d/%m/%Y às %H:%M') %></td>
-              </tr>
-            </table>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="general">
+            <%= render partial: 'clients/components/general_information' %>
           </div>
-          <div class="tab-pane fade" id="examplePillVertical" role="tabpanel" aria-labelledby="example-pill-vertical">
-            <table class="table">
-              <tr>
-                <th><%= t('.address_zip_code') %></th>
-                <td><%= @client.address.zip_code %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_street') %></th>
-                <td><%= @client.address.street %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_number') %></th>
-                <td><%= @client.address.number %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_complement') %></th>
-                <td><%= @client.address.complement %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_neighborhood') %></th>
-                <td><%= @client.address.neighborhood %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_city') %></th>
-                <td><%= @client.address.city %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_state') %></th>
-                <td><%= @client.address.state %></td>
-              </tr>
-              <tr>
-                <th><%= t('.address_country') %></th>
-                <td><%= @client.address.country %></td>
-              </tr>
-            </table>
+          <div class="tab-pane fade" id="address">
+            <%= render partial: 'clients/components/address' %>
           </div>
         </div>
       </div>

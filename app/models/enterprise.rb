@@ -27,8 +27,10 @@ class Enterprise < ApplicationRecord
   mount_uploader :logo, ImageUploader
   validates_uniqueness_of :document_number
   validates_presence_of %i[company_name fantasy_name document_number email opening_date primary_color secondary_color]
+  cnpj_column :document_number
+  paginates_per 25
 
   def formatted_enterprises
-    "#{company_name} | #{document_number}"
+    "#{company_name} | #{document_number.to_br_cnpj}"
   end
 end

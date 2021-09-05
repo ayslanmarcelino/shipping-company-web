@@ -2,10 +2,10 @@ pt-BR:
   user:
     roles:
       index:
-        list: Regras de usuários
+        list: Regras de usuários cadastradas
         id: Código
         kind: Regra
         user: Usuário
         enterprise: Empresa
         created_at: Criado em
-        delete_confirm: Você deseja excluir a regra de usuário
+        delete_confirm: Você tem certeza que deseja excluir a regra de usuário

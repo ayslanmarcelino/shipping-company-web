@@ -78,3 +78,96 @@ body {
 .custom-switch {
   padding-left: 1rem !important;
 }
+
+table {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border: 1px solid #dee2e6;
+}
+
+.table {
+  thead {
+    th {
+      border-top: none !important;
+    }
+  }
+}
+
+.dataTable {
+  th {
+    border-bottom: none !important;
+  }
+  
+  table.dataTable.no-footer {
+    border-bottom: none !important;
+  }
+}
+
+.sort_link {
+  color: #212529 !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize::first-letter {
+  text-transform: capitalize;
+}
+
+.bank-account-fields {
+  border-radius: 5px;
+  padding: 10px;
+  border: 1px solid #dee2e6;
+  margin-bottom: 10px;
+}
+
+.dataTables_wrapper {
+  padding-right: 2px;
+}
+
+.td-value-driver {
+  font-weight: bold;
+  color: #4f9800;
+}
+
+.td-value-transfer {
+  font-weight: bold;
+  color: #c65a56;
+  font-size: 25px;
+}
+
+.td-balance {
+  font-weight: bold;
+  color: #95951b;
+}
+
+.td-all-transfers {
+  font-weight: bold;
+  color: #3c91ff;
+}
+
+.td-observation {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+@media print {    
+  .no-print, .no-print * {
+    display: none !important;
+  }
+
+  .transfer-request {
+    -webkit-print-color-adjust: exact; 
+  }
+}
+
+.time{
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.attachment {
+  font-size: 12px;
+}

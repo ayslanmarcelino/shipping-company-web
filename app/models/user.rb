@@ -29,7 +29,7 @@
 # Foreign Keys
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
-#  fk_rails_...  (person_id => user_people.id)
+#  fk_rails_...  (person_id => people.id)
 #
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
@@ -45,15 +45,11 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :enterprise_id,
             :email,
-            :password,
-            :password_confirmation,
             presence: true,
             if: -> { validate_access_data }
 
   validates :enterprise_id,
             :email,
-            :password,
-            :password_confirmation,
             :person_id,
             :enterprise_id,
             presence: true,
@@ -64,13 +60,14 @@ class User < ApplicationRecord
   has_many :roles, dependent: :destroy
 
   accepts_nested_attributes_for :person
+  paginates_per 25
 
   def all_roles
     roles.map(&:kind_cd).sort
   end
 
   def full_information
-    "#{person.first_name} #{person.last_name} | #{enterprise.company_name} - #{enterprise.document_number} "
+    "#{person.first_name} #{person.last_name} | #{enterprise.company_name} - #{enterprise.document_number.to_br_cnpj} "
   end
 
   def full_name
