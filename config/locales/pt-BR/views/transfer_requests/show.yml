@@ -9,6 +9,9 @@ pt-BR:
       destiny: Destino
       client: Cliente
       cte_number: CT-e(s)
+      dt_number: Número da DT
+      info_cte: Destino / Cliente / Número do(s) CT-e(s)
+      no_cte: Não há CT-e vinculado nesta carga
       driver: Motorista
       requested_by: Solicitado por
       value_driver: Valor do motorista
