@@ -1,0 +1,78 @@
+$detail-tb-width: 1px;
+$detail-tb-color: #ADADAD;
+$reg-timeline-bg: #E3E3E3;
+$reg-timeline-active: #00AF00;
+$reg-timeline-rejected: #D22F2D;
+$reg-timeline-disabled: #8C8C8C;
+$reg-bullet-disabled: #545B61;
+
+.registration-timeline {
+  position: relative;
+  padding-bottom: 1rem;
+
+  .vertical-bar {
+    position: absolute;
+    background: $reg-timeline-bg;
+    width: 2px;
+    height: 100%;
+    margin-top: 4px;
+  }
+
+  .vertical-point {
+    border-radius: 15px;
+    margin-left: -5px;
+    display: block;
+    background: $reg-timeline-bg;
+    position: absolute;
+    height: 12px;
+    width: 12px;
+    z-index: 10;
+    margin-top: 4px;
+  }
+  
+  .reg-border-active {
+    border: solid $reg-timeline-active;
+  }
+
+  .reg-border-rejected {
+    border: solid $reg-timeline-rejected;
+  }
+
+  .reg-active {
+    background: $reg-timeline-active;
+  }
+
+  .reg-rejected {
+    background: $reg-timeline-rejected !important;
+  }
+
+  .reg-disabled {
+    background: $reg-bullet-disabled !important;
+  }
+  
+  .reg-title-active {
+    color: $reg-timeline-active;
+  }
+
+  .reg-title-rejected {
+    color: $reg-timeline-rejected;
+  }
+
+  .reg-title-disabled {
+    color: $reg-timeline-disabled;
+  }
+
+
+  .reg-event-container {
+    line-height: 1.3;
+  }
+
+  .time{
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .attachment {
+    font-size: 12px;
+  }
+}
