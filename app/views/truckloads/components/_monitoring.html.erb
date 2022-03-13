@@ -1,7 +1,9 @@
 <% @truckload.comments.includes(:user).order(created_at: :desc).each do |comment| %>
-  <ul>
-    <li>
-      <div class="time capitalize">
+  <div class="col-12 registration-timeline">
+    <div class="vertical-point reg-active"></div>
+    <div class="vertical-bar reg-active"></div>
+    <div class="col-12 reg-event-container">
+      <div class="time captalize">
         <%= l(comment.created_at, format: :with_full_hour_and_day) %> - (Há <%= time_ago_in_words(comment.created_at) %>)
       </div>
       <p><%= comment.description %></p>
@@ -17,7 +19,6 @@
           <% end %>
         </div>
       <% end %>
-      <hr>
-    </li>
-  </ul>
+    </div>
+  </div>
 <% end %>
